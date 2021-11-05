@@ -1,2 +1,77 @@
 <app-header></app-header>
-<p>patient-registration works!</p>
+<div class="container">
+    <div class="row">
+        <h1>Patient Registration</h1>
+        <form>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class=" patient-reg-item">
+                        <label for="patientName" class="form-label">Patient Name</label>
+                        <input type="text" class="form-control" name="patientName" [(ngModel)]="patientRegObj.name"
+                            id="patientName">
+                    </div>
+
+                    <div class=" patient-reg-item">
+                        <label for="contact" class="form-label">Contact</label>
+                        <input type="text" class="form-control" name="contact" [(ngModel)]="patientRegObj.contact"
+                            id="contact">
+                    </div>
+                    <div class=" patient-reg-item">
+                        <label for="email" class="form-label">Email address</label>
+                        <input type="email" class="form-control" name="email" [(ngModel)]="patientRegObj.email"
+                            id="email" aria-describedby="emailHelp">
+                    </div>
+                    <div class=" patient-reg-item">
+                        <label for="address" class="form-label">Address</label>
+                        <textarea class="form-control" name="address" [(ngModel)]="patientRegObj.address"
+                            id="address"></textarea>
+                    </div>
+                    <div class=" patient-reg-item">
+                        <label for="pincode" class="form-label">Pin Code</label>
+                        <input type="text" class="form-control" name="pincode" [(ngModel)]="patientRegObj.pincode"
+                            id="pincode">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="patient-reg-item">
+                        <label for="dob" class="form-label">DOB</label>
+                        <input type="date" class="form-control" name="dob" [(ngModel)]="patientRegObj.dob" id="dob">
+                    </div>
+                    <div class="patient-reg-item sex">
+                        <label for="dob" class="form-label block" >Sex</label>
+                        <input class="form-check-input mar10lr" [value]="'male'" [(ngModel)]="patientRegObj.sex" type="radio" name="male" id="male">
+                        <label class="form-check-label" for="male">
+                            Male
+                        </label>
+                        <input class=" form-check-input mar10lr" [value]="'female'" [(ngModel)]="patientRegObj.sex" type="radio" name="female" id="female">
+                        <label class="form-check-label" for="female">
+                            Female
+                        </label>
+                    </div>
+
+
+
+                
+
+                <div class=" patient-reg-item">
+                    <label for="lastDoc" class="form-label">Last Doctor Consulted</label>
+                    <input type="text" class="form-control" name="lastDoc" [(ngModel)]="patientRegObj.lastDoc"
+                        id="lastDoc">
+                </div>
+                <div class=" patient-reg-item">
+                    <label for="communicationAddress" class="form-label">Communication Address</label>
+                    <textarea class="form-control" name="communicationAddress"
+                        [(ngModel)]="patientRegObj.communicationAddress" id="communicationAddress"></textarea>
+                </div>
+                <div class=" patient-reg-item">
+                    <label for="fvDate" class="form-label">First Visit Date</label>
+                    <input type="date" class="form-control" name="fvDate" [(ngModel)]="patientRegObj.fvDate"
+                        id="fvDate">
+                </div>
+            </div>
+    </div>
+
+    <button (click)="registerPatient()" class="btn btn-primary mar20t">Submit</button>
+    </form>
+</div>
+</div>
