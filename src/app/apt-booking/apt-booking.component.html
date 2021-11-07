@@ -1,2 +1,45 @@
 <app-header></app-header>
-<p>apt-booking works!</p>
+
+<div #appointBooking class="container">
+    <div class="row">
+        <h1>Apointment Booking</h1>
+        <form>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class=" patient-apt-item">
+                        <label for="patientID" class="form-label">Patient ID</label>
+                        <input type="text" class="form-control" name="patientID" [(ngModel)]="aptObj.patientId"
+                            id="patientID">
+                    </div>
+                    <div class=" patient-apt-item">
+                        <label for="patientName" class="form-label">Patient Name</label>
+                        <input type="text" class="form-control" name="patientName" [(ngModel)]="aptObj.name"
+                            id="patientName">
+                    </div>
+
+                    <div class=" patient-reg-item">
+                        <label for="contact" class="form-label">Contact</label>
+                        <input type="text" class="form-control" name="contact" [(ngModel)]="aptObj.contact"
+                            id="contact">
+                    </div>
+                    <div class="patient-reg-item">
+                        <label for="aptDate" class="form-label">Appointment Date</label>
+                        <!-- <input type="datetime-local" id="meeting-time" name="meeting-time" [(ngModel)]="aptObj.aptDate"
+                            [min]="currentDate"> -->
+                        <input type="date" min="{{currentDate|date:'yyyy-MM-dd'}}" class="form-control" name="aptDate" [(ngModel)]="aptObj.aptDate"
+                            id="aptDate">
+                    </div>
+                    <div class="patient-reg-item">
+                        <label for="aptTime" class="form-label">Time</label>                        
+                        <input type="time" class="form-control" min='03:00' name="aptTime" [(ngModel)]="aptObj.aptTime"
+                            id="aptTime">
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button (click)="bookApt()" class="btn btn-primary mar20t">Book</button>
+        </form>
+    </div>
+</div>
