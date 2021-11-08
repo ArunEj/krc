@@ -7,17 +7,17 @@ import { LoginService } from './login.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
-  constructor(private router:Router,
+  loginObj = { userId: '', pwd: '' }
+  constructor(private router: Router,
     private loginService: LoginService) { }
 
   ngOnInit(): void {
     this.loginService.isUserLoggedIn = false;
   }
-  login(){
-    this.loginService.login();
-    this.router.navigate(['/landing'])
+  login() {
+    this.loginService.login(this.loginObj);
+
   }
-  
+
 
 }

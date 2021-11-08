@@ -6,14 +6,14 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title:any;
+  branches:any = [];
   constructor(private http:HttpClient){
 
   }
 
   ngOnInit(){
 this.http.get('https://krcnephrology.herokuapp.com/index.php').subscribe(data=>{
-  this.title = data;
+  this.branches = JSON.parse(data.toString()).records;
 })
   }
 }
