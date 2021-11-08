@@ -4,10 +4,15 @@
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
-    "build": "ng build --prod",
+    "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "postinstall": "ng build --aot --prod"
   },
+  "engines": {  
+    "node": "14.7.1",  
+    "npm": "6.14.13"  
+    },
   "private": true,
   "dependencies": {
     "@angular/animations": "~12.1.1",
