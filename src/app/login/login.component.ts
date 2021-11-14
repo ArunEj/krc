@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from './login.service';
+import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -8,14 +9,23 @@ import { LoginService } from './login.service';
 })
 export class LoginComponent implements OnInit {
   loginObj = { userId: '', pwd: '' }
+  validUser: boolean = true;
   constructor(private router: Router,
-    private loginService: LoginService) { }
+    private loginService: LoginService, private auth:AuthService) { }
 
   ngOnInit(): void {
     this.loginService.isUserLoggedIn = false;
   }
   login() {
-    this.loginService.login(this.loginObj);
+    this.loginService.login(this.loginObj).subscribe(response => {
+      this.validUser = true;
+      this.loginService.isUserLoggedIn = true;
+      this.auth.login('employee');
+      this.router.navigate(['/landing']);
+    }, err => {
+      this.validUser = false;
+      this.loginService.isUserLoggedIn = false;
+    });
 
   }
 
