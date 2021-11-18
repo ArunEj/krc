@@ -20,6 +20,8 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.loginObj).subscribe(response => {
       this.validUser = true;
       this.loginService.isUserLoggedIn = true;
+      this.loginService.userData = response;
+      this.loginService.userDataSubject.next(response);
       this.auth.login('employee');
       this.router.navigate(['/landing']);
     }, err => {
