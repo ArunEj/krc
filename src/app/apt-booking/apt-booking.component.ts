@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Appointment } from './appointment.model';
 import { HttpClient } from '@angular/common/http';
+import { AptBookingService } from './apt-booking.service';
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-apt-booking',
   templateUrl: './apt-booking.component.html',
@@ -8,21 +11,39 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AptBookingComponent implements OnInit {
   aptObj: Appointment = {
-    name: '',
-    patientId: '',
+    patient_name: '',
+    patient_id: '',
     aptDate: new Date(),
     doctor: '',
-    aptTime: new Date(),
-    contact: 0
+    contact_no: ''
   }
+  fetchData = { patient_id: '', patient_name: '' }
   currentDate = new Date();
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient, 
+    private router:Router,private aptService: AptBookingService) { }
 
   ngOnInit(): void {
   }
-  fetchPatientDetail(){
-this.http.get('src/assets/stub/patient.json').subscribe(data=>console.log(data));
+  fetchUser() {
+    const contact_no = this.aptObj.contact_no;
+    this.aptService.fetchUserData(this.aptObj.contact_no).subscribe(response => {
+      this.aptObj = response;
+      this.aptObj.contact_no = contact_no;
+    })
+
   }
-  bookApt(){}
+  bookApt() {
+    this.aptService.bookApt(this.aptObj).subscribe(response=>{
+      this.aptObj = {
+        patient_name: '',
+        patient_id: '',
+        aptDate: new Date(),
+        doctor: '',
+        contact_no: ''
+      }
+      alert('appointment booked')
+      this.router.navigate(['landing']);
+    })
+   }
 
 }

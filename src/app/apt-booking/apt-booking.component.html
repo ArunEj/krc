@@ -8,19 +8,20 @@
                 <div class="col-lg-6">
                     <div class=" patient-apt-item">
                         <label for="patientID" class="form-label">Patient ID</label>
-                        <input type="text" class="form-control" name="patientID" [(ngModel)]="aptObj.patientId"
+                        <input type="text" class="form-control" name="patientID" [(ngModel)]="aptObj.patient_id"
                             id="patientID">
                     </div>
                     <div class=" patient-apt-item">
                         <label for="patientName" class="form-label">Patient Name</label>
-                        <input type="text" class="form-control" name="patientName" [(ngModel)]="aptObj.name"
+                        <input type="text" class="form-control" name="patientName" [(ngModel)]="aptObj.patient_name"
                             id="patientName">
                     </div>
 
                     <div class=" patient-reg-item">
                         <label for="contact" class="form-label">Contact</label>
-                        <input type="text" class="form-control" name="contact" [(ngModel)]="aptObj.contact"
+                        <input type="text" class="form-control" name="contact" [(ngModel)]="aptObj.contact_no"
                             id="contact">
+                            <button (click)="fetchUser()" class="btn btn-primary mar20t">fetch</button>
                     </div>
                     <div class="patient-reg-item">
                         <label for="aptDate" class="form-label">Appointment Date</label>
@@ -29,11 +30,11 @@
                         <input type="date" min="{{currentDate|date:'yyyy-MM-dd'}}" class="form-control" name="aptDate" [(ngModel)]="aptObj.aptDate"
                             id="aptDate">
                     </div>
-                    <div class="patient-reg-item">
+                    <!-- <div class="patient-reg-item">
                         <label for="aptTime" class="form-label">Time</label>                        
                         <input type="time" class="form-control" min='03:00' name="aptTime" [(ngModel)]="aptObj.aptTime"
                             id="aptTime">
-                    </div>
+                    </div> -->
 
                 </div>
 
