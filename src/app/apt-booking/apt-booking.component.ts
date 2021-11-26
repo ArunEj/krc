@@ -15,7 +15,7 @@ export class AptBookingComponent implements OnInit {
     patient_id: '',
     doa: new Date(),
     doctor: '',
-    contact_no: ''
+    mobile_no: ''
   }
   fetchData = { patient_id: '', patient_name: '' }
   currentDate = new Date();
@@ -25,14 +25,14 @@ export class AptBookingComponent implements OnInit {
   ngOnInit(): void {
   }
   fetchUser() {
-    const contact_no = this.aptObj.contact_no;
-    this.aptService.fetchUserData(this.aptObj.contact_no).subscribe(response => {
+    const mobile_no = this.aptObj.mobile_no;
+    this.aptService.fetchUserData(this.aptObj.mobile_no).subscribe(response => {
       if (response.patient_id !== '') {
         this.aptObj = response;
-        this.aptObj.contact_no = contact_no;
+        this.aptObj.mobile_no = mobile_no;
       } else {
         alert('no records found');
-        this.aptObj.contact_no = '';
+        this.aptObj.mobile_no = '';
       }
 
     })
@@ -45,11 +45,13 @@ export class AptBookingComponent implements OnInit {
         patient_id: '',
         doa: new Date(),
         doctor: '',
-        contact_no: ''
+        mobile_no: ''
       }
       alert('appointment booked')
       this.router.navigate(['landing']);
     })
+
+    //this.router.navigate(['landing']);
   }
 
 }

@@ -14,12 +14,14 @@ export class AptBookingService {
 
   
 
-  fetchUserData(contact_no:string):Observable<any>{
-      return this.http.post('https://krcnephrology.herokuapp.com/fetchdata.php', { contact_no: contact_no });
+  fetchUserData(mobile_no:string):Observable<any>{
+      return this.http.post('https://krcnephrology.herokuapp.com/fetchdata.php', { mobile_no: mobile_no });
   }
 
   bookApt(aptObj:any){
       return this.http.post('https://krcnephrology.herokuapp.com/appt-save.php', aptObj);
     }
-
+getAllAppointments():any{
+  return this.http.get('https://krcnephrology.herokuapp.com/fetchapptdata.php');
+}
 }

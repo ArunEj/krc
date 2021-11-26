@@ -6,5 +6,5 @@ export interface Appointment {
     doa: Date,
     doctor: string,
     aptTime?: Date,
-    contact_no:string
+    mobile_no:string
 }

@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start_dev":"ng serve --live-reload false --host krcnephrology.herokuapp.com",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",

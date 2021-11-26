@@ -19,15 +19,15 @@
 
                     <div class=" patient-reg-item">
                         <label for="contact" class="form-label">Contact</label>
-                        <input type="text" class="form-control" required name="contact" [(ngModel)]="aptObj.contact_no"
+                        <input type="text" class="form-control" required name="contact" [(ngModel)]="aptObj.mobile_no"
                             id="contact">
-                            <button (click)="fetchUser()" [disabled]="!aptObj.contact_no" class="btn btn-primary mar20t">fetch contact details</button>
+                            <button (click)="fetchUser()" [disabled]="!aptObj.mobile_no" class="btn btn-primary mar20t">fetch contact details</button>
                     </div>
                     <div class="patient-reg-item mar20t">
                         <label for="aptDate" class="form-label">Appointment Date</label>
                         <!-- <input type="datetime-local" id="meeting-time" name="meeting-time" [(ngModel)]="aptObj.aptDate"
                             [min]="currentDate"> -->
-                        <input type="date" min="{{currentDate|date:'yyyy-MM-dd'}}" class="form-control" name="aptDate" [(ngModel)]="aptObj.doa"
+                        <input type="date" required min="{{currentDate|date:'yyyy-MM-dd'}}" class="form-control" name="aptDate" [(ngModel)]="aptObj.doa"
                             id="aptDate">
                     </div>
                     <!-- <div class="patient-reg-item">
