@@ -10,19 +10,20 @@ export class AuthService {
 
     constructor() { }
 
-    login(value: string) {
+    login(value:any) {
+        let userData = value[0];
         this.isLogin = true;
         this.roleAs = value;
         localStorage.setItem('STATE', 'true');
-        localStorage.setItem('ROLE', this.roleAs);
+        localStorage.setItem('user_id', userData.user_id);
+        localStorage.setItem('branch_id', userData.branch_id);
         
       }
     
       logout() {
         this.isLogin = false;
         this.roleAs = '';
-        localStorage.setItem('STATE', 'false');
-        localStorage.setItem('ROLE', '');
+        localStorage.clear();
        
       }
     getUser() {

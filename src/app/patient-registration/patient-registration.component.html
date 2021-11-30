@@ -7,13 +7,13 @@
                 <div class="col-lg-6">
                     <div class=" patient-reg-item">
                         <label for="patientName" class="form-label">Patient Name</label>
-                        <input type="text" class="form-control" name="patientName" [(ngModel)]="patientRegObj.name"
+                        <input type="text" class="form-control" name="patientName" [(ngModel)]="patientRegObj.patient_name"
                             id="patientName">
                     </div>
 
                     <div class=" patient-reg-item">
-                        <label for="contact" class="form-label">Contact</label>
-                        <input type="text" class="form-control" name="contact" [(ngModel)]="patientRegObj.contact"
+                        <label for="contact" class="form-label">Mobile</label>
+                        <input type="text" class="form-control" name="contact" [(ngModel)]="patientRegObj.mobile_no"
                             id="contact">
                     </div>
                     <div class=" patient-reg-item">
@@ -23,12 +23,12 @@
                     </div>
                     <div class=" patient-reg-item">
                         <label for="address" class="form-label">Address</label>
-                        <textarea class="form-control" name="address" [(ngModel)]="patientRegObj.address"
+                        <textarea class="form-control" name="address" [(ngModel)]="patientRegObj.add1"
                             id="address"></textarea>
                     </div>
                     <div class=" patient-reg-item">
-                        <label for="pincode" class="form-label">Pin Code</label>
-                        <input type="text" class="form-control" name="pincode" [(ngModel)]="patientRegObj.pincode"
+                        <label for="pincode" class="form-label">Adhar No</label>
+                        <input type="text" class="form-control" name="pincode" [(ngModel)]="patientRegObj.aadhar_no"
                             id="pincode">
                     </div>
                 </div>
@@ -47,25 +47,21 @@
                         <label class="form-check-label" for="female">
                             Female
                         </label>
-                    </div>
-
-
-
-                
+                    </div>                
 
                 <div class=" patient-reg-item">
-                    <label for="lastDoc" class="form-label">Last Doctor Consulted</label>
-                    <input type="text" class="form-control" name="lastDoc" [(ngModel)]="patientRegObj.lastDoc"
+                    <label for="lastDoc" class="form-label">Phone</label>
+                    <input type="text" class="form-control" name="lastDoc" [(ngModel)]="patientRegObj.phone"
                         id="lastDoc">
                 </div>
                 <div class=" patient-reg-item">
                     <label for="communicationAddress" class="form-label">Communication Address</label>
                     <textarea class="form-control" name="communicationAddress"
-                        [(ngModel)]="patientRegObj.communicationAddress" id="communicationAddress"></textarea>
+                        [(ngModel)]="patientRegObj.add2" id="communicationAddress"></textarea>
                 </div>
                 <div class=" patient-reg-item">
                     <label for="fvDate" class="form-label">First Visit Date</label>
-                    <input type="date" class="form-control" name="fvDate" [(ngModel)]="patientRegObj.fvDate"
+                    <input type="date" class="form-control" name="fvDate" [(ngModel)]="patientRegObj.first_visit_date"
                         id="fvDate">
                 </div>
             </div>

@@ -1,12 +1,17 @@
 export interface Patient {
-    name:string,
-    dob:Date,
-    address:string,
+    branch_id:string,
+    photo:string,
+    patient_name:string,
+    dob:string,
+    add1:string,
+    add2:string,
     email:string,
-    contact:string,
-    fvDate:Date,
-    communicationAddress:string,
-    lastDoc:String,
-    pincode:string,
-    sex:string
+    mobile_no:string,
+    phone:string,
+    other_email:string,
+    aadhar_no:string,
+    first_visit_date:String,
+    sex:string,
+    updated_by:string,
+    updated_date: string
 }
