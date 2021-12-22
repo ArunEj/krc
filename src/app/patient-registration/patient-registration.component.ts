@@ -21,7 +21,7 @@ export class PatientRegistrationComponent implements OnInit {
     this.patientRegObj.updated_by = user || '';
   }
   registerPatient() {
-    this.patientRegObj.updated_date = '2021-06-23';
+   // this.patientRegObj.updated_date = '2021-06-23';
     this.ps.registerPatient(this.patientRegObj).subscribe(response=>{      
       alert('Patient Registered successfully!!!')
       this.router.navigate(['landing']);

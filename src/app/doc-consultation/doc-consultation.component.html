@@ -1,0 +1,48 @@
+<app-header></app-header>
+<div class="container">
+    <div class="row">
+        <h1>Doctor consulation</h1>
+    </div>
+
+    <div class="row">
+        <h3>Patient Details</h3>
+        <div *ngIf="!patientDetail"  class="patient-details">
+            <label for="contact" class="form-label">Contact</label>
+            <input type="text" class="form-control contact-input" required name="contact"
+                [(ngModel)]="mobile_no" id="contact">
+            <br>
+            <button (click)="fetchUser()" [disabled]="!mobile_no" class="btn btn-primary mar20t">fetch
+                contact details</button>
+        </div>
+    </div>
+
+    <div *ngIf="patientDetail" class="row margin-20t">
+        <div class="mb-3">
+            <label>Patient Name : {{currentPatientDetail.patient_id}}</label>
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Previous History</label>
+            <!-- <span class="visit-tag">Visit#:</span> -->
+            <textarea [disabled]="recordIndex !== getLastRecordIndex() && recordIndex !== undefined" [(ngModel)]="currentPatientDetail.prev_hist" class="form-control" id="exampleFormControlTextarea1" rows="10"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Doctor Notes</label>
+            <textarea [disabled]="recordIndex !== getLastRecordIndex() && recordIndex !== undefined" [(ngModel)]="currentPatientDetail.doctor_notes" class="form-control" id="exampleFormControlTextarea1" rows="10"></textarea>
+        </div>
+
+        <nav aria-label="...">
+            <ul class="pagination" >
+                <li class="page-item" [ngClass]="{'disabled': recordIndex === 0 }">
+                    <a class="page-link" (click)="prevItem()">Previous</a>
+                </li>
+                <li class="page-item" [ngClass]="{'disabled': recordIndex === undefined || recordIndex === getLastRecordIndex() }">
+                    <a class="page-link" (click)="nextItem()">Next</a>
+                </li>
+
+
+
+            </ul>
+        </nav>
+    </div>
+</div>

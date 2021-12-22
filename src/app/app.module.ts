@@ -10,6 +10,7 @@ import { LandingComponent } from './landing/landing.component';
 import { AptBookingComponent } from './apt-booking/apt-booking.component';
 import { PatientRegistrationComponent } from './patient-registration/patient-registration.component';
 import { AuthService } from './services/auth.service';
+import { DocConsultationComponent } from './doc-consultation/doc-consultation.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,7 +18,8 @@ import { AuthService } from './services/auth.service';
     LoginComponent,
     LandingComponent,
     AptBookingComponent,
-    PatientRegistrationComponent
+    PatientRegistrationComponent,
+    DocConsultationComponent
   ],
   imports: [
     BrowserModule,

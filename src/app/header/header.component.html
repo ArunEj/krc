@@ -17,12 +17,13 @@
           </ul>
         </li>
         <li class="nav-item dropdown">
-          <a  class="nav-link dropdown-toggle" href="#" *ngIf="menuEntitlement.Previous_History" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a  class="nav-link dropdown-toggle" [routerLink]="'/doc-consult'" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Doctor Consultation
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li *ngIf="menuEntitlement.Previous_History == 'y'"><a class="dropdown-item" href="#">Previous History</a></li>
-            <li *ngIf="menuEntitlement.Doctor_Notes == 'y'"><a class="dropdown-item" >Doctor Notes</a></li>            
+            <li class="dropdown-item">DOc Consult</li>
+            <!-- <li *ngIf="menuEntitlement.Previous_History == 'y'"><a class="dropdown-item" href="#">Previous History</a></li>
+            <li *ngIf="menuEntitlement.Doctor_Notes == 'y'"><a class="dropdown-item" >Doctor Notes</a></li>             -->
           </ul>
         </li>
         <li class="nav-item">
