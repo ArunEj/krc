@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +11,10 @@ import { AptBookingComponent } from './apt-booking/apt-booking.component';
 import { PatientRegistrationComponent } from './patient-registration/patient-registration.component';
 import { AuthService } from './services/auth.service';
 import { DocConsultationComponent } from './doc-consultation/doc-consultation.component';
+import { BillingComponent } from './billing/billing.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MaterialModule} from './material.module';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,13 +23,17 @@ import { DocConsultationComponent } from './doc-consultation/doc-consultation.co
     LandingComponent,
     AptBookingComponent,
     PatientRegistrationComponent,
-    DocConsultationComponent
+    DocConsultationComponent,
+    BillingComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

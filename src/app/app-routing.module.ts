@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { AptBookingComponent } from './apt-booking/apt-booking.component';
 import { PatientRegistrationComponent } from './patient-registration/patient-registration.component';
 import { DocConsultationComponent } from './doc-consultation/doc-consultation.component';
+import { BillingComponent } from './billing/billing.component';
 const routes: Routes = [
   {
     path: '',
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path:'doc-consult',
     component:DocConsultationComponent
+  },
+  {
+    path:'billing',
+    component:BillingComponent
   }
 ];
 

@@ -1,0 +1,151 @@
+<app-header></app-header>
+<div class="container">
+  <div class="row">
+    <h1>Billing</h1>
+  </div>
+
+
+</div>
+
+<div class="container mar30" *ngIf="showBillingForm">
+  <form class="example-form">
+    <mat-form-field class="mar20lr" appearance="fill">
+      <mat-label>Select</mat-label>
+      <mat-select name="product_type" [(ngModel)]="billingItem.product_type" (selectionChange)="fetchProduct($event)">
+        <mat-option value="DIALYSIS">DIALYSIS</mat-option>
+        <mat-option value="PHARMACY">PHARMACY</mat-option>
+        <mat-option value="LAB">LAB</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width mar20lr" appearance="fill">
+      <mat-label>Product</mat-label>
+      <input type="text" name="product_name" [(ngModel)]="billingItem.product_name" placeholder="Pick one"
+        aria-label="Product" matInput [formControl]="myControl" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="setProductCost($event.option)"
+        [displayWith]="displayProperty">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option?.product_name}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+
+    <mat-form-field class="mar20lr" appearance="fill">
+      <mat-label>Amount</mat-label>
+      <input matInput type="number" [(ngModel)]="billingItem.amount" name="amount">
+    </mat-form-field>
+    <div>
+      <mat-form-field class="mar20lr" appearance="fill">
+        <mat-label>Other charges 1</mat-label>
+        <input matInput type="number" [(ngModel)]="billingItem.oc1" (ngModelChange)="calclulateOthercharges($event)"
+          name="oc1">
+      </mat-form-field>
+      <mat-form-field class="mar20lr" appearance="fill">
+        <mat-label>Other charges 2</mat-label>
+        <input matInput type="number" [(ngModel)]="billingItem.oc2" (ngModelChange)="calclulateOthercharges($event)"
+          name="oc2">
+      </mat-form-field>
+      <mat-form-field class="mar20lr" appearance="fill">
+        <mat-label>Other charges3</mat-label>
+        <input matInput type="number" [(ngModel)]="billingItem.oc3" (ngModelChange)="calclulateOthercharges($event)"
+          name="oc3">
+      </mat-form-field>
+
+      <mat-form-field class="mar20lr" appearance="fill">
+        <mat-label>Gross Amount</mat-label>
+        <input matInput type="number" [(ngModel)]="billingItem.gross" name="gross">
+      </mat-form-field>
+    </div>
+    <mat-form-field class="mar20lr" appearance="fill">
+      <mat-label>Dicscount 1</mat-label>
+      <input matInput type="number" [(ngModel)]="billingItem.d1" name="d1" (ngModelChange)="calclulateDiscount($event)">
+    </mat-form-field>
+    <mat-form-field class="mar20lr" appearance="fill">
+      <mat-label>Discount 2</mat-label>
+      <input matInput type="number" [(ngModel)]="billingItem.d2" name="d2" (ngModelChange)="calclulateDiscount($event)">
+    </mat-form-field>
+    <mat-form-field class="mar20lr" appearance="fill">
+      <mat-label>Discount 3</mat-label>
+      <input matInput type="number" [(ngModel)]="billingItem.d3" name="d3" (ngModelChange)="calclulateDiscount($event)">
+    </mat-form-field>
+    <mat-form-field class="mar20lr" appearance="fill">
+      <mat-label>Total Discount</mat-label>
+      <input matInput type="number" [(ngModel)]="billingItem.total_discount" name="total_discount">
+    </mat-form-field>
+    <div>
+      <mat-form-field class="mar20lr" appearance="fill">
+        <mat-label>Net Amount</mat-label>
+        <input matInput type="number" [(ngModel)]="this.billingItem.netpay" name="netpay">
+      </mat-form-field>
+
+      <mat-form-field class="mar20lr" appearance="fill">
+        <mat-label>Amount Received</mat-label>
+        <input matInput type="number" [(ngModel)]="this.billingItem.amount_received" name="amount_received">
+      </mat-form-field>
+    </div>
+  </form>
+  <button type="button" class="btn btn-primary" (click)="addItem()">
+    + Item
+  </button>
+</div>
+<div *ngIf="billingArray?.length > 0">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+        <th scope="col">Product Name</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Net Pay</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of billingArray">
+        
+        <td>{{item.product_type}}</td>
+        <td>{{item.product_name.product_name}}</td>
+        <td>{{item.amount}}</td>
+        <td>{{item.netpay}}</td>
+        
+      </tr>
+      </tbody>
+      </table>
+</div>
+<div>
+  <button type="button" class="btn btn-primary mar30" *ngIf="!showBillingForm" (click)="showBillingForm = true">
+    Create Item
+  </button>
+Total Amount to pay : {{this.finalPay}}
+  <button type="button" class="btn btn-primary mar30" [disabled]="billingArray.length === 0" *ngIf="!showBillingForm" (click)=submitData()>
+    Submit
+  </button>
+</div>
+
+
+
+
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    + Billing Item
+  </button> -->
+
+
+
+
+<!-- Modal -->
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">KRc- Item Add</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+         
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
