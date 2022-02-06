@@ -7,18 +7,20 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class BillingService {
-  
+
 
   constructor(private authService: AuthService,
     private route: Router, private http: HttpClient) { }
 
-  
 
-  fetchUserData(mobile_no:string):Observable<any>{
-      return this.http.post('https://krcnephrology.herokuapp.com/patient_hist.php', { mobile_no: mobile_no });
+
+  fetchUserData(mobile_no: string): Observable<any> {
+    return this.http.post('https://krcnephrology.herokuapp.com/patient_hist.php', { mobile_no: mobile_no });
   }
-  fetchProductMaster(type:string):Observable<any>{
+  fetchProductMaster(type: string): Observable<any> {
     return this.http.post('https://krcnephrology.herokuapp.com/fetchproducts.php', { product_type: type });
-}
-  
+  }
+  submitInvoice(billingArray: any): Observable<any> {
+    return this.http.post('https://krcnephrology.herokuapp.com/invoicesave.php',billingArray);
+  }
 }

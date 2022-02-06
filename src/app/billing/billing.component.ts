@@ -19,7 +19,29 @@ export class BillingComponent implements OnInit {
   dialysisProducts: BillingItem[] = [];
   labProducts: BillingItem[] = [];
   pharmacyProducts: BillingItem[] = [];
-  billingItem = { product_id: '', product_type: '', amount: Number(0), product_name: '', oc1: Number(0), oc2: Number(0), oc3: Number(0), gross: Number(0), d1: Number(0), d2: Number(0), d3: Number(0), total_discount: Number(0), netpay: Number(0), finalAmount: Number(0), amount_received: Number(0) }
+  billingItem = {
+    product_id: '',
+    product_type: '',
+    product_cost: Number(0),
+    product_name: '',
+    charge1: Number(0),
+    charge2: Number(0),
+    charge3: Number(0),
+    cgremark1: '',
+    cgremark2: '',
+    cgremark3: '',
+    gross_inv_amount: Number(0),
+    dscount1: Number(0),
+    dscount2: Number(0),
+    dscount3: Number(0),
+    dsremark1: '',
+    dsremark2: '',
+    dsremark3: '',
+    totaldiscount: Number(0),
+    netamount: Number(0),
+    netbalance: Number(0),
+    netpaid: Number(0)
+  }
   dialysisProductsNameList: string[] = [];
   labProductNameList: string[] = [];
   pharmacyProductNameList: string[] = [];
@@ -64,8 +86,8 @@ export class BillingComponent implements OnInit {
   }
 
   setProductCost(data: any) {
-    this.billingItem.amount = parseInt(data.value.selling_price);
-    this.calclulateNetPay();
+    this.billingItem.product_cost = parseInt(data.value.selling_price);
+    this.calclulateOthercharges(this.billingItem.product_cost);
   }
   public displayProperty(value: any) {
     if (value) {
@@ -107,33 +129,54 @@ export class BillingComponent implements OnInit {
     this.showBillingForm = false;
     this.options = [];
     this.calculateFinal();
-    this.billingItem = { product_id: '', product_type: '', amount: Number(0), product_name: '', oc1: Number(0), oc2: Number(0), oc3: Number(0), gross: Number(0), d1: Number(0), d2: Number(0), d3: Number(0), total_discount: Number(0), netpay: Number(0), finalAmount: Number(0), amount_received: Number(0) };
+    this.billingItem = {
+      product_id: '',
+      product_type: '',
+      product_cost: Number(0),
+      product_name: '',
+      charge1: Number(0),
+      charge2: Number(0),
+      charge3: Number(0),
+      cgremark1: '',
+      cgremark2: '',
+      cgremark3: '',
+      gross_inv_amount: Number(0),
+      dscount1: Number(0),
+      dscount2: Number(0),
+      dscount3: Number(0),
+      dsremark1: '',
+      dsremark2: '',
+      dsremark3: '',
+      totaldiscount: Number(0),
+      netamount: Number(0),
+      netbalance: Number(0),
+      netpaid: Number(0)
+    }
   }
 
   calclulateOthercharges(data: number) {
-    this.billingItem.gross = this.billingItem.oc1 + this.billingItem.oc2 + this.billingItem.oc3;
+    this.billingItem.gross_inv_amount = this.billingItem.product_cost + this.billingItem.charge1 + this.billingItem.charge2 + this.billingItem.charge3;
     this.calclulateNetPay();
     //this.billingItem.gross = 4+5;
   }
   calclulateDiscount(data: number) {
-    this.billingItem.total_discount = this.billingItem.d1 + this.billingItem.d2 + this.billingItem.d3;
+    this.billingItem.totaldiscount = this.billingItem.dscount1 + this.billingItem.dscount2 + this.billingItem.dscount3;
     this.calclulateNetPay();
   }
 
   calclulateNetPay() {
-    this.billingItem.netpay = (this.billingItem.gross + this.billingItem.amount) - this.billingItem.total_discount;
+    this.billingItem.netamount = (this.billingItem.gross_inv_amount) - this.billingItem.totaldiscount;
     //this.calculateFinal();
   }
 
   calculateFinal() {
-   
-       this.finalPay = this.finalPay+ this.billingItem.netpay;
-    
-    
+    this.finalPay = this.finalPay + this.billingItem.netamount;
+
   }
 
   submitData() {
-    alert('data to be sent to backend and saved in db')
+    this.bs.submitInvoice(this.billingArray)
+    console.log(this.billingArray);
   }
 
 }

@@ -33,55 +33,91 @@
 
     <mat-form-field class="mar20lr" appearance="fill">
       <mat-label>Amount</mat-label>
-      <input matInput type="number" [(ngModel)]="billingItem.amount" name="amount">
+      <input matInput type="number" [(ngModel)]="billingItem.product_cost" name="product_cost">
     </mat-form-field>
     <div>
       <mat-form-field class="mar20lr" appearance="fill">
         <mat-label>Other charges 1</mat-label>
-        <input matInput type="number" [(ngModel)]="billingItem.oc1" (ngModelChange)="calclulateOthercharges($event)"
-          name="oc1">
+        <input matInput type="number" [(ngModel)]="billingItem.charge1" (ngModelChange)="calclulateOthercharges($event)"
+          name="charge1">
       </mat-form-field>
       <mat-form-field class="mar20lr" appearance="fill">
         <mat-label>Other charges 2</mat-label>
-        <input matInput type="number" [(ngModel)]="billingItem.oc2" (ngModelChange)="calclulateOthercharges($event)"
-          name="oc2">
+        <input matInput type="number" [(ngModel)]="billingItem.charge2" (ngModelChange)="calclulateOthercharges($event)"
+          name="charge2">
       </mat-form-field>
       <mat-form-field class="mar20lr" appearance="fill">
         <mat-label>Other charges3</mat-label>
-        <input matInput type="number" [(ngModel)]="billingItem.oc3" (ngModelChange)="calclulateOthercharges($event)"
-          name="oc3">
-      </mat-form-field>
-
+        <input matInput type="number" [(ngModel)]="billingItem.charge3" (ngModelChange)="calclulateOthercharges($event)"
+          name="charge3">
+      </mat-form-field>      
       <mat-form-field class="mar20lr" appearance="fill">
         <mat-label>Gross Amount</mat-label>
-        <input matInput type="number" [(ngModel)]="billingItem.gross" name="gross">
+        <input matInput type="number" [(ngModel)]="billingItem.gross_inv_amount" name="gross_inv_amount">
       </mat-form-field>
     </div>
+
+    <div>     
+      
+      <mat-form-field class="mar20lr" appearance="fill">
+        <mat-label>Comments 1</mat-label>
+        <input matInput  [(ngModel)]="billingItem.cgremark1" name="cgremark1">
+      </mat-form-field>
+      <mat-form-field class="mar20lr" appearance="fill">
+        <mat-label>Comments 2</mat-label>
+        <input matInput  [(ngModel)]="billingItem.cgremark2" name="cgremark2">
+      </mat-form-field>
+      <mat-form-field class="mar20lr" appearance="fill">
+        <mat-label>Comments 3</mat-label>
+        <input matInput  [(ngModel)]="billingItem.cgremark3" name="cgremark3">
+      </mat-form-field>
+      
+    </div>
+<div>
     <mat-form-field class="mar20lr" appearance="fill">
       <mat-label>Dicscount 1</mat-label>
-      <input matInput type="number" [(ngModel)]="billingItem.d1" name="d1" (ngModelChange)="calclulateDiscount($event)">
+      <input matInput type="number" [(ngModel)]="billingItem.dscount1" name="dscount1" (ngModelChange)="calclulateDiscount($event)">
     </mat-form-field>
     <mat-form-field class="mar20lr" appearance="fill">
       <mat-label>Discount 2</mat-label>
-      <input matInput type="number" [(ngModel)]="billingItem.d2" name="d2" (ngModelChange)="calclulateDiscount($event)">
+      <input matInput type="number" [(ngModel)]="billingItem.dscount2" name="dscount2" (ngModelChange)="calclulateDiscount($event)">
     </mat-form-field>
     <mat-form-field class="mar20lr" appearance="fill">
       <mat-label>Discount 3</mat-label>
-      <input matInput type="number" [(ngModel)]="billingItem.d3" name="d3" (ngModelChange)="calclulateDiscount($event)">
+      <input matInput type="number" [(ngModel)]="billingItem.dscount3" name="dscount3" (ngModelChange)="calclulateDiscount($event)">
     </mat-form-field>
+    
     <mat-form-field class="mar20lr" appearance="fill">
       <mat-label>Total Discount</mat-label>
-      <input matInput type="number" [(ngModel)]="billingItem.total_discount" name="total_discount">
+      <input matInput type="number" [(ngModel)]="billingItem.totaldiscount" name="totaldiscount">
     </mat-form-field>
+  </div>
+  <div>
+    
+    <mat-form-field class="mar20lr" appearance="fill">
+      <mat-label>Discount Comments 1</mat-label>
+      <input matInput  [(ngModel)]="billingItem.dsremark1" name="dsremark1">
+    </mat-form-field>
+    <mat-form-field class="mar20lr" appearance="fill">
+      <mat-label>Discount Comments 1</mat-label>
+      <input matInput  [(ngModel)]="billingItem.dsremark2" name="dsremark2">
+    </mat-form-field>
+    <mat-form-field class="mar20lr" appearance="fill">
+      <mat-label>Discount Comments 1</mat-label>
+      <input matInput  [(ngModel)]="billingItem.dsremark3" name="dsremark3">
+    </mat-form-field>
+
+    
+  </div>
     <div>
       <mat-form-field class="mar20lr" appearance="fill">
         <mat-label>Net Amount</mat-label>
-        <input matInput type="number" [(ngModel)]="this.billingItem.netpay" name="netpay">
+        <input matInput type="number" [(ngModel)]="this.billingItem.netamount" name="netamount">
       </mat-form-field>
 
       <mat-form-field class="mar20lr" appearance="fill">
         <mat-label>Amount Received</mat-label>
-        <input matInput type="number" [(ngModel)]="this.billingItem.amount_received" name="amount_received">
+        <input matInput type="number" [(ngModel)]="this.billingItem.netpaid" name="netpaid">
       </mat-form-field>
     </div>
   </form>
@@ -105,8 +141,8 @@
         
         <td>{{item.product_type}}</td>
         <td>{{item.product_name.product_name}}</td>
-        <td>{{item.amount}}</td>
-        <td>{{item.netpay}}</td>
+        <td>{{item.product_cost}}</td>
+        <td>{{item.netamount}}</td>
         
       </tr>
       </tbody>
