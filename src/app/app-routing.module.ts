@@ -7,6 +7,7 @@ import { AptBookingComponent } from './apt-booking/apt-booking.component';
 import { PatientRegistrationComponent } from './patient-registration/patient-registration.component';
 import { DocConsultationComponent } from './doc-consultation/doc-consultation.component';
 import { BillingComponent } from './billing/billing.component';
+import { PaymentComponent } from './payment/payment.component';
 const routes: Routes = [
   {
     path: '',
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path:'billing',
     component:BillingComponent
+  },
+  {
+    path:'payment',
+    component:PaymentComponent
   }
 ];
 

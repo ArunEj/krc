@@ -8,7 +8,8 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 })
 export class BillingService {
 
-
+invoice_no:string = '';
+currentBillingArray = [];
   constructor(private authService: AuthService,
     private route: Router, private http: HttpClient) { }
 
@@ -23,4 +24,8 @@ export class BillingService {
   submitInvoice(billingArray: any): Observable<any> {
     return this.http.post('https://krcnephrology.herokuapp.com/invoicesave.php',billingArray);
   }
+  submitInvoiceMock(billingArray: any): Observable<any> {
+    return this.http.get('assets/stub/billing_item.json');
+  }
+  
 }

@@ -1,0 +1,39 @@
+<app-header></app-header>
+<div class="container">
+    <div class="row">
+        <h1>Payment</h1>
+    </div>
+    <div *ngIf="billingArray?.length > 0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Serial#</th>
+                    <th scope="col">Product Type</th>
+                    <th scope="col">Net Amount</th>
+                    <th scope="col">Net Paid</th>
+                    <th scope="col">Payable Amount</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of billingArray">
+
+                    <td>{{item.inv_sr_no}}</td>
+                    <td>{{item.billAlias}}</td>
+                    <td>{{item.netamount}}</td>
+                    <td>{{item.netpaid}}</td>
+                    <td><input type="text" name="amt_payment" [(ngModel)]="paymentItem.amt_payment"></td>
+                    <td><select   [(ngModel)]="paymentItem.payment_mode" name="payment_mode">
+                        
+                        <option value="S">Cash</option>
+                        <option value="C">Card</option>
+                        <option value="Q">Cheque</option>
+                        <option value="U">UPI</option></select></td>
+                    <td><button [disabled]="paymentItem.amt_payment === '' || paymentItem.payment_mode === ''" (click)="makePayment(item)">Make Payment</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

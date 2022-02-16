@@ -14,6 +14,7 @@ import { DocConsultationComponent } from './doc-consultation/doc-consultation.co
 import { BillingComponent } from './billing/billing.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MaterialModule} from './material.module';
+import { PaymentComponent } from './payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {MaterialModule} from './material.module';
     AptBookingComponent,
     PatientRegistrationComponent,
     DocConsultationComponent,
-    BillingComponent
+    BillingComponent,
+    PaymentComponent
   ],
   imports: [
     BrowserModule,

@@ -3,15 +3,25 @@
   <div class="row">
     <h1>Billing</h1>
   </div>
-
+  <div class="row" *ngIf="!patientDetail">
+    <h3>Patient Details</h3>
+    <div class="patient-details">
+      <label for="contact" class="form-label">Contact</label>
+      <input type="text" class="form-control contact-input" required name="contact" [(ngModel)]="mobile_no"
+        id="contact">
+      <br>
+      <button (click)="fetchUser()" [disabled]="!mobile_no" class="btn btn-primary mar20t">fetch
+        contact details</button>
+    </div>
+  </div>
 
 </div>
 
 <div class="container mar30" *ngIf="showBillingForm">
-  <form class="example-form">
+  <form class="example-form" [formGroup]="myForm" novalidate>
     <mat-form-field class="mar20lr" appearance="fill">
       <mat-label>Select</mat-label>
-      <mat-select name="product_type" [(ngModel)]="billingItem.product_type" (selectionChange)="fetchProduct($event)">
+      <mat-select matInput name="product_type" formControlName="product_type" [(ngModel)]="billingItem.product_type" required (selectionChange)="fetchProduct($event)">
         <mat-option value="DIALYSIS">DIALYSIS</mat-option>
         <mat-option value="PHARMACY">PHARMACY</mat-option>
         <mat-option value="LAB">LAB</mat-option>
@@ -20,40 +30,49 @@
 
     <mat-form-field class="example-full-width mar20lr" appearance="fill">
       <mat-label>Product</mat-label>
-      <input type="text" name="product_name" [(ngModel)]="billingItem.product_name" placeholder="Pick one"
-        aria-label="Product" matInput [formControl]="myControl" [matAutocomplete]="auto">
+      <input type="text" matInput name="product_name"  required [(ngModel)]="billingItem.product_name" placeholder="Pick one"
+        aria-label="Product"  [formControl]="myControl" [matAutocomplete]="auto">
       <mat-autocomplete #auto="matAutocomplete" (optionSelected)="setProductCost($event.option)"
         [displayWith]="displayProperty">
         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
           {{option?.product_name}}
         </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
+      </mat-autocomplete>     
+    </mat-form-field> 
 
 
     <mat-form-field class="mar20lr" appearance="fill">
       <mat-label>Amount</mat-label>
-      <input matInput type="number" [(ngModel)]="billingItem.product_cost" name="product_cost">
+      <input matInput type="number" formControlName="product_cost" required [(ngModel)]="billingItem.product_cost"
+        name="product_cost">
+     
     </mat-form-field>
-    <div>
+
+    <mat-form-field class="mar20lr" appearance="fill">
+      <mat-label>Quantity</mat-label>
+      <input matInput type="number" formControlName="product_bill_qty" required
+        [(ngModel)]="billingItem.product_bill_qty" name="product_bill_qty"
+        (ngModelChange)="calculateAmountPerQty($event)">
+    </mat-form-field>
+     <div>
       <mat-form-field class="mar20lr" appearance="fill">
         <mat-label>Other charges 1</mat-label>
-        <input matInput type="number" [(ngModel)]="billingItem.charge1" (ngModelChange)="calclulateOthercharges($event)"
+        <input matInput type="number" formControlName="charge1" [(ngModel)]="billingItem.charge1" (ngModelChange)="calclulateOthercharges($event)"
           name="charge1">
       </mat-form-field>
       <mat-form-field class="mar20lr" appearance="fill">
         <mat-label>Other charges 2</mat-label>
-        <input matInput type="number" [(ngModel)]="billingItem.charge2" (ngModelChange)="calclulateOthercharges($event)"
+        <input matInput type="number" formControlName="charge2"  [(ngModel)]="billingItem.charge2" (ngModelChange)="calclulateOthercharges($event)"
           name="charge2">
       </mat-form-field>
       <mat-form-field class="mar20lr" appearance="fill">
         <mat-label>Other charges3</mat-label>
-        <input matInput type="number" [(ngModel)]="billingItem.charge3" (ngModelChange)="calclulateOthercharges($event)"
+        <input matInput type="number" formControlName="charge3" [(ngModel)]="billingItem.charge3" (ngModelChange)="calclulateOthercharges($event)"
           name="charge3">
       </mat-form-field>      
       <mat-form-field class="mar20lr" appearance="fill">
         <mat-label>Gross Amount</mat-label>
-        <input matInput type="number" [(ngModel)]="billingItem.gross_inv_amount" name="gross_inv_amount">
+        <input matInput type="number" formControlName="gross_inv_amount" [(ngModel)]="billingItem.gross_inv_amount" name="gross_inv_amount">
       </mat-form-field>
     </div>
 
@@ -61,70 +80,77 @@
       
       <mat-form-field class="mar20lr" appearance="fill">
         <mat-label>Comments 1</mat-label>
-        <input matInput  [(ngModel)]="billingItem.cgremark1" name="cgremark1">
+        <input matInput formControlName="cgremark1"  [(ngModel)]="billingItem.cgremark1" name="cgremark1">
       </mat-form-field>
       <mat-form-field class="mar20lr" appearance="fill">
         <mat-label>Comments 2</mat-label>
-        <input matInput  [(ngModel)]="billingItem.cgremark2" name="cgremark2">
+        <input matInput formControlName="cgremark2"  [(ngModel)]="billingItem.cgremark2" name="cgremark2">
       </mat-form-field>
       <mat-form-field class="mar20lr" appearance="fill">
         <mat-label>Comments 3</mat-label>
-        <input matInput  [(ngModel)]="billingItem.cgremark3" name="cgremark3">
+        <input matInput formControlName="cgremark3" [(ngModel)]="billingItem.cgremark3" name="cgremark3">
       </mat-form-field>
       
     </div>
 <div>
     <mat-form-field class="mar20lr" appearance="fill">
       <mat-label>Dicscount 1</mat-label>
-      <input matInput type="number" [(ngModel)]="billingItem.dscount1" name="dscount1" (ngModelChange)="calclulateDiscount($event)">
+      <input matInput type="number" formControlName="dscount1"  [(ngModel)]="billingItem.dscount1" name="dscount1" (ngModelChange)="calclulateDiscount($event)">
     </mat-form-field>
     <mat-form-field class="mar20lr" appearance="fill">
       <mat-label>Discount 2</mat-label>
-      <input matInput type="number" [(ngModel)]="billingItem.dscount2" name="dscount2" (ngModelChange)="calclulateDiscount($event)">
+      <input matInput type="number" formControlName="dscount2"  [(ngModel)]="billingItem.dscount2" name="dscount2" (ngModelChange)="calclulateDiscount($event)">
     </mat-form-field>
     <mat-form-field class="mar20lr" appearance="fill">
       <mat-label>Discount 3</mat-label>
-      <input matInput type="number" [(ngModel)]="billingItem.dscount3" name="dscount3" (ngModelChange)="calclulateDiscount($event)">
+      <input matInput type="number" formControlName="dscount3"  [(ngModel)]="billingItem.dscount3" name="dscount3" (ngModelChange)="calclulateDiscount($event)">
     </mat-form-field>
     
     <mat-form-field class="mar20lr" appearance="fill">
       <mat-label>Total Discount</mat-label>
-      <input matInput type="number" [(ngModel)]="billingItem.totaldiscount" name="totaldiscount">
+      <input matInput type="number" formControlName="totaldiscount"  [(ngModel)]="billingItem.totaldiscount" name="totaldiscount">
     </mat-form-field>
   </div>
   <div>
     
     <mat-form-field class="mar20lr" appearance="fill">
       <mat-label>Discount Comments 1</mat-label>
-      <input matInput  [(ngModel)]="billingItem.dsremark1" name="dsremark1">
+      <input matInput formControlName="dsremark1" [(ngModel)]="billingItem.dsremark1" name="dsremark1">
     </mat-form-field>
     <mat-form-field class="mar20lr" appearance="fill">
       <mat-label>Discount Comments 1</mat-label>
-      <input matInput  [(ngModel)]="billingItem.dsremark2" name="dsremark2">
+      <input matInput formControlName="dsremark2" [(ngModel)]="billingItem.dsremark2" name="dsremark2">
     </mat-form-field>
     <mat-form-field class="mar20lr" appearance="fill">
       <mat-label>Discount Comments 1</mat-label>
-      <input matInput  [(ngModel)]="billingItem.dsremark3" name="dsremark3">
+      <input matInput formControlName="dsremark3" [(ngModel)]="billingItem.dsremark3" name="dsremark3">
     </mat-form-field>
 
     
-  </div>
+  </div> 
     <div>
       <mat-form-field class="mar20lr" appearance="fill">
         <mat-label>Net Amount</mat-label>
-        <input matInput type="number" [(ngModel)]="this.billingItem.netamount" name="netamount">
+        <input matInput type="number" required formControlName="netamount" [(ngModel)]="this.billingItem.netamount" name="netamount">
       </mat-form-field>
 
-      <mat-form-field class="mar20lr" appearance="fill">
-        <mat-label>Amount Received</mat-label>
-        <input matInput type="number" [(ngModel)]="this.billingItem.netpaid" name="netpaid">
-      </mat-form-field>
-    </div>
+    </div> 
+    
+    <button type="button" class="btn btn-primary"  [disabled]="!myForm.valid" (click)="addItem()">
+      + Item
+    </button>
+    <button type="button" class="btn btn-primary mar30" (click)="cancelNewItem()">
+      Cancel
+    </button>
+
+    <button type="button" class="btn btn-primary mar30" (click)="resetFields()">
+      Reset
+    </button>
   </form>
-  <button type="button" class="btn btn-primary" (click)="addItem()">
-    + Item
-  </button>
-</div>
+
+
+ 
+</div> 
 <div *ngIf="billingArray?.length > 0">
   <table class="table">
     <thead>
@@ -133,55 +159,41 @@
         <th scope="col">Product Name</th>
         <th scope="col">Amount</th>
         <th scope="col">Net Pay</th>
-        
+        <!-- <th scope="col"></th> -->
+
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let item of billingArray">
-        
+
         <td>{{item.product_type}}</td>
         <td>{{item.product_name.product_name}}</td>
         <td>{{item.product_cost}}</td>
         <td>{{item.netamount}}</td>
-        
+        <!-- <td><button (click)="redirectPayment()">Make Payment</button></td> -->
       </tr>
-      </tbody>
-      </table>
+    </tbody>
+  </table>
 </div>
-<div>
+<div *ngIf="patientDetail">
   <button type="button" class="btn btn-primary mar30" *ngIf="!showBillingForm" (click)="showBillingForm = true">
     Create Item
   </button>
-Total Amount to pay : {{this.finalPay}}
-  <button type="button" class="btn btn-primary mar30" [disabled]="billingArray.length === 0" *ngIf="!showBillingForm" (click)=submitData()>
-    Submit
+  Total Amount to pay : {{this.finalPay}}
+  <button type="button" class="btn btn-primary mar30" [disabled]="billingArray.length === 0" *ngIf="!showBillingForm"
+    (click)=submitData()>
+    Generate Invoice
   </button>
 </div>
 
 
 
 
-<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    + Billing Item
-  </button> -->
-
-
-
-
-<!-- Modal -->
-<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">KRc- Item Add</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-         
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div> -->
+<!-- <form [formGroup]="registerForm">
+  <mat-label>Email</mat-label>
+   <input type="email" matInput formControlName="email" 
+   placeholder="Ex. mail@gmail.com"/>
+   <input matInput type="number" formControlName="product_cost" required [(ngModel)]="billingItem.product_cost"
+   name="product_cost">
+   <button [disabled]="!registerForm.valid" class="btn btn-primary mar30" type="submit">Submit</button>
+<form> -->
