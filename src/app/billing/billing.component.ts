@@ -38,26 +38,26 @@ export class BillingComponent implements OnInit {
       validators: [Validators.required, Validators.min(1)],
       updateOn: "change"
     }],
-    charge1:[],
-    charge2:[],
-    charge3:[],
-    gross_inv_amount:[],
-    cgremark1:[],
-    cgremark2:[],
-    cgremark3:[],
-    dsremark1:[],
-    dsremark2:[],
-    dsremark3:[],
-    dscount1:[],
-    dscount2:[],
-    dscount3:[],
-    totaldiscount:[],
-    netamount:[]
+    charge1: [],
+    charge2: [],
+    charge3: [],
+    gross_inv_amount: [],
+    cgremark1: [],
+    cgremark2: [],
+    cgremark3: [],
+    dsremark1: [],
+    dsremark2: [],
+    dsremark3: [],
+    dscount1: [],
+    dscount2: [],
+    dscount3: [],
+    totaldiscount: [],
+    netamount: []
 
   });
 
   patientDetail = false;
-
+  patientHeader = { patient_id: "", netpaid: "", netbalance: "" };
   mobile_no: string = '';
   billingArray: any = [];
   showModal = false;
@@ -70,6 +70,7 @@ export class BillingComponent implements OnInit {
   pharmacyProducts: BillingItem[] = [];
   billingItem = {
     branch_id: localStorage.getItem('branch_id'),
+    patient_id:'',
     product_id: '',
     product_type: '',
     product_cost: Number(0),
@@ -110,7 +111,7 @@ export class BillingComponent implements OnInit {
       startWith(''),
       map(value => this._filter(value)),
     );
-   
+
 
 
   }
@@ -119,6 +120,7 @@ export class BillingComponent implements OnInit {
   fetchUser() {
     this.bs.fetchUserData(this.mobile_no).subscribe(data => {
       this.patientDetail = true;
+      this.patientHeader = data;
       console.log(data);
     })
   }
@@ -207,6 +209,7 @@ export class BillingComponent implements OnInit {
     this.showBillingForm = false;
   }
   addItem() {
+    this.billingItem.patient_id = this.patientHeader.patient_id;
     this.billingArray.push(this.billingItem);
     this.showBillingForm = false;
     this.options = [];
@@ -249,14 +252,16 @@ export class BillingComponent implements OnInit {
     this.bs.submitInvoice(this.billingArray).subscribe(data => {
       console.log(data);
       this.bs.invoice_no = data.invoice_no;
+      this.bs.patient_id = this.patientHeader.patient_id;
       this.router.navigate(['/payment']);
     })
 
-    //
+   // this.router.navigate(['/payment']);
   }
 
   resetFields() {
     this.billingItem = {
+      patient_id:'',
       branch_id: localStorage.getItem('branch_id'),
       product_id: '',
       product_type: '',

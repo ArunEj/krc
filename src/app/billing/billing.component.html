@@ -175,11 +175,16 @@
     </tbody>
   </table>
 </div>
-<div *ngIf="patientDetail">
+<div *ngIf="!showBillingForm && patientDetail">
+  <div>
+    <label class="mar30">Patient Id: {{patientHeader.patient_id}}</label>
+    <label class="mar30">Net Paid: {{patientHeader.netpaid}}</label>
+    <label class="mar30">Net Balance: {{patientHeader.netbalance}}</label>
+  </div>
   <button type="button" class="btn btn-primary mar30" *ngIf="!showBillingForm" (click)="showBillingForm = true">
     Create Item
   </button>
-  Total Amount to pay : {{this.finalPay}}
+  <!-- Total Amount to pay : {{this.finalPay}} -->
   <button type="button" class="btn btn-primary mar30" [disabled]="billingArray.length === 0" *ngIf="!showBillingForm"
     (click)=submitData()>
     Generate Invoice
