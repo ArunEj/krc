@@ -253,7 +253,7 @@ export class BillingComponent implements OnInit {
       console.log(data);
       this.bs.invoice_no = data.invoice_no;
       this.bs.patient_id = this.patientHeader.patient_id;
-      this.router.navigate(['/payment']);
+      this.router.navigate(['landing']);
     })
 
    // this.router.navigate(['/payment']);

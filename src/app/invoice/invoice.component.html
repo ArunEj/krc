@@ -1,0 +1,31 @@
+<app-header></app-header>
+<div class="container">
+<div class="row" *ngIf="!patientDetail">
+    <h3>Payment Details</h3>
+    <div class="patient-details">
+        <label for="contact" class="form-label">Contact</label>
+        <input type="text" class="form-control contact-input" required name="contact" [(ngModel)]="mobile_no"
+            id="contact">
+        <br>
+        <button (click)="fetchUserInvoices()" [disabled]="!mobile_no" class="btn btn-primary mar20t">fetch
+            Invoices</button>
+    </div>
+</div>
+<div *ngIf="invoiceDetails?.invoice_no.length > 0">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Invoice#</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of invoiceDetails?.invoice_no; let index">
+
+                <td><a href="" [routerLink]="['/invoice', item, {invoice_no:item, patient_id:invoiceDetails.patient_id}]">{{item}}</a></td>
+                
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>

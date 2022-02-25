@@ -15,6 +15,8 @@ import { BillingComponent } from './billing/billing.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MaterialModule} from './material.module';
 import { PaymentComponent } from './payment/payment.component';
+import {DialogOverviewExampleDialog} from './payment/payment.component';
+import { InvoiceComponent } from './invoice/invoice.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { PaymentComponent } from './payment/payment.component';
     PatientRegistrationComponent,
     DocConsultationComponent,
     BillingComponent,
-    PaymentComponent
+    PaymentComponent,
+    DialogOverviewExampleDialog,
+    InvoiceComponent
   ],
   imports: [
     BrowserModule,

@@ -8,11 +8,12 @@ import { PatientRegistrationComponent } from './patient-registration/patient-reg
 import { DocConsultationComponent } from './doc-consultation/doc-consultation.component';
 import { BillingComponent } from './billing/billing.component';
 import { PaymentComponent } from './payment/payment.component';
+import { InvoiceComponent } from './invoice/invoice.component';
 const routes: Routes = [
   {
     path: '',
     redirectTo: 'login',
-    pathMatch:'full'
+    pathMatch: 'full'
   },
   {
     path: 'landing',
@@ -23,24 +24,28 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path:'patient-reg',
-    component:PatientRegistrationComponent
+    path: 'patient-reg',
+    component: PatientRegistrationComponent
   },
   {
-    path:'apt-booking',
-    component:AptBookingComponent
+    path: 'apt-booking',
+    component: AptBookingComponent
   },
   {
-    path:'doc-consult',
-    component:DocConsultationComponent
+    path: 'doc-consult',
+    component: DocConsultationComponent
   },
   {
-    path:'billing',
-    component:BillingComponent
+    path: 'billing',
+    component: BillingComponent
   },
   {
-    path:'payment',
-    component:PaymentComponent
+    path: 'invoice',
+    component: InvoiceComponent
+  },
+  {
+    path: 'invoice/:item',
+    component: PaymentComponent
   }
 ];
 
