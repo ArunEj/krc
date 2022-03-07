@@ -11,7 +11,19 @@
             Invoices</button>
     </div>
 </div>
-<div *ngIf="invoiceDetails?.invoice_no.length > 0">
+<div *ngIf="invoiceDetails" class="row header-border margin-20t">
+    <div class="">
+        <label class="mar20">Patient Id: {{invoiceDetails?.patient_id}}</label>
+        <label class="mar20">Patient Name: {{invoiceDetails?.patient_name}}</label>
+        <label class="mar20">Age: {{invoiceDetails?.age}}</label>
+        <label class="mar20">Last Visit: {{invoiceDetails?.last_visit}}</label>
+        <label class="mar20">Past Due: {{invoiceDetails?.past_due}}</label>
+        <label class="mar20">Advance Amount: {{invoiceDetails?.adv_amount}}</label>
+        <label class="mar20">Advance Balance: {{invoiceDetails?.adv_balance}}</label>
+      </div>
+      
+</div>
+<div *ngIf="invoiceDetails?.invoice_no.length > 0" class="margin-20t">
     <table class="table">
         <thead>
             <tr>

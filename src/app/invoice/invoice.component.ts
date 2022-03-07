@@ -7,22 +7,25 @@ import { Router } from '@angular/router';
   styleUrls: ['./invoice.component.scss']
 })
 export class InvoiceComponent implements OnInit {
-  mobile_no:string='';
-  invoiceDetails:any;
+  mobile_no: string = '';
+  invoiceDetails: any;
   patientDetail = false;
-  constructor(private is: InvoiceService, private router:Router) { 
-    
+  constructor(private is: InvoiceService, private router: Router) {
+
   }
 
   ngOnInit(): void {
   }
   fetchUserInvoices() {
     this.is.fetchInvoices(this.mobile_no).subscribe(data => {
-      this.invoiceDetails = data;
+      if (data) {
+        this.invoiceDetails = data;
+      }
+
       //this.invoiceArray = data.invoice_no;
     })
   }
 
- 
+
 
 }

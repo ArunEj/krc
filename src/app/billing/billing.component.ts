@@ -57,7 +57,7 @@ export class BillingComponent implements OnInit {
   });
 
   patientDetail = false;
-  patientHeader = { patient_id: "", netpaid: "", netbalance: "" };
+  patientHeader:any;
   mobile_no: string = '';
   billingArray: any = [];
   showModal = false;

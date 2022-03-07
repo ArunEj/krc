@@ -17,7 +17,7 @@ export class BillingService {
 
 
   fetchUserData(mobile_no: string): Observable<any> {
-    return this.http.post('https://krcnephrology.herokuapp.com/patient_billing_header.php', { mobile_no: mobile_no });
+    return this.http.post('https://krcnephrology.herokuapp.com/billing_header.php', { mobile_no: mobile_no });
   }
   fetchProductMaster(type: string): Observable<any> {
     return this.http.post('https://krcnephrology.herokuapp.com/fetchproducts.php', { product_type: type });
