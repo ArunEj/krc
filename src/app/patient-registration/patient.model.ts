@@ -13,5 +13,6 @@ export interface Patient {
     first_visit_date:String,
     sex:string,
     updated_by:string,
-    updated_date: string
+    updated_date: string,
+    patient_type: string
 }

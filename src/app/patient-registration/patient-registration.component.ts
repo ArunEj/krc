@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class PatientRegistrationComponent implements OnInit {
   patientRegObj: Patient = {
     patient_name: '', dob: '', add1: '', sex: '', email: '', mobile_no: '', first_visit_date: '',
-    add2: '', phone: '', aadhar_no: '', photo: '', other_email: '', branch_id: '', updated_by: '', updated_date:''
+    add2: '', phone: '', aadhar_no: '', photo: '', other_email: '', branch_id: '', updated_by: '', updated_date:'', patient_type:''
   };
   constructor(private ps: PatientRegService, private router:Router) { }
 

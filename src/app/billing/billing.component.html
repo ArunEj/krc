@@ -158,30 +158,7 @@
 
 
 </div>
-<div *ngIf="billingArray?.length > 0">
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Type</th>
-        <th scope="col">Product Name</th>
-        <th scope="col">Amount</th>
-        <th scope="col">Net Pay</th>
-        <!-- <th scope="col"></th> -->
 
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of billingArray">
-
-        <td>{{item.product_type}}</td>
-        <td>{{item.product_name.product_name}}</td>
-        <td>{{item.product_cost}}</td>
-        <td>{{item.netamount}}</td>
-        <!-- <td><button (click)="redirectPayment()">Make Payment</button></td> -->
-      </tr>
-    </tbody>
-  </table>
-</div>
 <div class="container" *ngIf="!showBillingForm && patientDetail">
   <!-- <div>
     <label class="mar30">Patient Id: {{patientHeader.patient_id}}</label>
@@ -193,12 +170,38 @@
       <label class="mar20">Patient Id: {{patientHeader?.patient_id}}</label>
       <label class="mar20">Patient Name: {{patientHeader?.patient_name}}</label>
       <label class="mar20">Age: {{patientHeader?.age}}</label>
+      <label class="mar20">Sex: {{patientHeader?.sex}}</label>
+      <label class="mar20">Phone: {{patientHeader?.mobile_no}}</label>
       <label class="mar20">Last Visit: {{patientHeader?.last_visit}}</label>
       <label class="mar20">Past Due: {{patientHeader?.past_due}}</label>
       <label class="mar20">Advance Amount: {{patientHeader?.adv_amount}}</label>
       <label class="mar20">Advance Balance: {{patientHeader?.adv_balance}}</label>
     </div>
 
+  </div>
+  <div *ngIf="billingArray?.length > 0">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Type</th>
+          <th scope="col">Product Name</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Net Pay</th>
+          <!-- <th scope="col"></th> -->
+  
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of billingArray">
+  
+          <td>{{item.product_type}}</td>
+          <td>{{item.product_name.product_name}}</td>
+          <td>{{item.product_cost}}</td>
+          <td>{{item.netamount}}</td>
+          <!-- <td><button (click)="redirectPayment()">Make Payment</button></td> -->
+        </tr>
+      </tbody>
+    </table>
   </div>
   <button type="button" class="btn btn-primary mar30" *ngIf="!showBillingForm" (click)="showBillingForm = true">
     Create Item

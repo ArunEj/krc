@@ -37,17 +37,32 @@
                         <label for="dob" class="form-label">DOB</label>
                         <input type="date" class="form-control" name="dob" [(ngModel)]="patientRegObj.dob" id="dob">
                     </div>
-                    <div class="patient-reg-item sex">
-                        <label for="dob" class="form-label block" >Sex</label>
-                        <input class="form-check-input mar10lr" [value]="'male'" [(ngModel)]="patientRegObj.sex" type="radio" name="male" id="male">
-                        <label class="form-check-label" for="male">
-                            Male
-                        </label>
-                        <input class=" form-check-input mar10lr" [value]="'female'" [(ngModel)]="patientRegObj.sex" type="radio" name="female" id="female">
-                        <label class="form-check-label" for="female">
-                            Female
-                        </label>
-                    </div>                
+                    <div class='row'>
+                        <div class="col-lg-4 patient-reg-item sex">
+                            <label for="dob" class="form-label block" >Sex</label>
+                            <input class="form-check-input mar10lr" [value]="'male'" [(ngModel)]="patientRegObj.sex" type="radio" name="male" id="male">
+                            <label class="form-check-label" for="male">
+                                Male
+                            </label>
+                            <input class=" form-check-input mar10lr" [value]="'female'" [(ngModel)]="patientRegObj.sex" type="radio" name="female" id="female">
+                            <label class="form-check-label" for="female">
+                                Female
+                            </label>
+                        </div> 
+                        <div class="col-lg-8">
+                            <label class="form-label">Patient Type</label>
+                            <select class="form-control" name="patient_type" [(ngModel)]="patientRegObj.patient_type">                                
+                                
+                                <option value="w">Working</option>                                
+                                <option value="c">CM Care</option>
+                                <option value="n">Normal</option>
+                                <option value="r`">Corporate</option>
+                                <option value="p">Pensioner</option>
+                                
+                            </select>
+                        </div> 
+                    </div>
+                                 
 
                 <div class=" patient-reg-item">
                     <label for="lastDoc" class="form-label">Phone</label>
