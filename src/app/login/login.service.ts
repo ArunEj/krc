@@ -15,9 +15,14 @@ export class LoginService {
   constructor(private authService: AuthService,
     private route: Router, private http: HttpClient) { }
 
-  login(loginData: any) {
+  login1(loginData: any) {
     return this.http.post('https://krcnephrology.herokuapp.com/login.php', { user_id: loginData.userId, pwd: loginData.pwd })
   }
+  login(loginData: any) {
+    return this.http.post('http://www.kkkrchennai.com/krc/login.php', { user_id: loginData.userId, pwd: loginData.pwd })
+  }
+
+  
   getUserData(){
     return this.userData;
   }

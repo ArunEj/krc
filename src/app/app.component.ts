@@ -24,8 +24,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.get('https://krcnephrology.herokuapp.com/index.php').subscribe(data => {
-      this.branches = JSON.parse(data.toString()).records;
-    })
+    // this.http.get('https://krcnephrology.herokuapp.com/index.php').subscribe(data => {
+    //   this.branches = JSON.parse(data.toString()).records;
+    // })
   }
 }

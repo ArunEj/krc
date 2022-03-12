@@ -19,7 +19,7 @@ export class PatientRegService {
   }
 
   registerPatient(patientObj:any){
-      return this.http.post('https://krcnephrology.herokuapp.com/patient-save.php', patientObj);
+      return this.http.post('http://www.kkkrchennai.com/krc/patient-save.php', patientObj);
     }
 getAllAppointments():any{
   return this.http.get('https://krcnephrology.herokuapp.com/fetchapptdata.php');
