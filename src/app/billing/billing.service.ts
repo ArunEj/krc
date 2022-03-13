@@ -20,7 +20,8 @@ export class BillingService {
     return this.http.post('https://krcnephrology.herokuapp.com/billing_header.php', { mobile_no: mobile_no });
   }
   fetchProductMaster(type: string): Observable<any> {
-    return this.http.post('https://krcnephrology.herokuapp.com/fetchproducts.php', { product_type: type });
+    // return this.http.post('https://krcnephrology.herokuapp.com/fetchproducts.php', { product_type: type });
+    return this.http.post('http://www.kkkrchennai.com/krc/fetchproducts.php', { product_type: type });
   }
   submitInvoice(billingArray: any): Observable<any> {
     return this.http.post('https://krcnephrology.herokuapp.com/invoicesave.php', billingArray);

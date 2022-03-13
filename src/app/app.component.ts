@@ -9,6 +9,7 @@ declare const gtag: Function;
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  title = 'KRC';
   branches: any = [];
   constructor(private http: HttpClient, private router: Router) {
     

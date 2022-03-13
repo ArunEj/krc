@@ -15,7 +15,9 @@ export class AptBookingService {
   
 
   fetchUserData(mobile_no:string):Observable<any>{
-      return this.http.post('https://krcnephrology.herokuapp.com/fetchdata.php', { mobile_no: mobile_no });
+      //return this.http.post('https://krcnephrology.herokuapp.com/fetchdata.php', { mobile_no: mobile_no });
+      return this.http.post('http://www.kkkrchennai.com/krc/fetchdata.php', { mobile_no: mobile_no });
+      
   }
 
   bookApt(aptObj:any){
