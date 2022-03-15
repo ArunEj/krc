@@ -16,7 +16,7 @@ export class InvoiceService {
 
 
   fetchInvoices(mobile_no: string) {
-    return this.http.post('https://www.kkkrchennai.com/krc//billing_header.php', { mobile_no: mobile_no });
+    return this.http.post('http://www.kkkrchennai.com/krc//billing_header.php', { mobile_no: mobile_no });
   }
  
 
