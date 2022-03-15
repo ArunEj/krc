@@ -16,16 +16,9 @@ export class InvoiceService {
 
 
   fetchInvoices(mobile_no: string) {
-    return this.http.post('https://krcnephrology.herokuapp.com/billing_header.php', { mobile_no: mobile_no });
+    return this.http.post('https://www.kkkrchennai.com/krc//billing_header.php', { mobile_no: mobile_no });
   }
-  fetchItemsUnderInvoice(invoice: string): Observable<any> {
-    return this.http.post('https://krcnephrology.herokuapp.com/view_one_invoice.php', { invoice_no: invoice });
-  }
-
-
-  submitPayment(billingItem: any): Observable<any> {
-    return this.http.post('https://krcnephrology.herokuapp.com/paymentsave.php', billingItem);
-  }
+ 
 
 
 }

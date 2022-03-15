@@ -15,16 +15,14 @@ export class PaymentService {
 
 
 
-  fetchInvoices(mobile_no: string) {
-    return this.http.post('https://krcnephrology.herokuapp.com/billing_header.php', { mobile_no: mobile_no });
-  }
+  
   fetchItemsUnderInvoice(invoice: string): Observable<any> {
-    return this.http.post('https://krcnephrology.herokuapp.com/view_one_invoice.php', { invoice_no: invoice });
+    return this.http.post('http://www.kkkrchennai.com/krc/view_one_invoice.php', { invoice_no: invoice });
   }
 
 
   submitPayment(billingItem: any): Observable<any> {
-    return this.http.post('https://krcnephrology.herokuapp.com/paymentsave.php', billingItem);
+    return this.http.post('http://www.kkkrchennai.com/krc/paymentsave.php', billingItem);
   }
 
 
