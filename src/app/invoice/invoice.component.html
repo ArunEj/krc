@@ -18,27 +18,36 @@
             <label class="mar20">Age: {{invoiceDetails?.age}}</label>
             <label class="mar20">Sex: {{invoiceDetails?.sex}}</label>
             <label class="mar20">Phone: {{invoiceDetails?.mobile_no}}</label>
+            <label class="mar20">Patient Type: {{invoiceDetails?.patient_type}}</label>
             <label class="mar20">Last Visit: {{invoiceDetails?.last_visit}}</label>
-            <label class="mar20">Past Due: {{invoiceDetails?.past_due}}</label>
+            <label class="mar20">Total Invoice Amount: {{invoiceDetails?.total_amount}}</label>
+            <label class="mar20">Total Paid: {{invoiceDetails?.total_paid}}</label>
+            <label class="mar20">Total Balance: {{invoiceDetails?.past_due}}</label>
             <label class="mar20">Advance Amount: {{invoiceDetails?.adv_amount}}</label>
             <label class="mar20">Advance Balance: {{invoiceDetails?.adv_balance}}</label>
         </div>
 
     </div>
-    <div *ngIf="invoiceDetails?.invoice_no.length > 0" class="margin-20t">
+    <div *ngIf="invoiceDetails?.invoice_details.length > 0" class="margin-20t">
         <table class="table">
             <thead>
                 <tr>
                     <th scope="col">Invoice#</th>
+                    <th scope="col">Net Amount</th>
+                    <th scope="col">Net Paid</th>
+                    <th scope="col">Net Balance</th>
 
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let item of invoiceDetails?.invoice_no; let index">
+                <tr *ngFor="let item of invoiceDetails?.invoice_details; let index">
 
                     <td><a href=""
-                            [routerLink]="['/invoice', item, {invoice_no:item, patient_id:invoiceDetails.patient_id}]">{{item}}</a>
+                            [routerLink]="['/invoice', item.invoice_no, {invoice_no:item.invoice_no, patient_id:invoiceDetails.patient_id}]">{{item.invoice_no}}</a>
                     </td>
+                    <td>{{item.netamount}}</td>
+                    <td>{{item.netpaid}}</td>
+                    <td>{{item.netbalance}}</td>
 
                 </tr>
             </tbody>

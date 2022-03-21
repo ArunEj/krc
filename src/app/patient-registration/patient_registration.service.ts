@@ -14,14 +14,9 @@ export class PatientRegService {
 
 
 
-  // fetchUserData(mobile_no:string):Observable<any>{
-  //     return this.http.post('https://krcnephrology.herokuapp.com/fetchdata.php', { mobile_no: mobile_no });
-  // }
 
   registerPatient(patientObj: any) {
     return this.http.post('http://www.kkkrchennai.com/krc/patient-save.php', patientObj);
   }
-  getAllAppointments(): any {
-    return this.http.get('https://krcnephrology.herokuapp.com/fetchapptdata.php');
-  }
+
 }

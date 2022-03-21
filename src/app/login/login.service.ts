@@ -9,21 +9,18 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 export class LoginService {
   isUserLoggedIn = false;
   roleAs: any;
-  userData:any;
-  userDataSubject:BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  userData: any;
+  userDataSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
   constructor(private authService: AuthService,
     private route: Router, private http: HttpClient) { }
 
-  login1(loginData: any) {
-    return this.http.post('https://krcnephrology.herokuapp.com/login.php', { user_id: loginData.userId, pwd: loginData.pwd })
-  }
   login(loginData: any) {
     return this.http.post('http://www.kkkrchennai.com/krc/login.php', { user_id: loginData.userId, pwd: loginData.pwd })
   }
 
-  
-  getUserData(){
+
+  getUserData() {
     return this.userData;
   }
 
