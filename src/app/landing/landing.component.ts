@@ -17,7 +17,7 @@ export class LandingComponent implements OnInit {
   }
 
   fetchAppointments() {
-    this.aptService.getAllAppointments().subscribe((response: { data: any; }) => {
+    this.aptService.getCurrentAppointments().subscribe((response: { data: any; }) => {
       this.aptData = response.data;
     })
   }

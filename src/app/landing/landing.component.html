@@ -9,7 +9,7 @@
         <table class="table">
             <thead>
               <tr>
-                <th scope="col">ID</th>
+               
                 <th scope="col">Patient ID</th>
                 <th scope="col">Patient Name</th>
                 <th scope="col">Mobile</th>
@@ -18,7 +18,7 @@
             </thead>
             <tbody *ngIf="aptData?.length > 0">
               <tr *ngFor="let apt of aptData" >                
-                <td>{{apt.tr_id}}</td>
+                
                 <td>{{apt.patient_id}}</td>
                 <td>{{apt.patient_name}}</td>
                 <td>{{apt.mobile_no}}</td>

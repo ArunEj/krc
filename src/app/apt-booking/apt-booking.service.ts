@@ -26,4 +26,8 @@ export class AptBookingService {
   getAllAppointments(): any {
     return this.http.get('http://www.kkkrchennai.com/krc/fetchapptdata.php');
   }
+
+  getCurrentAppointments(): any {
+    return this.http.get('http://www.kkkrchennai.com/krc/fetch-today-appt.php');
+  }
 }

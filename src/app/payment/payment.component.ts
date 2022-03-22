@@ -117,7 +117,7 @@ export class PaymentComponent implements OnInit {
         payment_mode: '',
         updated_by: localStorage.getItem('user_id')
       }
-      this.router.navigate(['landing']);
+      this.router.navigate(['invoice']);
     })
   }
   navigateToInvoice(){
