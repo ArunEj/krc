@@ -1,0 +1,29 @@
+<div class="row" *ngIf="!headerDetail">
+    <h3>Patient Details</h3>
+    <div class="patient-details">
+      <label for="contact" class="form-label">Contact</label>
+      <input type="text" class="form-control contact-input" required name="contact" [(ngModel)]="mobile_no"
+        id="contact">
+      <br>
+      <button (click)="fetchUser()" [disabled]="!mobile_no" class="btn btn-primary mar20t">fetch
+        contact details</button>
+    </div> 
+  </div>
+  <div class="container" *ngIf="headerDetail">  
+    <div class="row header-border margin-20t">
+      <div class="">
+        <label class="mar20">Patient Id: {{patientHeader?.patient_id}}</label>
+        <label class="mar20">Patient Name: {{patientHeader?.patient_name}}</label>
+        <label class="mar20">Age: {{patientHeader?.age}}</label>
+        <label class="mar20">Sex: {{patientHeader?.sex}}</label>
+        <label class="mar20">Phone: {{patientHeader?.mobile_no}}</label>
+        <label class="mar20">Patient Type: {{patientHeader?.patient_type}}</label>
+        
+        <label class="mar20">Total Invoice Amount: {{patientHeader?.net_inv_amount}}</label>
+        <label class="mar20">Total Paid: {{patientHeader?.net_inv_paid}}</label>
+        <label class="mar20">Total Balance: {{patientHeader?.net_inv_balance}}</label>
+        <label class="mar20">Advance Amount: {{patientHeader?.advance_amount_paid}}</label>
+        <label class="mar20">Advance Balance: {{patientHeader?.advance_amount_balance}}</label>
+      </div>
+    </div>
+    </div>
