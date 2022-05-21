@@ -44,7 +44,7 @@ export class MedPrescriptionComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.mpService.fetchProducts('LAB').subscribe(data => {
+    this.mpService.fetchProducts('PHARM').subscribe(data => {
       this.pharmaList = data.results;
     });
   }

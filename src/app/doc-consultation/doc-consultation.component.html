@@ -4,7 +4,7 @@
         <h1>Doctor consulation</h1>
     </div>
     <app-patient-header (outputPatientHeader)="patientHeader($event)"></app-patient-header>
-    <div *ngIf="headerDetail" class="margin-20t">
+    <div *ngIf="!headerDetail" class="margin-20t">
         <mat-tab-group>
             <mat-tab label="Doc Notes">
                 <label for="prevHistory" class="form-label margin-20t">Previous History</label>

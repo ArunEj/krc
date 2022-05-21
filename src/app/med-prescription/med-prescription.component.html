@@ -1,5 +1,5 @@
 
-<div class="container mar20t">
+<div class="container mar20t pad0">
     <button class="btn btn-primary" (click)="addRecord()">Add Record</button>
     <div class="table-responsive-lg col-lg-12" style="margin-top:20px">
     <table class="table table-bordered">
@@ -12,9 +12,9 @@
             <th colspan="2">Evening</th>
             <th colspan="2">Night</th>
             <th colspan="3">Adhoc</th>
-            <th colspan="1">Days</th>
-            <th colspan="1">Remarks</th>
-            <th colspan="1">Action</th>
+            <th rowspan="2">Days</th>
+            <th rowspan="2">Remarks</th>
+            <th rowspan="2">Action</th>
           </tr>
 
           <tr>
@@ -34,30 +34,30 @@
           <tr *ngFor="let item of tableData">
             <td scope="row">{{item.id}}</td>
             <td>
-                <select class="form-select" aria-label="Default select example">
+                <select class="form-select scrollable-menu" aria-label="Default select example">
                     <!-- <option selected>Open this select menu</option> -->
                     <option *ngFor="let product of pharmaList" [value]="product">{{product.product_name}}</option>                    
                   </select>
             </td>
 
-            <td class="w-5"><input type="number" class="form-control" min="0" max="99" [(ngModel)]="item.morning_bf"></td>            
-            <td class="w-5"><input type="number" class="form-control" min="0" max="99" [(ngModel)]="item.morning_af"></td> 
+            <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.morning_bf"></td>            
+            <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.morning_af"></td> 
             
-            <td class="w-5"><input type="number" class="form-control" min="0" max="99" [(ngModel)]="item.noon_bf"></td> 
-            <td class="w-5"><input type="number" class="form-control" min="0" max="99" [(ngModel)]="item.noon_af"></td> 
+            <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.noon_bf"></td> 
+            <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.noon_af"></td> 
             
-            <td class="w-5"><input type="number" class="form-control" min="0" max="99" [(ngModel)]="item.evening_bf"></td> 
-            <td class="w-5"><input type="number" class="form-control" min="0" max="99" [(ngModel)]="item.evening_af"></td> 
+            <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.evening_bf"></td> 
+            <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.evening_af"></td> 
 
-            <td class="w-5"><input type="number" class="form-control" min="0" max="99" [(ngModel)]="item.night_bf"></td> 
-            <td class="w-5"><input type="number" class="form-control" min="0" max="99" [(ngModel)]="item.night_af"></td> 
+            <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.night_bf"></td> 
+            <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.night_af"></td> 
 
-            <td class="w-7"><input type="text" class="form-control" [(ngModel)]="item.adhoc_notes"></td> 
-            <td class="w-5"><input type="number" class="form-control" min="0" max="99" [(ngModel)]="item.adhoc_bf"></td> 
-            <td class="w-5"><input type="number" class="form-control" min="0" max="99" [(ngModel)]="item.adhoc_af"></td> 
+            <td class=""><input type="text" class="form-control no-border" [(ngModel)]="item.adhoc_notes"></td> 
+            <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.adhoc_bf"></td> 
+            <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.adhoc_af"></td> 
             
-            <td class="w-5"><input type="number" class="form-control" min="0" max="99" [(ngModel)]="item.days"></td> 
-            <td><input type="text" class="form-control" [(ngModel)]="item.remarks"></td> 
+            <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.days"></td> 
+            <td><input type="text" class="form-control no-border" [(ngModel)]="item.remarks"></td> 
             
             <td><mat-icon title="delete" class="delete-icon" aria-hidden="false" aria-label="Example home icon" (click)="delete_item(item)">delete</mat-icon> </td>
           </tr>
