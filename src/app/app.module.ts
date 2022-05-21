@@ -25,6 +25,7 @@ import { BillingEditComponent } from './billing-edit/billing-edit.component';
 import { PromptDialogComponent } from './utilities/prompt-dialog/prompt-dialog.component';
 import { PatientHeaderComponent } from './patient-header/patient-header.component';
 import { LabPrescriptionComponent } from './lab-prescription/lab-prescription.component';
+import { MedPrescriptionComponent } from './med-prescription/med-prescription.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { LabPrescriptionComponent } from './lab-prescription/lab-prescription.co
     BillingEditComponent,
     PromptDialogComponent,
     PatientHeaderComponent,
-    LabPrescriptionComponent
+    LabPrescriptionComponent,
+    MedPrescriptionComponent
   ],
   imports: [
     BrowserModule,

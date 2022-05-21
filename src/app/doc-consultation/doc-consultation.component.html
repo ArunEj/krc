@@ -4,81 +4,62 @@
         <h1>Doctor consulation</h1>
     </div>
     <app-patient-header (outputPatientHeader)="patientHeader($event)"></app-patient-header>
-    <div *ngIf="!headerDetail" class="margin-20t">
-        <mat-tab-group>            
-            <mat-tab label="Doc Notes"> 
-                <label for="exampleFormControlTextarea1" class="form-label margin-20t">Previous History</label>
-                
-                <textarea readonly class="form-control " id="prevHistory" rows="10" [(ngModel)]="currentPatientDetail.doctor_notes"></textarea>    
-                
-                <ul class="pagination" >
+    <div *ngIf="headerDetail" class="margin-20t">
+        <mat-tab-group>
+            <mat-tab label="Doc Notes">
+                <label for="prevHistory" class="form-label margin-20t">Previous History</label>
+
+                <textarea readonly class="form-control " id="prevHistory" rows="10"
+                    [(ngModel)]="currentPatientDetail.doctor_notes"></textarea>
+
+                <ul class="pagination">
                     <li class="page-item" [ngClass]="{'disabled': recordIndex === 0 }">
                         <a class="page-link" (click)="prevItem()">Previous</a>
                     </li>
-                    <li class="page-item" [ngClass]="{'disabled': recordIndex === undefined || recordIndex === getLastRecordIndex() }">
+                    <li class="page-item"
+                        [ngClass]="{'disabled': recordIndex === undefined || recordIndex === getLastRecordIndex() }">
                         <a class="page-link" (click)="nextItem()">Next</a>
                     </li>
                 </ul>
 
                 <label for="exampleFormControlTextarea1" class="form-label margin-20t">Doctor Notes</label>
-                <textarea  class="form-control" [(ngModel)]="docNotes" id="currentNotes" rows="10"></textarea> 
-                <button type="button" class="btn btn-primary margin-20t" (click)="saveNotes()">
+                <textarea class="form-control" [(ngModel)]="docNotes" id="currentNotes" rows="10"></textarea>
+                <button type="button" [disabled]="!docNotes" class="btn btn-primary margin-20t" (click)="saveNotes()">
                     Save
-                  </button></mat-tab>
-            <mat-tab label="Medicine"> Content 2 </mat-tab>
-            <mat-tab label="Lab"> 
-                <app-lab-prescription [headerDetail]="headerDetail"></app-lab-prescription> </mat-tab>
+                </button>
+            </mat-tab>
+            <mat-tab label="Medicine">
+                <app-med-prescription [headerDetail]="headerDetail"></app-med-prescription>    
+            </mat-tab>
+            <mat-tab label="Lab">
+                <app-lab-prescription [headerDetail]="headerDetail"></app-lab-prescription>
+            </mat-tab>
             <mat-tab label="Dialysis">
+                <div class="error-container" *ngIf="!visit_no">Please save doctor notes to saave dialysis notes</div>
+                
+                <label for="prevDialysisHistory" class="form-label margin-20t">Previous History</label>
+
+                <textarea readonly class="form-control " id="prevDialysisHistory" rows="10"
+                [(ngModel)]="currentPatientDialysisDetail.dialysis_notes" ></textarea>
+                <ul class="pagination">
+                    <li class="page-item" [ngClass]="{'disabled': recordIndexDialysis === 0 }">
+                        <a class="page-link" (click)="prevDialysisItem()">Previous</a>
+                    </li>
+                    <li class="page-item"
+                        [ngClass]="{'disabled': recordIndexDialysis === undefined || recordIndexDialysis === getLastDialysisRecordIndex() }">
+                        <a class="page-link" (click)="nextDialysisItem()">Next</a>
+                    </li>
+                </ul>
+
                 <label for="exampleFormControlTextarea1" class="form-label margin-20t">Dialysis Notes</label>
-                <textarea  class="form-control" [(ngModel)]="dialysisNotes" id="dialysisNotes" rows="10"></textarea> 
-                <button type="button" disabled class="btn btn-primary margin-20t" (click)="saveDialysisNotes()">
+                <textarea class="form-control" [(ngModel)]="dialysisNotes" id="dialysisNotes" rows="10"></textarea>
+                <button type="button" [disabled]="!visit_no" class="btn btn-primary margin-20t"
+                    (click)="saveDialysisNotes()">
                     Save
-                  </button>    
-            
+                </button>
+
             </mat-tab>
         </mat-tab-group>
     </div>
     
-
-    <!-- <div class="row">
-        <h3>Patient Details</h3>
-        <div *ngIf="!patientDetail"  class="patient-details">
-            <label for="contact" class="form-label">Contact</label>
-            <input type="text" class="form-control contact-input" required name="contact"
-                [(ngModel)]="mobile_no" id="contact">
-            <br>
-            <button (click)="fetchUser()" [disabled]="!mobile_no" class="btn btn-primary mar20t">fetch
-                contact details</button>
-        </div>
-    </div> -->
-
-    <!-- <div *ngIf="patientDetail" class="row margin-20t">
-        <div class="mb-3">
-            <label>Patient Name : {{currentPatientDetail.patient_id}}</label>
-        </div>
-        <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Previous History</label>
-            
-            <textarea [disabled]="recordIndex !== getLastRecordIndex() && recordIndex !== undefined" [(ngModel)]="currentPatientDetail.prev_hist" class="form-control" id="exampleFormControlTextarea1" rows="10"></textarea>
-        </div>
-
-        <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Doctor Notes</label>
-            <textarea [disabled]="recordIndex !== getLastRecordIndex() && recordIndex !== undefined" [(ngModel)]="currentPatientDetail.doctor_notes" class="form-control" id="exampleFormControlTextarea1" rows="10"></textarea>
-        </div>
-
-        <nav aria-label="...">
-            <ul class="pagination" >
-                <li class="page-item" [ngClass]="{'disabled': recordIndex === 0 }">
-                    <a class="page-link" (click)="prevItem()">Previous</a>
-                </li>
-                <li class="page-item" [ngClass]="{'disabled': recordIndex === undefined || recordIndex === getLastRecordIndex() }">
-                    <a class="page-link" (click)="nextItem()">Next</a>
-                </li>
-
-
-
-            </ul>
-        </nav>
-    </div> -->
 </div>

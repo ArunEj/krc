@@ -14,11 +14,14 @@ export class DocConsultationComponent implements OnInit {
   mobile_no: string = '';
   headerDetailFound = false;
   docNotes: string = '';
-  dialysisNotes:string='';
+  dialysisNotes: string = '';
+  visit_no: any;
   headerDetail: any;
   consultObj = {};
   patientHistory: any;
+  patientDialysisHistory: any;
   currentPatientDetail = { doctor_notes: '' };
+  currentPatientDialysisDetail = { dialysis_notes: '' }
   constructor(private docService: DocConsultationService,
     private utility: UtilityService, private dialog: MatDialog) { }
 
@@ -31,23 +34,45 @@ export class DocConsultationComponent implements OnInit {
       console.log(data.results);
       this.patientHistory = data.results;
       this.setCurrentPatientData();
+    });
+    this.docService.fetchPrevDialysisDetails(this.headerDetail.patient_id).subscribe(data => {
+      console.log(data);
+      this.patientDialysisHistory = data.results;
+      this.setCurrentPatientDialysisData();
     })
   }
   saveNotes() {
-    this.consultObj = {
-      "org_id": localStorage.getItem('org_id'),
-      "branch_id": localStorage.getItem('branch_id'),
-      "patient_id": this.headerDetail.patient_id,
-      "doctor_id": localStorage.getItem('user_id'),
-      "user_id": localStorage.getItem('user_id'),
-      "business_id": "",
-      "visit_date": this.utility.convertTodayTostr(),
-      "prev_visit_date": "",
-      "prev_history": "",
-      "doctor_notes": this.docNotes
+    if (this.visit_no) {
+      this.consultObj = {
+        "org_id": localStorage.getItem('org_id'),
+        "branch_id": localStorage.getItem('branch_id'),
+        "patient_id": this.headerDetail.patient_id,
+        "doctor_id": localStorage.getItem('user_id'),
+        "user_id": localStorage.getItem('user_id'),
+        "business_id": "",
+        "visit_no": this.visit_no,
+        "visit_date": this.utility.convertTodayTostr(),
+        "prev_visit_date": "",
+        "prev_history": "",
+        "doctor_notes": this.docNotes
+      }
+    } else {
+      this.consultObj = {
+        "org_id": localStorage.getItem('org_id'),
+        "branch_id": localStorage.getItem('branch_id'),
+        "patient_id": this.headerDetail.patient_id,
+        "doctor_id": localStorage.getItem('user_id'),
+        "user_id": localStorage.getItem('user_id'),
+        "business_id": "",
+        "visit_date": this.utility.convertTodayTostr(),
+        "prev_visit_date": "",
+        "prev_history": "",
+        "doctor_notes": this.docNotes
+      }
     }
     this.docService.submitNotes(this.consultObj).subscribe(data => {
       console.log(data);
+      this.visit_no = data.visit_no;
       this.dialog.open(InfoDialogComponent, {
         width: '500px',
         data: 'Notes Saved Successfully'
@@ -55,7 +80,33 @@ export class DocConsultationComponent implements OnInit {
     });
   }
 
-  saveDialysisNotes(){
+  saveDialysisNotes() {
+    if (this.visit_no) {
+      this.consultObj = {
+        "org_id": localStorage.getItem('org_id'),
+        "branch_id": localStorage.getItem('branch_id'),
+        "patient_id": this.headerDetail.patient_id,
+        "doctor_id": localStorage.getItem('user_id'),
+        "user_id": localStorage.getItem('user_id'),
+        "business_id": "",
+        "visit_no": this.visit_no,
+        "prescription_date": this.utility.convertTodayTostr(),
+        "dialysis_notes": this.dialysisNotes
+      }
+      this.docService.updatePatientConsult(this.consultObj).subscribe(data => {
+        console.log(data);
+        this.dialog.open(InfoDialogComponent, {
+          width: '500px',
+          data: 'Notes updated Successfully'
+        })
+      });
+    } else {
+      this.dialog.open(InfoDialogComponent, {
+        width: '500px',
+        data: 'Please save doctor notes'
+      })
+    }
+
 
   }
   setCurrentPatientData() {
@@ -79,5 +130,30 @@ export class DocConsultationComponent implements OnInit {
     this.prevCounter--;
     this.recordIndex = this.getLastRecordIndex() - this.prevCounter;
     this.currentPatientDetail = this.patientHistory[this.recordIndex]; // give us back the item of where we are now
+  }
+
+  //dialysis notes pagination
+
+  setCurrentPatientDialysisData() {
+    this.currentPatientDialysisDetail = this.patientDialysisHistory[this.getLastDialysisRecordIndex()];
+    if (this.getLastDialysisRecordIndex() === 0) {
+      this.recordIndexDialysis = 0;
+    }
+  }
+  prevDialysisCounter = 0;
+  recordIndexDialysis: number | undefined;
+  getLastDialysisRecordIndex() {
+    return this.patientDialysisHistory.length - 1;
+  }
+  prevDialysisItem() {
+    this.prevCounter++;
+    this.recordIndexDialysis = this.getLastRecordIndex() - this.prevDialysisCounter;
+    this.currentPatientDialysisDetail = this.patientDialysisHistory[this.recordIndexDialysis]; // give us back the item of where we are now
+  }
+
+  nextDialysisItem() {
+    this.prevCounter--;
+    this.recordIndexDialysis = this.getLastRecordIndex() - this.prevDialysisCounter;
+    this.currentPatientDialysisDetail = this.patientDialysisHistory[this.recordIndexDialysis]; // give us back the item of where we are now
   }
 }
