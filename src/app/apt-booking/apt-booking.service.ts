@@ -37,7 +37,7 @@ export class AptBookingService {
     return this.http.put(environment.apiUrl + 'updateappointment/' + updateObj.appoint_no, updateObj,
       { headers: headers })
   }
-  
+
 
   getCurrentAppointments(appointDate: any): any {
     let headers = new HttpHeaders();
@@ -52,5 +52,16 @@ export class AptBookingService {
     headers.append('Content-Type', 'application/json');
     return this.http.get('http://172.105.36.229:4003/v1/doctors/' + branch_id,
       { headers: headers })
+  }
+
+
+  getAppointments(payload: any): Observable<any> {
+    
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    if (payload.field === 'phone_no') {
+      return this.http.get(environment.apiUrl + 'appointments/' +localStorage.getItem('branch_id') +'?'+ payload.field + '=' + payload[payload.field], { headers: headers })
+    } else
+      return this.http.get(environment.apiUrl + 'appointments/'+localStorage.getItem('branch_id') +'?'+ payload.field + '=' + payload[payload.field], { headers: headers });
   }
 }

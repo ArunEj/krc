@@ -7,8 +7,8 @@ export class UtilityService {
 
   constructor() { }
 
-  convertTodayTostr() {
-    let temp = new Date();
+  convertTodayTostr(date?:any) {
+    let temp = (date)?new Date(date):new Date();
     let month = this.appendZero(temp.getMonth() + 1);
     return temp.getFullYear() + '-' + month + '-' + this.appendZero(temp.getDate());
   }

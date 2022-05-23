@@ -72,7 +72,9 @@ export class DocConsultationComponent implements OnInit {
     }
     this.docService.submitNotes(this.consultObj).subscribe(data => {
       console.log(data);
+      
       this.visit_no = data.visit_no;
+    
       this.dialog.open(InfoDialogComponent, {
         width: '500px',
         data: 'Notes Saved Successfully'

@@ -26,6 +26,7 @@ import { PromptDialogComponent } from './utilities/prompt-dialog/prompt-dialog.c
 import { PatientHeaderComponent } from './patient-header/patient-header.component';
 import { LabPrescriptionComponent } from './lab-prescription/lab-prescription.component';
 import { MedPrescriptionComponent } from './med-prescription/med-prescription.component';
+import { ManageAppointmentComponent } from './manage-appointment/manage-appointment.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { MedPrescriptionComponent } from './med-prescription/med-prescription.co
     PromptDialogComponent,
     PatientHeaderComponent,
     LabPrescriptionComponent,
-    MedPrescriptionComponent
+    MedPrescriptionComponent,
+    ManageAppointmentComponent
   ],
   imports: [
     BrowserModule,

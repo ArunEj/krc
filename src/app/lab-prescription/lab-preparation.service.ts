@@ -22,7 +22,15 @@ export class LabPreparationService {
   updateLabDetails(labPayload: any): Observable<any> {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post(environment.apiUrl + 'consulting', labPayload,
+    return this.http.post(environment.apiUrl + 'labconsulting', labPayload,
+      { headers: headers })
+  }
+
+  fetchLastLabDetails(patient_id:any):Observable<any>{
+    let branch_id = localStorage.getItem('branch_id');
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(environment.apiUrl + 'lablists/'+patient_id+'?limit=1',
       { headers: headers })
   }
 }

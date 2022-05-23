@@ -4,6 +4,7 @@ import { AptBookingService } from '../apt-booking/apt-booking.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ManageDialogComponent } from '../manage-dialog/manage-dialog.component';
+import { ManageAppointmentComponent } from '../manage-appointment/manage-appointment.component';
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
@@ -44,7 +45,7 @@ export class LandingComponent implements OnInit {
   }
 
   managePatient() {
-    const dialogRef = this.dialog.open(ManageDialogComponent,{
+    const dialogRef = this.dialog.open(ManageDialogComponent, {
       width: '300px',
     });
 
@@ -52,4 +53,23 @@ export class LandingComponent implements OnInit {
       console.log(data);
     })
   }
+
+  openAppointmentPopup() {
+    const dialogRef = this.dialog.open(ManageAppointmentComponent, {
+      width: '300px',
+    });
+
+    dialogRef.afterClosed().subscribe(data => {
+      console.log(data);
+      this.retrieveAppointments(data);
+    })
+  }
+
+  retrieveAppointments(data: any) {
+    this.aptService.getAppointments(data).subscribe(response=> {
+      console.log(response);
+      this.aptData = response.results;
+    })
+  }
+
 }

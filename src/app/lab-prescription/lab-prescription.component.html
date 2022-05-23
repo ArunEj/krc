@@ -1,5 +1,7 @@
 <div class="container mar20t">
     <h5>Lab Prescription</h5>
+    
+    <div class="error-container" *ngIf="!visit_no">Please save doctor notes to saave dialysis notes</div>
     <button type="button" class="btn btn-primary mar30" (click)="addRecord()">
         Add Row
     </button>
@@ -11,12 +13,12 @@
             <mat-cell *matCellDef="let element;let i = index;"> {{element.id}} </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="product_name">
+        <ng-container matColumnDef="test_id">
             <mat-header-cell *matHeaderCellDef> Lab Test Name </mat-header-cell>
             <mat-cell *matCellDef="let element">
                 <mat-form-field floatLabel="never">
-                    <mat-select [(value)]="element.product_name" placeholder="Product name">
-                        <mat-option *ngFor="let product of labTest" [value]="product">{{product.product_name}}
+                    <mat-select [(value)]="element.test_id" placeholder="Product name">
+                        <mat-option *ngFor="let product of labTest" [value]="product.product_id">{{product.product_name}}
                         </mat-option>
                         <!-- <mat-option value="Yes">Yes</mat-option> -->
                     </mat-select>
@@ -24,21 +26,21 @@
             </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="visit_date">
+        <ng-container matColumnDef="test_date">
             <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
             <mat-cell *matCellDef="let element">
                 <mat-form-field floatLabel="never">
                     <input type="date"  required  matInput
-                            name="visit_date"  [(ngModel)]="element.visit_date" id="visit_date" >                            
+                            name="test_date"  [(ngModel)]="element.test_date" id="test_date" >                            
                 </mat-form-field>
             </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="remarks">
+        <ng-container matColumnDef="test_notes">
             <mat-header-cell *matHeaderCellDef> Remarks </mat-header-cell>
             <mat-cell *matCellDef="let element">
                 <mat-form-field floatLabel="never">
-                    <input matInput placeholder="Remarks" [value]="element.remarks" [(ngModel)]="element.remarks">
+                    <input matInput placeholder="Remarks" [value]="element.test_notes" [(ngModel)]="element.test_notes">
                 </mat-form-field>
             </mat-cell>
         </ng-container>
@@ -57,4 +59,7 @@
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
 
+    <button type="button" [disabled]="!visit_no || dataSource.data.length === 0" class="btn btn-primary mar20tb" (click)="updateLabDetails()">
+        Save
+    </button>
 </div>
