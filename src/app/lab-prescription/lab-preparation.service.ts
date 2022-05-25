@@ -30,7 +30,7 @@ export class LabPreparationService {
     let branch_id = localStorage.getItem('branch_id');
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.get(environment.apiUrl + 'lablists/'+patient_id+'?limit=1',
+    return this.http.get(environment.apiUrl + 'lablists/'+patient_id,
       { headers: headers })
   }
 }

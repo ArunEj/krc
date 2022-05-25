@@ -26,7 +26,7 @@ export class LabPrescriptionComponent implements OnInit {
     private utility: UtilityService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.visit_no = '2';
+   // this.visit_no = '2';
     this.lpService.fetchProducts('LAB').subscribe(data => {
       this.labTest = data.results;
     });

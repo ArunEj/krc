@@ -20,8 +20,8 @@ export class DocConsultationComponent implements OnInit {
   consultObj = {};
   patientHistory: any;
   patientDialysisHistory: any;
-  currentPatientDetail = { doctor_notes: '' };
-  currentPatientDialysisDetail = { dialysis_notes: '' }
+  currentPatientDetail = { doctor_notes: '', visit_no: '', visit_date:'' };
+  currentPatientDialysisDetail = { dialysis_notes: '', visit_no: '', prescription_date: '' }
   constructor(private docService: DocConsultationService,
     private utility: UtilityService, private dialog: MatDialog) { }
 
@@ -72,9 +72,9 @@ export class DocConsultationComponent implements OnInit {
     }
     this.docService.submitNotes(this.consultObj).subscribe(data => {
       console.log(data);
-      
+
       this.visit_no = data.visit_no;
-    
+
       this.dialog.open(InfoDialogComponent, {
         width: '500px',
         data: 'Notes Saved Successfully'
@@ -113,6 +113,7 @@ export class DocConsultationComponent implements OnInit {
   }
   setCurrentPatientData() {
     this.currentPatientDetail = this.patientHistory[this.getLastRecordIndex()];
+    this.currentPatientDetail.visit_date = this.utility.convertDate(this.currentPatientDetail.visit_date);
     if (this.getLastRecordIndex() === 0) {
       this.recordIndex = 0;
     }
@@ -124,20 +125,23 @@ export class DocConsultationComponent implements OnInit {
   }
   prevItem() {
     this.prevCounter++;
-    this.recordIndex = this.getLastRecordIndex() - this.prevCounter;
-    this.currentPatientDetail = this.patientHistory[this.recordIndex]; // give us back the item of where we are now
+    this.setCurrentNotesAfterChange();
   }
 
   nextItem() {
     this.prevCounter--;
+    this.setCurrentNotesAfterChange();
+  }
+  setCurrentNotesAfterChange() {
     this.recordIndex = this.getLastRecordIndex() - this.prevCounter;
     this.currentPatientDetail = this.patientHistory[this.recordIndex]; // give us back the item of where we are now
+    this.currentPatientDetail.visit_date = this.utility.convertDate(this.currentPatientDetail.visit_date);
   }
-
   //dialysis notes pagination
 
   setCurrentPatientDialysisData() {
     this.currentPatientDialysisDetail = this.patientDialysisHistory[this.getLastDialysisRecordIndex()];
+    this.currentPatientDialysisDetail.prescription_date = this.utility.convertDate(this.currentPatientDialysisDetail.prescription_date);
     if (this.getLastDialysisRecordIndex() === 0) {
       this.recordIndexDialysis = 0;
     }
@@ -148,14 +152,18 @@ export class DocConsultationComponent implements OnInit {
     return this.patientDialysisHistory.length - 1;
   }
   prevDialysisItem() {
-    this.prevCounter++;
-    this.recordIndexDialysis = this.getLastRecordIndex() - this.prevDialysisCounter;
-    this.currentPatientDialysisDetail = this.patientDialysisHistory[this.recordIndexDialysis]; // give us back the item of where we are now
+    this.prevDialysisCounter++;
+    this.setCurrentDialysisAfterChange();
   }
 
   nextDialysisItem() {
-    this.prevCounter--;
-    this.recordIndexDialysis = this.getLastRecordIndex() - this.prevDialysisCounter;
+    this.prevDialysisCounter--;
+    this.setCurrentDialysisAfterChange();
+  }
+
+  setCurrentDialysisAfterChange() {
+    this.recordIndexDialysis = this.getLastDialysisRecordIndex() - this.prevDialysisCounter;
     this.currentPatientDialysisDetail = this.patientDialysisHistory[this.recordIndexDialysis]; // give us back the item of where we are now
+    this.currentPatientDialysisDetail.prescription_date = this.utility.convertDate(this.currentPatientDialysisDetail.prescription_date);
   }
 }

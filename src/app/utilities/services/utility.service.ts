@@ -19,5 +19,10 @@ export class UtilityService {
     return value;
   }
 
+  convertDate(test_date: any) {
+    return  this.convertTodayTostr(test_date);
+     
+   }
+
 
 }
