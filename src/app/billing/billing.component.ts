@@ -194,6 +194,21 @@ export class BillingComponent implements OnInit {
 
     }
   }
+
+  fetchProductsDynamic(data: any) {
+
+    this.options = [];
+    this.billingItem.bu_id = data;
+    this.resetFieldsCalculation();
+    this.bs.fetchProducts(data).subscribe(data => {
+      this.options = data.results;
+      this.filteredOptions = this.myControl.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filter(value)),
+      );
+    })
+  }
+
   
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();

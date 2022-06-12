@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -18,7 +19,7 @@ export class LoginService {
   login(loginData: any): Observable<any> {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://172.105.36.229:4003/v1/login',
+    return this.http.post(environment.apiUrl+'login',
       { user: { user_id: loginData.userId, pwd: loginData.pwd } }, { headers: headers })
   }
 

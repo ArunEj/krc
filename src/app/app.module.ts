@@ -27,6 +27,7 @@ import { PatientHeaderComponent } from './patient-header/patient-header.componen
 import { LabPrescriptionComponent } from './lab-prescription/lab-prescription.component';
 import { MedPrescriptionComponent } from './med-prescription/med-prescription.component';
 import { ManageAppointmentComponent } from './manage-appointment/manage-appointment.component';
+import {AdvancePaymentComponent} from './advance-payment/advance-payment.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { ManageAppointmentComponent } from './manage-appointment/manage-appointm
     PatientHeaderComponent,
     LabPrescriptionComponent,
     MedPrescriptionComponent,
-    ManageAppointmentComponent
+    ManageAppointmentComponent,
+    AdvancePaymentComponent
   ],
   imports: [
     BrowserModule,

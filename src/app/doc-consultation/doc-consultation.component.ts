@@ -20,13 +20,19 @@ export class DocConsultationComponent implements OnInit {
   consultObj = {};
   patientHistory: any;
   patientDialysisHistory: any;
-  currentPatientDetail = { doctor_notes: '', visit_no: '', visit_date:'' };
+  currentPatientDetail = { doctor_notes: '', visit_no: '', visit_date: '' };
   currentPatientDialysisDetail = { dialysis_notes: '', visit_no: '', prescription_date: '' }
+  vitalParam = { khi_code: '', khi_value: '', khi_notes: '' }
+  vitalParametersList: any;
+  // [{khi_code:'bp',khi_desc:'Bloop pressure'}, {khi_code:'height',khi_desc:'Height'}];
   constructor(private docService: DocConsultationService,
     private utility: UtilityService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
-
+    //this.visit_no = 6;
+    this.docService.fetchVitalParams().subscribe(data => {
+      this.vitalParametersList = data;
+    })
   }
   patientHeader(data: any) {
     this.headerDetail = data;
@@ -114,7 +120,7 @@ export class DocConsultationComponent implements OnInit {
   setCurrentPatientData() {
     this.currentPatientDetail = this.patientHistory[this.getLastRecordIndex()];
     this.currentPatientDetail.visit_date = this.utility.convertDate(this.currentPatientDetail.visit_date);
-    if (this.getLastRecordIndex() === 0) {
+    if (this.getLastRecordIndex() <= 0) {
       this.recordIndex = 0;
     }
   }
@@ -166,4 +172,53 @@ export class DocConsultationComponent implements OnInit {
     this.currentPatientDialysisDetail = this.patientDialysisHistory[this.recordIndexDialysis]; // give us back the item of where we are now
     this.currentPatientDialysisDetail.prescription_date = this.utility.convertDate(this.currentPatientDialysisDetail.prescription_date);
   }
+
+  // vital params
+  vitalList: any = [];
+  updateVitalArray() {
+    let vitalParam = { khi_code: '', khi_value: '', khi_notes: '' };
+
+    this.vitalParametersList.forEach((element: { khi_code: string; }) => {
+      let bpParam = { khi_code: '', khi_value: '', khi_notes: '' };
+
+      bpParam.khi_code = element.khi_code;
+      const inputValue = document.getElementById(element.khi_code) as HTMLInputElement | null;
+
+      if (inputValue != null) {
+        bpParam.khi_value = inputValue.value;        
+      }
+      const inputNotes = document.getElementById(this.setNotesId(element.khi_code)) as HTMLInputElement | null;
+      if (inputNotes != null) {
+        bpParam.khi_notes = inputNotes.value;       
+      }
+    
+      this.vitalList.push(bpParam);
+    });
+
+
+  }
+  setNotesId(code: any) {
+    return code + '_notes';
+  }
+  saveVitalParams() {
+    this.updateVitalArray();
+    let vitalPram = {
+      "org_id": localStorage.getItem('org_id'),
+      "branch_id": localStorage.getItem('branch_id'),
+      "patient_id": this.headerDetail.patient_id,
+      "doctor_id": localStorage.getItem('user_id'),
+      "user_id": localStorage.getItem('user_id'),
+      "business_id": "",
+      "visit_no": this.visit_no,
+      "health_lists": this.vitalList
+    }
+    this.docService.updateVital(vitalPram).subscribe(data => {
+      console.log(data);
+      this.dialog.open(InfoDialogComponent, {
+        width: '500px',
+        data: 'Vital Params updated Successfully'
+      })
+    });
+  }
+
 }

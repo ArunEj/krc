@@ -10,7 +10,7 @@ export interface LabItem {
   id?: any;
   bu_id?: string;
   product_id?: string;
-  product_name: string;
+  medicine_id: string;
   morning_bf?: number;
   morning_af?: number;
   noon_bf?: number;
@@ -19,10 +19,10 @@ export interface LabItem {
   evening_af?: number;
   night_bf?: number;
   night_af?: number;
-  adhoc_notes?: string;
-  adhoc_bf?: number;
-  adhoc_af?: number;
-  days:number;
+  other_time_desc?: string;
+  other_time_bf?: number;
+  other_time_af?: number;
+  no_of_days: number;
   remarks?: string;
 }
 
@@ -34,8 +34,12 @@ export interface LabItem {
 export class MedPrescriptionComponent implements OnInit {
   @Input()
   headerDetail: any;
+  @Input()
+  visit_no: any;
   pharmaList: any = [];
   tableData: LabItem[] = [];
+  
+  previousData: LabItem[] = [];
   labPayload = {};
 
   constructor(private mpService: MedPreparationService,
@@ -47,12 +51,23 @@ export class MedPrescriptionComponent implements OnInit {
     this.mpService.fetchProducts('PHARM').subscribe(data => {
       this.pharmaList = data.results;
     });
+
+    this.mpService.fetchLastPharmaDetails(this.headerDetail.patient_id).subscribe(data => {
+      this.previousData = data.results;
+      this.tableData = this.previousData
+      
+    }, error => {
+      this.dialog.open(InfoDialogComponent, {
+        width: '500px',
+        data: 'No data found'
+      })
+    })
   }
 
   addRecord() {
     this.tableData.push({
       id: this.tableData.length,
-      product_name: '',
+      medicine_id: '',
       morning_bf: 0,
       morning_af: 0,
       noon_bf: 0,
@@ -61,16 +76,16 @@ export class MedPrescriptionComponent implements OnInit {
       evening_af: 0,
       night_bf: 0,
       night_af: 0,
-      adhoc_notes:'',
-      adhoc_bf: 0,
-      adhoc_af: 0,
-      days:0,
-      remarks:''
+      other_time_desc: '',
+      other_time_bf: 0,
+      other_time_af: 0,
+      no_of_days: 0,
+      remarks: ''
     })
   }
 
   delete_item(item: any) {
-this.tableData.splice(item.id,1);
+    this.tableData.splice(item.id, 1);
 
   }
 
@@ -82,16 +97,16 @@ this.tableData.splice(item.id,1);
       "doctor_id": localStorage.getItem('user_id'),
       "user_id": localStorage.getItem('user_id'),
       "business_id": "",
-      "visit_date": this.utility.convertTodayTostr(),
-      "lab_details": []
+      "visit_no": this.visit_no,
+      "pharm_lists": this.tableData
     }
 
-    // this.lpService.updateLabDetails(this.labPayload).subscribe(data=>{
-    //  this.dialog.open(InfoDialogComponent, {
-    //   width: '500px',
-    //   data: 'Lab Details Saved Successfully'
-    //  })
-    // })
+    this.mpService.updatePharmaDetails(this.labPayload).subscribe(data => {
+      this.dialog.open(InfoDialogComponent, {
+        width: '500px',
+        data: 'Pharma Details Saved Successfully'
+      })
+    })
   }
 
 

@@ -19,10 +19,18 @@ export class MedPreparationService {
   }
 
 
-  updateLabDetails(labPayload: any): Observable<any> {
+  updatePharmaDetails(labPayload: any): Observable<any> {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post(environment.apiUrl + 'consulting', labPayload,
+    return this.http.post(environment.apiUrl + 'pharmconsulting', labPayload,
       { headers: headers })
   }
+  fetchLastPharmaDetails(patient_id:any):Observable<any>{
+    let branch_id = localStorage.getItem('branch_id');
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(environment.apiUrl + 'pharmlists/'+patient_id,
+      { headers: headers })
+  }
+  
 }

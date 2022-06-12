@@ -29,7 +29,7 @@
     </mat-form-field> -->
     
     <mat-form-field  class="mar20lr" appearance="fill">
-      <mat-select placeholder="select" formControlName="bu_id"  required (valueChange)="fetchProductNew($event)">        
+      <mat-select placeholder="select" formControlName="bu_id"  required (valueChange)="fetchProductsDynamic($event)">        
         <mat-option *ngFor="let bu of buList" [value]="bu.bu_id">
           {{bu.bu_name}}
         </mat-option>

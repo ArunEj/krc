@@ -9,6 +9,7 @@ import { DocConsultationComponent } from './doc-consultation/doc-consultation.co
 import { BillingComponent } from './billing/billing.component';
 import { PaymentComponent } from './payment/payment.component';
 import { InvoiceComponent } from './invoice/invoice.component';
+import { AdvancePaymentComponent } from './advance-payment/advance-payment.component';
 const routes: Routes = [
   {
     path: '',
@@ -46,7 +47,13 @@ const routes: Routes = [
   {
     path: 'invoice/:item',
     component: PaymentComponent
+  },
+  {
+    path: 'adv-payment',
+    component: AdvancePaymentComponent
   }
+
+
 ];
 
 @NgModule({

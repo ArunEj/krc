@@ -34,9 +34,9 @@
           <tr *ngFor="let item of tableData">
             <td scope="row">{{item.id}}</td>
             <td>
-                <select class="form-select scrollable-menu" aria-label="Default select example">
+                <select class="form-select scrollable-menu" aria-label="Default select example" [(ngModel)]="item.medicine_id">
                     <!-- <option selected>Open this select menu</option> -->
-                    <option *ngFor="let product of pharmaList" [value]="product">{{product.product_name}}</option>                    
+                    <option *ngFor="let product of pharmaList" [value]="product.product_id">{{product.product_name}}</option>                    
                   </select>
             </td>
 
@@ -52,11 +52,11 @@
             <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.night_bf"></td> 
             <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.night_af"></td> 
 
-            <td class=""><input type="text" class="form-control no-border" [(ngModel)]="item.adhoc_notes"></td> 
-            <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.adhoc_bf"></td> 
-            <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.adhoc_af"></td> 
+            <td class=""><input type="text" class="form-control no-border" [(ngModel)]="item.other_time_desc"></td> 
+            <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.other_time_bf"></td> 
+            <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.other_time_af"></td> 
             
-            <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.days"></td> 
+            <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.no_of_days"></td> 
             <td><input type="text" class="form-control no-border" [(ngModel)]="item.remarks"></td> 
             
             <td><mat-icon title="delete" class="delete-icon" aria-hidden="false" aria-label="Example home icon" (click)="delete_item(item)">delete</mat-icon> </td>
@@ -64,6 +64,10 @@
          
         </tbody>
       </table>
+
+      <button type="button" [disabled]="!visit_no || tableData.length === 0" class="btn btn-primary mar20tb" (click)="updateLabDetails()">
+        Save
+    </button>
     </div>
 </div>
 

@@ -48,6 +48,22 @@ export class DocConsultationService {
       { headers: headers })
   }
 
+
+  fetchVitalParams(): Observable<any> {
+    // let branch_id = localStorage.getItem('branch_id');
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(environment.apiUrl + 'vitalparams',
+      { headers: headers })
+  }
+
+  updateVital(params: any): Observable<any> {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(environment.apiUrl + 'healthconsulting', params,
+      { headers: headers })
+  }
+
   //ttp://localhost:4003/v1/consult/KRC001?patient_id=PATKRC00100022
 
 }

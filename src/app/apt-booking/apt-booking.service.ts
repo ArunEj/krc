@@ -40,9 +40,10 @@ export class AptBookingService {
 
 
   getCurrentAppointments(appointDate: any): any {
+    let branch_id = localStorage.getItem('branch_id');
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.get(environment.apiUrl + 'appointments/KRC001?appoint_date=' + appointDate, { headers: headers })
+    return this.http.get(environment.apiUrl + 'appointments/'+branch_id +'?appoint_date=' + appointDate, { headers: headers })
 
   }
   // fetch doctot list from branch id
@@ -50,7 +51,7 @@ export class AptBookingService {
     let branch_id = localStorage.getItem('branch_id');
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.get('http://172.105.36.229:4003/v1/doctors/' + branch_id,
+    return this.http.get(environment.apiUrl+'doctors/' + branch_id,
       { headers: headers })
   }
 
