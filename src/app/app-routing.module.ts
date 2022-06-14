@@ -10,6 +10,7 @@ import { BillingComponent } from './billing/billing.component';
 import { PaymentComponent } from './payment/payment.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { AdvancePaymentComponent } from './advance-payment/advance-payment.component';
+import { InvoicePrintComponent } from './invoice-print/invoice-print.component';
 const routes: Routes = [
   {
     path: '',
@@ -51,8 +52,11 @@ const routes: Routes = [
   {
     path: 'adv-payment',
     component: AdvancePaymentComponent
+  },
+  {
+    path: 'print',
+    component: InvoicePrintComponent
   }
-
 
 ];
 

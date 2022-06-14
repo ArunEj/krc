@@ -44,7 +44,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
 import { MatFormFieldModule } from "@angular/material/form-field";
-
+import {NgxPrintModule} from 'ngx-print';
 @NgModule({
   exports: [
     A11yModule,
@@ -92,7 +92,8 @@ import { MatFormFieldModule } from "@angular/material/form-field";
     OverlayModule,
     PortalModule,
     ScrollingModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    NgxPrintModule
   ]
 })
 export class MaterialModule {}
