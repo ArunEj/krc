@@ -7,6 +7,8 @@ import { InfoDialogComponent } from '../utilities/info-dialog/info-dialog.compon
 import { PatientListDialogComponent } from '../utilities/patient-list-dialog/patient-list-dialog.component';
 import { PromptDialogComponent } from '../utilities/prompt-dialog/prompt-dialog.component';
 import { InvoicePrintService } from './invoice-print.service';
+import * as _ from 'lodash'; 
+import { ReferenceService } from '../utilities/services/reference.service';
 
 @Component({
   selector: 'app-invoice-print',
@@ -28,14 +30,36 @@ export class InvoicePrintComponent implements OnInit {
   isShowPrint: boolean = false;
   orgId: any;
   branchId: any;
+  isShowEstimateData: boolean = false;
+  invoiceNumber: any;
+  invoiceDate: any;
+  today: any;
+  createdBy: any;
+  refList: any;
+  invoiceStatusDetails: any;
 
   constructor(private invoicePrintService: InvoicePrintService,
     private is: InvoiceService,
-    private dialog: MatDialog, private router: Router) { }
+    private dialog: MatDialog, private router: Router,
+    private reference: ReferenceService) { }
 
   ngOnInit(): void {
+    this.today = new Date();
     this.orgId = localStorage.getItem('org_id');
     this.branchId = localStorage.getItem('branch_id');
+    this.getReferenceList();
+    // this.fetchInvoiceStatus('A');
+  }
+
+  getReferenceList() {
+    this.reference.getPaymentModes('INVSTA').subscribe(
+      (data) => {
+        this.refList = data.results;
+        // console.log("data",this.refList)
+      },
+      (err) => {
+        console.log(err, "response error");
+      });
   }
   printToPdf() {
     let element: HTMLElement = document.getElementById('print-section') as HTMLElement;
@@ -45,7 +69,6 @@ export class InvoicePrintComponent implements OnInit {
   }
 
   print(item: any) {
-    console.log("item",item)
     this.isShowPrint = true;
     this.getInvoiceData(item)
   }
@@ -60,32 +83,25 @@ export class InvoicePrintComponent implements OnInit {
     this.invoicePrintService.getInvoiceList(item.invoice_no,item.patient_id).subscribe(
       (data) => {
         this.invoiceData = data;
-        console.log("data",this.invoiceData)
+        this.invoiceNumber = item.invoice_no;
+        this.invoiceDate = item.inv_date;
+        this.createdBy = item.created_by;
+        if(this.invoiceData.estimate_lists.length !== 0) {
+          this.isShowEstimateData = true;
+        }
+        // console.log("data",this.invoiceData)
       },
       (err) => {
         console.log(err, "response error");
       });
   }
 
-  // getInvoiceTableData() {
-
-  //   this.invoiceService.getInvoiceTableList().subscribe(
-  //     (data) => {
-  //       // console.log("TableData", data)
-  //       this.invoiceTableData = data;
-  //     },
-  //     (err) => {
-  //       console.log(err, "response error");
-  //     });
-  // }
   fetchUserInvoices() {
     this.is.fetchUserData(this.mobile_no).subscribe(data => {
       if (data) {
         this.patientList = data.results;
         this.showPatientList(this.patientList);
       }
-
-      //this.invoiceArray = data.invoice_no;
     }, error => {
       if (error.error.status === 404) {
         this.dialog.open(InfoDialogComponent, {
@@ -107,26 +123,27 @@ export class InvoicePrintComponent implements OnInit {
       this.is.fetchHeader(data.patient_id).subscribe(data => {
         if (data) {
           this.patientHeader = data;
+          this.patientInvoiceDetail = true;
         }
       })
-      this.is.fetchInvoices(data.patient_id).subscribe(data => {
-        this.patientInvoiceDetail = true;
-        this.invoiceDetails = data.results;
-        console.log("invoice",this.invoiceDetails)
-      }, error => {
-        if (error.error.status === 404) {
-          this.dialog.open(InfoDialogComponent, {
-            width: '300px',
-            data: 'Invoice details not found!!!'
-          });
-        }
-      })
+      // this.invoicePrintService.fetchInvoiceSection(data.patient_id).subscribe(data => {
+      //   this.patientInvoiceDetail = true;
+      //   this.invoiceDetails = data.results;
+      //   // console.log("invoice",this.invoiceDetails)
+      // }, error => {
+      //   if (error.error.status === 404) {
+      //     this.dialog.open(InfoDialogComponent, {
+      //       width: '300px',
+      //       data: 'Invoice details not found!!!'
+      //     });
+      //   }
+      // })
     });
   }
 
   fetchItemDetail(item: any) {
     this.is.fetchBillingDetail(item).subscribe(data => {
-      console.log(data);
+      // console.log(data);
       this.billingItem.emit(data);
     })
   }
@@ -164,6 +181,21 @@ export class InvoicePrintComponent implements OnInit {
       }
     })
    
+  }
+
+  fetchInvoiceStatus(data: any) {
+    let pt_id = this.patientHeader.patient_id;
+    this.invoicePrintService.fetchInvoiceSectionList(data, pt_id).subscribe(data => {
+      this.patientInvoiceDetail = true;
+      this.invoiceStatusDetails = data.results;
+    }, error => {
+      if (error.error.status === 404) {
+        this.dialog.open(InfoDialogComponent, {
+          width: '300px',
+          data: 'Invoice details not found!!!'
+        });
+      }
+    })
   }
 }
 

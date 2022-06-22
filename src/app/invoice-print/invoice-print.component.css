@@ -14,13 +14,12 @@
     border: 1px solid black;
     border-bottom: 0px;
     justify-content: center !important;
-    /* margin-left: 20%;
-    margin-right: 20%; */
 }
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
+    font-size: 12px;
   }
   
   th {
@@ -43,7 +42,6 @@ table {
     padding: 10px;
 }
 .d-flex {
-    display: -ms-flexbox!important;
     display: flex!important;
     justify-content: center;
 }
@@ -80,4 +78,27 @@ table {
 .print-icon{
   cursor: pointer;
   margin-left: 10px;
+}
+.align-item{
+  text-align: center;
+}
+@media print {
+  .pagebreak { page-break-before: always; }
+}
+.align-left{
+  text-align: right;
+}
+.space{
+  height: 50px;
+}
+.txt-danger{
+  color: red;
+}
+.d-flex-drop{
+  display: flex;
+  justify-content: left;
+  margin-top: 5px;
+}
+.txt-success{
+  color: green;
 }

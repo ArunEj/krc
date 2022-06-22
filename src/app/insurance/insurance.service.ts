@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
     providedIn: 'root'
   })
 
-export class InvoicePrintService {
+export class InsuranceService {
 
     constructor(public http: HttpClient) {}
 
@@ -20,7 +20,6 @@ export class InvoicePrintService {
         }),
       };
         const api_url = this.getInvoiceListUrl(inv_no,pt_id);
-        console.log("api_url",api_url)
         return this.http.get(api_url, httpOptions);
       }
 
@@ -34,16 +33,33 @@ export class InvoicePrintService {
       let branch_id = localStorage.getItem('branch_id');
       let headers = new HttpHeaders();
       headers.append('Content-Type', 'application/json');
-      return this.http.get(environment.apiUrl + 'billings/' + branch_id + '?patient_id=' + patient_id,
+      return this.http.get(environment.apiUrl + 'billings/' + branch_id + '?patient_id=' + patient_id + '&INVSTA',
         { headers: headers })
     }
 
     //list
-    fetchInvoiceSectionList(inv_status: string, patient_id: string): Observable<any> {
+    fetchInvoiceSectionList(inv_status: string): Observable<any> {
       let branch_id = localStorage.getItem('branch_id');
       let headers = new HttpHeaders();
       headers.append('Content-Type', 'application/json');
-      return this.http.get(environment.apiUrl + 'billings/' + branch_id + '?patient_id=' + patient_id + '&inv_status=' + inv_status,
+      return this.http.get(environment.apiUrl + 'billings/' + branch_id + '?inv_status=' + inv_status,
         { headers: headers })
     }
+
+    //bu list
+    fetchBuList(): Observable<any> {
+      let org_id = localStorage.getItem('org_id');
+      let headers = new HttpHeaders();
+      headers.append('Content-Type', 'application/json');
+      return this.http.get(environment.apiUrl + 'business/'+org_id,
+        { headers: headers })
+    }
+
+    //submit Insurance
+    submitInsurance(dataArray: any): Observable<any> {
+      let headers = new HttpHeaders();
+      headers.append('Content-Type', 'application/json');
+      return this.http.post(environment.apiUrl + 'patientinsurance',dataArray,
+        { headers: headers })
+    }  
 }
