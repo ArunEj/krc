@@ -209,7 +209,7 @@ export class BillingComponent implements OnInit {
     })
   }
 
-  
+
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
@@ -222,13 +222,45 @@ export class BillingComponent implements OnInit {
   }
 
   calclulateOthercharges(data: number) {
+    this.setChargesMandatory();
     this.billingItem.gross_inv_amount = (this.billingItem.product_qty * this.billingItem.product_cost) + this.billingItem.other_charge1 + this.billingItem.other_charge2 + this.billingItem.other_charge3;
     this.calclulateNetPay();
     //this.billingItem.gross = 4+5;
   }
   calclulateDiscount(data: number) {
+    this.setDiscountMandatory();
     this.billingItem.gross_discount = this.billingItem.discount1 + this.billingItem.discount2 + this.billingItem.discount3;
     this.calclulateNetPay();
+  }
+
+  setDiscountMandatory() {
+    if (this.billingItem.discount1) {
+      this.myForm.get('discount_remark1')?.setValidators([Validators.required]);
+      this.myForm.get('discount_remark1')?.updateValueAndValidity();
+    }
+    if (this.billingItem.discount2) {
+      this.myForm.get('discount_remark2')?.setValidators([Validators.required]);
+      this.myForm.get('discount_remark2')?.updateValueAndValidity();
+    }
+    if (this.billingItem.discount3) {
+      this.myForm.get('discount_remark3')?.setValidators([Validators.required]);
+      this.myForm.get('discount_remark3')?.updateValueAndValidity();
+    }
+  }
+
+  setChargesMandatory() {
+    if (this.billingItem.other_charge1) {
+      this.myForm.get('other_charge_remark1')?.setValidators([Validators.required]);
+      this.myForm.get('other_charge_remark1')?.updateValueAndValidity();
+    }
+    if (this.billingItem.other_charge2) {
+      this.myForm.get('other_charge_remark2')?.setValidators([Validators.required]);
+      this.myForm.get('other_charge_remark2')?.updateValueAndValidity();
+    }
+    if (this.billingItem.other_charge3) {
+      this.myForm.get('other_charge_remark3')?.setValidators([Validators.required]);
+      this.myForm.get('other_charge_remark3')?.updateValueAndValidity();
+    }
   }
 
   calclulateNetPay() {
@@ -288,19 +320,19 @@ export class BillingComponent implements OnInit {
     this.options = [];
     this.calculateFinal();
     this.resetFields();
-    
+
   }
   cancelNewItem() {
-    if(this.editBillingItem){
+    if (this.editBillingItem) {
       this.billingArray.push(this.billingItemCopy)
     }
-    
+
     this.resetFields();
     this.showBillingForm = false;
     this.editBillingItem = false;
 
   }
-  billingItemCopy:any;
+  billingItemCopy: any;
   editItem(item: any, index: any) {
     this.editBillingItem = true;
     this.showBillingForm = true;
@@ -375,7 +407,7 @@ export class BillingComponent implements OnInit {
       net_balance: Number(0),
       net_paid: Number(0),
     }
-   // this.myForm.get('bu_id')?.setValue('');
+    // this.myForm.get('bu_id')?.setValue('');
   }
 
   editBilling(item: any) {
@@ -385,7 +417,7 @@ export class BillingComponent implements OnInit {
 
     this.billingArray = item.invoice_details;
   }
-  
+
 
 }
 function MdAutocompleteTrigger(MdAutocompleteTrigger: any) {

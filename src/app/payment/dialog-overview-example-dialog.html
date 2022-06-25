@@ -3,7 +3,7 @@
   <p></p>
   <mat-form-field appearance="fill">
     <mat-label>Amount Payable</mat-label>
-    <input matInput type="number" [(ngModel)]="data.amt_payment">
+    <input matInput type="number" [max]="data.net_balance" [(ngModel)]="data.amt_payment">
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Payment Mode</mat-label>
@@ -22,5 +22,5 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [disabled]="data.amt_payment === '' || data.payment_mode === ''" [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+  <button mat-button [disabled]="data.amt_payment === 0 || data.amt_payment>data.net_balance || data.payment_mode === ''" [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
 </div>

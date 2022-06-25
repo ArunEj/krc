@@ -9,9 +9,10 @@ export interface DialogData {
   patient_id: '',
   invoice_no: '',
   inv_sr_no: '',
-  amt_payment: '',
+  amt_payment: 0,
   payment_mode: '',
-  updated_by: ''
+  updated_by: '',
+  net_balance:0
 }
 @Component({
   selector: 'app-payment',
@@ -108,7 +109,7 @@ export class PaymentComponent implements OnInit {
   }
   makePayment() {
 
-    console.log(this.paymentItem);
+
 
     this.ps.submitPayment(this.paymentItem).subscribe(data => {
       alert('payment done');
@@ -123,7 +124,11 @@ export class PaymentComponent implements OnInit {
         payment_remark: '',
         updated_by: localStorage.getItem('user_id')
       }
-      this.router.navigate(['invoice']);
+
+      this.ps.fetchBillingDetail(this.invoice).subscribe(data => {
+
+        this.billingArray = data.invoice_details;
+      });
     })
   }
   navigateToInvoice() {
@@ -135,13 +140,17 @@ export class PaymentComponent implements OnInit {
   selector: 'dialog-overview-example-dialog',
   templateUrl: 'dialog-overview-example-dialog.html',
 })
-export class DialogOverviewExampleDialog {
+export class DialogOverviewExampleDialog implements OnInit {
+  
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
   ) { }
+  ngOnInit() {
 
+  }
   onNoClick(): void {
+   
     this.dialogRef.close();
   }
 }

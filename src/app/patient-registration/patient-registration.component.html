@@ -104,8 +104,13 @@
                     </div>
 
                     <div class=" patient-reg-item">
-                        <label for="husbandName" class="form-label">Husband Name</label>
+                        <label for="husbandName" class="form-label">Spouse Name</label>
                         <input type="text" class="form-control" name="husbandName" id="husbandName" [(ngModel)]="patientRegObj.husband_name">
+                    </div>
+
+                    <div class=" patient-reg-item">
+                        <label for="patient_id" class="form-label">Patient ID</label>
+                        <input readonly type="text" class="form-control" name="patient_id" id="patient_id" [(ngModel)]="patient_id">
                     </div>
 
                 </div>

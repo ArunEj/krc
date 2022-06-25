@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class PatientRegistrationComponent implements OnInit {
   updatePatient = false;
   currentDate = new Date();
+  patient_id:string='';
   patientRegObj: Patient = {
     patient_name: '', dob: '', address: '', sex: '', email_id: '', mobile_no: '', first_visit_date: '',
     communicate_address: '', user_id: '', org_id: '', alt_mobile_no: '', aadhar_no: '', photo: '', alt_email_id: '', branch_id: '',
@@ -24,6 +25,7 @@ export class PatientRegistrationComponent implements OnInit {
     if (history.state && history.state.patient_id) {
       this.patientRegObj = history.state;
       this.updatePatient = true;
+      this.patient_id = history.state.patient_id;
     }
     this.convertTodayTostr();
     const branch = localStorage.getItem('branch_id');
