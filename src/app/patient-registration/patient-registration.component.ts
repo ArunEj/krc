@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Patient } from './patient.model';
+import { Patient, PatientType } from './patient.model';
 import { PatientRegService } from './patient_registration.service';
 import { MatDialog } from '@angular/material/dialog';
 import { InfoDialogComponent } from '../utilities/info-dialog/info-dialog.component';
@@ -12,7 +12,9 @@ import { Router } from '@angular/router';
 export class PatientRegistrationComponent implements OnInit {
   updatePatient = false;
   currentDate = new Date();
-  patient_id:string='';
+  patient_id: string = '';
+  patientTypes: PatientType[] = [];
+
   patientRegObj: Patient = {
     patient_name: '', dob: '', address: '', sex: '', email_id: '', mobile_no: '', first_visit_date: '',
     communicate_address: '', user_id: '', org_id: '', alt_mobile_no: '', aadhar_no: '', photo: '', alt_email_id: '', branch_id: '',
@@ -22,6 +24,7 @@ export class PatientRegistrationComponent implements OnInit {
     private dialog: MatDialog, private router: Router) { }
 
   ngOnInit(): void {
+    this.fetchPatientTypes();
     if (history.state && history.state.patient_id) {
       this.patientRegObj = history.state;
       this.updatePatient = true;
@@ -35,9 +38,16 @@ export class PatientRegistrationComponent implements OnInit {
     this.patientRegObj.user_id = user || '';
     this.patientRegObj.org_id = org_id || '';
   }
+  fetchPatientTypes() {
+    this.ps.getPatientTypes().subscribe(data => {
+      this.patientTypes = data.results;
+    })
+  }
+
+
   convertTodayTostr() {
     let temp, fvDate;
-   
+
     if (this.updatePatient) {
       temp = new Date(this.patientRegObj.dob);
       fvDate = new Date(this.patientRegObj.first_visit_date || '');
@@ -46,7 +56,7 @@ export class PatientRegistrationComponent implements OnInit {
     } else {
       temp = new Date();
     }
-    let month = this.appendZero(temp.getMonth() + 1);    
+    let month = this.appendZero(temp.getMonth() + 1);
     this.patientRegObj.dob = temp.getFullYear() + '-' + month + '-' + this.appendZero(temp.getDate());
   }
   goBack() {

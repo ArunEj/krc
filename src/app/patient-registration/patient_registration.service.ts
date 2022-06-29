@@ -31,4 +31,12 @@ export class PatientRegService {
       { headers: headers })
   }
 
+  
+  getPatientTypes():Observable<any>{
+    let org_id = localStorage.getItem('org_id');
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(environment.apiUrl+'references/PATTYP')
+  }
+
 }

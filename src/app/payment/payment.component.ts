@@ -20,6 +20,8 @@ export interface DialogData {
   styleUrls: ['./payment.component.scss']
 })
 export class PaymentComponent implements OnInit {
+
+  patientHeader:any;
   mobile_no: string = '';
   invoice: string = '';
   patientDetail = false;
@@ -58,6 +60,7 @@ export class PaymentComponent implements OnInit {
         // }
 
         this.billingArray = data.invoice_details;
+        this.patientHeader = JSON.parse(localStorage.getItem('header')!);
       });
     })
   }

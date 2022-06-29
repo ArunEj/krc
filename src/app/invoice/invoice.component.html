@@ -18,7 +18,7 @@
             <label class="mar20">Age: {{patientHeader.age}}</label>
             <label class="mar20">Sex: {{patientHeader.sex}}</label>
             <label class="mar20">Phone: {{patientHeader.mobile_no}}</label>
-            <label class="mar20">Patient Type: {{patientHeader.patient_type}}</label>
+            <label class="mar20">Patient Type: {{patientHeader.patient_type_name}}</label>
             <!-- <label class="mar20">Last Visit: {{patientHeader?.last_visit}}</label>       -->
             <label class="mar20">Total Invoice Amount: {{patientHeader.net_inv_amount}}</label>
             <label class="mar20">Total Paid: {{patientHeader.net_inv_paid}}</label>
@@ -44,7 +44,7 @@
                 <tr *ngFor="let item of invoiceDetails; let index">
 
                     <td *ngIf="!billing"><a href=""
-                            [routerLink]="['/invoice', item.invoice_no, {invoice_no:item.invoice_no}]">{{item.invoice_no}}</a>
+                            [routerLink]="['/invoice', item.invoice_no]">{{item.invoice_no}}</a>
                     </td>
                     
                     <td>{{item.net_inv_amount}}</td>

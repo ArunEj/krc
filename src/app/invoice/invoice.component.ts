@@ -56,6 +56,7 @@ export class InvoiceComponent implements OnInit {
       this.is.fetchHeader(data.patient_id).subscribe(data => {
         if (data) {
           this.patientHeader = data;
+          localStorage.setItem('header', JSON.stringify(data));
         }
       })
       this.is.fetchInvoices(data.patient_id).subscribe(data => {
