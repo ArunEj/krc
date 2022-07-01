@@ -116,6 +116,48 @@
 
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-4 patient-reg-item">
+                    <label for="ration_cardno" class="form-label">Ration Card No</label>
+                    <input type="number" class="form-control" name="ration_cardno" id="ration_cardno" [(ngModel)]="patientRegObj.ration_cardno">
+                </div>
+                <div class="col-md-4 patient-reg-item">
+                    <label for="profession" class="form-label">Profession</label>
+                    <input type="text" class="form-control" name="profession" id="profession" [(ngModel)]="patientRegObj.profession">
+                </div>
+                <div class="col-md-4 patient-reg-item">
+                    <label for="attender1_name" class="form-label">Attender1 Name</label>
+                    <input type="text" class="form-control" name="attender1_name" id="attender1_name" [(ngModel)]="patientRegObj.attender1_name">
+                </div>
+                <div class="col-md-4 patient-reg-item">
+                    <label for="attender1_relation_type" class="form-label">Attender1 Relation</label>
+                    <input type="text" class="form-control" name="attender1_relation_type" id="attender1_relation_type" [(ngModel)]="patientRegObj.attender1_relation_type">
+                </div>
+
+                <div class="col-md-4 patient-reg-item">
+                    <label for="attender1_contact" class="form-label">Attender1 contact</label>
+                    <input type="number" class="form-control" name="attender1_contact" id="attender1_contact" [(ngModel)]="patientRegObj.attender1_contact">
+                </div>
+
+                <div class="col-md-4 patient-reg-item">
+                    <label for="attender2_name" class="form-label">Attender2 Name</label>
+                    <input type="text" class="form-control" name="attender2_name" id="attender2_name" [(ngModel)]="patientRegObj.attender2_name">
+                </div>
+                <div class="col-md-4 patient-reg-item">
+                    <label for="attender2_relation_type" class="form-label">Attender2 Relation</label>
+                    <input type="text" class="form-control" name="attender2_relation_type" id="attender2_relation_type" [(ngModel)]="patientRegObj.attender2_relation_type">
+                </div>
+
+                <div class="col-md-4 patient-reg-item">
+                    <label for="attender2_contact" class="form-label">Attender2 contact</label>
+                    <input type="number" class="form-control" name="attender2_contact" id="attender2_contact" [(ngModel)]="patientRegObj.attender2_contact">
+                </div>
+
+                <div class="col-md-4 patient-reg-item">
+                    <label for="pin_code" class="form-label">Pin Code</label>
+                    <input type="number" class="form-control" name="pin_code" id="pin_code" [(ngModel)]="patientRegObj.pin_code">
+                </div>
+        </div>
             <button class="btn btn-primary mar20t mar10lr" (click)="goBack()">Back</button>
             <button [disabled]="!patientReg.valid" *ngIf="!updatePatient" (click)="registerPatient()"
                 class="btn btn-primary mar20t">Submit</button>

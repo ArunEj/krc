@@ -23,7 +23,16 @@ export interface Patient {
     husband_name?: string,
     guardian_name?: string,
     guardian_type?: string,
-    father_name: string
+    father_name: string,
+    ration_cardno: string,
+    profession: string,
+    attender1_name: string,
+    attender1_relation_type: string,
+    attender1_contact: string,
+    attender2_name: string,
+    attender2_relation_type: string,
+    attender2_contact: string,
+    pin_code: string
 }
 
 export interface PatientType {
