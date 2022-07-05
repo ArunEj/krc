@@ -32,6 +32,7 @@ export class BillingComponent implements OnInit {
     other_charge1: [],
     other_charge2: [],
     other_charge3: [],
+    total_charges:[],
     gross_inv_amount: [],
     other_charge_remark1: [],
     other_charge_remark2: [],
@@ -76,6 +77,7 @@ export class BillingComponent implements OnInit {
     other_charge1: Number(0),
     other_charge2: Number(0),
     other_charge3: Number(0),
+    total_charges:Number(0),
     other_charge_remark1: '',
     other_charge_remark2: '',
     other_charge_remark3: '',
@@ -223,6 +225,7 @@ export class BillingComponent implements OnInit {
 
   calclulateOthercharges(data: number) {
     this.setChargesMandatory();
+    this.billingItem.total_charges =  this.billingItem.other_charge1 + this.billingItem.other_charge2 + this.billingItem.other_charge3;
     this.billingItem.gross_inv_amount = (this.billingItem.product_qty * this.billingItem.product_cost) + this.billingItem.other_charge1 + this.billingItem.other_charge2 + this.billingItem.other_charge3;
     this.calclulateNetPay();
     //this.billingItem.gross = 4+5;
@@ -364,6 +367,7 @@ export class BillingComponent implements OnInit {
       other_charge1: Number(0),
       other_charge2: Number(0),
       other_charge3: Number(0),
+      total_charges:Number(0),
       other_charge_remark1: '',
       other_charge_remark2: '',
       other_charge_remark3: '',
@@ -394,6 +398,7 @@ export class BillingComponent implements OnInit {
       other_charge1: Number(0),
       other_charge2: Number(0),
       other_charge3: Number(0),
+      total_charges:Number(0),
       other_charge_remark1: '',
       other_charge_remark2: '',
       other_charge_remark3: '',

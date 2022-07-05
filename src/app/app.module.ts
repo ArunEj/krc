@@ -29,7 +29,8 @@ import { MedPrescriptionComponent } from './med-prescription/med-prescription.co
 import { ManageAppointmentComponent } from './manage-appointment/manage-appointment.component';
 import {AdvancePaymentComponent} from './advance-payment/advance-payment.component';
 import { InvoicePrintComponent } from './invoice-print/invoice-print.component';
-
+import { PreviousMedComponent } from './previous-med/previous-med.component';
+import { BaseDetailComponent } from './base-detail/base-detail.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,7 +55,9 @@ import { InvoicePrintComponent } from './invoice-print/invoice-print.component';
     MedPrescriptionComponent,
     ManageAppointmentComponent,
     AdvancePaymentComponent,
-    InvoicePrintComponent
+    InvoicePrintComponent,
+    PreviousMedComponent,
+    BaseDetailComponent
   ],
   imports: [
     BrowserModule,

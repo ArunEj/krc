@@ -191,8 +191,8 @@
         <tr>
           <th scope="col">Type</th>
           <th scope="col">Amount</th>
-          <th scope="col">Net Balance</th>
-          <th scope="col">Net Paid</th>
+          <th scope="col">Total Other Charges</th>
+          <th scope="col">Total Discount</th>
           <th scope="col"></th>
   
         </tr>
@@ -202,8 +202,8 @@
   
           <td>{{getBuName(item.product_name)}}</td>
           <td>{{item.net_amount}}</td>
-          <td>{{item.net_balance}}</td>
-          <td>{{item.net_paid}}</td>
+          <td>{{item.total_charges}}</td>
+          <td>{{item.gross_discount}}</td>
           <td>
             <mat-icon title="edit" class="edit-icon" aria-hidden="false" aria-label="edit icon" (click)="editItem(item, i)">edit
             </mat-icon>

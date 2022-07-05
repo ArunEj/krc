@@ -38,7 +38,7 @@ export class MedPrescriptionComponent implements OnInit {
   visit_no: any;
   pharmaList: any = [];
   tableData: LabItem[] = [];
-  
+
   previousData: LabItem[] = [];
   labPayload = {};
 
@@ -55,7 +55,7 @@ export class MedPrescriptionComponent implements OnInit {
     this.mpService.fetchLastPharmaDetails(this.headerDetail.patient_id).subscribe(data => {
       this.previousData = data.results;
       this.tableData = this.previousData
-      
+
     }, error => {
       this.dialog.open(InfoDialogComponent, {
         width: '500px',
@@ -107,6 +107,10 @@ export class MedPrescriptionComponent implements OnInit {
         data: 'Pharma Details Saved Successfully'
       })
     })
+  }
+  showPreviousTable = false;
+  displayPrevious() {
+    this.showPreviousTable = true;
   }
 
 
