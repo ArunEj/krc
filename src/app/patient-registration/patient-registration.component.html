@@ -36,7 +36,7 @@
                 <div class="col-lg-4">
                     <div class="patient-reg-item">
                         <label for="patient_dob" class="form-label">DOB</label>
-                        <input type="date" required max="{{currentDate|date:'yyyy-MM-dd'}}" class="form-control"
+                        <input type="date" max="{{currentDate|date:'yyyy-MM-dd'}}" class="form-control"
                             name="patient_dob" [(ngModel)]="patientRegObj.dob" id="patient_dob">
                     </div>
                     <div class='row'>
@@ -55,7 +55,7 @@
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label">Patient Type</label>
-                            <select class="form-control" name="patient_type" [(ngModel)]="patientRegObj.patient_type">
+                            <select class="form-control" name="patient_type" [(ngModel)]="patientRegObj.patient_type" required>
                                 <option *ngFor="let patient of patientTypes" [value]="patient.ref_code">{{patient.ref_desc}}</option>
                                 
                                 <!-- <option value="W">Working</option>
@@ -119,7 +119,7 @@
             <div class="row">
                 <div class="col-md-4 patient-reg-item">
                     <label for="ration_cardno" class="form-label">Ration Card No</label>
-                    <input type="number" class="form-control" name="ration_cardno" id="ration_cardno" [(ngModel)]="patientRegObj.ration_cardno">
+                    <input type="text" class="form-control" name="ration_cardno" id="ration_cardno" [(ngModel)]="patientRegObj.ration_cardno">
                 </div>
                 <div class="col-md-4 patient-reg-item">
                     <label for="profession" class="form-label">Profession</label>
@@ -154,8 +154,8 @@
                 </div>
 
                 <div class="col-md-4 patient-reg-item">
-                    <label for="pin_code" class="form-label">Pin Code</label>
-                    <input type="number" class="form-control" name="pin_code" id="pin_code" [(ngModel)]="patientRegObj.pin_code">
+                    <label for="pincode" class="form-label">Pin Code</label>
+                    <input type="number" class="form-control" name="pincode" id="pincode" [(ngModel)]="patientRegObj.pincode">
                 </div>
         </div>
             <button class="btn btn-primary mar20t mar10lr" (click)="goBack()">Back</button>

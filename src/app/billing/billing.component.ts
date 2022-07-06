@@ -158,10 +158,11 @@ export class BillingComponent implements OnInit {
 
     this.options = [];
     this.billingItem.bu_id = data;
+    let patientType = this.patientHeader.patient_type;
     this.resetFieldsCalculation();
     switch (data) {
       case 'DIALY': {
-        this.bs.fetchProducts(data).subscribe(data => {
+        this.bs.fetchProducts(data, patientType).subscribe(data => {
           this.options = data.results;
           this.filteredOptions = this.myControl.valueChanges.pipe(
             startWith(''),
@@ -171,7 +172,7 @@ export class BillingComponent implements OnInit {
         break;
       }
       case 'PHARM': {
-        this.bs.fetchProducts(data).subscribe(data => {
+        this.bs.fetchProducts(data, patientType).subscribe(data => {
           this.options = data.results;
           this.filteredOptions = this.myControl.valueChanges.pipe(
             startWith(''),
@@ -181,7 +182,7 @@ export class BillingComponent implements OnInit {
         break;
       }
       case 'LAB': {
-        this.bs.fetchProducts(data).subscribe(data => {
+        this.bs.fetchProducts(data, patientType).subscribe(data => {
           this.options = data.results;
           this.filteredOptions = this.myControl.valueChanges.pipe(
             startWith(''),
@@ -201,8 +202,9 @@ export class BillingComponent implements OnInit {
 
     this.options = [];
     this.billingItem.bu_id = data;
+    let patientType = this.patientHeader.patient_type;
     this.resetFieldsCalculation();
-    this.bs.fetchProducts(data).subscribe(data => {
+    this.bs.fetchProducts(data, patientType).subscribe(data => {
       this.options = data.results;
       this.filteredOptions = this.myControl.valueChanges.pipe(
         startWith(''),

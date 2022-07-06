@@ -20,7 +20,7 @@ export class PatientRegistrationComponent implements OnInit {
     communicate_address: '', user_id: '', org_id: '', alt_mobile_no: '', aadhar_no: '', photo: '', alt_email_id: '', branch_id: '',
     age: '', blood_group: '', husband_name: '', guardian_name: '', guardian_type: '', father_name: '', ration_cardno: '',
     profession: '', attender1_name: '', attender1_relation_type: '', attender1_contact: '', attender2_name: '', attender2_relation_type: '', attender2_contact: '',
-    pin_code: ''
+    pincode: ''
 
   };
   constructor(private ps: PatientRegService,
