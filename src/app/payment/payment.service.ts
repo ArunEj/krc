@@ -21,6 +21,13 @@ export class PaymentService {
     return this.http.post('http://www.kkkrchennai.com/krc/view_one_invoice.php', { invoice_no: invoice });
   }
 
+  getPaymentTypes():Observable<any>{
+    let org_id = localStorage.getItem('org_id');
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(environment.apiUrl+'references/PAYMOD')
+  }
+
 
   submitPayment(billingItem: any): Observable<any> {
     let headers = new HttpHeaders();

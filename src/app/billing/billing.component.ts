@@ -315,6 +315,7 @@ export class BillingComponent implements OnInit {
       console.log(data);
       this.bs.invoice_no = data.invoice_no;
       this.bs.patient_id = this.patientHeader.patient_id;
+      localStorage.setItem('header', JSON.stringify(this.patientHeader));
      // this.router.navigate(['invoice']);
      this.router.navigate(['invoice', this.bs.invoice_no]);
     })

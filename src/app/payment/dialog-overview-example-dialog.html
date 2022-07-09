@@ -1,13 +1,10 @@
 <h1 mat-dialog-title>Payment</h1>
 <div mat-dialog-content>
   <p></p>
-  <mat-form-field appearance="fill">
-    <mat-label>Amount Payable</mat-label>
-    <input matInput type="number" [max]="data.net_balance" [(ngModel)]="data.amt_payment">
-  </mat-form-field>
+  
   <mat-form-field appearance="fill">
     <mat-label>Payment Mode</mat-label>
-    <mat-select [(ngModel)]="data.payment_mode">
+    <mat-select [(ngModel)]="data.payment_mode" (selectionChange)="changePaymentMode()">
       <mat-option value="S">Cash</mat-option>
       <mat-option value="C">Card</mat-option>
       <mat-option value="Q">Cheque</mat-option>
@@ -15,6 +12,17 @@
       <mat-option value="A">Advance Pay</mat-option>
     </mat-select>
   </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <!-- {{showAdvanceError}} -->
+    <mat-label>Amount Payable</mat-label>
+    <input matInput type="number" [(ngModel)]="data.amt_payment" (change)="changePaymentMode()">
+        
+    
+  </mat-form-field>
+  <div class="error" *ngIf="!isAdvancePayment &&(showamountError)">Amount must be less than Net Balance</div>
+  <div  class="error" *ngIf="showAdvanceError">Insuffcient Advance Balance</div>
+
   <mat-form-field appearance="fill">
     <mat-label>Remarks</mat-label>
     <input matInput type="text">
@@ -22,5 +30,5 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [disabled]="data.amt_payment === 0 || data.amt_payment>data.net_balance || data.payment_mode === ''" [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+  <button mat-button [disabled]="data.amt_payment === 0 || data.payment_mode === '' || showamountError || showAdvanceError" [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
 </div>

@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { InvoiceService } from './invoice.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PatientListDialogComponent } from '../utilities/patient-list-dialog/patient-list-dialog.component';
 import { InfoDialogComponent } from '../utilities/info-dialog/info-dialog.component'
-import {PromptDialogComponent} from '../utilities/prompt-dialog/prompt-dialog.component';
+import { PromptDialogComponent } from '../utilities/prompt-dialog/prompt-dialog.component';
 @Component({
   selector: 'app-invoice',
   templateUrl: './invoice.component.html',
@@ -21,7 +21,12 @@ export class InvoiceComponent implements OnInit {
   patientHeader: any;
   patientList = [];
   constructor(private is: InvoiceService,
-    private dialog: MatDialog, private router: Router) {
+    private dialog: MatDialog, private router: Router, private route: ActivatedRoute) {
+    this.route.params.subscribe(data => {
+      if (data?.patient_id) {
+        this.loadInvoiceDetails(data?.patient_id);
+      }
+    })
 
   }
 
@@ -39,7 +44,7 @@ export class InvoiceComponent implements OnInit {
       if (error.error.status === 404) {
         this.dialog.open(InfoDialogComponent, {
           width: '300px',
-          data: 'patient details not found!!!'
+          data: 'No Pending Invoice Payment'
         })
       }
     })
@@ -53,24 +58,28 @@ export class InvoiceComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(data => {
       this.patientList = data.results;
-      this.is.fetchHeader(data.patient_id).subscribe(data => {
-        if (data) {
-          this.patientHeader = data;
-          localStorage.setItem('header', JSON.stringify(data));
-        }
-      })
-      this.is.fetchInvoices(data.patient_id).subscribe(data => {
-        this.patientInvoiceDetail = true;
-        this.invoiceDetails = data.results;
-      }, error => {
-        if (error.error.status === 404) {
-          this.dialog.open(InfoDialogComponent, {
-            width: '300px',
-            data: 'Invoice details not found!!!'
-          });
-        }
-      })
+      this.loadInvoiceDetails(data.patient_id);
     });
+  }
+
+  loadInvoiceDetails(patient_id: string) {
+    this.is.fetchHeader(patient_id).subscribe(data => {
+      if (data) {
+        this.patientHeader = data;
+        localStorage.setItem('header', JSON.stringify(data));
+      }
+    })
+    this.is.fetchInvoices(patient_id).subscribe(data => {
+      this.patientInvoiceDetail = true;
+      this.invoiceDetails = data.results;
+    }, error => {
+      if (error.error.status === 404) {
+        this.dialog.open(InfoDialogComponent, {
+          width: '300px',
+          data: 'Invoice details not found!!!'
+        });
+      }
+    })
   }
 
   fetchItemDetail(item: any) {
@@ -79,7 +88,7 @@ export class InvoiceComponent implements OnInit {
       this.billingItem.emit(data);
     })
   }
-  
+
   cancelInvoice(invoice: any) {
     let cancelObj =
     {
@@ -93,8 +102,8 @@ export class InvoiceComponent implements OnInit {
       width: '300px',
       data: 'Are you sure want to cancel the invoice?'
     });
-    prompt.afterClosed().subscribe(data=>{
-      if(data){
+    prompt.afterClosed().subscribe(data => {
+      if (data) {
         this.is.cancelInvoice(cancelObj).subscribe(data => {
           this.patientInvoiceDetail = false;
           this.invoiceDetails = [];
@@ -102,17 +111,17 @@ export class InvoiceComponent implements OnInit {
             width: '300px',
             data: 'Invoice cancellation is successful!'
           });
-    
-        }, error=>{
+
+        }, error => {
           this.dialog.open(InfoDialogComponent, {
             width: '300px',
             data: 'Invoice cancellation is not successful!'
           });
         });
-        
+
       }
     })
-   
+
   }
 
 

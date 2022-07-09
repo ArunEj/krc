@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PaymentService } from './payment.service';
 import { BillingService } from '../billing/billing.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Location } from '@angular/common';
 
 export interface DialogData {
   branch_id: string,
@@ -12,7 +13,8 @@ export interface DialogData {
   amt_payment: 0,
   payment_mode: '',
   updated_by: '',
-  net_balance:0
+  net_balance: 0,
+  advance_amount_balance?: 0
 }
 @Component({
   selector: 'app-payment',
@@ -21,7 +23,7 @@ export interface DialogData {
 })
 export class PaymentComponent implements OnInit {
 
-  patientHeader:any;
+  patientHeader: any;
   mobile_no: string = '';
   invoice: string = '';
   patientDetail = false;
@@ -43,7 +45,8 @@ export class PaymentComponent implements OnInit {
     public dialog: MatDialog,
     private router: Router,
     private route: ActivatedRoute,
-    private ps: PaymentService) {
+    private ps: PaymentService,
+    private _location: Location) {
 
   }
 
@@ -81,6 +84,7 @@ export class PaymentComponent implements OnInit {
   }
   showPayment(item: any) {
     this.clearDialogFields(item);
+    item.advance_amount_balance = this.patientHeader.advance_amount_balance;
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
       width: '250px',
       data: item,
@@ -135,7 +139,8 @@ export class PaymentComponent implements OnInit {
     })
   }
   navigateToInvoice() {
-    this.router.navigate(['invoice']);
+    this.router.navigate(['invoice',{patient_id:this.patientHeader.patient_id} ]);
+    //this._location.back();
   }
 }
 
@@ -144,16 +149,105 @@ export class PaymentComponent implements OnInit {
   templateUrl: 'dialog-overview-example-dialog.html',
 })
 export class DialogOverviewExampleDialog implements OnInit {
-  
+
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
+    private ps:PaymentService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
   ) { }
   ngOnInit() {
-
+    this.ps.getPaymentTypes().subscribe(types=>{
+      console.log(types);
+    })
+    this.maxAmount = this.data.net_balance;
   }
   onNoClick(): void {
-   
+
     this.dialogRef.close();
   }
+  showAdvanceError = false;
+  showamountError = false;
+  isAdvancePayment = false
+  maxAmount: any;
+  validateAdvance() {    
+    if (this.data.payment_mode && this.data.payment_mode === 'A') {
+     
+      this.maxAmount = this.data.advance_amount_balance;
+      if (!this.data.advance_amount_balance) {
+        this.showAdvanceError = true;
+        return true;
+      }
+      if (this.data.advance_amount_balance && this.data.amt_payment > this.data.advance_amount_balance!) {
+        this.showAdvanceError = true;
+        return true;
+      } else {
+        this.showAdvanceError = false;
+        return false;
+      }
+    } else {
+     
+      this.maxAmount = this.data.net_balance;
+      return false;
+    }
+
+
+
+  }
+
+
+  changePaymentMode() {    
+    if (this.data.payment_mode && this.data.payment_mode === 'A') {
+      this.showamountError = false;
+      this.isAdvancePayment = true;
+      
+      if (!this.data.advance_amount_balance) {
+         this.showAdvanceError = true;
+        return;
+      }
+      if (this.data.advance_amount_balance && this.data.amt_payment <= this.data.net_balance && this.data.amt_payment <= this.data.advance_amount_balance ) {
+        this.showAdvanceError = false;
+       // return true;
+      } else {
+        this.showAdvanceError = true;
+        //return false;
+      }
+    } else {
+      
+       this.showAdvanceError = false;
+       this.isAdvancePayment = false;
+      this.showamountError =  this.validateAmount();
+    }
+  }
+
+  validateAmount() {
+    if (this.data.amt_payment <= this.data.net_balance) {
+      this.showamountError = false;
+      return false;
+    } else {
+      this.showamountError = true;
+      return true;
+    }
+  }
+
+  // checkAdvancePaymode() {
+  //   if (this.data.payment_mode && this.data.payment_mode === 'A') {
+  //     this.
+  //     this.maxAmount = this.data.advance_amount_balance;
+  //     return true;
+  //   } else {
+  //     this.maxAmount = this.data.net_balance;
+  //     return false;
+  //   }
+  // }
+
+  // setMaxAmount() {
+  //   if (this.checkAdvancePaymode()) {
+  //     return this.data.advance_amount_balance;
+  //   } else {
+  //     return this.data.net_balance;
+  //   }
+
+  // }
+
+
 }
