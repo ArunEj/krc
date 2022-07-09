@@ -10,7 +10,7 @@
             <mat-tab label="Doc Notes">
                 <label class="d-block">Visit#: {{currentPatientDetail.visit_no}}</label>
                 
-                <label class="d-block">Visit Date: {{currentPatientDetail.visit_date}}</label>
+                <label class="d-block">Visit Date: {{currentPatientDetail.visit_date |date:'dd-MM-yyyy'}}</label>
                 <label for="prevHistory" class="form-label margin-20t">Previous History</label>
 
                 <textarea readonly class="form-control " id="prevHistory" rows="10"
@@ -65,7 +65,7 @@
             <mat-tab label="Dialysis">
                 <div class="error-container" *ngIf="!visit_no">Please save doctor notes to saave dialysis notes</div>
                 <label class="d-block">Visit#: {{currentPatientDialysisDetail.visit_no}}</label>
-                <label class="d-block">Visit Date: {{currentPatientDialysisDetail.prescription_date}}</label>
+                <label class="d-block">Visit Date: {{currentPatientDialysisDetail.prescription_date |date:'dd-MM-yyyy'}}</label>
                 <label for="prevDialysisHistory" class="form-label margin-20t">Previous History</label>
                 
 

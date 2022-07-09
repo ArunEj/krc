@@ -60,6 +60,7 @@ export class BillingComponent implements OnInit {
   showModal = false;
   finalPay: number = 0;
   showBillingForm = false;
+  isShowHeader = false;
   myControl = new FormControl();
   options: any = [];
   dialysisProducts: BillingItem[] = [];
@@ -136,6 +137,7 @@ export class BillingComponent implements OnInit {
       this.billingItem.patient_id = data.patient_id;
       this.bs.fetchHeader(data.patient_id).subscribe(data => {
         this.headerDetail = true;
+        this.isShowHeader = true;
         this.patientHeader = data;
       });
 
@@ -327,7 +329,11 @@ export class BillingComponent implements OnInit {
     this.options = [];
     this.calculateFinal();
     this.resetFields();
+    this.clearValidation(this.myForm, this.myControl);
 
+  }
+  clearValidation(myForm: any,myControl: any) {
+    this.bs.clearValidation(myForm, myControl);
   }
   cancelNewItem() {
     if (this.editBillingItem) {
@@ -357,35 +363,36 @@ export class BillingComponent implements OnInit {
     this.resetFields();
   }
   resetFields() {
-    this.billingItem = {
-      bu_id: '',
-      patient_id: '',
-      product_id: '',
-      product_type: '',
-      product_cost: Number(0),
-      product_name: '',
-      product_qty: Number(1),
-      product_value: Number(0),
-      other_charge1: Number(0),
-      other_charge2: Number(0),
-      other_charge3: Number(0),
-      total_charges:Number(0),
-      other_charge_remark1: '',
-      other_charge_remark2: '',
-      other_charge_remark3: '',
-      gross_inv_amount: Number(0),
-      discount1: Number(0),
-      discount2: Number(0),
-      discount3: Number(0),
-      discount_remark1: '',
-      discount_remark2: '',
-      discount_remark3: '',
-      gross_discount: Number(0),
-      net_amount: Number(0),
-      net_balance: Number(0),
-      net_paid: Number(0),
-    }
-    this.myForm.get('bu_id')?.setValue('');
+
+      this.billingItem = {
+        bu_id: '',
+        patient_id: '',
+        product_id: '',
+        product_type: '',
+        product_cost: Number(0),
+        product_name: '',
+        product_qty: Number(1),
+        product_value: Number(0),
+        other_charge1: Number(0),
+        other_charge2: Number(0),
+        other_charge3: Number(0),
+        total_charges:Number(0),
+        other_charge_remark1: '',
+        other_charge_remark2: '',
+        other_charge_remark3: '',
+        gross_inv_amount: Number(0),
+        discount1: Number(0),
+        discount2: Number(0),
+        discount3: Number(0),
+        discount_remark1: '',
+        discount_remark2: '',
+        discount_remark3: '',
+        gross_discount: Number(0),
+        net_amount: Number(0),
+        net_balance: Number(0),
+        net_paid: Number(0),
+      }
+      this.myForm.get('bu_id')?.setValue('');
   }
   resetFieldsCalculation() {
     this.billingItem = {
@@ -425,6 +432,11 @@ export class BillingComponent implements OnInit {
     item.invoice_details[0].bu_id = 'PHARMA'
 
     this.billingArray = item.invoice_details;
+  }
+
+  createItem() {
+    this.showBillingForm = true;
+    this.isShowHeader = true;
   }
 
 

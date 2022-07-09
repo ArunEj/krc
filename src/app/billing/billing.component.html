@@ -16,7 +16,24 @@
   </div>
 
 </div>
-
+<div class="container" *ngIf="isShowHeader">
+  <div class="row header-border margin-20t">
+    <div class="">
+      <label class="mar15">Patient Id: {{patientHeader?.patient_id}}</label>
+      <label class="mar15">Patient Name: {{patientHeader?.patient_name}}</label>
+      <label class="mar15">Age: {{patientHeader?.age}}</label>
+      <label class="mar15">Sex: {{patientHeader?.sex}}</label>
+      <label class="mar15">Phone: {{patientHeader?.mobile_no}}</label>
+      <label class="mar15">Patient Type: {{patientHeader?.patient_type_name}}</label><br>
+      
+      <label class="mar15">Total Invoice Amount: {{patientHeader?.net_inv_amount}}</label>
+      <label class="mar15">Total Paid: {{patientHeader?.net_inv_paid}}</label>
+      <label class="mar15">Total Balance: {{patientHeader?.net_inv_balance}}</label>
+      <label class="mar15">Advance Adjusted: {{patientHeader?.advance_amount_paid}}</label>
+      <label class="mar15">Advance Balance: {{patientHeader?.advance_amount_balance}}</label>
+    </div>
+  </div>
+</div>
 <div class="container mar30" *ngIf="showBillingForm">
   <form class="example-form" [formGroup]="myForm" novalidate>
     <!-- <mat-form-field class="mar20lr" appearance="fill">
@@ -51,36 +68,36 @@
 
     <mat-form-field class="mar20lr" appearance="fill">
       <mat-label>Amount</mat-label>
-      <input matInput type="number" formControlName="product_cost" required [(ngModel)]="billingItem.product_cost"
+      <input matInput type="number" min = '0' formControlName="product_cost" required [(ngModel)]="billingItem.product_cost"
         name="product_cost">
 
     </mat-form-field>
 
     <mat-form-field class="mar20lr" appearance="fill">
       <mat-label>Quantity</mat-label>
-      <input matInput type="number" formControlName="product_qty" required min="1"
+      <input matInput type="number" min = '0' formControlName="product_qty" required min="1"
         [(ngModel)]="billingItem.product_qty" name="product_qty"
         (ngModelChange)="calculateAmountPerQty($event)">
     </mat-form-field>
     <div>
       <mat-form-field class="mar20lr" appearance="fill">
         <mat-label>Other charges 1</mat-label>
-        <input matInput type="number" formControlName="other_charge1" [(ngModel)]="billingItem.other_charge1"
+        <input matInput type="number" min = '0' formControlName="other_charge1" [(ngModel)]="billingItem.other_charge1"
           (ngModelChange)="calclulateOthercharges($event)" name="charge1">
       </mat-form-field>
       <mat-form-field class="mar20lr" appearance="fill">
         <mat-label>Other charges 2</mat-label>
-        <input matInput type="number" formControlName="other_charge2" [(ngModel)]="billingItem.other_charge2"
+        <input matInput type="number" min = '0' formControlName="other_charge2" [(ngModel)]="billingItem.other_charge2"
           (ngModelChange)="calclulateOthercharges($event)" name="charge2">
       </mat-form-field>
       <mat-form-field class="mar20lr" appearance="fill">
         <mat-label>Other charges3</mat-label>
-        <input matInput type="number" formControlName="other_charge3" [(ngModel)]="billingItem.other_charge3"
+        <input matInput type="number" min = '0' formControlName="other_charge3" [(ngModel)]="billingItem.other_charge3"
           (ngModelChange)="calclulateOthercharges($event)" name="charge3">
       </mat-form-field>
       <mat-form-field class="mar20lr" appearance="fill">
         <mat-label>Gross Amount</mat-label>
-        <input matInput type="number" formControlName="gross_inv_amount" [(ngModel)]="billingItem.gross_inv_amount"
+        <input matInput type="number" min = '0' formControlName="gross_inv_amount" [(ngModel)]="billingItem.gross_inv_amount"
           name="gross_inv_amount" readonly>
       </mat-form-field>
     </div>
@@ -104,23 +121,23 @@
     <div>
       <mat-form-field class="mar20lr" appearance="fill">
         <mat-label>Dicscount 1</mat-label>
-        <input matInput type="number" formControlName="discount1" [(ngModel)]="billingItem.discount1" name="discount1"
+        <input matInput type="number" min = '0' formControlName="discount1" [(ngModel)]="billingItem.discount1" name="discount1"
           (ngModelChange)="calclulateDiscount($event)">
       </mat-form-field>
       <mat-form-field class="mar20lr" appearance="fill">
         <mat-label>Discount 2</mat-label>
-        <input matInput type="number" formControlName="discount2" [(ngModel)]="billingItem.discount2" name="discount2"
+        <input matInput type="number" min = '0' formControlName="discount2" [(ngModel)]="billingItem.discount2" name="discount2"
           (ngModelChange)="calclulateDiscount($event)">
       </mat-form-field>
       <mat-form-field class="mar20lr" appearance="fill">
         <mat-label>Discount 3</mat-label>
-        <input matInput type="number" formControlName="discount3" [(ngModel)]="billingItem.discount3" name="dIscount3"
+        <input matInput type="number" min = '0' formControlName="discount3" [(ngModel)]="billingItem.discount3" name="dIscount3"
           (ngModelChange)="calclulateDiscount($event)">
       </mat-form-field>
 
       <mat-form-field class="mar20lr" appearance="fill">
         <mat-label>Total Discount</mat-label>
-        <input matInput type="number" formControlName="total_discount" [(ngModel)]="billingItem.gross_discount"
+        <input matInput type="number" min = '0' formControlName="total_discount" [(ngModel)]="billingItem.gross_discount"
           name="total_discount" readonly>
       </mat-form-field>
     </div>
@@ -144,7 +161,7 @@
     <div>
       <mat-form-field class="mar20lr" appearance="fill">
         <mat-label>Net Amount</mat-label>
-        <input matInput type="number" required formControlName="net_amount" [(ngModel)]="this.billingItem.net_amount"
+        <input matInput type="number" min = '0' required formControlName="net_amount" [(ngModel)]="this.billingItem.net_amount"
           name="netamount" readonly>
       </mat-form-field>
 
@@ -166,24 +183,9 @@
     </button>
   </form>
 </div>
+<div>
 
 <div class="container" *ngIf="!showBillingForm &&headerDetail">  
-  <div class="row header-border margin-20t">
-    <div class="">
-      <label class="mar20">Patient Id: {{patientHeader?.patient_id}}</label>
-      <label class="mar20">Patient Name: {{patientHeader?.patient_name}}</label>
-      <label class="mar20">Age: {{patientHeader?.age}}</label>
-      <label class="mar20">Sex: {{patientHeader?.sex}}</label>
-      <label class="mar20">Phone: {{patientHeader?.mobile_no}}</label>
-      <label class="mar20">Patient Type: {{patientHeader?.patient_type_name}}</label>
-      
-      <label class="mar20">Total Invoice Amount: {{patientHeader?.net_inv_amount}}</label>
-      <label class="mar20">Total Paid: {{patientHeader?.net_inv_paid}}</label>
-      <label class="mar20">Total Balance: {{patientHeader?.net_inv_balance}}</label>
-      <label class="mar20">Advance Amount: {{patientHeader?.advance_amount_paid}}</label>
-      <label class="mar20">Advance Balance: {{patientHeader?.advance_amount_balance}}</label>
-    </div>
-  </div>
 
   <div *ngIf="billingArray?.length > 0">
     <table class="table">
@@ -213,7 +215,7 @@
     </table>
   </div>
   
-    <button type="button" class="btn btn-primary mar30"  *ngIf="!showBillingForm" (click)="showBillingForm = true">
+    <button type="button" class="btn btn-primary mar30"  *ngIf="!showBillingForm" (click)="createItem()">
       Create Item
     </button>  
     <button type="button" class="btn btn-primary mar30" [disabled]="billingArray.length === 0" *ngIf="!showBillingForm && billingArray?.length>0"

@@ -10,7 +10,7 @@ export interface Patient {
     alt_mobile_no?: string,
     alt_email_id?: string,
     aadhar_no?: string,
-    first_visit_date?: string,
+    first_visit_date?: string | null,
     sex: string,
     updated_by?: string,
     updated_date?: string,

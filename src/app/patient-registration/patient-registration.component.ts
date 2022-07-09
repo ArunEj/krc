@@ -89,6 +89,10 @@ export class PatientRegistrationComponent implements OnInit {
 
 
   updatePatientDetails() {
+    if(this.patientRegObj.first_visit_date == "NaN-NaN-NaN") {
+      // console.log(this.patientRegObj)
+      this.patientRegObj.first_visit_date = null;
+    }
     this.ps.updatePatient(this.patientRegObj).subscribe(data => {
       //alert('updated');
       this.dialog.open(InfoDialogComponent, {

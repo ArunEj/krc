@@ -70,4 +70,21 @@ export class BillingService {
     return this.http.get(environment.apiUrl + 'billings/' + branch_id + '?patient_id=' + patient_id,
       { headers: headers })
   }
+
+  //ClearValidation
+  clearValidation(myForm: any, myControl: any) {
+    myForm.controls.other_charge1.clearValidators();
+    myForm.controls.other_charge_remark1.clearValidators();
+    myForm.controls.other_charge2.clearValidators();
+    myForm.controls.other_charge_remark2.clearValidators();
+    myForm.controls.other_charge3.clearValidators();
+    myForm.controls.other_charge_remark3.clearValidators();
+    myForm.controls.discount1.clearValidators();
+    myForm.controls.discount_remark1.clearValidators();
+    myForm.controls.discount2.clearValidators();
+    myForm.controls.discount_remark2.clearValidators();
+    myForm.controls.discount3.clearValidators();
+    myForm.controls.discount_remark3.clearValidators();
+    myControl.product_name.clearValidators();
+  }
 }
