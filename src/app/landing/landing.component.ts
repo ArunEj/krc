@@ -11,6 +11,7 @@ import { ManageAppointmentComponent } from '../manage-appointment/manage-appoint
   styleUrls: ['./landing.component.scss']
 })
 export class LandingComponent implements OnInit {
+  doctorList = [];
   userData: any;
   aptData: any = [];
   constructor(private login: LoginService,
@@ -19,6 +20,7 @@ export class LandingComponent implements OnInit {
   ngOnInit(): void {
     this.userData = this.login.userData;
     this.fetchAppointments();
+    this.fetchDoctorsByBranchId();
   }
 
   fetchAppointments() {
@@ -56,6 +58,7 @@ export class LandingComponent implements OnInit {
 
   openAppointmentPopup() {
     const dialogRef = this.dialog.open(ManageAppointmentComponent, {
+      data:this.doctorList,
       width: '300px',
     });
 
@@ -69,6 +72,12 @@ export class LandingComponent implements OnInit {
     this.aptService.getAppointments(data).subscribe(response=> {
       console.log(response);
       this.aptData = response.results;
+    })
+  }
+
+  fetchDoctorsByBranchId() {
+    this.aptService.fetchDoctors().subscribe(data => {
+      this.doctorList = data.results;
     })
   }
 

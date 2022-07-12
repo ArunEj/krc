@@ -139,7 +139,7 @@ export class PaymentComponent implements OnInit {
     })
   }
   navigateToInvoice() {
-    this.router.navigate(['invoice',{patient_id:this.patientHeader.patient_id} ]);
+    this.router.navigate(['invoice', { patient_id: this.patientHeader.patient_id }]);
     //this._location.back();
   }
 }
@@ -152,11 +152,11 @@ export class DialogOverviewExampleDialog implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
-    private ps:PaymentService,
+    private ps: PaymentService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
   ) { }
   ngOnInit() {
-    this.ps.getPaymentTypes().subscribe(types=>{
+    this.ps.getPaymentTypes().subscribe(types => {
       console.log(types);
     })
     this.maxAmount = this.data.net_balance;
@@ -169,54 +169,21 @@ export class DialogOverviewExampleDialog implements OnInit {
   showamountError = false;
   isAdvancePayment = false
   maxAmount: any;
-  validateAdvance() {    
-    if (this.data.payment_mode && this.data.payment_mode === 'A') {
-     
-      this.maxAmount = this.data.advance_amount_balance;
-      if (!this.data.advance_amount_balance) {
-        this.showAdvanceError = true;
-        return true;
-      }
-      if (this.data.advance_amount_balance && this.data.amt_payment > this.data.advance_amount_balance!) {
-        this.showAdvanceError = true;
-        return true;
-      } else {
-        this.showAdvanceError = false;
-        return false;
-      }
-    } else {
-     
-      this.maxAmount = this.data.net_balance;
-      return false;
+
+  changePaymentMode() {
+    let amtError = this.validateAmount();
+    if (!amtError) {
+      if (this.data.payment_mode && this.data.payment_mode === 'A') {
+        if (this.data.advance_amount_balance && this.data.amt_payment <= this.data.advance_amount_balance) {
+          this.showAdvanceError = false;
+          // return true;
+        } else {
+          this.showAdvanceError = true;
+          //return false;
+        }
+       }
     }
-
-
-
-  }
-
-
-  changePaymentMode() {    
-    if (this.data.payment_mode && this.data.payment_mode === 'A') {
-      this.showamountError = false;
-      this.isAdvancePayment = true;
-      
-      if (!this.data.advance_amount_balance) {
-         this.showAdvanceError = true;
-        return;
-      }
-      if (this.data.advance_amount_balance && this.data.amt_payment <= this.data.net_balance && this.data.amt_payment <= this.data.advance_amount_balance ) {
-        this.showAdvanceError = false;
-       // return true;
-      } else {
-        this.showAdvanceError = true;
-        //return false;
-      }
-    } else {
-      
-       this.showAdvanceError = false;
-       this.isAdvancePayment = false;
-      this.showamountError =  this.validateAmount();
-    }
+    
   }
 
   validateAmount() {

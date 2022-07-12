@@ -440,6 +440,10 @@ export class BillingComponent implements OnInit {
     this.isShowHeader = true;
   }
 
+  patientHeaderData(data: any) {
+    this.headerDetail = data;
+  }
+
 
 }
 function MdAutocompleteTrigger(MdAutocompleteTrigger: any) {

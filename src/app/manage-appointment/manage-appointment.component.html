@@ -21,8 +21,11 @@
 
 
     <mat-form-field *ngIf="manageAppoint.doctor_id" appearance="fill">
-        <mat-label>Doctor ID</mat-label>
-        <input required matInput type="text" [(ngModel)]="doctor_id">
+        <mat-label>Doctor Name</mat-label>
+        <!-- <input required matInput type="text" [(ngModel)]="doctor_id"> -->
+        <mat-select  name="patient_type" [(ngModel)]="doctor_id">
+            <mat-option *ngFor="let doctor of data" [value]="doctor.doctor_id">{{doctor.doctor_name}}</mat-option>
+        </mat-select>
     </mat-form-field>
 
     <mat-form-field *ngIf="manageAppoint.appoint_date" appearance="fill">
@@ -33,5 +36,5 @@
 </div>
 <div mat-dialog-actions>
     <!-- <button mat-button (click)="onNoClick()">No Thanks</button> -->
-    <button mat-button cdkFocusInitial  (click)="sendBackPayload()">Retrieve</button>
+    <button mat-button cdkFocusInitial (click)="sendBackPayload()">Retrieve</button>
 </div>

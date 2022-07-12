@@ -25,4 +25,12 @@ export class PatientHeaderService {
     return this.http.get(environment.apiUrl + 'patients/' + localStorage.getItem('branch_id') + '?mobile_no=' + mobile_no,
       { headers: headers })
   }
+
+  fetchUserDataByName(patient_name:string):Observable<any>{
+    let branch_id = localStorage.getItem('branch_id');
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(environment.apiUrl + 'patients/' + localStorage.getItem('branch_id') + '?patient_name=' + patient_name,
+      { headers: headers })
+  }
 }

@@ -76,7 +76,7 @@ export class InvoiceComponent implements OnInit {
       if (error.error.status === 404) {
         this.dialog.open(InfoDialogComponent, {
           width: '300px',
-          data: 'Invoice details not found!!!'
+          data: 'No Pending Invoice Payment!'
         });
       }
     })

@@ -3,7 +3,7 @@
   <div class="row">
     <h1>Billing</h1>
   </div>
-  <div class="row" *ngIf="!headerDetail">
+  <!-- <div class="row" *ngIf="!headerDetail">
     <h3>Patient Details</h3>
     <div class="patient-details">
       <label for="contact" class="form-label">Contact</label>
@@ -13,10 +13,11 @@
       <button (click)="fetchUser()" [disabled]="!mobile_no" class="btn btn-primary mar20t">fetch
         contact details</button>
     </div> 
-  </div>
-
+  </div> -->
+  <app-patient-header (outputPatientHeader)="patientHeaderData($event)"></app-patient-header>
 </div>
-<div class="container" *ngIf="isShowHeader">
+
+<!-- <div class="container" *ngIf="isShowHeader">
   <div class="row header-border margin-20t">
     <div class="">
       <label class="mar15">Patient Id: {{patientHeader?.patient_id}}</label>
@@ -33,7 +34,7 @@
       <label class="mar15">Advance Balance: {{patientHeader?.advance_amount_balance}}</label>
     </div>
   </div>
-</div>
+</div> -->
 <div class="container mar30" *ngIf="showBillingForm">
   <form class="example-form" [formGroup]="myForm" novalidate>
     <!-- <mat-form-field class="mar20lr" appearance="fill">
