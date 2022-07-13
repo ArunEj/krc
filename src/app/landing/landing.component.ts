@@ -47,13 +47,14 @@ export class LandingComponent implements OnInit {
   }
 
   managePatient() {
-    const dialogRef = this.dialog.open(ManageDialogComponent, {
-      width: '300px',
-    });
+    // const dialogRef = this.dialog.open(ManageDialogComponent, {
+    //   width: '300px',
+    // });
 
-    dialogRef.afterClosed().subscribe(data => {
-      console.log(data);
-    })
+    // dialogRef.afterClosed().subscribe(data => {
+    //   console.log(data);
+    // })
+    this.router.navigate(['manage-patient']);
   }
 
   openAppointmentPopup() {
