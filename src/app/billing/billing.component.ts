@@ -97,6 +97,7 @@ export class BillingComponent implements OnInit {
   }
 
   filteredOptions: Observable<any[]> | undefined;
+  headerDetailData: any;
   constructor(private bs: BillingService,
     private dialog: MatDialog, private router: Router, private fb: FormBuilder) { }
 
@@ -160,7 +161,7 @@ export class BillingComponent implements OnInit {
 
     this.options = [];
     this.billingItem.bu_id = data;
-    let patientType = this.patientHeader.patient_type;
+    let patientType = this.headerDetailData.patient_type;
     this.resetFieldsCalculation();
     switch (data) {
       case 'DIALY': {
@@ -204,7 +205,7 @@ export class BillingComponent implements OnInit {
 
     this.options = [];
     this.billingItem.bu_id = data;
-    let patientType = this.patientHeader.patient_type;
+    let patientType = this.headerDetailData.patient_type;
     this.resetFieldsCalculation();
     this.bs.fetchProducts(data, patientType).subscribe(data => {
       this.options = data.results;
@@ -303,7 +304,7 @@ export class BillingComponent implements OnInit {
   constructBillPayload() {
     let billPayload = {
       org_id: localStorage.getItem('org_id'), branch_id: localStorage.getItem('branch_id'), user_id: localStorage.getItem('user_id'),
-      patient_id: this.patientHeader.patient_id, invoice_details: this.billingArray
+      patient_id: this.headerDetailData.patient_id, invoice_details: this.billingArray
     }
     return billPayload;
   }
@@ -314,8 +315,8 @@ export class BillingComponent implements OnInit {
     this.bs.submitInvoice(payload).subscribe(data => {
       console.log(data);
       this.bs.invoice_no = data.invoice_no;
-      this.bs.patient_id = this.patientHeader.patient_id;
-      localStorage.setItem('header', JSON.stringify(this.patientHeader));
+      this.bs.patient_id = this.headerDetailData.patient_id;
+      localStorage.setItem('header', JSON.stringify(this.headerDetailData));
      // this.router.navigate(['invoice']);
      this.router.navigate(['invoice', this.bs.invoice_no]);
     })
@@ -344,6 +345,7 @@ export class BillingComponent implements OnInit {
     this.resetFields();
     this.showBillingForm = false;
     this.editBillingItem = false;
+    this.clearValidation(this.myForm, this.myControl);
 
   }
   billingItemCopy: any;
@@ -441,7 +443,8 @@ export class BillingComponent implements OnInit {
   }
 
   patientHeaderData(data: any) {
-    this.headerDetail = data;
+    this.headerDetail = true;
+    this.headerDetailData = data;
   }
 
 

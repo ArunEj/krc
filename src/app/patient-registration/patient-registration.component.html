@@ -5,48 +5,39 @@
         <h1 *ngIf="updatePatient">Patient Update</h1>
         <form #patientReg="ngForm">
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-md-4">
                     <div class=" patient-reg-item">
                         <label for="patient_id" class="form-label">Patient ID</label>
                         <input readonly type="text" class="form-control" name="patient_id" id="patient_id" [(ngModel)]="patient_id">
                     </div>
-
-                    <div class=" patient-reg-item">
-                        <label for="age" class="form-label">Age</label>
-                        <input type="number" class="form-control" name="age" id="age" [(ngModel)]="patientRegObj.age">
-                    </div>
-
-                    <div class=" patient-reg-item">
-                        <label for="lastDoc" class="form-label">Alternate Mobile</label>
-                        <input type="text" class="form-control" name="lastDoc"
-                            [(ngModel)]="patientRegObj.alt_mobile_no" id="lastDoc">
-                    </div>
-
-                    <div class=" patient-reg-item">
-                        <label for="fatherName" class="form-label">Father Name</label>
-                        <input type="text" class="form-control" name="fatherName" id="fatherName" [(ngModel)]="patientRegObj.father_name">
-                    </div>
-
-                    <div class=" patient-reg-item">
-                        <label for="ration_cardno" class="form-label">Ration Card No</label>
-                        <input type="text" class="form-control" name="ration_cardno" id="ration_cardno" [(ngModel)]="patientRegObj.ration_cardno">
-                    </div>
-
-                    <div class=" patient-reg-item">
-                        <label for="guardianName" class="form-label">Guardian Name</label>
-                        <input type="text" class="form-control" name="guardianName" id="guardianName" [(ngModel)]="patientRegObj.guardian_name">
-                    </div>
-                    
                 </div>
-                <div class="col-lg-4">
+                <div class="col-md-4">
                     <div class=" patient-reg-item">
                         <label for="patientName" class="form-label">Patient Name<span class="txt-danger">*</span></label>
                         <input type="text" class="form-control" name="patientName"
                             [(ngModel)]="patientRegObj.patient_name" id="patientName" required>
                     </div>
-                    
+                </div>
+                <div class="col-md-4">
+                    <div class="patient-reg-item">
+                        <label for="patient_dob" class="form-label">DOB</label>
+                        <input type="date" class="form-control"
+                            name="patient_dob" [(ngModel)]="patientRegObj.dob" id="patient_dob">
+                            <!-- max="{{currentDate|date:'yyyy-MM-dd'}}"  -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class=" patient-reg-item">
+                        <label for="age" class="form-label">Age</label>
+                        <input type="number" class="form-control" name="age" id="age" [(ngModel)]="patientRegObj.age">
+                    </div>
+                </div>
+                <div class="col-md-4">
                     <div class='row'>
-                        <div class="col-lg-6 patient-reg-item sex">
+                        <div class="col-md-6 patient-reg-item sex">
                             <label for="dob" class="form-label block">Sex<span class="txt-danger">*</span></label>
                             <input required class="form-check-input mar10lr" [value]="'M'"
                                 [(ngModel)]="patientRegObj.sex" type="radio" name="male" id="male">
@@ -59,7 +50,7 @@
                                 Female
                             </label>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-md-6">
                             <label class="form-label">Patient Type<span class="txt-danger">*</span></label>
                             <select class="form-control" name="patient_type" [(ngModel)]="patientRegObj.patient_type" required>
                                 <option *ngFor="let patient of patientTypes" [value]="patient.ref_code">{{patient.ref_desc}}</option>
@@ -73,69 +64,108 @@
                             </select>
                         </div>
                     </div>
-
-                    <div class=" patient-reg-item">
-                        <label for="email" class="form-label">Email address</label>
-                        <input type="email" class="form-control" name="email" [(ngModel)]="patientRegObj.email_id"
-                            id="email" aria-describedby="emailHelp">
-                    </div>
-
-                    <div class=" patient-reg-item">
-                        <label for="profession" class="form-label">Profession</label>
-                        <input type="text" class="form-control" name="profession" id="profession" [(ngModel)]="patientRegObj.profession">
-                    </div>
-
-                    <div class=" patient-reg-item">
-                        <label for="address" class="form-label">Address<span class="txt-danger">*</span></label>
-                        <textarea class="form-control" name="address" [(ngModel)]="patientRegObj.address" id="address"
-                            required></textarea>
-                    </div>
-
-                    <div class=" patient-reg-item">
-                        <label for="fvDate" class="form-label">First Visit Date</label>
-                        <input type="date" class="form-control" max="{{currentDate|date:'yyyy-MM-dd'}}" name="fvDate"
-                            [(ngModel)]="patientRegObj.first_visit_date" id="fvDate">
-                    </div>
                 </div>
-                <div class="col-lg-4">
-
-                    <div class="patient-reg-item">
-                        <label for="patient_dob" class="form-label">DOB</label>
-                        <input type="date" max="{{currentDate|date:'yyyy-MM-dd'}}" class="form-control"
-                            name="patient_dob" [(ngModel)]="patientRegObj.dob" id="patient_dob">
-                    </div>
-
+                <div class="col-md-4">
                     <div class=" patient-reg-item">
                         <label for="contact" class="form-label">Mobile<span class="txt-danger">*</span></label>
                         <input type="number" pattern=".{10}" required class="form-control" name="contact"
                             [(ngModel)]="patientRegObj.mobile_no" id="contact">
                     </div>
+                </div>
+            </div>
 
+            <div class="row">
+                <div class="col-md-4">
+                    <div class=" patient-reg-item">
+                        <label for="lastDoc" class="form-label">Alternate Mobile</label>
+                        <input type="text" class="form-control" name="lastDoc"
+                            [(ngModel)]="patientRegObj.alt_mobile_no" id="lastDoc">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class=" patient-reg-item">
+                        <label for="email" class="form-label">Email address</label>
+                        <input type="email" class="form-control" name="email" [(ngModel)]="patientRegObj.email_id"
+                            id="email" aria-describedby="emailHelp">
+                    </div>
+                </div>
+                <div class="col-md-4">
                     <div class=" patient-reg-item">
                         <label for="husbandName" class="form-label">Spouse Name</label>
                         <input type="text" class="form-control" name="husbandName" id="husbandName" [(ngModel)]="patientRegObj.husband_name">
                     </div>
+                </div>
+            </div>
 
+            <div class="row">
+                <div class="col-md-4">
+                    <div class=" patient-reg-item">
+                        <label for="fatherName" class="form-label">Father Name</label>
+                        <input type="text" class="form-control" name="fatherName" id="fatherName" [(ngModel)]="patientRegObj.father_name">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class=" patient-reg-item">
+                        <label for="profession" class="form-label">Profession</label>
+                        <input type="text" class="form-control" name="profession" id="profession" [(ngModel)]="patientRegObj.profession">
+                    </div>
+                </div>
+                <div class="col-md-4">
                     <div class=" patient-reg-item">
                         <label for="adhar" class="form-label">Adhar No</label>
                         <input type="text"  class="form-control" name="adhar" [(ngModel)]="patientRegObj.aadhar_no"
                             id="adhar">
                     </div>
-
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-4">
+                    <div class=" patient-reg-item">
+                        <label for="ration_cardno" class="form-label">Ration Card No</label>
+                        <input type="text" class="form-control" name="ration_cardno" id="ration_cardno" [(ngModel)]="patientRegObj.ration_cardno">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class=" patient-reg-item">
+                        <label for="address" class="form-label">Address<span class="txt-danger">*</span></label>
+                        <textarea class="form-control" name="address" [(ngModel)]="patientRegObj.address" id="address"
+                            required></textarea>
+                    </div>
+                </div>
+                <div class="col-md-4">
                     <div class=" patient-reg-item">
                         <label for="communicate_address" class="form-label">Communication Address</label>
                         <textarea class="form-control" name="communicate_address"
                             [(ngModel)]="patientRegObj.communicate_address" id="communicate_address"></textarea>
                     </div>
-
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-2 patient-reg-item">
+                    <label for="pincode" class="form-label">Pin Code</label>
+                    <input type="number" class="form-control" name="pincode" id="pincode" [(ngModel)]="patientRegObj.pincode">
+                </div>
+                <div class="col-md-2 patient-reg-item">
+                    <label for="fvDate" class="form-label">First Visit Date</label>
+                    <input type="date" class="form-control" max="{{currentDate|date:'yyyy-MM-dd'}}" name="fvDate"
+                        [(ngModel)]="patientRegObj.first_visit_date" id="fvDate">
+                </div>
+                <div class="col-md-4">
+                    <div class=" patient-reg-item">
+                        <label for="guardianName" class="form-label">Guardian Name</label>
+                        <input type="text" class="form-control" name="guardianName" id="guardianName" [(ngModel)]="patientRegObj.guardian_name">
+                    </div> 
+                </div>
+                <div class="col-md-4">
                     <div class=" patient-reg-item">
                         <label for="bgroup" class="form-label">Blood group</label>
                         <input type="text" class="form-control" name="bgroup" id="bgroup" [(ngModel)]="patientRegObj.blood_group">
                     </div>
-
-
                 </div>
             </div>
+
             <div class="row">
 
                 <div class="col-md-4 patient-reg-item">
@@ -164,11 +194,6 @@
                 <div class="col-md-4 patient-reg-item">
                     <label for="attender2_contact" class="form-label">Attender2 contact</label>
                     <input type="number" class="form-control" name="attender2_contact" id="attender2_contact" [(ngModel)]="patientRegObj.attender2_contact">
-                </div>
-
-                <div class="col-md-4 patient-reg-item">
-                    <label for="pincode" class="form-label">Pin Code</label>
-                    <input type="number" class="form-control" name="pincode" id="pincode" [(ngModel)]="patientRegObj.pincode">
                 </div>
         </div>
             <button class="btn btn-primary mar20t mar10lr" (click)="goBack()">Back</button>
