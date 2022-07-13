@@ -1,12 +1,11 @@
 <div class="container mar20t">
     <h5>Lab Prescription</h5>
     
-    <div class="error-container" *ngIf="!visit_no">Please save doctor notes to saave dialysis notes</div>
+    <div class="error-container" *ngIf="!visit_no">Please save doctor notes to save lab details</div>
     <button type="button" class="btn btn-primary mar30" (click)="addRecord()">
         Add Row
     </button>
     <mat-table #table [dataSource]="dataSource">
-
         <!-- Test ID Column -->
         <ng-container matColumnDef="id">
             <mat-header-cell *matHeaderCellDef>Index</mat-header-cell>

@@ -40,7 +40,7 @@
                    <div class="row margin-20l">
                     <label [for]="param.khi_desc" class="form-label margin-20t">{{param.khi_desc}}</label>
 
-                    <input type="text"  class="form-control col-lg-6 contact-input" placeholder="Value" [id]="param.khi_code"  />
+                    <input type="text"  class="form-control col-lg-6 contact-input" [placeholder]="param.khi_desc" [id]="param.khi_code"  />
 
                     <input type="text"  class="form-control col-lg-6 contact-input margin-20l" placeholder="Notes" [id]="setNotesId(param.khi_code)"/>
                 </div>         
@@ -63,7 +63,7 @@
 
             <!-- dilaysis -->
             <mat-tab label="Dialysis">
-                <div class="error-container" *ngIf="!visit_no">Please save doctor notes to saave dialysis notes</div>
+                <div class="error-container" *ngIf="!visit_no">Please save doctor notes to save dialysis notes</div>
                 <label class="d-block">Visit#: {{currentPatientDialysisDetail.visit_no}}</label>
                 <label class="d-block">Visit Date: {{currentPatientDialysisDetail.prescription_date |date:'dd-MM-yyyy'}}</label>
                 <label for="prevDialysisHistory" class="form-label margin-20t">Previous History</label>

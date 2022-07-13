@@ -30,5 +30,5 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [disabled]="data.amt_payment === 0 || data.payment_mode === '' || showamountError || showAdvanceError" [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+  <button mat-button [disabled]="data.amt_payment === 0 || data.amt_payment === '' || data.payment_mode === '' || showamountError || showAdvanceError" [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
 </div>

@@ -159,7 +159,7 @@ export class DialogOverviewExampleDialog implements OnInit {
     this.ps.getPaymentTypes().subscribe(types => {
       console.log(types);
     })
-    this.maxAmount = this.data.net_balance;
+    this.maxAmount = this.data.net_balance;    
   }
   onNoClick(): void {
 
@@ -181,6 +181,8 @@ export class DialogOverviewExampleDialog implements OnInit {
           this.showAdvanceError = true;
           //return false;
         }
+       } else {
+        this.showAdvanceError = false;
        }
     }
     
@@ -196,25 +198,7 @@ export class DialogOverviewExampleDialog implements OnInit {
     }
   }
 
-  // checkAdvancePaymode() {
-  //   if (this.data.payment_mode && this.data.payment_mode === 'A') {
-  //     this.
-  //     this.maxAmount = this.data.advance_amount_balance;
-  //     return true;
-  //   } else {
-  //     this.maxAmount = this.data.net_balance;
-  //     return false;
-  //   }
-  // }
-
-  // setMaxAmount() {
-  //   if (this.checkAdvancePaymode()) {
-  //     return this.data.advance_amount_balance;
-  //   } else {
-  //     return this.data.net_balance;
-  //   }
-
-  // }
+ 
 
 
 }

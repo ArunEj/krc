@@ -17,6 +17,7 @@ export class ManageAppointmentComponent implements OnInit {
   patient_id: string = '';
   appoint_date: string = '';
   doctor_id:string='';
+  selectionType:string = '';
   
   constructor(public dialogRef: MatDialogRef<ManageAppointmentComponent> , @Inject(MAT_DIALOG_DATA) public data: any) { }
 
@@ -26,7 +27,9 @@ export class ManageAppointmentComponent implements OnInit {
 
   selectAptType(item: any) {
     let type = item;
+    Object.keys(this.manageAppoint).forEach(key=> this.manageAppoint[key] = false);
     this.manageAppoint[type] = true;
+
   }
 
   sendBackPayload() {

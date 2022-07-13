@@ -60,9 +60,9 @@ export class AptBookingService {
     
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    if (payload.field === 'phone_no') {
-      return this.http.get(environment.apiUrl + 'appointments/' +localStorage.getItem('branch_id') +'?'+ payload.field + '=' + payload[payload.field], { headers: headers })
-    } else
+    // if (payload.field === 'phone_no') {
+    //   return this.http.get(environment.apiUrl + 'appointments/' +localStorage.getItem('branch_id') +'?'+ payload.field + '=' + payload[payload.field], { headers: headers })
+    // } else
       return this.http.get(environment.apiUrl + 'appointments/'+localStorage.getItem('branch_id') +'?'+ payload.field + '=' + payload[payload.field], { headers: headers });
   }
 }
