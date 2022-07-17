@@ -1,0 +1,41 @@
+<h1 mat-dialog-title>Manage Appointment</h1>
+<div mat-dialog-content>
+    <mat-form-field class="" appearance="fill">
+        <mat-select placeholder="select" required (valueChange)="selectAptType($event)" [(ngModel)]="selectionType">
+            <mat-option value="patient_id"> By Patient ID </mat-option>
+            <mat-option value="phone_no"> By Phone Number </mat-option>
+            <mat-option value="appoint_date"> By Date </mat-option>
+            <mat-option value="doctor_id"> By Doctor </mat-option>
+
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field *ngIf="selectionType === 'phone_no'" appearance="fill">
+        <mat-label>Phone Number</mat-label>
+        <input required matInput type="number" [(ngModel)]="phone_no">
+    </mat-form-field>
+
+    <mat-form-field *ngIf="selectionType === 'patient_id'" appearance="fill">
+        <mat-label>Patient ID</mat-label>
+        <input required matInput type="text" [(ngModel)]="patient_id">
+    </mat-form-field>
+
+
+    <mat-form-field *ngIf="selectionType === 'doctor_id'" appearance="fill">
+        <mat-label>Doctor Name</mat-label>
+        <!-- <input required matInput type="text" [(ngModel)]="doctor_id"> -->
+        <mat-select name="patient_type" [(ngModel)]="doctor_id">
+            <mat-option *ngFor="let doctor of data" [value]="doctor.doctor_id">{{doctor.doctor_name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="selectionType === 'appoint_date'" appearance="fill">
+        <mat-label>Date of Appointment</mat-label>
+        <input required matInput type="date" [(ngModel)]="appoint_date">
+    </mat-form-field>
+
+</div>
+<div mat-dialog-actions>
+    <!-- <button mat-button (click)="onNoClick()">No Thanks</button> -->
+    <button mat-button [disabled]="!phone_no && !patient_id && !doctor_id &&!appoint_date" cdkFocusInitial
+        (click)="sendBackPayload()">Retrieve</button>
+</div>

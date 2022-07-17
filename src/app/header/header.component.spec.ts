@@ -1,21 +1,23 @@
+import { HttpClient, HttpHandler } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AppComponent } from '.././app.component';
+import { HeaderComponent } from './header.component';
 
-describe('AppComponent', () => {
+describe('HeaderComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
         RouterTestingModule
       ],
       declarations: [
-        AppComponent
+        HeaderComponent
       ],
+      providers:[HttpClient, HttpHandler]
     }).compileComponents();
   });
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
+  it('should load the header component', () => {
+    const fixture = TestBed.createComponent(HeaderComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
   });

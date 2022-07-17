@@ -3,29 +3,56 @@
     <div class="row">
         <h1>Payment</h1>
     </div>
-    
+    <div class="row">
+        <div class="container" *ngIf="patientHeader">  
+            <div class="row header-border margin-20t">
+              <div class="">
+                <label class="mar20">Patient Id: {{patientHeader?.patient_id}}</label>
+                <label class="mar20">Patient Name: {{patientHeader?.patient_name}}</label>
+                <label class="mar20">Age: {{patientHeader?.age}}</label>
+                <label class="mar20">Sex: {{patientHeader?.sex}}</label>
+                <label class="mar20">Phone: {{patientHeader?.mobile_no}}</label>
+                <label class="mar20">Patient Type: {{patientHeader?.patient_type}}</label>
+                
+                <label class="mar20">Total Invoice Amount: {{patientHeader?.net_inv_amount}}</label>
+                <label class="mar20">Total Paid: {{patientHeader?.net_inv_paid}}</label>
+                <label class="mar20">Total Balance: {{patientHeader?.net_inv_balance}}</label>
+                <label class="mar20">Advance Adjusted: {{patientHeader?.advance_amount_paid}}</label>
+                <label class="mar20">Advance Balance: {{patientHeader?.advance_amount_balance}}</label>
+              </div>
+            </div>
+    </div>
+    </div>
     <div *ngIf="billingArray?.length > 0">
-        <table class="table">
+        Invoice#: {{invoice}}
+        <table class="table mar20">
             <thead>
                 <tr>
                     <th scope="col">Serial#</th>
-                    <th scope="col">Product Type</th>
-                    <th scope="col">Net Amount</th>
+                    <!-- <th scope="col">Product Type</th> -->
+                    <th scope="col">Net Amount</th>                    
                     <th scope="col">Net Paid</th>
+                    <th scope="col">Net Balance</th>
                     <th scope="col">Payable Amount</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let item of billingArray; let index">
 
-                    <td>{{item.inv_sr_no}}</td>
-                    <td>{{item.billAlias}}</td>
-                    <td>{{item.netamount}}</td>
-                    <td>{{item.netpaid}}</td>
-                    <td><button (click)="showPayment(item)">Make Payment</button></td>
+                    <td>{{item.inv_srl_no}}</td>
+                    <!-- <td>{{item.billAlias}}</td> -->
+                    <td>{{item.net_amount}}</td> 
+                    <td>{{item.net_paid}}</td>
+                    <td>{{item.net_balance}}</td>
+                                      
+                   
+                    <td><button [disabled]="item.inv_status === 'F'" (click)="showPayment(item)">Make Payment</button></td>
                 </tr>
             </tbody>
         </table>
+    </div>
+    <div *ngIf="billingArray.length === 0">
+        No pending Invoice Payment
     </div>
     <div><button (click)="navigateToInvoice()" class="btn btn-primary mar20t">Back to Invoice
         </button></div>

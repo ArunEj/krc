@@ -3,15 +3,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PaymentService } from './payment.service';
 import { BillingService } from '../billing/billing.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Location } from '@angular/common';
 
 export interface DialogData {
   branch_id: string,
   patient_id: '',
   invoice_no: '',
   inv_sr_no: '',
-  amt_payment: '',
+  amt_payment: 0,
   payment_mode: '',
-  updated_by: ''
+  updated_by: '',
+  net_balance: 0,
+  advance_amount_balance?: 0
 }
 @Component({
   selector: 'app-payment',
@@ -19,6 +22,8 @@ export interface DialogData {
   styleUrls: ['./payment.component.scss']
 })
 export class PaymentComponent implements OnInit {
+
+  patientHeader: any;
   mobile_no: string = '';
   invoice: string = '';
   patientDetail = false;
@@ -26,37 +31,41 @@ export class PaymentComponent implements OnInit {
   invoiceArray: any = [];
   billingArray: any = [];
   paymentItem = {
+    org_id: localStorage.getItem('org_id'),
     branch_id: localStorage.getItem('branch_id'),
-    patient_id: '',
+    user_id: localStorage.getItem('user_id'),
     invoice_no: this.invoice,
-    inv_sr_no: '',
-    amt_payment: '',
+    inv_srl_no: '',
+    payment_amount: '',
     payment_mode: '',
+    payment_remark: '',
     updated_by: localStorage.getItem('user_id')
   }
   constructor(private bs: BillingService,
     public dialog: MatDialog,
     private router: Router,
     private route: ActivatedRoute,
-    private ps: PaymentService) {
+    private ps: PaymentService,
+    private _location: Location) {
 
   }
-  
-  
-  ngOnInit(): void {
-    this.route.params.subscribe(data=>{
-      this.invoice = data.item;
-      this.paymentItem.patient_id = data.patient_id;
-      this.ps.fetchItemsUnderInvoice(this.invoice).subscribe(data => {
-      if (data.length > 0) {
-        data.forEach((element: any) => {
-          this.setProductAlias(element)
-        });
-      }
 
-      this.billingArray = data;
-    });
-    })      
+
+  ngOnInit(): void {
+    this.route.params.subscribe(data => {
+      this.invoice = data.item;
+      // this.paymentItem.patient_id = data.patient_id;
+      this.ps.fetchBillingDetail(this.invoice).subscribe(data => {
+        // if (data.length > 0) {
+        //   data.forEach((element: any) => {
+        //     this.setProductAlias(element)
+        //   });
+        // }
+
+        this.billingArray = data.invoice_details;
+        this.patientHeader = JSON.parse(localStorage.getItem('header')!);
+      });
+    })
   }
 
   setProductAlias(element: any) {
@@ -75,6 +84,7 @@ export class PaymentComponent implements OnInit {
   }
   showPayment(item: any) {
     this.clearDialogFields(item);
+    item.advance_amount_balance = this.patientHeader.advance_amount_balance;
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
       width: '250px',
       data: item,
@@ -82,20 +92,22 @@ export class PaymentComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.paymentItem.amt_payment = result.amt_payment;
+        this.paymentItem.payment_amount = result.amt_payment;
         this.paymentItem.payment_mode = result.payment_mode;
-        this.paymentItem.inv_sr_no = result.inv_sr_no;
+        this.paymentItem.inv_srl_no = result.inv_srl_no;
         this.paymentItem.invoice_no = result.invoice_no;
-       // this.paymentItem.patient_id = this.bs.patient_id;
+        // this.paymentItem.patient_id = this.bs.patient_id;
         this.makePayment();
       } else {
         this.paymentItem = {
+          org_id: localStorage.getItem('org_id'),
           branch_id: localStorage.getItem('branch_id'),
-          patient_id: '',
+          user_id: localStorage.getItem('user_id'),
           invoice_no: this.invoice,
-          inv_sr_no: '',
-          amt_payment: '',
+          inv_srl_no: '',
+          payment_amount: '',
           payment_mode: '',
+          payment_remark: '',
           updated_by: localStorage.getItem('user_id')
         }
       }
@@ -104,24 +116,31 @@ export class PaymentComponent implements OnInit {
   }
   makePayment() {
 
-    console.log(this.paymentItem);
-    
+
+
     this.ps.submitPayment(this.paymentItem).subscribe(data => {
       alert('payment done');
       this.paymentItem = {
+        org_id: localStorage.getItem('org_id'),
         branch_id: localStorage.getItem('branch_id'),
-        patient_id: '',
+        user_id: localStorage.getItem('user_id'),
         invoice_no: this.invoice,
-        inv_sr_no: '',
-        amt_payment: '',
+        inv_srl_no: '',
+        payment_amount: '',
         payment_mode: '',
+        payment_remark: '',
         updated_by: localStorage.getItem('user_id')
       }
-      this.router.navigate(['invoice']);
+
+      this.ps.fetchBillingDetail(this.invoice).subscribe(data => {
+
+        this.billingArray = data.invoice_details;
+      });
     })
   }
-  navigateToInvoice(){
-    this.router.navigate(['invoice']);
+  navigateToInvoice() {
+    this.router.navigate(['invoice', { patient_id: this.patientHeader.patient_id }]);
+    //this._location.back();
   }
 }
 
@@ -129,13 +148,57 @@ export class PaymentComponent implements OnInit {
   selector: 'dialog-overview-example-dialog',
   templateUrl: 'dialog-overview-example-dialog.html',
 })
-export class DialogOverviewExampleDialog {
+export class DialogOverviewExampleDialog implements OnInit {
+
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
+    private ps: PaymentService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
   ) { }
-
+  ngOnInit() {
+    this.ps.getPaymentTypes().subscribe(types => {
+      console.log(types);
+    })
+    this.maxAmount = this.data.net_balance;    
+  }
   onNoClick(): void {
+
     this.dialogRef.close();
   }
+  showAdvanceError = false;
+  showamountError = false;
+  isAdvancePayment = false
+  maxAmount: any;
+
+  changePaymentMode() {
+    let amtError = this.validateAmount();
+    if (!amtError) {
+      if (this.data.payment_mode && this.data.payment_mode === 'A') {
+        if (this.data.advance_amount_balance && this.data.amt_payment <= this.data.advance_amount_balance) {
+          this.showAdvanceError = false;
+          // return true;
+        } else {
+          this.showAdvanceError = true;
+          //return false;
+        }
+       } else {
+        this.showAdvanceError = false;
+       }
+    }
+    
+  }
+
+  validateAmount() {
+    if (this.data.amt_payment <= this.data.net_balance) {
+      this.showamountError = false;
+      return false;
+    } else {
+      this.showamountError = true;
+      return true;
+    }
+  }
+
+ 
+
+
 }

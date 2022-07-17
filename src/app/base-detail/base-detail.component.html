@@ -1,0 +1,5 @@
+<div class="row" *ngIf="userData">
+    <h3>Logged by User: {{userData.user_name}}</h3>
+    <div class="col-lg-6">Branch - {{userData.branch_id}} - {{userData.branch_name}}</div>
+    <div class="col-lg-6 text-end">{{today | date:'medium'}}</div>
+</div>

@@ -1,0 +1,45 @@
+.med-table{
+    width:100%
+}
+
+.mat-column-id{
+    flex: 0 0 10%;
+}
+.mat-column-product_name{
+    flex: 0 0 10%;
+}
+// .mat-column-morning{
+//     flex: 0 0 10%;
+// }
+// .mat-column-morning_qty{
+//     flex: 0 0 10%;
+// }
+// .mat-column-remarks{
+//     flex: 0 0 10%;
+// }
+// .mat-column-action{
+//     flex: 0 0 10%;
+// }
+
+
+table {
+    width: 100%;
+  }
+  
+ .w-5{
+     width:5%;
+     padding:0;
+ }
+ .w-10{
+    width: 10%;
+    padding:0;
+}
+.no-border{
+    border:none;
+}
+
+.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}

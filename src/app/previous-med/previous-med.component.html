@@ -1,0 +1,92 @@
+<div class="container mar20t pad0">
+    <ul class="pagination">
+        <li class="page-item mx-2" [ngClass]="{'disabled': prevCounter === 1 }">
+            <a class="page-link" (click)="prevItem()">Previous</a>
+        </li>
+        <li class="mx-2">Visit#:<strong>{{prevCounter}}</strong></li>
+        <li class="page-item mx-2"
+            [ngClass]="{'disabled':disableNext }">
+            <a class="page-link" (click)="nextItem()">Next</a>
+        </li>
+    </ul>
+    <div class="table-responsive-lg col-lg-12" style="margin-top:20px">
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th rowspan="2">#</th>
+                    <th rowspan="2">Product Name</th>
+                    <th colspan="2">Morning</th>
+                    <th colspan="2">Noon</th>
+                    <th colspan="2">Evening</th>
+                    <th colspan="2">Night</th>
+                    <th colspan="3">Adhoc</th>
+                    <th rowspan="2">Days</th>
+                    <th rowspan="2">Remarks</th>
+
+                </tr>
+
+                <tr>
+                    <th>BF</th>
+                    <th>AF</th>
+                    <th>BF</th>
+                    <th>AF</th>
+                    <th>BF</th>
+                    <th>AF</th>
+                    <th>BF</th>
+                    <th>AF</th>
+                    <th>Notes</th>
+                    <th>BF</th>
+                    <th>AF</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of currentPharmaDetail">
+                    <td scope="row">{{item.id}}</td>
+                    <td>
+                        <select class="form-select scrollable-menu" aria-label="Default select example"
+                            [(ngModel)]="item.medicine_id" disabled>
+                           
+                            <option *ngFor="let product of pharmaList" [value]="product.product_id">
+                                {{product.product_name}}</option>
+                        </select>
+                    </td>
+
+                    <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99"
+                            [(ngModel)]="item.morning_bf" readonly></td>
+                    <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99"
+                            [(ngModel)]="item.morning_af" readonly></td>
+
+                    <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99"
+                            [(ngModel)]="item.noon_bf" readonly></td>
+                    <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99"
+                            [(ngModel)]="item.noon_af" readonly></td>
+
+                    <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99"
+                            [(ngModel)]="item.evening_bf" readonly></td>
+                    <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99"
+                            [(ngModel)]="item.evening_af" readonly></td>
+
+                    <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99"
+                            [(ngModel)]="item.night_bf" readonly></td>
+                    <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99"
+                            [(ngModel)]="item.night_af" readonly></td>
+
+                    <td class=""><input type="text" class="form-control no-border" [(ngModel)]="item.other_time_desc" readonly>
+                    </td>
+                    <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99"
+                            [(ngModel)]="item.other_time_bf" readonly></td>
+                    <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99"
+                            [(ngModel)]="item.other_time_af" readonly></td>
+
+                    <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99"
+                            [(ngModel)]="item.no_of_days" readonly></td>
+                    <td><input type="text" class="form-control no-border" [(ngModel)]="item.remarks" readonly></td>
+
+                    <!-- <td><mat-icon title="delete" class="delete-icon" aria-hidden="false" aria-label="Example home icon" (click)="delete_item(item)">delete</mat-icon> </td> -->
+                </tr>
+
+            </tbody>
+        </table>
+        <div *ngIf="tableData && tableData.length === 0">No Data Found</div>
+        
+    </div>
+</div>

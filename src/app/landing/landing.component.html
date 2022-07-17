@@ -1,32 +1,46 @@
 <app-header></app-header>
 <div class="container">
-    <div class="row">
-        <h1>Welcome {{userData.user_id}}</h1>
-        <div>Branch - {{userData.branch_id}}</div>
+  <app-base-detail></app-base-detail>
+  <div class="row margin10t">
+    <div>
+      <button  (click)="managePatient()"
+      class="btn btn-primary mar20t manage-button">Manage Patient</button>
     </div>
-    <div class="row">
-        <h2>Appointments Listing</h2>
-        <table class="table">
-            <thead>
-              <tr>
-               
-                <th scope="col">Patient ID</th>
-                <th scope="col">Patient Name</th>
-                <th scope="col">Mobile</th>
-                <th scope="col">Date of Appointment</th>
-              </tr>
-            </thead>
-            <tbody *ngIf="aptData?.length > 0">
-              <tr *ngFor="let apt of aptData" >                
-                
-                <td>{{apt.patient_id}}</td>
-                <td>{{apt.patient_name}}</td>
-                <td>{{apt.mobile_no}}</td>
-                <td>{{apt.doa}}</td>
-              </tr>
-              
-            </tbody>
-            <span *ngIf="aptData?.length === 0">No records</span>
-          </table>
     </div>
+    
+  <div class="row margin10t">
+    <h2>Appointments</h2>
+    <button  (click)="openAppointmentPopup()"
+      class="btn btn-primary mar20t manage-appoint">Manage Appointment</button>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Patient ID</th>
+          <th scope="col">Patient Name</th>
+          <th scope="col">Mobile</th>
+          <th scope="col">Date of Appointment</th>
+          <th scope="col">Appointment No</th>
+          <th scope="col">Doctor Name</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody *ngIf="aptData?.length > 0">
+        <tr *ngFor="let apt of aptData">
+
+          <td>{{apt.patient_id}}</td>
+          <td>{{apt.patient_name}}</td>
+          <td>{{apt.phone_no}}</td>
+          <td>{{apt.appoint_date}}</td>
+          <td>{{apt.appoint_no}}</td>
+          <td>{{apt.doctor_name}}</td>
+          <td>
+            <mat-icon title="edit" class="edit-icon"aria-hidden="false" aria-label="Example home icon" (click)="edit_apt(apt)">edit</mat-icon>
+            <!-- <mat-icon title="delete" class="delete-icon" aria-hidden="false" aria-label="Example home icon" (click)="delete_apt(apt)">delete</mat-icon> -->
+          </td>
+        </tr>
+
+      </tbody>
+      <span *ngIf="aptData?.length === 0">No records</span>
+    </table>
+  </div>
 </div>

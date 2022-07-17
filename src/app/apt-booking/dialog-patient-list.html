@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Patient Select</h1>
+<div mat-dialog-content>
+  <label id="patient-radio-group-label">Pick Patient from list</label>
+  <mat-radio-group aria-labelledby="patient-radio-group-label" class="patient-radio-group" [(ngModel)]="selectedPatient">
+    <mat-radio-button class="patient-radio-button" *ngFor="let patient of patientList"  [value]="patient">
+     Name: {{patient.patient_name}}    Id: {{ patient.patient_id}}
+    </mat-radio-button>
+  </mat-radio-group>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [disabled]="!selectedPatient" [mat-dialog-close]="selectedPatient" cdkFocusInitial>Ok</button>
+</div>

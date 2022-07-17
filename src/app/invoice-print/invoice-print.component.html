@@ -1,0 +1,220 @@
+<app-header></app-header>
+<div class="container" *ngIf="!isShowPrint">
+    <div class="row" *ngIf="!patientInvoiceDetail">
+        <h3>Patient Details</h3>
+        <div class="patient-details">
+            <label for="contact" class="form-label">Contact</label>
+            <input type="text" class="form-control contact-input" required name="contact" [(ngModel)]="mobile_no"
+                id="contact">
+            <br>
+            <button (click)="fetchUserInvoices()" [disabled]="!mobile_no" class="btn btn-primary mar20t">fetch
+                Invoices</button>
+        </div>
+    </div>
+    <div *ngIf="patientHeader" class="row header-border margin-20t">
+        <div class="">
+            <label class="mar15">Patient Id: {{patientHeader.patient_id}}</label>
+            <label class="mar15">Patient Name: {{patientHeader.patient_name}}</label>
+            <label class="mar15">Age: {{patientHeader.age}}</label>
+            <label class="mar15">Sex: {{patientHeader.sex}}</label>
+            <label class="mar15">Phone: {{patientHeader.mobile_no}}</label>
+            <label class="mar15">Patient Type: {{patientHeader.patient_type}}</label><br>
+            <label class="mar15">Total Invoice Amount: {{patientHeader.net_inv_amount}}</label>
+            <label class="mar15">Total Paid: {{patientHeader.net_inv_paid}}</label>
+            <label class="mar15">Total Balance: {{patientHeader.net_inv_balance}}</label>
+            <label class="mar15">Advance Adjusted: {{patientHeader.advance_amount_paid}}</label>
+            <label class="mar15">Advance Balance: {{patientHeader.advance_amount_balance}}</label>
+        </div>
+    </div>
+    <div class="d-flex-drop" *ngIf="patientInvoiceDetail">
+        <!-- <div class="col-8"> -->
+            <div class="col-">
+                <label class="mar20">Select Invoice Status Type<span class="txt-danger">*</span> :</label>
+            </div>
+            <div class="col-4">
+                <mat-form-field  class="mar20lr" appearance="fill">
+                    <mat-select placeholder="select" (valueChange)="fetchInvoiceStatus($event)">        
+                      <mat-option *ngFor="let ref of refList" [value]="ref.ref_code">
+                         {{ref.ref_desc}} 
+                      </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div> 
+        <!-- </div> -->
+    </div>
+    <div *ngIf="patientInvoiceDetail && invoiceStatusDetails?.length > 0" class="margin-20t">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Invoice#</th>
+                    <th scope="col">Net Amount</th>
+                    <th scope="col">Net Paid</th>
+                    <th scope="col">Net Balance</th>
+                    <th scope="col">Invoice Date</th>
+                    <th scope="col">Status</th>
+                   <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of invoiceStatusDetails; let index">
+
+                    <td *ngIf="!billing">{{item.invoice_no}}</td>
+                    <!-- [routerLink]="['/invoice', item.invoice_no, {invoice_no:item.invoice_no}]" -->
+                    
+                    <td>{{item.net_inv_amount}}</td>
+                    <td>{{item.net_inv_paid}}</td>
+                    <td>{{item.net_inv_balance}}</td>
+                    <td>{{item.updated_date | date: 'dd/MM/yyyy'}}</td>
+                    <td [ngClass]="item.inv_status == 'F' ? 'txt-success' : 'txt-danger'">{{item.inv_status}}</td>
+                   <td>
+                    <mat-icon class="print-icon" (click)="print(item)">print</mat-icon>
+                    </td>
+                    <!-- <mat-icon title="delete" class="cancel-icon" aria-hidden="false" aria-label="Example home icon" (click)="cancelInvoice(item)">delete</mat-icon> -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<ng-container *ngIf="isShowPrint">
+    <div id="print-section">
+        <div class="invoice-container-txt" *ngIf="invoiceData">
+            <div class="d-flex">
+                <div class="invoice-address">
+                  <div>{{invoiceData.branch_name}}</div>
+                  <div>{{invoiceData.branch_address}}</div>
+                  <div class="row">
+                    <div class="col-6">Phone: {{invoiceData.branch_contact_num}}</div>
+                    <div class="col-6">Mobile + WhatsApp: {{invoiceData.branch_cont_pers_phone}}</div>
+                  </div>
+                </div>
+            </div>
+            <h6 class="b-1 d-flex">INVOICE CUM RECEIPT</h6>
+            <div class="row">
+                <div class="col-4">Id : {{invoiceData.patient_id}}</div>
+                <div class="col-4">Name : {{invoiceData.patient_name}}</div>
+                <div class="col-2">Sex : {{invoiceData.sex}}</div>
+                <div class="col-2">Age : {{invoiceData.age}}</div>
+            </div>
+            <div class="col-md-12">Ref : Dr.R.Vijayakumar/ Dr.V.Abhinesh</div>
+            <div class="d-flex b-1">Inv No : {{invoiceNumber}}     Inv Dt : {{invoiceDate | date: 'dd-MMM-y'}}									
+            </div>
+            <table>
+                <tr>
+                  <th class="align-item">Sl No</th>
+                  <th class="align-item">Description</th>
+                  <th class="align-item">Rate</th>
+                  <th class="align-item">Qty</th>
+                  <th class="align-item">Amount</th>
+                  <th class="align-item">Discount</th>
+                  <th class="align-item">Net amount</th>
+                  <th class="align-item">Received</th>
+                  <th class="align-item">mode</th>
+                  <th class="align-item">Payment Date</th>
+                  <th class="align-item">Payment Amount</th>
+                  <th class="align-item">Balance</th>
+                </tr>
+                <tr *ngFor="let data of invoiceData.invoice_lists; let i=index">
+                  <td class="align-item">{{i + 1}}</td>
+                  <td class="align-item"> {{data.product_name}}</td>
+                  <td class="align-item">{{data.product_cost}}</td>
+                  <td class="align-item">{{data.product_qty}}</td>
+                  <td class="align-item">{{data.gross_inv_amount}}</td>
+                  <td class="align-item">{{data.gross_discount}}</td>
+                  <td class="align-item">{{data.net_amount}}</td>
+                  <td class="align-item"> {{data.net_paid}}</td>
+                  <td class="align-item">{{data.payment_mode}}</td>
+                  <td class="align-item">{{data.payment_date | date: 'dd-MMM-y'}}</td>
+                  <td class="align-item">{{data.payment_amount}}</td>
+                  <td class="align-item">{{data.net_balance}}</td>
+                </tr>
+                <tr>
+                    <td colspan="12">S - Cash,  C - Card, Q - Cheque , U - UPI, A - Against Advance</td>
+                </tr>
+              </table>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="">User Name: {{createdBy}}</div>
+                <div class="">Time: {{today | date: 'shortTime'}}</div>
+            </div>
+            <div class="col-6 align-left">
+                <div class="">For {{invoiceData.branch_name}}</div>
+                <div class="space"></div>
+                 <div class="">Authorised Signature</div>
+            </div>
+        </div>
+        <div class="pagebreak"> </div>
+        <ng-container *ngIf="isShowEstimateData">
+            <div class="invoice-container-txt" *ngIf="invoiceData">
+                <div class="d-flex">
+                    <div class="invoice-address">
+                      <div>{{invoiceData.branch_name}}</div>
+                      <div>{{invoiceData.branch_address}}</div>
+                      <div class="row">
+                        <div class="col-6">Phone: {{invoiceData.branch_contact_num}}</div>
+                        <div class="col-6">Mobile + WhatsApp: {{invoiceData.branch_cont_pers_phone}}</div>
+                      </div>
+                    </div>
+                </div>
+                <h6 class="b-1 d-flex">ESTIMATE</h6>
+                <div class="row">
+                    <div class="col-4">Id : {{invoiceData.patient_id}}</div>
+                    <div class="col-4">Name : {{invoiceData.patient_name}}</div>
+                    <div class="col-2">Sex : {{invoiceData.sex}}</div>
+                    <div class="col-2">Age : {{invoiceData.age}}</div>
+                </div>
+                <div class="col-md-12">Ref : Dr.R.Vijayakumar/ Dr.V.Abhinesh</div>
+                <div class="d-flex b-1">Inv No : {{invoiceNumber}}     Inv Dt : {{invoiceDate | date: 'dd-MMM-y'}}									
+                </div>
+                <table>
+                    <tr>
+                        <th class="align-item">Sl No</th>
+                        <th class="align-item">Description</th>
+                        <th class="align-item">Rate</th>
+                        <th class="align-item">Qty</th>
+                        <th class="align-item">Amount</th>
+                        <th class="align-item">Discount</th>
+                        <th class="align-item">Net amount</th>
+                        <th class="align-item">Received</th>
+                        <th class="align-item">mode</th>
+                        <th class="align-item">Payment Date</th>
+                        <th class="align-item">Payment Amount</th>
+                        <th class="align-item">Balance</th>
+                    </tr>
+                    <tr *ngFor="let data of invoiceData.estimate_lists; let i=index">
+                      <td class="align-item">{{i + 1}}</td>
+                      <td class="align-item"> {{data.product_name}}</td>
+                      <td class="align-item">{{data.product_cost}}</td>
+                      <td class="align-item">{{data.product_qty}}</td>
+                      <td class="align-item">{{data.gross_inv_amount}}</td>
+                      <td class="align-item">{{data.gross_discount}}</td>
+                      <td class="align-item">{{data.net_amount}}</td>
+                      <td class="align-item"> {{data.net_paid}}</td>
+                      <td class="align-item">{{data.payment_mode}}</td>
+                      <td class="align-item">{{data.payment_date | date: 'd-MMM-y'}}</td>
+                      <td class="align-item">{{data.payment_amount}}</td>
+                      <td class="align-item">{{data.net_balance}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="12">S - Cash,  C - Card, Q - Cheque , U - UPI, A - Against Advance</td>
+                    </tr>
+                  </table>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="">User Name: {{createdBy}}</div>
+                    <div class="">Time: {{today | date: 'shortTime'}}</div>
+                </div>
+                <div class="col-6 align-left">
+                    <div class=""><span>For</span> {{invoiceData.branch_name}}</div>
+                    <div class="space"></div>
+                     <div class="">Authorised Signature</div>
+                </div>
+            </div> 
+        </ng-container>
+    </div>
+    <div class="d-flex">
+        <button type="button" class="btn btn-primary mar20t" [useExistingCss]="true" id="print-to-pdf" printSectionId="print-section"  ngxPrint >Print to Pdf</button>
+    </div>
+</ng-container>

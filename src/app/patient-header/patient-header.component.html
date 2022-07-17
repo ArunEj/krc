@@ -1,0 +1,93 @@
+<div class="row" *ngIf="!headerDetail">
+  <h3>Patient Details</h3>
+  <div class="patient-details">
+
+    <label class="form-label">Select Search Type</label>
+    <select class="form-control contact-input margin-20b" name="patient_type" [(ngModel)]="searchType">
+      <option value="patient_name">Patient Name</option>
+      <option value="phone_no">Phone Number</option>
+    </select>
+
+    <div *ngIf="searchType === 'phone_no'">
+      <label for="contact" class="form-label">Contact</label>
+      <input type="text" class="form-control contact-input" required name="contact" [(ngModel)]="mobile_no"
+        id="contact">
+      <br>
+      <button (click)="fetchUser()" [disabled]="!mobile_no" class="btn btn-primary mar20t">fetch
+        contact details</button>
+    </div>
+
+
+    <div *ngIf="searchType === 'patient_name'">
+      <label for="contact" class="form-label">Patient Name</label>
+      <input type="text" class="form-control contact-input" required name="contact" [(ngModel)]="patient_name"
+        id="contact">
+      <br>
+      <button (click)="fetchUserByName()" [disabled]="!patient_name" class="btn btn-primary mar20t margin-20b">fetch
+        contact details</button>
+    </div>
+
+  </div>
+</div>
+<div class="container" *ngIf="headerDetail">
+  <div class="row header-border margin-20t">
+    <div class="">
+      <label class="mar15">Patient Id: {{patientHeader?.patient_id}}</label>
+      <label class="mar15">Patient Name: {{patientHeader?.patient_name}}</label>
+      <label class="mar15">Age: {{patientHeader?.age}}</label>
+      <label class="mar15">Sex: {{patientHeader?.sex}}</label>
+      <label class="mar15">Phone: {{patientHeader?.mobile_no}}</label>
+      <label class="mar15">Patient Type: {{patientHeader?.patient_type_name}}</label>
+      <br>
+      <label class="mar15">Total Invoice Amount: {{patientHeader?.net_inv_amount}}</label>
+      <label class="mar15">Total Paid: {{patientHeader?.net_inv_paid}}</label>
+      <label class="mar15">Total Balance: {{patientHeader?.net_inv_balance}}</label>
+      <label class="mar15">Advance Adjusted: {{patientHeader?.advance_amount_paid}}</label>
+      <label class="mar15">Advance Balance: {{patientHeader?.advance_amount_balance}}</label>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!headerDetail && patientNameList && patientNameList.length>0">  
+  <mat-table #table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="radio">
+      <mat-header-cell *matHeaderCellDef ></mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <mat-radio-group [(ngModel)]="selectedPerson" (change)="fetchUserDetail(selectedPerson)"> 
+          <mat-radio-button [value]="row"></mat-radio-button>
+        </mat-radio-group>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="patient_name">
+      <mat-header-cell *matHeaderCellDef>patient Name</mat-header-cell>
+      <mat-cell *matCellDef="let element;let i = index;"> {{element.patient_name}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="father_name">
+      <mat-header-cell *matHeaderCellDef>Father's Name</mat-header-cell>
+      <mat-cell *matCellDef="let element;let i = index;"> {{element.father_name}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="mobile_no">
+      <mat-header-cell *matHeaderCellDef>Phone Number</mat-header-cell>
+      <mat-cell *matCellDef="let element;let i = index;"> {{element.mobile_no}} </mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="age">
+      <mat-header-cell *matHeaderCellDef>Age</mat-header-cell>
+      <mat-cell *matCellDef="let element;let i = index;"> {{element.age}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="dob">
+      <mat-header-cell *matHeaderCellDef>DOB</mat-header-cell>
+      <mat-cell *matCellDef="let element;let i = index;"> {{element.dob | date: 'dd/MM/yyyy'}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="sex">
+      <mat-header-cell *matHeaderCellDef>Sex</mat-header-cell>
+      <mat-cell *matCellDef="let element;let i = index;"> {{element.sex}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="patient_type">
+      <mat-header-cell *matHeaderCellDef>Patient Type</mat-header-cell>
+      <mat-cell *matCellDef="let element;let i = index;"> {{element.patient_type}} </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>

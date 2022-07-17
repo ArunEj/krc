@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AuthService } from '../services/auth.service';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,11 +13,14 @@ export class LoginService {
   userData: any;
   userDataSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
-  constructor(private authService: AuthService,
-    private route: Router, private http: HttpClient) { }
+  constructor(
+     private http: HttpClient) { }
 
-  login(loginData: any) {
-    return this.http.post('http://www.kkkrchennai.com/krc/login.php', { user_id: loginData.userId, pwd: loginData.pwd })
+  login(loginData: any): Observable<any> {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(environment.apiUrl+'login',
+      { user: { user_id: loginData.userId, pwd: loginData.pwd } }, { headers: headers })
   }
 
 
