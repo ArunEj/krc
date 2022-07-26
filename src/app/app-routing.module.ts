@@ -14,6 +14,7 @@ import { InvoicePrintComponent } from './invoice-print/invoice-print.component';
 import { ManagePatientComponent } from './manage-patient/manage-patient.component';
 import { PatientwiseReportComponent } from './patientwise-report/patientwise-report.component';
 import { CollectionwiseReportComponent } from './collectionwise-report/collectionwise-report.component';
+import { OutstantingInvwiseComponent } from './outstanting-invwise/outstanting-invwise.component';
 
 const routes: Routes = [
   {
@@ -72,6 +73,10 @@ const routes: Routes = [
   {
     path: 'collectionwise-report',
     component: CollectionwiseReportComponent
+  },
+  {
+    path: 'outstanding-invwise-report',
+    component: OutstantingInvwiseComponent
   }
 
 ];

@@ -34,6 +34,7 @@ import { BaseDetailComponent } from './base-detail/base-detail.component';
 import { ManagePatientComponent } from './manage-patient/manage-patient.component';
 import {PatientwiseReportComponent} from './patientwise-report/patientwise-report.component';
 import { CollectionwiseReportComponent } from './collectionwise-report/collectionwise-report.component';
+import { OutstantingInvwiseComponent } from './outstanting-invwise/outstanting-invwise.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { CollectionwiseReportComponent } from './collectionwise-report/collectio
     BaseDetailComponent,
     ManagePatientComponent,
     PatientwiseReportComponent,
-    CollectionwiseReportComponent
+    CollectionwiseReportComponent,
+    OutstantingInvwiseComponent
   ],
   imports: [
     BrowserModule,
