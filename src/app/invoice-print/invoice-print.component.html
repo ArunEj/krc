@@ -1,7 +1,8 @@
 <app-header></app-header>
 <div class="container" *ngIf="!isShowPrint">
     <div class="row" *ngIf="!patientInvoiceDetail">
-        <h3>Patient Details</h3>
+        <app-patient-header (outputPatientHeader)="patientHeader($event)"></app-patient-header>
+        <!-- <h3>Patient Details</h3>
         <div class="patient-details">
             <label for="contact" class="form-label">Contact</label>
             <input type="text" class="form-control contact-input" required name="contact" [(ngModel)]="mobile_no"
@@ -9,21 +10,21 @@
             <br>
             <button (click)="fetchUserInvoices()" [disabled]="!mobile_no" class="btn btn-primary mar20t">fetch
                 Invoices</button>
-        </div>
+        </div> -->
     </div>
-    <div *ngIf="patientHeader" class="row header-border margin-20t">
+    <div *ngIf="patientHeaderData" class="row header-border margin-20t">
         <div class="">
-            <label class="mar15">Patient Id: {{patientHeader.patient_id}}</label>
-            <label class="mar15">Patient Name: {{patientHeader.patient_name}}</label>
-            <label class="mar15">Age: {{patientHeader.age}}</label>
-            <label class="mar15">Sex: {{patientHeader.sex}}</label>
-            <label class="mar15">Phone: {{patientHeader.mobile_no}}</label>
-            <label class="mar15">Patient Type: {{patientHeader.patient_type}}</label><br>
-            <label class="mar15">Total Invoice Amount: {{patientHeader.net_inv_amount}}</label>
-            <label class="mar15">Total Paid: {{patientHeader.net_inv_paid}}</label>
-            <label class="mar15">Total Balance: {{patientHeader.net_inv_balance}}</label>
-            <label class="mar15">Advance Adjusted: {{patientHeader.advance_amount_paid}}</label>
-            <label class="mar15">Advance Balance: {{patientHeader.advance_amount_balance}}</label>
+            <label class="mar15">Patient Id: {{patientHeaderData.patient_id}}</label>
+            <label class="mar15">Patient Name: {{patientHeaderData.patient_name}}</label>
+            <label class="mar15">Age: {{patientHeaderData.age}}</label>
+            <label class="mar15">Sex: {{patientHeaderData.sex}}</label>
+            <label class="mar15">Phone: {{patientHeaderData.mobile_no}}</label>
+            <label class="mar15">Patient Type: {{patientHeaderData.patient_type}}</label><br>
+            <label class="mar15">Total Invoice Amount: {{patientHeaderData.net_inv_amount}}</label>
+            <label class="mar15">Total Paid: {{patientHeaderData.net_inv_paid}}</label>
+            <label class="mar15">Total Balance: {{patientHeaderData.net_inv_balance}}</label>
+            <label class="mar15">Advance Adjusted: {{patientHeaderData.advance_amount_paid}}</label>
+            <label class="mar15">Advance Balance: {{patientHeaderData.advance_amount_balance}}</label>
         </div>
     </div>
     <div class="d-flex-drop" *ngIf="patientInvoiceDetail">

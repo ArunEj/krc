@@ -32,6 +32,7 @@ import { InvoicePrintComponent } from './invoice-print/invoice-print.component';
 import { PreviousMedComponent } from './previous-med/previous-med.component';
 import { BaseDetailComponent } from './base-detail/base-detail.component';
 import { ManagePatientComponent } from './manage-patient/manage-patient.component';
+import { InsuranceComponent } from './insurance/insurance.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +60,8 @@ import { ManagePatientComponent } from './manage-patient/manage-patient.componen
     InvoicePrintComponent,
     PreviousMedComponent,
     BaseDetailComponent,
-    ManagePatientComponent
+    ManagePatientComponent,
+    InsuranceComponent
   ],
   imports: [
     BrowserModule,

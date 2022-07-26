@@ -12,6 +12,7 @@ import { InvoiceComponent } from './invoice/invoice.component';
 import { AdvancePaymentComponent } from './advance-payment/advance-payment.component';
 import { InvoicePrintComponent } from './invoice-print/invoice-print.component';
 import { ManagePatientComponent } from './manage-patient/manage-patient.component';
+import { InsuranceComponent } from './insurance/insurance.component';
 
 const routes: Routes = [
   {
@@ -62,6 +63,10 @@ const routes: Routes = [
   {
     path: 'manage-patient',
     component: ManagePatientComponent
+  },
+  {
+    path: 'insurance',
+    component: InsuranceComponent
   }
 
 ];
