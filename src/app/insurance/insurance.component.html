@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div class="container fs-14" *ngIf="!isShowPrint">
         <div class="row" *ngIf="!patientInvoiceDetail">
-            <h3>Patient Details</h3>
+            <div>Patient Details</div>
             <div class="patient-details">
                 <label for="contact" class="form-label">Contact</label>
                 <input type="text" class="form-control contact-input" required name="contact" [(ngModel)]="mobile_no"
@@ -52,7 +52,7 @@
         </div>
         <ng-container  *ngIf="isShowPatientHeader">
             <form [formGroup]="insuranceform">
-                <div class="row header-border margin-10t">
+                <div class="row card margin-10t">
                     <div class="col-5 form-group">
                         <label for="doctor_id" class="">Doctor ID<span class="txt-danger">*</span> :</label>
                         <select class="form-control" name="doctor_id"  formControlName="doctor_id">
@@ -108,8 +108,8 @@
         <!-- //multiple details -->
         <ng-container  *ngIf="isShowPatientInputForm">
             <div class="d-flex-j">
-                <form class="col-md-5" [formGroup]="patientInputForm">
-                    <div class="col-12 header-border margin-10t">
+                <form class="col-md-6" [formGroup]="patientInputForm">
+                    <div class="col-12 card-ins margin-10t">
                         <div class="row">
                             <div class="col-6 form-group">
                                 <label class="">Dialysis Date :</label>
@@ -127,19 +127,19 @@
                             <div class="col-6 form-group">
                                 <label class="">HD STARTING TIME :</label>
                                 <input type="text" class="form-control fs-12"  formControlName="hd_start_time"  name="hd_start_time"
-                                id="hd_start_time" [(ngModel)]="currentPatientDetail.hd_start_time" [attr.disabled]="insuranceform.invalid ? true : null">
+                                id="hd_start_time" [(ngModel)]="currentPatientDetail && currentPatientDetail.hd_start_time" [attr.disabled]="insuranceform.invalid ? true : null">
                             </div>
                             <div class="col-6 form-group">
                                 <label class="">HD ENDING TIME :</label>
                                 <input type="text" class="form-control fs-12" formControlName="hd_end_time"  name="hd_end_time"
                                 (change)="getEndTime()"
-                                id="hd_end_time" [(ngModel)]="currentPatientDetail.hd_end_time" [attr.disabled]="insuranceform.invalid ? true : null">
+                                id="hd_end_time" [(ngModel)]="currentPatientDetail && currentPatientDetail.hd_end_time" [attr.disabled]="insuranceform.invalid ? true : null">
                             </div>
                         </div>
                         <div class="col-6 form-group">
                             <label for="history" class="">DURATION :</label>
                             <input type="text" class="form-control fs-12" formControlName="hd_duration"  name="hd_duration"
-                            id="hd_duration" [(ngModel)]="currentPatientDetail.hd_duration" [attr.disabled]="insuranceform.invalid ? true : null">
+                            id="hd_duration" [(ngModel)]="currentPatientDetail && currentPatientDetail.hd_duration" [attr.disabled]="insuranceform.invalid ? true : null">
                         </div>
                         <div class="d-flex-j form-group">
                              <div class="col-md-6">
@@ -147,25 +147,25 @@
                                 <div>
                                     <mat-form-field class="example-full-width w-90 fs-12" appearance="fill">
                                         <mat-label>WT</mat-label>
-                                        <input matInput placeholder="Pre WT" value="" formControlName="pre_wt" [(ngModel)]="currentPatientDetail.pre_wt" [readonly]="insuranceform.invalid ? true : null">
+                                        <input matInput placeholder="Pre WT" value="" formControlName="pre_wt" [(ngModel)]="currentPatientDetail && currentPatientDetail.pre_wt" [readonly]="insuranceform.invalid ? true : null">
                                     </mat-form-field>
                                 </div>
                                 <div>
                                     <mat-form-field class="example-full-width w-90 fs-12" appearance="fill">
                                         <mat-label>BP</mat-label>
-                                        <input matInput placeholder="Pre BT" value="" formControlName="pre_bp" [(ngModel)]="currentPatientDetail.pre_bp" [readonly]="insuranceform.invalid ? true : null">
+                                        <input matInput placeholder="Pre BT" value="" formControlName="pre_bp" [(ngModel)]="currentPatientDetail && currentPatientDetail.pre_bp" [readonly]="insuranceform.invalid ? true : null">
                                     </mat-form-field>
                                 </div>
                                 <div>
                                     <mat-form-field class="example-full-width w-90 fs-12" appearance="fill">
                                         <mat-label>PULSE</mat-label>
-                                        <input matInput placeholder="Pre pulse" value="" formControlName="pre_pulse" [(ngModel)]="currentPatientDetail.pre_pulse" [readonly]="insuranceform.invalid ? true : null">
+                                        <input matInput placeholder="Pre pulse" value="" formControlName="pre_pulse" [(ngModel)]="currentPatientDetail && currentPatientDetail.pre_pulse" [readonly]="insuranceform.invalid ? true : null">
                                     </mat-form-field>
                                 </div>
                                 <div>
                                     <mat-form-field class="example-full-width w-90 fs-12" appearance="fill">
                                         <mat-label>TEMP</mat-label>
-                                        <input matInput placeholder="Pre TEMP" value="" formControlName="pre_temp" [(ngModel)]="currentPatientDetail.pre_temp" [readonly]="insuranceform.invalid ? true : null">
+                                        <input matInput placeholder="Pre TEMP" value="" formControlName="pre_temp" [(ngModel)]="currentPatientDetail && currentPatientDetail.pre_temp" [readonly]="insuranceform.invalid ? true : null">
                                     </mat-form-field>
                                 </div>
                              </div>
@@ -174,25 +174,25 @@
                                 <div>
                                     <mat-form-field class="example-full-width w-90 fs-12" appearance="fill">
                                         <mat-label>WT</mat-label>
-                                        <input matInput placeholder="post WT" value="" formControlName="post_wt" [(ngModel)]="currentPatientDetail.post_wt" [readonly]="insuranceform.invalid ? true : null">
+                                        <input matInput placeholder="post WT" value="" formControlName="post_wt" [(ngModel)]="currentPatientDetail && currentPatientDetail.post_wt" [readonly]="insuranceform.invalid ? true : null">
                                     </mat-form-field>
                                 </div>
                                 <div>
                                     <mat-form-field class="example-full-width w-90 fs-12" appearance="fill">
                                         <mat-label>BP</mat-label>
-                                        <input matInput placeholder="post BT" value="" formControlName="post_bp" [(ngModel)]="currentPatientDetail.post_bp" [readonly]="insuranceform.invalid ? true : null">
+                                        <input matInput placeholder="post BT" value="" formControlName="post_bp" [(ngModel)]="currentPatientDetail && currentPatientDetail.post_bp" [readonly]="insuranceform.invalid ? true : null">
                                     </mat-form-field>
                                 </div>
                                 <div>
                                     <mat-form-field class="example-full-width w-90 fs-12" appearance="fill">
                                         <mat-label>PULSE</mat-label>
-                                        <input matInput placeholder="post pulse" value="" formControlName="post_pulse" [(ngModel)]="currentPatientDetail.post_pulse" [readonly]="insuranceform.invalid ? true : null">
+                                        <input matInput placeholder="post pulse" value="" formControlName="post_pulse" [(ngModel)]="currentPatientDetail && currentPatientDetail.post_pulse" [readonly]="insuranceform.invalid ? true : null">
                                     </mat-form-field>
                                 </div>
                                 <div>
                                     <mat-form-field class="example-full-width w-90 fs-12" appearance="fill">
                                         <mat-label>TEMP</mat-label>
-                                        <input matInput placeholder="post TEMP" value="" formControlName="post_temp" [(ngModel)]="currentPatientDetail.post_temp" [readonly]="insuranceform.invalid ? true : null">
+                                        <input matInput placeholder="post TEMP" value="" formControlName="post_temp" [(ngModel)]="currentPatientDetail && currentPatientDetail.post_temp" [readonly]="insuranceform.invalid ? true : null">
                                     </mat-form-field>
                                 </div>
                              </div>
@@ -202,13 +202,13 @@
                                 <div>
                                     <mat-form-field class="example-full-width w-90 fs-12" appearance="fill">
                                         <mat-label>FLOW</mat-label>
-                                        <input matInput placeholder="flow" value="" formControlName="curr_flow" [(ngModel)]="currentPatientDetail.curr_flow" [readonly]="insuranceform.invalid ? true : null">
+                                        <input matInput placeholder="flow" value="" formControlName="curr_flow" [(ngModel)]="currentPatientDetail && currentPatientDetail.curr_flow" [readonly]="insuranceform.invalid ? true : null">
                                     </mat-form-field>
                                 </div>
                                 <div>
                                     <mat-form-field class="example-full-width w-90 fs-12" appearance="fill">
                                         <mat-label>FLUID REMOVAL</mat-label>
-                                        <input matInput placeholder="fluid removal" value="" formControlName="fluid_removal" [(ngModel)]="currentPatientDetail.fluid_removal" [readonly]="insuranceform.invalid ? true : null">
+                                        <input matInput placeholder="fluid removal" value="" formControlName="fluid_removal" [(ngModel)]="currentPatientDetail && currentPatientDetail.fluid_removal" [readonly]="insuranceform.invalid ? true : null">
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -216,19 +216,19 @@
                                 <div>
                                     <mat-form-field class="example-full-width w-90 fs-12" appearance="fill">
                                         <mat-label>COMPLICATION</mat-label>
-                                        <input matInput placeholder="complication" value="" formControlName="complication" [(ngModel)]="currentPatientDetail.complication" [readonly]="insuranceform.invalid ? true : null">
+                                        <input matInput placeholder="complication" value="" formControlName="complication" [(ngModel)]="currentPatientDetail && currentPatientDetail.complication" [readonly]="insuranceform.invalid ? true : null">
                                     </mat-form-field>
                                 </div>
                                 <div>
                                     <mat-form-field class="example-full-width w-90 fs-12" appearance="fill">
                                         <mat-label>DRUGS</mat-label>
-                                        <input matInput placeholder="drugs" value="" formControlName="drugs" [(ngModel)]="currentPatientDetail.drugs" [readonly]="insuranceform.invalid ? true : null">
+                                        <input matInput placeholder="drugs" value="" formControlName="drugs" [(ngModel)]="currentPatientDetail && currentPatientDetail.drugs" [readonly]="insuranceform.invalid ? true : null">
                                     </mat-form-field>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="d-flex txt-center">
+                    <div class="d-flex card txt-center">
     
                         <!-- <div class="col-md-4">
                             <button type="button" class="btn btn-primary mar30 fs-12"
@@ -236,19 +236,19 @@
                             Next Date
                             </button>
                         </div> -->
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <button type="button" class="btn btn-primary mar30 fs-12"
                             (click)="isrequiredSaveBtn()">
                             Save
                             </button>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <button type="button" class="btn btn-primary mar30 fs-12" [ngClass]="{'disabled': recordIndexDialysis === undefined || recordIndexDialysis === getLastDialysisRecordIndex() }"
                             (click)="prev()" >
                             Prev
                             </button>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <button type="button" class="btn btn-primary mar30 fs-12"
                             (click)="next()" [ngClass]="{'disabled': recordIndexDialysis === 0 }">
                             Next
@@ -257,7 +257,7 @@
                     </div>
                 </form>
                 <div class="col-6">
-                    <table class="table header-border margin-10t">
+                    <table class="table card-ins margin-10t">
                         <thead>
                             <tr>
                                 <th scope="col">Dialysis Dt</th>
@@ -278,11 +278,12 @@
                                     <div class="circle-green"></div>
                                 </td>
                                 <td><mat-icon class="print-icon cancel-icon" (click)="edit(patientDialysisData.invoice_date)"> border_color</mat-icon>
-                                    <mat-icon class="print-icon cancel-icon" (click)="print(patientDialysisData.invoice_num)" [ngClass]="{'disabled':  isShowPrint}">print</mat-icon></td>
+                                    <mat-icon class="print-icon cancel-icon" (click)="print(patientDialysisData.invoice_num)" [ngClass]="{'icon-disabled': patientDialysisData.active_flag == null }" 
+                                    [class.toolbar-icon-disabled]="patientDialysisData.active_flag == null">print</mat-icon></td>
                             </tr> 
                         </tbody>
-                        <div class="d-flex">
-                            <button type="button" class="btn btn-primary mar20t" [useExistingCss]="true" id="print-to-pdf" printSectionId="print-section"  ngxPrint [disabled]="isrequiredBtn" (click)="printAllData()">Print to Pdf</button>
+                        <div class="d-flex-center">
+                            <button type="button" class="btn btn-primary mar20t" [useExistingCss]="true" id="print-to-pdf" printSectionId="print-section"  ngxPrint [disabled]="isrequiredBtn"  (click)="printAllData()">Print All</button>
                         </div>
                     </table>
                 </div>   
@@ -291,72 +292,93 @@
 </div>
 
 <ng-container *ngIf="isShowPrint">
-    <div class="row header-border" id="print-section">
-        <div><h3 class="border-b">NAME &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{printData.patient_name}}</h3>
-        </div>
-        <div><h3 class="border-b">AGE / SEX &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{printData.age}} / {{printData.sex}}</h3></div>
-        <div class="col-8 pr">
-            <h3 class="border-b">ADDRESS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{printData.address}}</h3>
-        </div>
-        <div class="col-4 pl">
-            <h3 class="border-b">R.NO {{printData.patient_id}}</h3>
-        </div>
-        <div class="col-8 pr">
-            <h3>CONSULTANT   : {{printData.doctor_name}}</h3>
-        </div>
-        <div class="col-4 pl">
-            <h3>Date: {{printData.dialysis_date | date: "dd-mm-yyyy"}}</h3>
+    <div id="print-section">
+        <div class="pg-30 fs-12" *ngFor="let printData of printData">
+            <div class="pg">
+                <div class="row header-border">
+                    <div class="p0"><div class="border-b">NAME &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{printData.patient_name}}</div>
+                    </div>
+                    <div class="col-12 pr p0">
+                        <div class="d-flex-j border-b">
+                            <div class="">AGE / SEX &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{printData.age}} / {{printData.sex}}</div>
+                            <div class="">{{printData.ref_desc}}</div>
+                            </div>
+                    </div>
+                    <div class="col-12 pr p0">
+                        <div class="d-flex-j border-b">
+                            <div>ADDRESS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{printData.address}}</div>
+                            <div class="">{{printData.patient_id}}</div>
+                        </div>
+                    </div>
+                    <div class="col-12 d-flex-j pr p0">
+                        <div>CONSULTANT   : {{printData.doctor_name}}</div>
+                        <div>Date: {{printData.dialysis_date | date: "dd-MM-yyyy"}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row pg">
+                <div class="tc"><div class="b">DISCHARGE SUMMARY</div></div>
+                <div>
+                    <div><span class="b-head">DIAGNOSIS</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;{{printData.header_remarks1}}</div>
+                </div>
+                <div>
+                    <div><span class="b-head">HISTORY</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;{{printData.header_remarks2}}</div>
+                </div>
+                <div>
+                    <div><span class="b-head">HD STARTING TIME</span>  &nbsp;:&nbsp;{{printData.hd_start_time | date: "dd-MM-yyyy"}}</div>
+                </div>
+                <div>
+                    <div><span class="b-head">HD ENDING TIME</span>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;{{printData.hd_end_time | date: "dd-MM-yyyy"}}</div>
+                </div>
+                <div>
+                    <div><span class="b-head">DURATION</span>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;{{printData.hd_duration}}</div>
+                </div>
+                <div class="space"></div>
+                <div class="row">
+                    <div class="col-6">
+                        <div><div class="b">PRE DIALYSIS</div></div>
+                        <div><div><span class="b-head">WT</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              :&nbsp;{{printData.pre_wt}}</div></div>
+                        <div><div><span class="b-head">BP</span>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            :&nbsp;{{printData.pre_bp}}</div></div>
+                        <div><div><span class="b-head">PULSE</span> &nbsp; :&nbsp;{{printData.pre_pulse}}</div></div>
+                        <div><div><span class="b-head">TEMP</span> &nbsp;&nbsp; :&nbsp;{{printData.pre_temp}}</div></div>
+                    </div>
+                    <div class="col-6">
+                        <div><div class="b">POST DIALYSIS</div></div>
+                        <div><div><span class="b-head">WT</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;{{printData.post_wt}}</div></div>
+                        <div><div><span class="b-head">BP</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :&nbsp;{{printData.post_bp}}</div></div>
+                        <div><div><span class="b-head">PULSE</span> &nbsp;&nbsp;&nbsp;:&nbsp;{{printData.post_pulse}}</div></div>
+                        <div><div><span class="b-head">TEMP</span> &nbsp;&nbsp;&nbsp;&nbsp; :&nbsp;{{printData.post_temp}}</div></div>
+                    </div>
+                </div>
+                <div class="space"></div>
+                <div class="row">
+                   
+                    <div><div><span class="b-head">FLOW</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  :&nbsp;{{printData.curr_flow}}</div></div>
+                    <div><div><span class="b-head">FLUID REMOVAL</span> :&nbsp;{{printData.fluid_removal}}</div></div>
+                    <div><div><span class="b-head">COMPLICATION</span>  &nbsp;:&nbsp;{{printData.complication}}</div></div>
+                    <div><div><span class="b-head">DRUGS</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :&nbsp;{{printData.drugs}}</div></div>
+                </div>
+                <br>
+                <br>
+                <div class="row">
+                    <div><div><span class="b-head">DIALY DRUGS</span>  &nbsp;&nbsp;&nbsp;&nbsp; :&nbsp;{{printData.footer_remarks}}</div></div>
+                </div>
+                <div class="row tr">
+                    <div><div>{{printData.doctor_name}}</div></div>
+                    <div><div class="b-head">NEPHROLOGIST.</div></div>
+                </div>
+            </div>
+            <!-- <div class="pagebreak"> </div> -->
         </div>
     </div>
-    <div class="row pg">
-        <div class="tc"><h3>DISCHARGE SUMMARY</h3></div>
-        <div>
-            <h3>DIAGNOSIS :{{HeaderIns.header_remarks1}}</h3>
-        </div>
-        <div>
-            <h3>HISTORY :{{HeaderIns.header_remarks2}}</h3>
-        </div>
-        <div>
-            <h3>HD STARTING TIME  :{{printData.hd_start_time | date: "dd-mm-yyyy"}}</h3>
-        </div>
-        <div>
-            <h3>HD ENDING TIME  :{{printData.hd_end_time | date: "dd-mm-yyyy"}}</h3>
-        </div>
-        <div>
-            <h3>DURATION  :{{printData.hd_duration}}</h3>
-        </div>
-        <br><br>
-        <div class="row">
-            <div class="col-6">
-                <div><h3>PRE DIALYSIS</h3></div>
-                <div><h3>WT  :{{printData.pre_wt}}</h3></div>
-                <div><h3>BP  :{{printData.pre_bp}}</h3></div>
-                <div><h3>PULSE  :{{printData.pre_pulse}}</h3></div>
-                <div><h3>TEMP  :{{printData.pre_temp}}</h3></div>
-            </div>
-            <div class="col-6">
-                <div><h3>POST DIALYSIS</h3></div>
-                <div><h3>WT  :{{printData.post_wt}}</h3></div>
-                <div><h3>BP  :{{printData.post_bp}}</h3></div>
-                <div><h3>PULSE  :{{printData.post_pulse}}</h3></div>
-                <div><h3>TEMP  :{{printData.post_temp}}</h3></div>
-            </div>
-        </div>
-        
-        <div class="row">
-            <br><br><div><h3>FLOW   :{{printData.flow}}</h3></div>
-            <div><h3>FLUID REMOVAL  :{{printData.fluid_removal}}</h3></div>
-            <div><h3>COMPLICATION  :{{printData.complication}}</h3></div>
-            <div><h3>DRUGS  :{{printData.drugs}}</h3></div>
-        </div>
-        <br>
-        <br>
-        <div class="row">
-            <div><h3>DIALY DRUGS   :{{HeaderIns.footer_remarks}}</h3></div>
-        </div>
-    </div>
-    <div class="d-flex">
+    <div class="d-flex-center">
         <button type="button" class="btn btn-primary mar20t" [useExistingCss]="true" id="print-to-pdf" printSectionId="print-section"  ngxPrint >Print to Pdf</button>
     </div>
 </ng-container>
