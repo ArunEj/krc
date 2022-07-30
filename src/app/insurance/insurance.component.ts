@@ -9,9 +9,6 @@ import { AptBookingService } from '../apt-booking/apt-booking.service';
 import { InsuranceService } from './insurance.service';
 import { UtilityService } from '../utilities/services/utility.service';
 import * as _ from 'lodash';
-// import moment from 'moment';
-// // tslint:disable-next-line:no-duplicate-imports
-// import {default as _rollupMoment, Moment} from 'moment';
 
 @Component({
   selector: 'app-insurance',
@@ -138,6 +135,13 @@ export class InsuranceComponent implements OnInit {
       this.is.fetchHeader(data.patient_id).subscribe(data => {
         if (data) {
           this.fetchInsHeader(data);
+          if(data.patient_type == 'N'){
+            this.dialog.open(InfoDialogComponent, {
+              width: '500px',
+              data: 'Insurance Entry Not applicable for Normal Patient!!!'
+            })
+            return;
+          }
           this.patientHeader = data;
           this.isShowPatientHeader = true;
           this.isShowPatientInputForm = true;
@@ -204,11 +208,11 @@ export class InsuranceComponent implements OnInit {
   getEndTime() {
     const date2 = this.currentPatientDetail.hd_end_time;
     const date1 = this.currentPatientDetail.hd_start_time;
-    console.log(date2, date2);
+    console.log(date1, date2);
     const diffInMs = Date.parse(date2) - Date.parse(date1);
     const diffInHours = diffInMs / 1000 / 60 / 60;
     this.currentPatientDetail.hd_duration = (diffInHours).toFixed(0);
-    // console.log(diffInHours);
+    console.log(diffInHours);
   }
 
   //Fetch Insurance Header
@@ -266,8 +270,7 @@ export class InsuranceComponent implements OnInit {
       this.currentPatientDetail.hd_end_time = this.currentPatientDetail.invoice_date + ' 00:00:00';
     }
     this.invoiceNum = this.currentPatientDetail.invoice_num;
-    console.log("currentPatientDetail", this.currentPatientDetail)
-    // this.currentPatientDetail.active_flag = 'Y';
+    // console.log("currentPatientDetail", this.currentPatientDetail)
     this.patientForm();
     if (this.getLastDialysisRecordIndex() === 0) {
       this.recordIndexDialysis = 0;
@@ -389,6 +392,11 @@ export class InsuranceComponent implements OnInit {
       this.isShowPrint = true;
       console.log("printResponse",data);
     })
+  }
+
+  //back
+  back(){
+    this.isShowPrint = false;
   }
 }
 

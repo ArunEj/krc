@@ -321,17 +321,18 @@
                 <div class="tc"><div class="b">DISCHARGE SUMMARY</div></div>
                 <div>
                     <div><span class="b-head">DIAGNOSIS</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;{{printData.header_remarks1}}</div>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;{{printData.header_remarks1}}</div><br>
                 </div>
                 <div>
                     <div><span class="b-head">HISTORY</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;{{printData.header_remarks2}}</div>
                 </div>
+                <div class="space"></div>
                 <div>
-                    <div><span class="b-head">HD STARTING TIME</span>  &nbsp;:&nbsp;{{printData.hd_start_time | date: "dd-MM-yyyy"}}</div>
+                    <div><span class="b-head">HD STARTING TIME</span>  &nbsp;:&nbsp;{{printData.hd_start_time | date: "dd-MM-yyyy h:mm"}}</div>
                 </div>
                 <div>
-                    <div><span class="b-head">HD ENDING TIME</span>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;{{printData.hd_end_time | date: "dd-MM-yyyy"}}</div>
+                    <div><span class="b-head">HD ENDING TIME</span>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;{{printData.hd_end_time | date: "dd-MM-yyyy h:mm"}}</div>
                 </div>
                 <div>
                     <div><span class="b-head">DURATION</span>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -365,20 +366,21 @@
                     <div><div><span class="b-head">COMPLICATION</span>  &nbsp;:&nbsp;{{printData.complication}}</div></div>
                     <div><div><span class="b-head">DRUGS</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :&nbsp;{{printData.drugs}}</div></div>
                 </div>
-                <br>
-                <br>
+                <div class="space"></div>
                 <div class="row">
-                    <div><div><span class="b-head">DIALY DRUGS</span>  &nbsp;&nbsp;&nbsp;&nbsp; :&nbsp;{{printData.footer_remarks}}</div></div>
+                    <div><div><span class="b-head">DIALY DRUGS</span>  &nbsp;&nbsp;&nbsp;&nbsp; :&nbsp;{{printData.footer_remarks}}</div></div><br>
                 </div>
+                <div class="space"></div>
                 <div class="row tr">
                     <div><div>{{printData.doctor_name}}</div></div>
                     <div><div class="b-head">NEPHROLOGIST.</div></div>
                 </div>
             </div>
-            <!-- <div class="pagebreak"> </div> -->
+            <div class="pagebreak"> </div>
         </div>
     </div>
     <div class="d-flex-center">
         <button type="button" class="btn btn-primary mar20t" [useExistingCss]="true" id="print-to-pdf" printSectionId="print-section"  ngxPrint >Print to Pdf</button>
+        <button type="button" class="btn btn-primary mar20t ml-15" (click)="back()">Back</button>
     </div>
 </ng-container>
