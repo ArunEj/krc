@@ -8,9 +8,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { AptBookingService } from '../apt-booking/apt-booking.service';
 import { InsuranceService } from './insurance.service';
 import { UtilityService } from '../utilities/services/utility.service';
-// import moment from 'moment';
-// // tslint:disable-next-line:no-duplicate-imports
-// import {default as _rollupMoment, Moment} from 'moment';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-insurance',
@@ -49,7 +47,7 @@ export class InsuranceComponent implements OnInit {
   isrequiredBtn: boolean = true;
   isShowPrint: boolean = false;
   getInvoiceNum: any[] = [];
-  printData: any;
+  printData: any[] =[];
   HeaderIns: any;
   // date = new FormControl(moment());
 
@@ -137,6 +135,13 @@ export class InsuranceComponent implements OnInit {
       this.is.fetchHeader(data.patient_id).subscribe(data => {
         if (data) {
           this.fetchInsHeader(data);
+          if(data.patient_type == 'N'){
+            this.dialog.open(InfoDialogComponent, {
+              width: '500px',
+              data: 'Insurance Entry Not applicable for Normal Patient!!!'
+            })
+            return;
+          }
           this.patientHeader = data;
           this.isShowPatientHeader = true;
           this.isShowPatientInputForm = true;
@@ -164,7 +169,7 @@ export class InsuranceComponent implements OnInit {
   constructHeaderParam() {
     let params = {
       org_id: localStorage.getItem('org_id'), branch_id: localStorage.getItem('branch_id'), user_id: localStorage.getItem('user_id'),
-      patient_id: this.patientHeader.patient_id, doctor_id: this.insuranceform.controls.doctor_id.value,
+      patient_id: this.patientHeader && this.patientHeader.patient_id, doctor_id: this.insuranceform.controls.doctor_id.value,
       bu_id: this.insuranceform.controls.bu_id.value, header_remarks1: this.insuranceform.controls.diagnosis.value,
       header_remarks2: this.insuranceform.controls.history.value,
       footer_remarks: this.insuranceform.controls.footer.value
@@ -194,8 +199,8 @@ export class InsuranceComponent implements OnInit {
     const patient_id = this.patientHeader.patient_id;
     this.insuranceService.fetchInsData(month, year, patient_id).subscribe(data => {
       this.patientDialysisHistory = (data.results).reverse();
-
       this.setCurrentPatientDialysisData();
+      this.isrequiredPrintBtn();
     })
   }
 
@@ -203,11 +208,11 @@ export class InsuranceComponent implements OnInit {
   getEndTime() {
     const date2 = this.currentPatientDetail.hd_end_time;
     const date1 = this.currentPatientDetail.hd_start_time;
-    console.log(date2, date2);
+    console.log(date1, date2);
     const diffInMs = Date.parse(date2) - Date.parse(date1);
     const diffInHours = diffInMs / 1000 / 60 / 60;
     this.currentPatientDetail.hd_duration = (diffInHours).toFixed(0);
-    // console.log(diffInHours);
+    console.log(diffInHours);
   }
 
   //Fetch Insurance Header
@@ -241,9 +246,9 @@ export class InsuranceComponent implements OnInit {
       invoice_no: [invoiceNum]
     }
     this.insuranceService.printInsData(params).subscribe(data => {
-      this.printData = data.results[0];
+      this.printData = data.results;
       this.isShowPrint = true;
-      console.log("printResponse",data);
+      console.log("printResponse",this.printData);
     })
   }
 
@@ -265,8 +270,7 @@ export class InsuranceComponent implements OnInit {
       this.currentPatientDetail.hd_end_time = this.currentPatientDetail.invoice_date + ' 00:00:00';
     }
     this.invoiceNum = this.currentPatientDetail.invoice_num;
-    console.log("currentPatientDetail", this.currentPatientDetail)
-    // this.currentPatientDetail.active_flag = 'Y';
+    // console.log("currentPatientDetail", this.currentPatientDetail)
     this.patientForm();
     if (this.getLastDialysisRecordIndex() === 0) {
       this.recordIndexDialysis = 0;
@@ -280,19 +284,21 @@ export class InsuranceComponent implements OnInit {
   }
   
    next() {
+    this.setDialysisValue();
     this.validateFlag();
     this.prevDialysisCounter++;
     this.setCurrentDialysisAfterChange();
+    this.isrequiredPrintBtn();
    }
 
    prev() {
     this.validateFlag();
     this.prevDialysisCounter--;
     this.setCurrentDialysisAfterChange();
+    this.isrequiredPrintBtn();
    }
  
    setCurrentDialysisAfterChange() {
-    this.setDialysisValue();
     this.recordIndexDialysis = this.getLastDialysisRecordIndex() - this.prevDialysisCounter;
     this.currentPatientDetail = this.patientDialysisHistory[this.recordIndexDialysis]; // give us back the item of where we are now
     this.currentPatientDetail.invoice_date = this.utility.convertDate(this.currentPatientDetail.invoice_date);
@@ -308,18 +314,32 @@ export class InsuranceComponent implements OnInit {
   setDialysisValue() {
     let i;
     this.patientDialysisHistory
-    for(i=1;i>this.patientDialysisHistory.length;i++){
-      this.patientDialysisHistory[i].pre_pulse = this.currentPatientDetail.pre_pulse;
-        // this.currentPatientDetail.pre_temp = element.pre_temp;
-        // this.currentPatientDetail.post_pulse = element.post_pulse;
-        // this.currentPatientDetail.post_temp = element.post_temp;
-        // this.currentPatientDetail.curr_flow = element.curr_flow;
-        // this.currentPatientDetail.fluid_removal = element.fluid_removal;
-        // this.currentPatientDetail.complication = element.complication;
-        // this.currentPatientDetail.drugs = element.drugs;
-        // count++;
+    for(i=0;i<this.patientDialysisHistory.length;i++){
+      if(!this.patientDialysisHistory[i].pre_pulse){
+        this.patientDialysisHistory[i].pre_pulse = this.currentPatientDetail.pre_pulse;
       }
-      console.log("setDialysisValue", this.patientDialysisHistory[i].pre_pulse)
+      if(!this.patientDialysisHistory[i].pre_temp){
+        this.patientDialysisHistory[i].pre_temp = this.currentPatientDetail.pre_temp;
+      }
+      if(!this.patientDialysisHistory[i].post_pulse){
+        this.patientDialysisHistory[i].post_pulse = this.currentPatientDetail.post_pulse;
+      }
+      if(!this.patientDialysisHistory[i].post_temp){
+        this.patientDialysisHistory[i].post_temp = this.currentPatientDetail.post_temp;
+      }
+      if(!this.patientDialysisHistory[i].curr_flow){
+        this.patientDialysisHistory[i].curr_flow = this.currentPatientDetail.curr_flow;
+      }
+      if(!this.patientDialysisHistory[i].fluid_removal){
+        this.patientDialysisHistory[i].fluid_removal = this.currentPatientDetail.fluid_removal;
+      }
+      if(!this.patientDialysisHistory[i].complication){
+        this.patientDialysisHistory[i].complication = this.currentPatientDetail.complication;
+      }
+      if(!this.patientDialysisHistory[i].drugs){
+        this.patientDialysisHistory[i].drugs = this.currentPatientDetail.drugs;
+      }
+      }
     }
 
   validateFlag() {
@@ -336,12 +356,24 @@ export class InsuranceComponent implements OnInit {
   isrequiredSaveBtn() {
     this.patientDialysisHistory.forEach((element: any)=> {
       if(element.active_flag == 'Y') {
-        this.isrequiredBtn = false;
         this.save();
+        this.isrequiredPrintBtn();
         this.dialog.open(InfoDialogComponent, {
           width: '300px',
           data: 'Insurance Saved Successfully!!!'
         })
+      }
+    });
+  }
+
+  isrequiredPrintBtn(){
+    let count = 0;
+    this.patientDialysisHistory.forEach((element: any)=> {
+      if(element.active_flag !== 'Y' && count == 0) {
+        this.isrequiredBtn = true;
+        count++;
+      }else if(element.active_flag == 'Y' && count == 0){
+        this.isrequiredBtn = false;
       }
     });
   }
@@ -353,11 +385,17 @@ export class InsuranceComponent implements OnInit {
     });
     let params = {
       org_id: localStorage.getItem('org_id'), branch_id: localStorage.getItem('branch_id'), patient_id: this.patientHeader.patient_id,
-      invoice_no: [this.getInvoiceNum]
+      invoice_no: this.getInvoiceNum
     }
     this.insuranceService.printInsData(params).subscribe(data => {
+      this.printData = data.results;
+      this.isShowPrint = true;
       console.log("printResponse",data);
     })
   }
-}
 
+  //back
+  back(){
+    this.isShowPrint = false;
+  }
+}
