@@ -33,6 +33,10 @@ import { PreviousMedComponent } from './previous-med/previous-med.component';
 import { BaseDetailComponent } from './base-detail/base-detail.component';
 import { ManagePatientComponent } from './manage-patient/manage-patient.component';
 import { InsuranceComponent } from './insurance/insurance.component';
+import {PatientwiseReportComponent} from './patientwise-report/patientwise-report.component';
+import { CollectionwiseReportComponent } from './collectionwise-report/collectionwise-report.component';
+import { OutstantingInvwiseComponent } from './outstanting-invwise/outstanting-invwise.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,7 +65,10 @@ import { InsuranceComponent } from './insurance/insurance.component';
     PreviousMedComponent,
     BaseDetailComponent,
     ManagePatientComponent,
-    InsuranceComponent
+    InsuranceComponent,
+    PatientwiseReportComponent,
+    CollectionwiseReportComponent,
+    OutstantingInvwiseComponent
   ],
   imports: [
     BrowserModule,

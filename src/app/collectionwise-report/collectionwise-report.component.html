@@ -1,0 +1,95 @@
+<app-header></app-header>
+<div class="container">
+  <app-base-detail></app-base-detail>
+  <h4>Patientwise Report</h4>
+  <div class="row">
+
+    <mat-form-field appearance="fill" class="col-lg-3">
+      <mat-label>Enter a date range</mat-label>
+      <mat-date-range-input [rangePicker]="picker">
+        <input matStartDate placeholder="Start date" [(ngModel)]="from_date">
+        <input matEndDate placeholder="End date" [max]="today" [(ngModel)]="to_date">
+      </mat-date-range-input>
+      <mat-hint>DD/MM/YYYY – DD/MM/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+    </mat-form-field>
+  </div>
+  <div class="row mt-4">
+    <button class="btn btn-primary col-lg-2" (click)="getReports()">Retrieve</button>
+
+    <button class="btn btn-primary col-lg-2 ms-2" [disabled]="reportData.length === 0"
+      (click)="export2Excel()">Export</button>
+
+  </div>
+
+
+  <div class="table-responsive-lg col-lg-12" style="margin-top:20px;padding-bottom:30px;"
+    *ngIf="reportData?.length > 0">
+    <table class="table table-bordered" id="collectionwise-table">
+      <thead class="thead-dark">
+        <tr>
+          <th>Collection Report Summary from {{this.from_date | date:'dd-MMM-YYYY'}} to {{this.to_date |
+            date:'dd-MMM-YYYY'}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of reportData">
+          <td>
+        <tr>
+          <th>inv date</th>
+          <th>Inv Number</th>
+          <th>Patient</th>
+          <th>Patient Type</th>
+          <th>Dialysis</th>
+          <th>Pharma</th>
+          <th>Test</th>
+          <th>Other</th>
+          <th>Gross OC</th>
+          <th>Gross Discount</th>
+          <th>Total</th>
+          <th>Amt Recvd</th>
+          <th>Outstanding</th>
+
+        </tr>
+        <tr *ngFor="let invoice of item?.details">
+          <td>{{invoice.inv_date}}</td>
+          <td>{{invoice.invoice_no}}</td>
+          <td>{{invoice.patient_name}}</td>
+          <td>{{invoice.ref_desc }}</td>
+          <td>{{invoice.dialysis}}</td>
+          <td>{{invoice.pharmacy }}</td>
+          <td>{{invoice.lab }}</td>
+          <td>{{invoice.others }}</td>
+          <td>{{invoice.other_charge }}</td>
+          <td>{{invoice.gross_discount }}</td>
+          <td>{{invoice.net_amount }}</td>
+          <td>{{invoice.net_paid }}</td>
+          <td>{{invoice.net_balance }}</td>
+
+        </tr>
+        <tr class="fw-bold">
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>{{item.dialysis}}</td>
+          <td>{{item.pharmacy}}</td>
+          <td>{{item.lab}}</td>
+          <td>{{item.others}}</td>
+          <td>{{item.other_charge}}</td>
+          <td>{{item.gross_discount}}</td>
+          <td>{{item.net_amount}}</td>
+          <td>{{item.net_paid}}</td>
+          <td>{{item.net_balance}}</td>
+
+        </tr>
+
+        </td>
+        </tr>
+
+
+      </tbody>
+    </table>
+    <div *ngIf="reportData.length === 0">No Records to display</div>
+  </div>
