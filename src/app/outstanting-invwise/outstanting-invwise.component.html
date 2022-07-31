@@ -36,39 +36,40 @@
       <tbody>
         <tr *ngFor="let item of reportData">
           <td>
-        <tr>
-          <th>Inv No</th>
-          <th>Inv Date</th>
-          <th>Pt Name</th>
-          <th>Pt Type</th>          
-          <th>Inv Amt</th>
-          <th>Amt Recvd</th>
-          <th>Outstanding</th>
+            <table class="w-100">
+              <tr>
+                <th>Inv No</th>
+                <th>Inv Date</th>
+                <th>Pt Name</th>
+                <th>Pt Type</th>
+                <th>Inv Amt</th>
+                <th>Amt Recvd</th>
+                <th>Outstanding</th>
 
-        </tr>
-        <tr *ngFor="let invoice of item?.details">
-          <td>{{invoice.invoice_no}}</td>
-          <td>{{invoice.inv_date}}</td>
-          <td>{{invoice.patient_name}}</td>
-          <td>{{invoice.ref_desc }}</td>
-         
-          <td>{{invoice.net_inv_amount }}</td>
-          <td>{{invoice.net_inv_paid }}</td>
-          <td>{{invoice.net_inv_balance }}</td>
+              </tr>
+              <tr *ngFor="let invoice of item?.details">
+                <td>{{invoice.invoice_no}}</td>
+                <td>{{invoice.inv_date| date:'dd-MM-YYYY'}}</td>
+                <td>{{invoice.patient_name}}</td>
+                <td>{{invoice.ref_desc }}</td>
 
-        </tr>
-        <tr class="fw-bold">
-          <td></td>
-          <td></td>
-          <td></td>          
-          <td>{{item.inv_date}}</td>          
-          <td>{{item.net_inv_amt}}</td>
-          <td>{{item.net_inv_paid}}</td>
-          <td>{{item.net_inv_bal}}</td>
+                <td>{{invoice.net_inv_amount }}</td>
+                <td>{{invoice.net_inv_paid }}</td>
+                <td>{{invoice.net_inv_balance }}</td>
 
-        </tr>
+              </tr>
+              <tr class="fw-bold">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{item.inv_date | date:'dd-MM-YYYY'}}</td>
+                <td>{{item.net_inv_amt}}</td>
+                <td>{{item.net_inv_paid}}</td>
+                <td>{{item.net_inv_bal}}</td>
 
-        </td>
+              </tr>
+            </table>
+          </td>
         </tr>
 
 

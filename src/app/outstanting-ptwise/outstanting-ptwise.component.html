@@ -51,7 +51,7 @@
         <tr *ngFor="let invoice of item?.details">
           <td>{{invoice.patient_name}}</td>
           <td>{{invoice.invoice_no}}</td>
-          <td>{{invoice.inv_date}}</td>
+          <td>{{invoice.inv_date | date:'dd-MM-YYYY'}}</td>
           
           <td>{{invoice.ref_desc }}</td>
          
@@ -64,7 +64,7 @@
           <td></td>
           <td></td>
           <td></td>          
-          <td>{{item.inv_date}}</td>          
+          <td>{{item.inv_date | date:'dd-MM-YYYY'}}</td>          
           <td>{{item.net_inv_amt}}</td>
           <td>{{item.net_inv_paid}}</td>
           <td>{{item.net_inv_bal}}</td>
