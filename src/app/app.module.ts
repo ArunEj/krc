@@ -37,6 +37,7 @@ import {PatientwiseReportComponent} from './patientwise-report/patientwise-repor
 import { CollectionwiseReportComponent } from './collectionwise-report/collectionwise-report.component';
 import { OutstantingInvwiseComponent } from './outstanting-invwise/outstanting-invwise.component';
 import { OutstantingPtwiseComponent } from './outstanting-ptwise/outstanting-ptwise.component';
+import { PoComponent } from './po/po.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,7 +70,8 @@ import { OutstantingPtwiseComponent } from './outstanting-ptwise/outstanting-ptw
     PatientwiseReportComponent,
     CollectionwiseReportComponent,
     OutstantingInvwiseComponent,
-    OutstantingPtwiseComponent
+    OutstantingPtwiseComponent,
+    PoComponent
   ],
   imports: [
     BrowserModule,
