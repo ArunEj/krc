@@ -1,0 +1,119 @@
+<app-header></app-header>
+<div class="container">
+  <app-base-detail></app-base-detail>
+  <h4>Payment wise Report</h4>
+  <div class="row">
+
+    <mat-form-field appearance="fill" class="col-lg-3">
+      <mat-label>Enter a date range</mat-label>
+      <mat-date-range-input [rangePicker]="picker">
+        <input matStartDate placeholder="Start date" [(ngModel)]="from_date">
+        <input matEndDate placeholder="End date" [max]="today" [(ngModel)]="to_date">
+      </mat-date-range-input>
+      <mat-hint>DD/MM/YYYY – DD/MM/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+    </mat-form-field>
+  </div>
+  <div class="row mt-4">
+    <button class="btn btn-primary col-lg-2" (click)="getReports()">Retrieve</button>
+
+    <button class="btn btn-primary col-lg-2 ms-2" [disabled]="reportData.length === 0"
+      (click)="export2Excel()">Export</button>
+
+  </div>
+
+
+  <div class="table-responsive-lg col-lg-12" style="margin-top:20px;padding-bottom:30px;"
+    *ngIf="reportData?.length > 0">
+    <table class="table table-bordered" id="collectionwise-table">
+      <thead class="thead-dark">
+        <tr>
+          <th>Collection Report Summary (Payment mode wise) from {{this.from_date | date:'dd-MMM-YYYY'}} to {{this.to_date |
+            date:'dd-MMM-YYYY'}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of reportData">
+          <td>
+
+        <tr>
+          <th rowspan="2">Date</th>
+          <th rowspan="2">Type</th>
+          <th colspan="2">Cash</th>
+          <th colspan="2">Card</th>
+          <th colspan="2">Chq</th>
+          <th colspan="2">UPI</th>
+          <th colspan="2">Adj Amount</th>
+          <th colspan="2">Outstanding</th>
+          <th colspan="2">Total</th>
+          <!-- <th colspan="2">Govt Working</th>
+          <th colspan="4">Govt. Pensioner</th>
+          <th colspan="4">Corporate</th>
+          <th colspan="4">Corporate CHK</th>
+          <th colspan="4">Total</th> -->
+        </tr>
+        <tr>
+          <th>No of inv</th>
+          <th>Amt</th>
+          <th>No of inv</th>
+          <th>Amt</th>
+          <th>No of inv</th>
+          <th>Amt</th>
+          <th>No of inv</th>
+          <th>Amt</th>
+          <th>No of inv</th>
+          <th>Amt</th>
+          <th>No of inv</th>
+          <th>Amt</th>
+          <th>No of inv</th>
+          <th>Amt</th>
+        </tr>
+
+        <tr *ngFor="let invoice of item?.details">
+          <td>{{invoice.inv_date}}</td>
+          <td>{{invoice.bu_id}}</td>
+          <td>{{invoice.cash_inv_cnt}}</td>
+          <td>{{invoice.cash_amt }}</td>
+          <td>{{invoice.card_inv_cnt}}</td>
+          <td>{{invoice.card_amt }}</td>
+          <td>{{invoice.chq_inv_cnt }}</td>
+          <td>{{invoice.chq_amt }}</td>
+          <td>{{invoice.upi_inv_cnt }}</td>
+          <td>{{invoice.upi_amt }}</td>
+          <td>{{invoice.adv_adj_inv_cnt }}</td>
+          <td>{{invoice.adv_adj_amt }}</td>
+          <td>{{invoice.os_cnt }}</td>
+          <td>{{invoice.os_amt }}</td>
+          <td>{{invoice.tot_inv_cnt }}</td>
+          <td>{{invoice.total_inv_amt }}</td>
+
+        </tr>
+        <tr class="fw-bold">
+          <td></td>
+          <td></td>
+          <td>{{item.cash_inv_cnt}}</td>
+          <td>{{item.cash_amt }}</td>
+          <td>{{item.card_inv_cnt}}</td>
+          <td>{{item.card_amt }}</td>
+          <td>{{item.chq_inv_cnt }}</td>
+          <td>{{item.chq_amt }}</td>
+          <td>{{item.upi_inv_cnt }}</td>
+          <td>{{item.upi_amt }}</td>
+          <td>{{item.adv_adj_inv_cnt }}</td>
+          <td>{{item.adv_adj_amt }}</td>
+          <td>{{item.os_cnt }}</td>
+          <td>{{item.os_amt }}</td>
+          <td>{{item.tot_inv_cnt }}</td>
+          <td>{{item.total_inv_amt }}</td>
+
+        </tr>
+
+        </td>
+        </tr>
+
+
+      </tbody>
+    </table>
+    <div *ngIf="reportData.length === 0">No Records to display</div>
+  </div>

@@ -18,6 +18,7 @@ import { CollectionwiseReportComponent } from './collectionwise-report/collectio
 import { OutstantingInvwiseComponent } from './outstanting-invwise/outstanting-invwise.component';
 import { OutstantingPtwiseComponent } from './outstanting-ptwise/outstanting-ptwise.component';
 import { PoComponent } from './po/po.component';
+import { CollectionPaymentwiseReportComponent } from './collection-payment-report/collection-payment-report.component';
 
 
 const routes: Routes = [
@@ -93,7 +94,11 @@ const routes: Routes = [
   {
     path: 'po',
     component: PoComponent
-  }
+  },
+  {
+    path: 'collection-paymentwise-report',
+    component: CollectionPaymentwiseReportComponent
+  },
 
 ];
 
