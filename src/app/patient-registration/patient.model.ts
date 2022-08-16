@@ -32,7 +32,8 @@ export interface Patient {
     attender2_name: string,
     attender2_relation_type: string,
     attender2_contact: string,
-    pincode: string
+    pincode: string,
+    reapproval?:string
 }
 
 export interface PatientType {

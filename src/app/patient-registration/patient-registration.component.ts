@@ -3,6 +3,7 @@ import { Patient, PatientType } from './patient.model';
 import { PatientRegService } from './patient_registration.service';
 import { MatDialog } from '@angular/material/dialog';
 import { InfoDialogComponent } from '../utilities/info-dialog/info-dialog.component';
+import { PromptDialogComponent } from '../utilities/prompt-dialog/prompt-dialog.component';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-patient-registration',
@@ -20,7 +21,7 @@ export class PatientRegistrationComponent implements OnInit {
     communicate_address: '', user_id: '', org_id: '', alt_mobile_no: '', aadhar_no: '', photo: '', alt_email_id: '', branch_id: '',
     age: '', blood_group: '', husband_name: '', guardian_name: '', guardian_type: '', father_name: '', ration_cardno: '',
     profession: '', attender1_name: '', attender1_relation_type: '', attender1_contact: '', attender2_name: '', attender2_relation_type: '', attender2_contact: '',
-    pincode: ''
+    pincode: '', reapproval: 'N'
 
   };
   constructor(private ps: PatientRegService,
@@ -82,14 +83,32 @@ export class PatientRegistrationComponent implements OnInit {
       this.router.navigate(['landing']);
     }, error => {
       if (error.error.status === 404) {
-        alert(error.error.message);
+        if (error.error.code === 4001 && error.error.message === 'Sorry, Patient Mobile No Already Exists!.') {
+          const duplicateuser = this.dialog.open(PromptDialogComponent, {
+            width: '300px',
+            data: 'Patient Already registered. Do you want to proceed registration?'
+          });
+          duplicateuser.afterClosed().subscribe(result => {
+            if (result) {
+              this.patientRegObj.reapproval = 'Y';
+              this.ps.registerPatient(this.patientRegObj).subscribe(response => {
+                //alert('Patient Registered successfully!!!')
+                this.dialog.open(InfoDialogComponent, {
+                  width: '300px',
+                  data: 'Patient Registered successfully!!!'
+                })
+                this.router.navigate(['landing']);
+              })
+            }
+          })
+        }
       }
     });
   }
 
 
   updatePatientDetails() {
-    if(this.patientRegObj.first_visit_date == "NaN-NaN-NaN") {
+    if (this.patientRegObj.first_visit_date == "NaN-NaN-NaN") {
       // console.log(this.patientRegObj)
       this.patientRegObj.first_visit_date = null;
     }

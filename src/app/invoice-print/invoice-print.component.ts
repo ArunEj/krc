@@ -25,7 +25,7 @@ export class InvoicePrintComponent implements OnInit {
   mobile_no: string = '';
   invoiceDetails: any;
   patientInvoiceDetail = false;
-  patientHeader: any;
+  patientHeaderData: any;
   patientList = [];
   isShowPrint: boolean = false;
   orgId: any;
@@ -37,6 +37,7 @@ export class InvoicePrintComponent implements OnInit {
   createdBy: any;
   refList: any;
   invoiceStatusDetails: any;
+  headerDetail: any;
 
   constructor(private invoicePrintService: InvoicePrintService,
     private is: InvoiceService,
@@ -122,7 +123,7 @@ export class InvoicePrintComponent implements OnInit {
       this.patientList = data.results;
       this.is.fetchHeader(data.patient_id).subscribe(data => {
         if (data) {
-          this.patientHeader = data;
+          this.patientHeaderData = data;
           this.patientInvoiceDetail = true;
         }
       })
@@ -184,7 +185,7 @@ export class InvoicePrintComponent implements OnInit {
   }
 
   fetchInvoiceStatus(data: any) {
-    let pt_id = this.patientHeader.patient_id;
+    let pt_id = this.patientHeaderData.patient_id;
     this.invoicePrintService.fetchInvoiceSectionList(data, pt_id).subscribe(data => {
       this.patientInvoiceDetail = true;
       this.invoiceStatusDetails = data.results;
@@ -196,6 +197,12 @@ export class InvoicePrintComponent implements OnInit {
         });
       }
     })
+  }
+
+  patientHeader(data: any) {
+    // this.headerDetail = data;
+    this.patientHeaderData = data;
+    this.patientInvoiceDetail = true;
   }
 }
 

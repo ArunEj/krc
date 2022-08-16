@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-
+import * as XLSX from 'xlsx';
 @Injectable({
   providedIn: 'root'
 })
@@ -23,6 +23,30 @@ export class UtilityService {
     return  this.convertTodayTostr(test_date);
      
    }
+
+   export2Excel(elementId:string, fileName:string) {
+    let keyRemoval = ''
+    /* pass here the table id */
+    let element = document.getElementById(elementId);
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+
+    Object.keys(ws).find(key=>{
+      if(ws[key]?.t  && ws[key]?.t ===  'z' && ws[key].v ===  ''){
+        let num = key.match(/\d+/g)
+        let letr  =  key.match(/[a-zA-Z]+/g);
+        keyRemoval = letr![0] +( parseInt(num![0])+1);
+        delete ws[keyRemoval];
+      }
+    })
+
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    /* save to file */
+    XLSX.writeFile(wb, fileName);
+
+  }
 
 
 }
