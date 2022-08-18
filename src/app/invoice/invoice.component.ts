@@ -18,7 +18,8 @@ export class InvoiceComponent implements OnInit {
   mobile_no: string = '';
   invoiceDetails: any;
   patientInvoiceDetail = false;
-  patientHeader: any;
+  //patientHeader: any;
+  patientHeaderData:any
   patientList = [];
   constructor(private is: InvoiceService,
     private dialog: MatDialog, private router: Router, private route: ActivatedRoute) {
@@ -123,7 +124,12 @@ export class InvoiceComponent implements OnInit {
     })
 
   }
-
+  patientHeader(data: any) {
+    // this.headerDetail = data;
+    this.patientHeaderData = data;
+    this.patientInvoiceDetail = true;
+    this.loadInvoiceDetails(data.patient_id);
+  }
 
 
 
