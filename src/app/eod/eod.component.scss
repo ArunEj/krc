@@ -1,0 +1,29 @@
+.btn-right {
+    text-align: right;
+}
+.modal {
+    position: fixed;
+    top: 35%;
+    left: 0;
+    z-index: 1055;
+    display: none;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    outline: 0;
+}
+
+.btn-left{
+    text-align: left;
+}
+
+.txt-center{
+    text-align: center;
+}
+.margin-top {
+    margin-top: 2rem;
+}
+.fs{
+    font-size: 20px;
+}

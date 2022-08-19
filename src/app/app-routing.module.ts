@@ -17,6 +17,9 @@ import { PatientwiseReportComponent } from './patientwise-report/patientwise-rep
 import { CollectionwiseReportComponent } from './collectionwise-report/collectionwise-report.component';
 import { OutstantingInvwiseComponent } from './outstanting-invwise/outstanting-invwise.component';
 import { OutstantingPtwiseComponent } from './outstanting-ptwise/outstanting-ptwise.component';
+import { SupplierMasterComponent } from './supplier/supplier-master/supplier-master.component';
+import { SupplierProductComponent } from './supplier-product/supplier-product.component';
+import { EodComponent } from './eod/eod.component';
 
 
 const routes: Routes = [
@@ -88,6 +91,18 @@ const routes: Routes = [
   {
     path: 'outstanding-ptwise-report',
     component: OutstantingPtwiseComponent
+  },
+  {
+    path: 'supplier-master',
+    component: SupplierMasterComponent
+  },
+  {
+    path: 'supplier-product',
+    component: SupplierProductComponent
+  },
+  {
+    path: 'eod',
+    component: EodComponent
   }
 
 ];
