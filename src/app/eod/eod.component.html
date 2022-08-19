@@ -1,0 +1,84 @@
+<app-header></app-header>
+<div class="container">
+    <form [formGroup]="eodForm">
+        <div class="row">
+            <h3>EOD</h3>
+            <mat-card class="col-6">
+                <div class="col-4">
+                    <div class="supplier-item">
+                        <label for="eod_date" class="form-label fs">Current Business Date</label>
+                        <input matInput type="date" class="form-control" formControlName="eod_date" name="eod_date" readonly>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="row">
+                        <div class="col-12 supplier-item margin-top">
+                            <label for="supplier_id" class="form-label fs">End of Day Business Closure</label>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <button mat-raised-button class="btn btn-primary"   type="button" value="yes" (click)="openModal()">Yes</button>
+                                </div>
+                                <div class="col-md-3">
+                                    <button mat-raised-button class="btn btn-primary" type="button" value="no">No</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="col-6 supplier-item">
+                            <label for="new_eod_date" class="form-label">New Business Date</label>
+                            <input matInput type="text" class="form-control" formControlName="new_eod_date" name="new_eod_date" readonly>
+                        </div> -->
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </form>
+
+    <!-- //Popup modal -->
+<!-- Modal Popup -->
+<div id="MyPopup" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body txt-center">
+               <div> Are You Sure to Close EOD for current Business date <br>{{setDate | date: 'dd-MM-yyyy'}}</div><br>
+                <div class="row">
+                    <div class="col-md-6 btn-right">
+                        <button class="btn btn-primary" type="button" value="yes" (click)="openModal1()">Yes</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn btn-primary" type="button" value="no" (click)="close()">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="MyPopup1" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <!-- <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    &times;</button>
+                <h4 class="modal-title"></h4>
+            </div> -->
+            <div class="modal-body txt-center">
+               <div> Are You Re-confirming to Close EOD for current Business date <br> {{setDate | date: 'dd-MM-yyyy'}}</div><br>
+                <div class="row">
+                    <div class="col-md-6 btn-right">
+                        <button class="btn btn-primary" type="button" value="yes" (click)="closeModal()">Yes</button>
+                    </div>
+                    <div class="col-md-6 btn-left">
+                        <button class="btn btn-primary" type="button" value="no" (click)="close1()">No</button>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="closeModal()">
+                    Close</button>
+            </div> -->
+        </div>
+    </div>
+</div>
+</div>
