@@ -56,17 +56,17 @@ export class EodComponent implements OnInit {
     this.setDate =this.eodForm.controls.new_eod_date.value;
     let currDate = new Date();
     // let date = currDate.setDate(currDate.getDate() + 1);
-    let date1 = (new Date(currDate)).toLocaleDateString();
-    let newDate = date1.split("/");
-    let oldDate = this.setDate.split('-');
-    // console.log(newDate);
-    if(newDate[1] == oldDate[0] || newDate[1] < oldDate[0]){
-      this.dialog.open(InfoDialogComponent, {
-        width: '400px',
-        data: 'Cannot moved to Future date'
-      })
-      return;
-    }
+    // let date1 = (new Date(currDate)).toLocaleDateString();
+    // let newDate = date1.split("/");
+    // let oldDate = this.setDate.split('-');
+    // // console.log(newDate);
+    // if(newDate[1] == oldDate[0] || newDate[1] < oldDate[0]){
+    //   this.dialog.open(InfoDialogComponent, {
+    //     width: '400px',
+    //     data: 'Cannot moved to Future date'
+    //   })
+    //   return;
+    // }
     this.setNewEodDate()
     $("#MyPopup").modal("show");
   }
