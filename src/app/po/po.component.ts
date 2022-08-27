@@ -17,6 +17,9 @@ export class PoComponent implements OnInit {
   price: string = '';
   cost: number = 0;
   qty: number = 1;
+  exp_date = '';
+  remarks = '';
+  del_branch_id = '';
   showForm = false;
   poList: poItem[] = [];
 
@@ -56,11 +59,14 @@ export class PoComponent implements OnInit {
     this.qty = 1;
     this.cost = 0;
     this.productName = '';
+    this.exp_date = '';
+    this.del_branch_id = '';
+    this.remarks = '';
   }
 
 
   addToList() {
-    const temp = {item_code:'', item_cost:'', qty_ordered:1, item_name:'', net_value:0, item_status:'D'}
+    const temp = {item_code:'', item_cost:'', qty_ordered:1, item_name:'', net_value:0, item_status:'D', remarks:'', del_branch_id:'',exp_del_date:''}
     temp.item_code = '';
     temp.item_cost = '';
     temp.qty_ordered = 1;
@@ -73,6 +79,9 @@ export class PoComponent implements OnInit {
     temp.qty_ordered = this.qty;
     temp.net_value = this.cost;
     temp.item_name = this.selectedProduct.product_name;
+    temp.remarks = this.remarks;
+    temp.exp_del_date = this.exp_date;
+    temp.del_branch_id= this.del_branch_id;
 
     this.poList.push(temp);
     
@@ -124,4 +133,7 @@ export interface poItem {
   net_value: number;
   qty_ordered: number;
   item_status: string;
+  exp_del_date:string;
+  del_branch_id:string;
+  remarks:string;
 }
