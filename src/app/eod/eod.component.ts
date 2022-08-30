@@ -54,16 +54,17 @@ export class EodComponent implements OnInit {
   }
   openModal() {
     this.setDate =this.eodForm.controls.new_eod_date.value;
-    let currDate = new Date();
+    let todayDate = (new Date()).getTime();
+    let systemNewDate = (new Date(this.setDate)).getTime();
     // let date = currDate.setDate(currDate.getDate() + 1);
-    let date1 = (new Date(currDate)).toLocaleDateString();
-    let newDate = date1.split("/");
-    let oldDate = this.setDate.split('-');
-    // console.log(newDate);
-    if(newDate[1] == oldDate[0] || newDate[1] < oldDate[0]){
+    // let date1 = (new Date(currDate)).toLocaleDateString();
+    // let newDate = date1.split("/");
+    // let oldDate = this.setDate.split('-');
+    console.log(systemNewDate);
+    if(todayDate == systemNewDate || todayDate < systemNewDate){
       this.dialog.open(InfoDialogComponent, {
         width: '400px',
-        data: 'Cannot moved to Future date'
+        data: 'Your Current Business Date Cannot be Future Date'
       })
       return;
     }
@@ -92,7 +93,7 @@ export class EodComponent implements OnInit {
     let final = date.setDate(date.getDate() + 1);
     final = (new Date(final)).toLocaleDateString();
     let final1 = final.split("/");
-    final = final1[1]+ '-' + final1[0] + '-' + final1[2];
+    final = final1[0]+ '-' + final1[1] + '-' + final1[2];
     console.log(final);
     this.eodForm.controls.new_eod_date.setValue(final);
     console.log(this.eodForm.value);
@@ -101,7 +102,8 @@ export class EodComponent implements OnInit {
   closeModal() {
     let newDate = this.eodForm.controls.new_eod_date.value;
     let splitDate = newDate.split('-');
-    newDate = splitDate[2] + '-' + splitDate[1] + '-' + splitDate[0];
+    newDate = splitDate[2] + '-' + splitDate[0] + '-' + splitDate[1];
+    let nextDate = splitDate[1] + '-' + splitDate[0] + '-' + splitDate[2];
     const eodDate = this.eodForm.controls.eod_date.value;
     $("#MyPopup1").modal("hide");
     let param = {
@@ -112,7 +114,7 @@ export class EodComponent implements OnInit {
       console.log(data);
       this.dialog.open(InfoDialogComponent, {
         width: '400px',
-        data: 'EOD Saved Successfully!!!'
+        data: 'EOD Completed Successfully.  Your Next Business Date : '+ nextDate
       })
       this.router.navigate(['/landing'])
       // this.getEodDetails();
