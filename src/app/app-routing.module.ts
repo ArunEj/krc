@@ -20,6 +20,8 @@ import { OutstantingPtwiseComponent } from './outstanting-ptwise/outstanting-ptw
 import { SupplierMasterComponent } from './supplier/supplier-master/supplier-master.component';
 import { SupplierProductComponent } from './supplier-product/supplier-product.component';
 import { EodComponent } from './eod/eod.component';
+import { PoComponent } from './po/po.component';
+import { CollectionPaymentwiseReportComponent } from './collection-payment-report/collection-payment-report.component';
 
 
 const routes: Routes = [
@@ -103,7 +105,15 @@ const routes: Routes = [
   {
     path: 'eod',
     component: EodComponent
-  }
+  },
+  {
+    path: 'po',
+    component: PoComponent
+  },
+  {
+    path: 'collection-paymentwise-report',
+    component: CollectionPaymentwiseReportComponent
+  },
 
 ];
 

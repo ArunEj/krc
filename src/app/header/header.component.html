@@ -29,6 +29,16 @@
           </ul>
         </li>
         <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" [routerLink]="'/po'" href="#" id="navbarDropdownMenuLink2"
+            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            PO
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
+            <li class="dropdown-item">PO</li>
+
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink3" role="button"
             data-bs-toggle="dropdown" aria-expanded="false">
             Billing
@@ -52,6 +62,7 @@
           <ul class="dropdown-menu" aria-labelledby="pattientwise-report">
             <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/patientwise-report'" href="#">Patient Type wise Report</a></li>
             <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/collectionwise-report'" href="#">Collectionwise Report</a></li>
+            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/collection-paymentwise-report'" href="#">Collection Paymentwise Report</a></li>
             <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/outstanding-invwise-report'" href="#">Outstanding Invoice wise Report</a></li>
             <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/outstanding-ptwise-report'" href="#">Outstanding Patient wise Report</a></li>
           </ul>

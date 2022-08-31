@@ -1,0 +1,119 @@
+<app-header></app-header>
+<div class="container">
+    <div class="row">
+        <h3>PO</h3>
+    </div>
+    <div class="row">
+        <mat-form-field appearance="fill" class="col-4">
+
+            <mat-label>Supplier Id</mat-label>
+            <input matInput type="text" name="supId" [(ngModel)]="supId">
+
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="col-4">
+
+            <mat-label>Branch Id</mat-label>
+            <input matInput type="text" readonly [value]="branch_id">
+
+        </mat-form-field>
+        <button mat-raised-button color="primary" class="col-2 btn-ht" [disabled]="supId === ''" (click)="getSupplierProducts()">Get
+            Products</button>
+    </div>
+
+    <div class="row" *ngIf="productList && productList.length>0 && !showForm">
+        <button color="primary" mat-raised-button class="col-2 btn-ht" (click)="showPOForm()">Add Product</button>
+
+        <button color="primary" mat-raised-button *ngIf="poList && poList.length>0" class="col-2 ms-1 btn-ht"
+            (click)="createPo()">Create PO</button>
+
+        <table class="table mar20" *ngIf="poList && poList.length>0">
+            <thead>
+                <tr>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Qty</th>
+                    <th scope="col">Net Value</th>
+                    <th scope="col">Exp Date</th>
+                    <th scope="col">Del branch</th>
+                    <th scope="col">Remarks</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of poList; let index">
+
+                    <td>{{item.item_name}}</td>
+                    <td>{{item.item_cost}}</td>
+                    <td>{{item.qty_ordered}}</td>
+                    <td>{{item.net_value}}</td>
+                    <td>{{item.exp_del_date}}</td>
+                    <td>{{item.del_branch_id}}</td>
+                    <td>{{item.remarks}}</td>
+
+
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <div class="row mt-2" *ngIf="showForm">
+        <h4>Add Product</h4>
+        <mat-form-field class="example-full-width" appearance="fill" class="col-2">
+            <mat-label>Product</mat-label>
+            <input type="text" placeholder="Pick one" aria-label="Number" matInput [matAutocomplete]="auto"
+                [(ngModel)]="productName">
+            <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let option of productList" [value]="option.product_name"
+                    (onSelectionChange)="selectProduct(option)">
+                    {{option.product_name}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="col-2">
+
+            <mat-label>Price</mat-label>
+            <input matInput type="text" readonly [(ngModel)]="price">
+
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="col-1">
+
+            <mat-label>Qty</mat-label>
+            <input matInput type="number" min='1' (ngModelChange)="setCost($event)" [(ngModel)]="qty">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="col-2">
+
+            <mat-label>Cost</mat-label>
+            <input matInput type="text" readonly [(ngModel)]="cost">
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="col-2">
+            <input matInput [matDatepicker]="picker" [(ngModel)]="exp_date">
+            <mat-hint>DD/MM/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="col-2">
+
+            <mat-label>Delete Branch</mat-label>
+            <input matInput type="text"  [(ngModel)]="del_branch_id">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="col-2">
+
+            <mat-label>Remarks</mat-label>
+            <input matInput type="text"  [(ngModel)]="remarks">
+        </mat-form-field>
+
+        <div class="row">
+            <button color="primary" mat-raised-button class="col-2 btn-ht" (click)="addToList()">Add Item</button>
+        </div>
+
+    </div>
+</div>
