@@ -12,8 +12,9 @@ export interface LabItem {
   purchase_price?: number;
   eff_from?: any;
   credit_days?: number;
-  check?: any;
   bu_id?: any;
+  active_flag?: string
+  // check?: number;
 }
 
 @Component({
@@ -31,7 +32,16 @@ export class SupplierProductComponent implements OnInit {
   getSuppProds: any;
   productList: any;
   buList: any;
-  buForm!: FormGroup;
+  prodItem = {
+    product_id: '',
+    product_name: '',
+    purchase_price: 0,
+    eff_from: '',
+    credit_days: 0,
+    active_flag: ''
+    // check: 0
+  }
+  // buForm!: FormGroup;
 
   constructor(private supplierProdSer: SupplierProductService,
     private formBuilder: FormBuilder, private dialog: MatDialog,
@@ -42,9 +52,9 @@ export class SupplierProductComponent implements OnInit {
     this.getSupplierId();
     // this.getProductList();
     this.fetchBu();
-    this.buForm = this.formBuilder.group({
-      bu_id: ['']
-    })
+    // this.buForm = this.formBuilder.group({
+    //   bu_id: ['']
+    // })
   }
 
   supplierProduct() {
@@ -52,23 +62,46 @@ export class SupplierProductComponent implements OnInit {
       {
         branch_id: ['', [Validators.required]],
         supplier_id: ['', Validators.required],
-        supplier_name: ['', [Validators.required]]
+        supplier_name: ['', [Validators.required]],
+        bu_id: ['', []],
+        product_id: ['', [Validators.required]],
+        product_name: ['', [Validators.required]],
+        purchase_price: ['', []],
+        eff_from: ['', [Validators.required]],
+        credit_days: ['', []]
       }
     );
   }
 
   addRecord() {
+    if(this.supplierProductForm.valid){
+      this.tableData.push(this.prodItem);
+      this.resetData();
+    }
     // this.buForm.controls.bu_id.setValue(this.buForm.value.bu_id);
-    this.tableData.push({
-      id: this.tableData.length,
+    // this.tableData.push({
+    //   id: this.tableData.length,
+    //   product_id: '',
+    //   product_name: '',
+    //   purchase_price: 0,
+    //   eff_from: '',
+    //   credit_days: 0,
+    //   check: 0,
+    //   bu_id: this.supplierProductForm.value.bu_id
+    // })
+  }
+
+  resetData() {
+    this.prodItem = {
       product_id: '',
       product_name: '',
       purchase_price: 0,
       eff_from: '',
       credit_days: 0,
-      check: 0,
-      bu_id: this.buForm.value.bu_id
-    })
+      active_flag: ''
+      // check: 0
+    }
+    this.supplierProductForm
   }
 
   delete_item(item: any) {
@@ -77,14 +110,14 @@ export class SupplierProductComponent implements OnInit {
   }
 
   getProductList(id: any) {
-    let bu_id = this.buForm.value.bu_id;
+    let bu_id = this.supplierProductForm.value.bu_id;
     let branch_id = localStorage.getItem('branch_id')
     this.supplierProdSer.getSupplierProdList(bu_id, branch_id).subscribe(data => {
-      this.tableData.forEach(element => {
-        if(element.id == id){
+      // this.tableData.forEach(element => {
+      //   if(element.id == id){
           this.productList = data.results;
-        }
-      });
+      //   }
+      // });
       // console.log("productList", this.productList);
     })
   }
@@ -100,14 +133,22 @@ export class SupplierProductComponent implements OnInit {
     })
   }
 
-  getProductId($event: any){
-    for(var i=0; i<this.SupplierProdData.length;i++){
-      for(var j=0;j< this.tableData.length;j++){
-        if(this.SupplierProdData[i].product_id == this.tableData[j].product_id){
-          this.tableData[j].product_name = this.SupplierProdData[i].product_name;
+  setProductId($event: any){
+    console.log("event", $event);
+    if($event !== ''){
+      this.productList.forEach((element: any) => {
+        if(element.product_name == $event){
+          this.supplierProductForm.controls.product_id.setValue(element.product_id);
         }
-      }
+      });
     }
+    // for(var i=0; i<this.SupplierProdData.length;i++){
+    //   for(var j=0;j< this.tableData.length;j++){
+    //     if(this.SupplierProdData[i].product_id == this.tableData[j].product_id){
+    //       this.tableData[j].product_name = this.SupplierProdData[i].product_name;
+    //     }
+    //   }
+    // }
   }
 
   onChange(id: any){
@@ -115,19 +156,21 @@ export class SupplierProductComponent implements OnInit {
     let branchId = localStorage.getItem('branch_id');
     let supplierId = id;
     this.supplierProdSer.getSupplierProd(branchId, supplierId).subscribe(data => {
-      // console.log("data", data);
+      console.log("data", data);
       this.SupplierProdData = data.results;
     })
     // this.supplierProduct();
   }
 
   submit() {
+    this.addRecord();
     this.tableData.forEach(element => {
-      if(element.check == 0){
-        let date = (element.eff_from).split("-");
-        element.eff_from = date[2] + '-' + date[1] + '-' + date[0];
-        element.check++;
-      }
+      element.active_flag = 'Y';
+      // if(element.check == 0){
+      //   let date = (element.eff_from).split("-");
+      //   element.eff_from = date[2] + '-' + date[1] + '-' + date[0];
+      //   element.check++;
+      // }
     });
     console.log("tableDate submit", this.tableData);
     let params = {
@@ -151,8 +194,7 @@ export class SupplierProductComponent implements OnInit {
     })
   }
 
-  fetchProductsDynamic(id: any) {
-    console.log("id", id);
-    this.buForm.value.bu_id ? this.getProductList(id) : '';
+  fetchProductsDynamic() {
+    this.supplierProductForm.value.bu_id ? this.getProductList(this.supplierProductForm.value.bu_id) : '';
   }
 }
