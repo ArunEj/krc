@@ -4,6 +4,7 @@ import { PaymentService } from './payment.service';
 import { BillingService } from '../billing/billing.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Location } from '@angular/common';
+import { PromptDialogComponent } from '../utilities/prompt-dialog/prompt-dialog.component';
 
 export interface DialogData {
   branch_id: string,
@@ -30,6 +31,7 @@ export class PaymentComponent implements OnInit {
   invoiceDetails: any;
   invoiceArray: any = [];
   billingArray: any = [];
+  payTypes:payType[] =[];
   paymentItem = {
     org_id: localStorage.getItem('org_id'),
     branch_id: localStorage.getItem('branch_id'),
@@ -52,6 +54,10 @@ export class PaymentComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.ps.getPaymentTypes().subscribe(types => {
+      console.log(types);
+      this.payTypes = types.results;
+    })
     this.route.params.subscribe(data => {
       this.invoice = data.item;
       // this.paymentItem.patient_id = data.patient_id;
@@ -97,27 +103,25 @@ export class PaymentComponent implements OnInit {
         this.paymentItem.inv_srl_no = result.inv_srl_no;
         this.paymentItem.invoice_no = result.invoice_no;
         // this.paymentItem.patient_id = this.bs.patient_id;
-        this.makePayment();
+        const prompt = this.dialog.open(PromptDialogComponent, {
+          width: '250px',
+          data: "Received Rs." + result.amt_payment + " Through " + this.fetchPaytype(result.payment_mode)
+        })
+
+        prompt.afterClosed().subscribe(result => {
+          if (result) {
+            this.makePayment();
+          } else {
+            this.resetFields();
+          }
+        })
       } else {
-        this.paymentItem = {
-          org_id: localStorage.getItem('org_id'),
-          branch_id: localStorage.getItem('branch_id'),
-          user_id: localStorage.getItem('user_id'),
-          invoice_no: this.invoice,
-          inv_srl_no: '',
-          payment_amount: '',
-          payment_mode: '',
-          payment_remark: '',
-          updated_by: localStorage.getItem('user_id')
-        }
+        this.resetFields();
       }
 
     });
   }
   makePayment() {
-
-
-
     this.ps.submitPayment(this.paymentItem).subscribe(data => {
       alert('payment done');
       this.paymentItem = {
@@ -138,18 +142,46 @@ export class PaymentComponent implements OnInit {
       });
     })
   }
+
+  fetchPaytype(payMode: any) {
+    let payDes;
+    this.payTypes.forEach(item => {
+      if (item.ref_code === payMode){
+        payDes = item.ref_desc;
+      }       
+      
+    })
+    return payDes;
+  }
+  resetFields() {
+    this.paymentItem = {
+      org_id: localStorage.getItem('org_id'),
+      branch_id: localStorage.getItem('branch_id'),
+      user_id: localStorage.getItem('user_id'),
+      invoice_no: this.invoice,
+      inv_srl_no: '',
+      payment_amount: '',
+      payment_mode: '',
+      payment_remark: '',
+      updated_by: localStorage.getItem('user_id')
+    }
+  }
   navigateToInvoice() {
     this.router.navigate(['invoice', { patient_id: this.patientHeader.patient_id }]);
     //this._location.back();
   }
 }
-
+interface payType {
+  ref_type: string,
+  ref_code: string,
+  ref_desc: String
+}
 @Component({
   selector: 'dialog-overview-example-dialog',
   templateUrl: 'dialog-overview-example-dialog.html',
 })
 export class DialogOverviewExampleDialog implements OnInit {
-
+  payTypes: payType[] = [];
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
     private ps: PaymentService,
@@ -158,11 +190,12 @@ export class DialogOverviewExampleDialog implements OnInit {
   ngOnInit() {
     this.ps.getPaymentTypes().subscribe(types => {
       console.log(types);
+      this.payTypes = types.results;
     })
-    this.maxAmount = this.data.net_balance;    
+    this.maxAmount = this.data.net_balance;
   }
+  
   onNoClick(): void {
-
     this.dialogRef.close();
   }
   showAdvanceError = false;
@@ -181,11 +214,11 @@ export class DialogOverviewExampleDialog implements OnInit {
           this.showAdvanceError = true;
           //return false;
         }
-       } else {
+      } else {
         this.showAdvanceError = false;
-       }
+      }
     }
-    
+
   }
 
   validateAmount() {
@@ -198,7 +231,7 @@ export class DialogOverviewExampleDialog implements OnInit {
     }
   }
 
- 
+
 
 
 }

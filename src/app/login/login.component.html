@@ -4,7 +4,7 @@
     <h1>Login</h1>
     <form class="col-lg-6" #loginForm="ngForm" novalidate>
       <div *ngIf="!validUser" class="alert alert-danger" role="alert">
-        This is a danger alert—check it out!
+        Username or Password is Invalid. Please check credentials
       </div>
       <div class="mb-3">
         <label for="userId" class="form-label">User ID</label>
@@ -17,7 +17,7 @@
         <input type="password" required class="form-control" name="pwd" [(ngModel)]="loginObj.pwd" id="pwd">
       </div>
 
-      <button [disabled]="!loginForm.valid || !validUser" (click)="login()" class="btn btn-primary">Login</button>
+      <button [disabled]="!loginForm.valid " (click)="login()" class="btn btn-primary">Login</button>
     </form>
   </div>
 

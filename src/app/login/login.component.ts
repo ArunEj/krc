@@ -11,13 +11,18 @@ export class LoginComponent implements OnInit {
   loginObj = { userId: '', pwd: '' }
   validUser: boolean = true;
   constructor(private router: Router,
-    private loginService: LoginService, private auth:AuthService) { }
+    private loginService: LoginService, private auth: AuthService) { }
 
   ngOnInit(): void {
     this.loginService.isUserLoggedIn = false;
   }
   login() {
     this.loginService.login(this.loginObj).subscribe(response => {
+      if (response.status === 401) {
+        this.validUser = false;
+        this.loginService.isUserLoggedIn = false;
+        return;
+      }
       this.validUser = true;
       this.loginService.isUserLoggedIn = true;
       this.loginService.userData = response.user;
