@@ -1,7 +1,8 @@
 <app-header></app-header>
 <div class="container fs-14" *ngIf="!isShowPrint">
         <div class="row" *ngIf="!patientInvoiceDetail">
-            <div>Patient Details</div>
+            <app-patient-header (outputPatientInsHeader)="patientHeaderData($event)" [insurance]="ins_flag"></app-patient-header>
+            <!-- <div>Patient Details</div>
             <div class="patient-details">
                 <label for="contact" class="form-label">Contact</label>
                 <input type="text" class="form-control contact-input" required name="contact" [(ngModel)]="mobile_no"
@@ -37,7 +38,7 @@
                   <br>
                 <button (click)="fetchUserInvoices()" [disabled]="!mobile_no" class="btn btn-primary mar20t">fetch
                     Invoices</button>
-            </div>
+            </div> -->
         </div>
         <div *ngIf="patientHeader" class="row header-border">
             <div class="">

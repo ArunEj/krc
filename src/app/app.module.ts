@@ -43,6 +43,7 @@ import { FilterPipe } from './supplier/supplier-master/filter';
 import { EodComponent } from './eod/eod.component';
 import {CollectionPaymentwiseReportComponent } from './collection-payment-report/collection-payment-report.component';
 import { PoComponent } from './po/po.component';
+import { InsuranceSummaryComponent } from './insurance-summary/insurance-summary.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -81,7 +82,8 @@ import { PoComponent } from './po/po.component';
     FilterPipe,
     EodComponent,
     PoComponent,
-    CollectionPaymentwiseReportComponent
+    CollectionPaymentwiseReportComponent,
+    InsuranceSummaryComponent
   ],
   imports: [
     BrowserModule,

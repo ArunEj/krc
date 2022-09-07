@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, Input } from '@angular/core';
 import { PatientHeaderService } from './patient-header.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PatientListDialogComponent } from '../utilities/patient-list-dialog/patient-list-dialog.component';
@@ -12,6 +12,7 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 export class PatientHeaderComponent implements OnInit {
   @Output()
   outputPatientHeader = new EventEmitter();
+  @Output() outputPatientInsHeader = new EventEmitter();
   searchType: string = '';
   patient_name: string = '';
   headerDetail: any;
@@ -24,6 +25,10 @@ export class PatientHeaderComponent implements OnInit {
   @ViewChild(MatTable, { static: true }) table: MatTable<any> | undefined;
   displayedColumns: string[] = ['radio','patient_name', 'father_name','mobile_no','age', 'dob','sex','patient_type' ];
   selectedPerson:any;
+  //insurance
+  month: string = '';
+  year: string = '';
+  @Input() insurance: any;
   constructor(private patientHeaderService: PatientHeaderService,
     private dialog: MatDialog) { }
 
@@ -70,7 +75,14 @@ export class PatientHeaderComponent implements OnInit {
       this.patientHeaderService.fetchHeader(data.patient_id).subscribe(data => {
         this.headerDetail = true;
         this.patientHeader = data;
-        this.outputPatientHeader.emit(this.patientHeader);
+        if(this.insurance){
+          console.log(this.month, this.year)
+          let month = this.month;
+          let year = this.year;
+          this.outputPatientInsHeader.emit({data, month, year});
+        }else{
+          this.outputPatientHeader.emit(this.patientHeader);
+        }
       });
 
     })

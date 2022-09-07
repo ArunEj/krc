@@ -13,6 +13,32 @@
       <input type="text" class="form-control contact-input" required name="contact" [(ngModel)]="mobile_no"
         id="contact">
       <br>
+      <!-- insurnace data -->
+      <div class="row" *ngIf="insurance">
+        <div class="col-2">
+            <label for="month" class="">Month :</label>
+            <select class="form-control" name="month" [(ngModel)]="month">
+                <option value="undefined" selected disabled>--Select--</option>
+                <option value="1">Jan</option>
+                <option value="2">Feb</option>
+                <option value="3">Mar</option>
+                <option value="4">Apr</option>
+                <option value="5">May</option>
+                <option value="6">Jun</option>
+                <option value="7">Jul</option>
+                <option value="8">Aug</option>
+                <option value="9">Sep</option>
+                <option value="10">Oct</option>
+                <option value="11">Nov</option>
+                <option value="12">Dec</option>
+            </select>
+        </div>
+        <div class="col-2">
+            <label for="year" class="">Year :</label>
+            <input type="text" class="form-control year-input" maxlength="4" name="year" [(ngModel)]="year"
+                id="year">
+        </div>
+      </div>
       <button (click)="fetchUser()" [disabled]="!mobile_no" class="btn btn-primary mar20t">fetch
         contact details</button>
     </div>

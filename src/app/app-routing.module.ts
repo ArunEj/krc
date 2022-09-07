@@ -22,7 +22,7 @@ import { SupplierProductComponent } from './supplier-product/supplier-product.co
 import { EodComponent } from './eod/eod.component';
 import { PoComponent } from './po/po.component';
 import { CollectionPaymentwiseReportComponent } from './collection-payment-report/collection-payment-report.component';
-
+import { InsuranceSummaryComponent } from './insurance-summary/insurance-summary.component';
 
 const routes: Routes = [
   {
@@ -114,6 +114,10 @@ const routes: Routes = [
     path: 'collection-paymentwise-report',
     component: CollectionPaymentwiseReportComponent
   },
+  {
+    path: 'insurance-summary',
+    component: InsuranceSummaryComponent
+  }
 
 ];
 
