@@ -51,7 +51,7 @@
                     <td *ngIf="!billing"><a href=""
                             [routerLink]="['/invoice', item.invoice_no]">{{item.invoice_no}}</a>
                     </td>
-                    <td>{{item.updated_date | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{item.inv_date | date: 'dd/MM/yyyy'}}</td>
                     <td>{{item.total_base_amt}}</td>
                     <td>{{item.total_charges}}</td>
                     <td>{{item.gross_amt}}</td>

@@ -372,11 +372,8 @@ export class BillingComponent implements OnInit {
     this.showBillingForm = false;
     this.options = [];
     this.calculateFinal();
-    this.resetFields();
-    this.clearValidation(this.myForm, this.myControl);
-    // this.billingArray.forEach((element: { net_amount: number; total_charges:number; gross_discount:number}) => {
-
-    //});
+    //this.resetFields();
+    //this.clearValidation(this.myForm, this.myControl);   
 
   }
   clearValidation(myForm: any, myControl: any) {
@@ -485,6 +482,9 @@ export class BillingComponent implements OnInit {
   createItem() {
     this.showBillingForm = true;
     this.isShowHeader = true;
+    if(this.billingItem.bu_id){
+      this.fetchProductsDynamic(this.billingItem.bu_id);
+    }
   }
 
   patientHeaderData(data: any) {

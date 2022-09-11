@@ -29,7 +29,7 @@
             <thead>
                 <tr>
                     <th scope="col">Serial#</th>
-                    <!-- <th scope="col">Product Type</th> -->
+                    <th scope="col">BU</th>
                     <th scope="col">Net Amount</th>                    
                     <th scope="col">Net Paid</th>
                     <th scope="col">Net Balance</th>
@@ -40,7 +40,7 @@
                 <tr *ngFor="let item of billingArray; let index">
 
                     <td>{{item.inv_srl_no}}</td>
-                    <!-- <td>{{item.billAlias}}</td> -->
+                    <td>{{item.bu_id}}</td>
                     <td>{{item.net_amount}}</td> 
                     <td>{{item.net_paid}}</td>
                     <td>{{item.net_balance}}</td>
