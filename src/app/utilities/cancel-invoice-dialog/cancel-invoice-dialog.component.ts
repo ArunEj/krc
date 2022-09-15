@@ -2,30 +2,27 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 @Component({
-  selector: 'app-info-dialog',
-  templateUrl: './prompt-dialog.component.html',
-  styleUrls: ['./prompt-dialog.component.scss']
+  selector: 'app-cancel-invoice-dialog',
+  templateUrl: './cancel-invoice-dialog.component.html',
+  styleUrls: ['./cancel-invoice-dialog.component.scss']
 })
-export class PromptDialogComponent implements OnInit {
+export class CancelInvoiceDialogComponent implements OnInit {
 message:any;
-showConfirm = false;
+remarks:any
   constructor(
-    public dialogRef: MatDialogRef<PromptDialogComponent> ,
+    public dialogRef: MatDialogRef<CancelInvoiceDialogComponent> ,
     private router: Router,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
 
   ngOnInit(): void {
     this.message = this.data;
-    if(this.message.indexOf('Received Rs.')>=0){
-      this.showConfirm = true;
-    }
   }  
   onNoClick(): void {
     this.dialogRef.close();
   }
   cancelItem():void{
    
-    this.dialogRef.close(true);
+    this.dialogRef.close(this.remarks);
   }
   }

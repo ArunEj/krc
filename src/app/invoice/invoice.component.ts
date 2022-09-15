@@ -5,6 +5,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { PatientListDialogComponent } from '../utilities/patient-list-dialog/patient-list-dialog.component';
 import { InfoDialogComponent } from '../utilities/info-dialog/info-dialog.component'
 import { PromptDialogComponent } from '../utilities/prompt-dialog/prompt-dialog.component';
+import { CancelInvoiceDialogComponent } from '../utilities/cancel-invoice-dialog/cancel-invoice-dialog.component';
 @Component({
   selector: 'app-invoice',
   templateUrl: './invoice.component.html',
@@ -19,7 +20,7 @@ export class InvoiceComponent implements OnInit {
   invoiceDetails: any;
   patientInvoiceDetail = false;
   //patientHeader: any;
-  patientHeaderData:any
+  patientHeaderData: any
   patientList = [];
   constructor(private is: InvoiceService,
     private dialog: MatDialog, private router: Router, private route: ActivatedRoute) {
@@ -96,8 +97,8 @@ export class InvoiceComponent implements OnInit {
       "org_id": localStorage.getItem('org_id'),
       "branch_id": localStorage.getItem('branch_id'),
       "invoice_no": invoice.invoice_no,
-      "inv_status": "C"
-
+      "inv_status": "C",
+      "cancel_remarks": ''
     }
     const prompt = this.dialog.open(PromptDialogComponent, {
       width: '300px',
@@ -105,20 +106,31 @@ export class InvoiceComponent implements OnInit {
     });
     prompt.afterClosed().subscribe(data => {
       if (data) {
-        this.is.cancelInvoice(cancelObj).subscribe(data => {
-          this.patientInvoiceDetail = false;
-          this.invoiceDetails = [];
-          this.dialog.open(InfoDialogComponent, {
-            width: '300px',
-            data: 'Invoice cancellation is successful!'
-          });
-
-        }, error => {
-          this.dialog.open(InfoDialogComponent, {
-            width: '300px',
-            data: 'Invoice cancellation is not successful!'
-          });
+        const cinvoice = this.dialog.open(CancelInvoiceDialogComponent, {
+          width: '300px',
+          data: 'Please provide remarks and proceed to cancel'
         });
+        cinvoice.afterClosed().subscribe(data => {
+          if (data) {
+            cancelObj.cancel_remarks = data;
+            this.is.cancelInvoice(cancelObj).subscribe(data => {
+              this.patientInvoiceDetail = false;
+              this.invoiceDetails = [];
+              this.dialog.open(InfoDialogComponent, {
+                width: '300px',
+                data: 'Invoice cancellation is successful!'
+              });
+
+            }, error => {
+              this.dialog.open(InfoDialogComponent, {
+                width: '300px',
+                data: 'Invoice cancellation is not successful!'
+              });
+            });
+          }
+
+        })
+
 
       }
     })

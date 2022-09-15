@@ -405,6 +405,17 @@ export class BillingComponent implements OnInit {
     this.editBillingItem = false;
     this.showBillingForm = false;
     this.billingArray.push(this.billingItem);
+    let total = 0
+    let tgdisc = 0;
+    let tgother = 0;
+    this.billingArray.forEach((element: any) => {
+      total += element.net_amount;
+      tgdisc += element.gross_discount;
+      tgother += element.total_charges;
+    });
+    this.totalAmount = total;
+    this.totalGrossDiscount = tgdisc;
+    this.totalOtherCharges = tgother;
     this.resetFields();
   }
   resetFields() {
@@ -482,7 +493,7 @@ export class BillingComponent implements OnInit {
   createItem() {
     this.showBillingForm = true;
     this.isShowHeader = true;
-    if(this.billingItem.bu_id){
+    if (this.billingItem.bu_id) {
       this.fetchProductsDynamic(this.billingItem.bu_id);
     }
   }

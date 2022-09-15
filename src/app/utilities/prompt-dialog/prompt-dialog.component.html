@@ -5,5 +5,6 @@
 </div>
 <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">No</button>
-    <button mat-button  (click)="cancelItem()" cdkFocusInitial>Yes</button>
+    <button mat-button  (click)="cancelItem()" *ngIf="!showConfirm" cdkFocusInitial>Yes</button>
+    <button mat-button  (click)="cancelItem()" *ngIf="showConfirm" cdkFocusInitial>Confirm</button>
 </div>
