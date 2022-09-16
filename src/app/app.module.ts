@@ -42,6 +42,7 @@ import { SupplierProductComponent } from './supplier-product/supplier-product.co
 import { FilterPipe } from './supplier/supplier-master/filter';
 import { EodComponent } from './eod/eod.component';
 import { CancelInvoiceDialogComponent } from './utilities/cancel-invoice-dialog/cancel-invoice-dialog.component'
+import { ViewProductDialogComponent } from './utilities/view-product-dialog/view-product-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -79,7 +80,8 @@ import { CancelInvoiceDialogComponent } from './utilities/cancel-invoice-dialog/
     SupplierProductComponent,
     FilterPipe,
     EodComponent,
-    CancelInvoiceDialogComponent
+    CancelInvoiceDialogComponent,
+    ViewProductDialogComponent
   ],
   imports: [
     BrowserModule,

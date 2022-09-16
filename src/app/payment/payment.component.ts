@@ -5,7 +5,7 @@ import { BillingService } from '../billing/billing.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Location } from '@angular/common';
 import { PromptDialogComponent } from '../utilities/prompt-dialog/prompt-dialog.component';
-
+import { ViewProductDialogComponent } from '../utilities/view-product-dialog/view-product-dialog.component';
 export interface DialogData {
   branch_id: string,
   patient_id: '',
@@ -31,7 +31,7 @@ export class PaymentComponent implements OnInit {
   invoiceDetails: any;
   invoiceArray: any = [];
   billingArray: any = [];
-  payTypes:payType[] =[];
+  payTypes: payType[] = [];
   paymentItem = {
     org_id: localStorage.getItem('org_id'),
     branch_id: localStorage.getItem('branch_id'),
@@ -146,10 +146,10 @@ export class PaymentComponent implements OnInit {
   fetchPaytype(payMode: any) {
     let payDes;
     this.payTypes.forEach(item => {
-      if (item.ref_code === payMode){
+      if (item.ref_code === payMode) {
         payDes = item.ref_desc;
-      }       
-      
+      }
+
     })
     return payDes;
   }
@@ -169,6 +169,16 @@ export class PaymentComponent implements OnInit {
   navigateToInvoice() {
     this.router.navigate(['invoice', { patient_id: this.patientHeader.patient_id }]);
     //this._location.back();
+  }
+
+  displayProducts() {
+    this.ps.fetchBilling(this.invoice).subscribe(data => {
+      const dialogRef = this.dialog.open(ViewProductDialogComponent, {
+        width: '500px',
+        data:data.invoice_details ,
+      });
+    })
+
   }
 }
 interface payType {
@@ -194,7 +204,7 @@ export class DialogOverviewExampleDialog implements OnInit {
     })
     this.maxAmount = this.data.net_balance;
   }
-  
+
   onNoClick(): void {
     this.dialogRef.close();
   }

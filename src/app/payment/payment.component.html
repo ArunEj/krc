@@ -46,7 +46,7 @@
                     <td>{{item.net_balance}}</td>
                                       
                    
-                    <td><button [disabled]="item.inv_status === 'F'" (click)="showPayment(item)">Make Payment</button></td>
+                    <td><button [disabled]="item.inv_status === 'F'" (click)="showPayment(item)">Make Payment</button></td>                    
                 </tr>
             </tbody>
         </table>
@@ -54,6 +54,9 @@
     <div *ngIf="billingArray.length === 0">
         No pending Invoice Payment
     </div>
-    <div><button (click)="navigateToInvoice()" class="btn btn-primary mar20t">Back to Invoice
-        </button></div>
+    <div><button (click)="navigateToInvoice()" class="btn btn-primary mar20">Back to Invoice
+        </button> 
+        <button (click)="displayProducts()" class="btn btn-primary mar20">View Products
+        </button>
+    </div>
 </div>

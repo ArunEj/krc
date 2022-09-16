@@ -41,6 +41,14 @@ export class PaymentService {
     return this.http.get(environment.apiUrl + 'billingbudetails/'+inv_no,
       { headers: headers })
   }
+
+
+  fetchBilling(inv_no:string):Observable<any>{
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(environment.apiUrl + 'billing/'+inv_no,
+      { headers: headers })
+  }
  
 
 }
