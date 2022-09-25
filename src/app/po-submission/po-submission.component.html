@@ -1,0 +1,111 @@
+<app-header></app-header>
+<div class="container">
+    <div class="row">
+        <h3>PO</h3>
+    </div>
+    <form [formGroup]="poSubForm">
+        <div class="row">
+            <div class="col-3">
+                <div class=" supplier-item">
+                    <label for="branch_id" class="form-label">Ordering Branch<span class="txt-danger">*</span></label>
+                    <select class="form-control" name="branch_id"  formControlName="branch_id" (change)="getSupplierList()">
+                        <option *ngFor="let branch of branchList;" [value]="branch.branch_id">{{branch.branch_name}}</option>
+
+                    </select>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="supplier-item">
+                    <label for="supplier_name" class="form-label">Supplier Name<span class="txt-danger">*</span></label>
+                    <select class="form-control" name="supplier_name"  formControlName="supplier_name" (change)="onChangeSupplier()">
+                        <option *ngFor="let suppData of supplierIdData" [value]="suppData.supplier_name">{{suppData.supplier_name}}</option>
+
+                    </select>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class=" supplier-item">
+                    <label for="supplier_id" class="form-label">Supplier ID</label>
+                    <input type="text" class="form-control" formControlName="supplier_id"
+                        name="supplier_id"  id="supplier_id">
+                </div>
+                <br>
+            </div>
+            
+        <hr>
+        </div>
+        <br>
+    </form>
+    <br>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th>PO#</th>
+            <th>PO Date</th>
+            <th>PO Value</th>
+            <th>Action</th>
+          </tr> 
+        </thead>
+        <tbody>
+            <ng-container *ngIf="poDraftData && poDraftData.length > 0">
+                <tr *ngFor="let item of poDraftData">
+
+                    <td class="pointer" (click)="setPoData(item.po_number)">{{item.po_number}}</td>
+        
+                    <td>{{item.po_date | date: 'dd-MM-yyyy'}}</td>
+
+                    <td>{{item.po_value}}</td>
+                    
+                    <td><mat-checkbox class="example-margin" color="primary" (click)="checked(item)"></mat-checkbox></td>
+                </tr>
+            </ng-container>
+        </tbody>
+      </table>
+      <br>
+      <hr>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <!-- <th>Item Code</th> -->
+            <th>Item Desc</th>
+            <th>Item Cost</th>
+            <th>Qty Order</th>
+            <th>Total cost</th>
+            <th>Deliver By</th>
+            <th>Delivery Branch</th>
+            <th>Remarks</th>
+          </tr> 
+        </thead>
+        <tbody>
+            <ng-container *ngIf="poList && poList.length > 0">
+                <tr *ngFor="let poData of poList">
+                    <td>{{poData.product_name}}</td>
+
+                    <td>{{poData.item_cost}}</td>
+        
+                    <td>{{poData.qty_ordered}}</td>
+
+                    <td>{{poData.net_value}}</td>
+
+                    <td>{{poData.exp_del_date | date: 'dd-MM-yyyy'}}</td>  
+                    
+                    <td>{{poData.del_branch_name}}</td>
+
+                    <td>{{poData.remarks}}</td>
+                
+                </tr>
+            </ng-container>
+        </tbody>
+      </table>
+      <br>
+      <div class="row">
+          <div class="col-6 d-flex">
+                  <div class="col-4">
+                      <button class="btn btn-primary" (click)="submitPoSupplier()">Submit PO to Supplier</button>
+                  </div>
+                  <div class="col-2">
+                    <button class="btn btn-primary" (click)="cancelPo()">Cancel PO</button>
+                </div>
+          </div>
+      </div>
+</div>

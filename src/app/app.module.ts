@@ -44,6 +44,8 @@ import { EodComponent } from './eod/eod.component';
 import {CollectionPaymentwiseReportComponent } from './collection-payment-report/collection-payment-report.component';
 import { PoComponent } from './po/po.component';
 import { InsuranceSummaryComponent } from './insurance-summary/insurance-summary.component';
+import { PoSubmissionComponent } from './po-submission/po-submission.component';
+import { GoodsReceiptComponent } from './goods-receipt/goods-receipt.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -83,7 +85,9 @@ import { InsuranceSummaryComponent } from './insurance-summary/insurance-summary
     EodComponent,
     PoComponent,
     CollectionPaymentwiseReportComponent,
-    InsuranceSummaryComponent
+    InsuranceSummaryComponent,
+    PoSubmissionComponent,
+    GoodsReceiptComponent
   ],
   imports: [
     BrowserModule,

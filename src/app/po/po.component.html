@@ -9,14 +9,14 @@
                 <div class=" supplier-item">
                     <label for="branch_id" class="form-label">Ordering Branch<span class="txt-danger">*</span></label>
                     <select class="form-control" name="branch_id"  formControlName="branch_id" (change)="getSupplierList()">
-                        <option *ngFor="let branch of branchList;" [value]="branch.branch_id">{{branch.branch_id}}</option>
+                        <option *ngFor="let branch of branchList;" [value]="branch.branch_id">{{branch.branch_name}}</option>
 
                     </select>
                 </div>
             </div>
             <div class="col-3">
                 <div class="supplier-item">
-                    <label for="supplier_name" class="form-label">Supplier ID<span class="txt-danger">*</span></label>
+                    <label for="supplier_name" class="form-label">Supplier Name<span class="txt-danger">*</span></label>
                     <select class="form-control" name="supplier_name"  formControlName="supplier_name" (change)="onChangeSupplier()">
                         <option *ngFor="let suppData of supplierIdData" [value]="suppData.supplier_name">{{suppData.supplier_name}}</option>
 
@@ -25,9 +25,9 @@
             </div>
             <div class="col-3">
                 <div class=" supplier-item">
-                    <label for="supplier_id" class="form-label">Supplier Name</label>
+                    <label for="supplier_id" class="form-label">Supplier ID</label>
                     <input type="text" class="form-control" formControlName="supplier_id"
-                        name="supplier_id"  id="supplier_id">
+                        name="supplier_id"  id="supplier_id" readonly>
                 </div>
             </div>
             <div class="col-2">
@@ -47,11 +47,18 @@
             <div class="col-3">
                 <div class="supplier-item">
                     <label for="po_date" class="form-label">PO Date</label>
-                    <input type="text" class="form-control" formControlName="po_date"
+                    <input type="date" class="form-control" formControlName="po_date"
                         name="po_date"  id="po_date" readonly>
                 </div>
             </div>
             <div class="col-3">
+                <div class="supplier-item">
+                    <label for="po_value" class="form-label">PO Value</label>
+                    <input type="text" class="form-control" formControlName="po_value"
+                        name="po_value"  id="po_value" readonly>
+                </div>
+            </div>
+            <!-- <div class="col-3">
                 <div class="supplier-item">
                     <label for="supInvVal" class="form-label">Supplier Inv Value</label>
                     <input type="text" class="form-control" formControlName="supInvVal"
@@ -71,7 +78,7 @@
                     <input type="text" class="form-control" formControlName="balSup"
                         name="balSup"  id="balSup" readonly>
                 </div>
-            </div>
+            </div> -->
             <div class="col-3">
                 <div class="supplier-item">
                     <label for="po_status" class="form-label">PO status</label>
@@ -93,38 +100,31 @@
             <div class="col-2">
                 <div class="supplier-item">
                     <label for="item_desc" class="form-label">Item Desc</label>
-                    <select class="form-control" name="item_desc"  formControlName="item_desc">
-                        <option *ngFor="let prod of prodList" [value]="prod.product_id">{{prod.product_name}}</option>
+                    <select class="form-control" name="item_desc"  formControlName="item_desc" (change)="setItemCode()">
+                        <option *ngFor="let prod of prodList" [value]="prod.product_name">{{prod.product_name}}</option>
 
                     </select>
                 </div>
             </div>
-            
-            <!-- <div class="col-2">
-                <div class="supplier-item">
-                    <label for="item_code" class="form-label">Item Code</label>
-                    <input type="text" class="form-control" formControlName="item_code"
-                        name="item_code"  id="item_code" readonly>
-                </div>
-            </div> -->
+
             <div class="col-2">
                 <div class="supplier-item">
                     <label for="item_cost" class="form-label">Item Cost</label>
-                    <input type="text" class="form-control" formControlName="item_cost"
+                    <input type="number" class="form-control" formControlName="item_cost"
                         name="item_cost"  id="item_cost" (change)="calculateTotalCost()">
                 </div>
             </div>
-            <div class="col-2">
+            <div class="col-1">
                 <div class="supplier-item">
                     <label for="qty_ordered" class="form-label">Qty Order</label>
-                    <input type="text" class="form-control" formControlName="qty_ordered"
+                    <input type="number" class="form-control" formControlName="qty_ordered"
                         name="qty_ordered"  id="qty_ordered" (change)="calculateTotalCost()">
                 </div>
             </div>
             <div class="col-2">
                 <div class="supplier-item">
                     <label for="net_value" class="form-label">Total cost</label>
-                    <input type="text" class="form-control" formControlName="net_value"
+                    <input type="number" class="form-control" formControlName="net_value"
                         name="net_value"  id="net_value">
                 </div>
             </div>
@@ -135,16 +135,16 @@
                         name="exp_del_date"  id="exp_del_date">
                 </div>
             </div>
-            <div class="col-2">
+            <div class="col-3">
                 <div class="supplier-item">
                     <label for="del_branch_id" class="form-label">Delivery Branch</label>
                     <select class="form-control" name="del_branch_id"  formControlName="del_branch_id">
-                        <option *ngFor="let branch of branchList;" [value]="branch.branch_id">{{branch.branch_id}}</option>
+                        <option *ngFor="let branch of branchList;" [value]="branch.branch_id">{{branch.branch_name}}</option>
 
                     </select>
                 </div>
             </div>
-            <div class="col-2">
+            <div class="col-4">
                 <div class="supplier-item">
                     <label for="remarks" class="form-label">Remarks</label>
                     <textarea type="text" class="form-control" formControlName="remarks"
@@ -156,8 +156,11 @@
         <br>
         <div class="row">
             <div class="col-6 d-flex">
-                    <div class="col-3">
+                    <div class="col-3" *ngIf="isShowEdit">
                         <button class="btn btn-primary" (click)="addToList()">Add Record</button>
+                    </div>
+                    <div class="col-3" *ngIf="!isShowEdit">
+                        <button class="btn btn-primary" (click)="editList()">Update Record</button>
                     </div>
                     <div class="col-2">
                         <button class="btn btn-primary" (click)="submit()">Save</button>
@@ -181,13 +184,15 @@
           </tr> 
         </thead>
         <tbody>
-            <!-- <ng-container *ngIf="poTableData.length > 0">
-                <tr *ngFor="let poData of poTableData">
-                    <td>{{poData.item_code}}</td>
+            <ng-container *ngIf="poList && poList.length > 0">
+                <tr *ngFor="let poData of poList">
+                    <td >{{poData.item_desc}}</td>
 
-                    <td>{{poData.item_desc}}</td>
+                    <td>{{poData.item_cost}}</td>
         
                     <td>{{poData.qty_ordered}}</td>
+
+                    <td>{{poData.net_value}}</td>
 
                     <td>{{poData.exp_del_date | date: 'dd-MM-yyyy'}}</td>  
                     
@@ -195,13 +200,14 @@
 
                     <td>{{poData.remarks}}</td>
                     
-                    <td><mat-icon title="delete" class="delete-icon delete-icon-disabled" aria-hidden="false" aria-label="Example home icon" disabled>delete</mat-icon> </td>
+                    <td><mat-icon class="print-icon cancel-icon" (click)="edit(poData)"> border_color</mat-icon>
+                        <mat-icon title="delete" class="delete-icon delete-icon-disabled" aria-hidden="false" aria-label="Example home icon" disabled>delete</mat-icon> </td>
                 </tr>
-            </ng-container> -->
+            </ng-container>
             <ng-container *ngIf="poTableData.length > 0">
                 <tr *ngFor="let item of poTableData">
 
-                    <td>{{item.item_desc}}</td>
+                    <td>{{item.product_name}}</td>
 
                     <td>{{item.item_cost}}</td>
         
@@ -209,13 +215,15 @@
 
                     <td>{{item.net_value}}</td>
 
-                    <td>{{item.exp_del_date | date: 'dd-MM-yyyy'}}</td>  
+                    <td>{{item.exp_del_date | date: 'dd-MM-yyyy'}}</td>
                     
-                    <td>{{item.del_branch_id}}</td>
+                    <td>{{item.del_branch_name}}</td>
 
                     <td>{{item.remarks}}</td>
                     
-                    <td><mat-icon title="delete" class="delete-icon pointer" aria-hidden="false" aria-label="Example home icon">delete</mat-icon> </td>
+                    <td>
+                        <mat-icon class="print-icon cancel-icon" (click)="edit(item)"> border_color</mat-icon>
+                        <mat-icon title="delete" class="delete-icon pointer" aria-hidden="false" aria-label="Example home icon">delete</mat-icon> </td>
                 </tr>
             </ng-container>
         </tbody>

@@ -23,6 +23,8 @@ import { EodComponent } from './eod/eod.component';
 import { PoComponent } from './po/po.component';
 import { CollectionPaymentwiseReportComponent } from './collection-payment-report/collection-payment-report.component';
 import { InsuranceSummaryComponent } from './insurance-summary/insurance-summary.component';
+import { PoSubmissionComponent } from './po-submission/po-submission.component';
+import { GoodsReceiptComponent } from './goods-receipt/goods-receipt.component';
 
 const routes: Routes = [
   {
@@ -117,6 +119,14 @@ const routes: Routes = [
   {
     path: 'insurance-summary',
     component: InsuranceSummaryComponent
+  },
+  {
+    path: 'po-submission',
+    component: PoSubmissionComponent
+  },
+  {
+    path: 'goods-receipt',
+    component: GoodsReceiptComponent
   }
 
 ];

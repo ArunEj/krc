@@ -107,13 +107,14 @@
                   <th class="align-item">Rate</th>
                   <th class="align-item">Qty</th>
                   <th class="align-item">Amount</th>
+                  <th class="align-item">Total Charges</th>
                   <th class="align-item">Discount</th>
                   <th class="align-item">Net amount</th>
-                  <th class="align-item">Received</th>
+                  <!-- <th class="align-item">Received</th>
                   <th class="align-item">mode</th>
                   <th class="align-item">Payment Date</th>
                   <th class="align-item">Payment Amount</th>
-                  <th class="align-item">Balance</th>
+                  <th class="align-item">Balance</th> -->
                 </tr>
                 <tr *ngFor="let data of invoiceData.invoice_lists; let i=index">
                   <td class="align-item">{{i + 1}}</td>
@@ -121,16 +122,42 @@
                   <td class="align-item">{{data.product_cost}}</td>
                   <td class="align-item">{{data.product_qty}}</td>
                   <td class="align-item">{{data.gross_inv_amount}}</td>
+                  <td class="align-item">{{data.tot_other_charge}}</td>
                   <td class="align-item">{{data.gross_discount}}</td>
                   <td class="align-item">{{data.net_amount}}</td>
-                  <td class="align-item"> {{data.net_paid}}</td>
+                  <!-- <td class="align-item"> {{data.net_paid}}</td>
                   <td class="align-item">{{data.payment_mode}}</td>
                   <td class="align-item">{{data.payment_date | date: 'dd-MMM-y'}}</td>
                   <td class="align-item">{{data.payment_amount}}</td>
-                  <td class="align-item">{{data.net_balance}}</td>
+                  <td class="align-item">{{data.net_balance}}</td> -->
                 </tr>
                 <tr>
-                    <td colspan="12">S - Cash,  C - Card, Q - Cheque , U - UPI, A - Against Advance</td>
+                    <td class="align-item font-weight" colspan="4">Total</td>
+                    <td class="align-item font-weight">{{invoiceData.invoice_summary.sum_gross_inv_amt}}</td>
+                    <td class="align-item font-weight">{{invoiceData.invoice_summary.sum_tot_other_charge}}</td>
+                    <td class="align-item font-weight">{{invoiceData.invoice_summary.sum_gross_disc}}</td>
+                    <td class="align-item font-weight">{{invoiceData.invoice_summary.sum_net_amt}}</td>
+                </tr>
+                <tr>
+                    <td class="" colspan="12">Payment Details</td>
+                </tr>
+                <tr>
+                    <td class="" colspan="1"></td>
+                    <td>Total Amount</td>
+                    <td>Received</td>
+                    <td>Receipt Date</td>
+                    <td>Mode</td>
+                    <td>Total Paid</td>
+                    <td colspan="2">Total Balance</td>
+                </tr>
+                <tr *ngFor="let data of invoiceData.invoice_payment; let i=index">
+                    <td class="" colspan="1"></td>
+                    <td>{{data.product_name}}</td>
+                    <td>{{data.net_paid}}</td>
+                    <td>{{data.payment_mode}}</td>
+                    <td>{{data.payment_date | date: 'dd-MMM-y'}}</td>
+                    <td>{{data.payment_amount}}</td>
+                    <td>{{data.net_balance}}</td>
                 </tr>
               </table>
         </div>
@@ -175,13 +202,14 @@
                         <th class="align-item">Rate</th>
                         <th class="align-item">Qty</th>
                         <th class="align-item">Amount</th>
+                        <th class="align-item">Total Charges</th>
                         <th class="align-item">Discount</th>
                         <th class="align-item">Net amount</th>
-                        <th class="align-item">Received</th>
+                        <!-- <th class="align-item">Received</th>
                         <th class="align-item">mode</th>
                         <th class="align-item">Payment Date</th>
                         <th class="align-item">Payment Amount</th>
-                        <th class="align-item">Balance</th>
+                        <th class="align-item">Balance</th> -->
                     </tr>
                     <tr *ngFor="let data of invoiceData.estimate_lists; let i=index">
                       <td class="align-item">{{i + 1}}</td>
@@ -189,13 +217,14 @@
                       <td class="align-item">{{data.product_cost}}</td>
                       <td class="align-item">{{data.product_qty}}</td>
                       <td class="align-item">{{data.gross_inv_amount}}</td>
+                      <td class="align-item">{{data.tot_other_charge}}</td>
                       <td class="align-item">{{data.gross_discount}}</td>
                       <td class="align-item">{{data.net_amount}}</td>
-                      <td class="align-item"> NA</td>
+                      <!-- <td class="align-item"> NA</td>
                       <td class="align-item">NA</td>
                       <td class="align-item">NA</td>
                       <td class="align-item">NA</td>
-                      <td class="align-item">NA</td>
+                      <td class="align-item">NA</td> -->
                       <!-- <td class="align-item"> {{data.net_paid}}</td>
                       <td class="align-item">{{data.payment_mode}}</td>
                       <td class="align-item">{{data.payment_date | date: 'd-MMM-y'}}</td>
@@ -203,7 +232,11 @@
                       <td class="align-item">{{data.net_balance}}</td> -->
                     </tr>
                     <tr>
-                        <td colspan="12">S - Cash,  C - Card, Q - Cheque , U - UPI, A - Against Advance</td>
+                        <td class="align-item font-weight" colspan="4">Total</td>
+                        <td class="align-item font-weight">{{invoiceData.invoice_summary.sum_gross_inv_amt}}</td>
+                        <td class="align-item font-weight">{{invoiceData.invoice_summary.sum_tot_other_charge}}</td>
+                        <td class="align-item font-weight">{{invoiceData.invoice_summary.sum_gross_disc}}</td>
+                        <td class="align-item font-weight">{{invoiceData.invoice_summary.sum_net_amt}}</td>
                     </tr>
                   </table>
             </div>

@@ -6,18 +6,18 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class PoService {
+export class PoSubmissionService {
 
   constructor(private http: HttpClient) { }
 
-  getProducts(supId: any):Observable<any> {
+  getProducts(supId: string):Observable<any> {
     return this.http.get(environment.apiUrl + 'supplierproducts/' + localStorage.getItem('branch_id') + '/' + supId);
   }
 
-  createPO(param:any):Observable<any>{
+  createPOSupplier(param:any):Observable<any>{
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post(environment.apiUrl + 'po',param,
+    return this.http.post(environment.apiUrl + 'posubmission',param,
       { headers: headers })
   }
 

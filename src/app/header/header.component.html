@@ -29,13 +29,14 @@
           </ul>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" [routerLink]="'/po'" href="#" id="navbarDropdownMenuLink2"
+          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink2"
             role="button" data-bs-toggle="dropdown" aria-expanded="false">
             PO
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
-            <li class="dropdown-item">PO</li>
-
+            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/po'" href="#">PO</a></li>
+            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/po-submission'" href="#">PO Submission</a></li>
+            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/goods-receipt'" href="#">Goods Receipt</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -62,7 +63,7 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="pattientwise-report">
             <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/insurance-summary'" href="#">Insurance Summary</a></li>
-            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/insurance-entry'" href="#">Insurance Entry</a></li>
+            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/insurance'" href="#">Insurance Entry</a></li>
           </ul>
         </li>
 
