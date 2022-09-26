@@ -102,3 +102,6 @@ table {
 .txt-success{
   color: green;
 }
+.font-weight{
+  font-weight: 600;
+}
