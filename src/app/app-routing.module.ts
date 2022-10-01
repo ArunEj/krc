@@ -20,7 +20,7 @@ import { OutstantingPtwiseComponent } from './outstanting-ptwise/outstanting-ptw
 import { SupplierMasterComponent } from './supplier/supplier-master/supplier-master.component';
 import { SupplierProductComponent } from './supplier-product/supplier-product.component';
 import { EodComponent } from './eod/eod.component';
-
+import { CollectionPaymentwiseReportComponent } from './collection-payment-report/collection-payment-report.component';
 
 const routes: Routes = [
   {
@@ -91,6 +91,10 @@ const routes: Routes = [
   {
     path: 'outstanding-ptwise-report',
     component: OutstantingPtwiseComponent
+  },
+  {
+    path:'collection-payment-wise',
+    component:CollectionPaymentwiseReportComponent
   },
   {
     path: 'supplier-master',

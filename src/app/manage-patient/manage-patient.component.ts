@@ -24,27 +24,40 @@ export class ManagePatientComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
+    if (history.state && history.state.mobile_no) {
+      this.reloadfromPatientUpdate();
+    }
   }
+  reloadfromPatientUpdate() { 
 
+    if(localStorage.getItem('searchType')=== 'phone_no'){
+      this.searchType = 'phone_no';
+      this.phone_no = localStorage.getItem('phone_no');
+    } else {
+      this.searchType = 'patient_name';
+      this.patient_name = localStorage.getItem('patient_name')!;
+    }    
+    this.fetchDetails();
+  }
   changeSearchType() {
     this.phone_no = null;
     this.patient_name = '';
   }
 
   fetchDetails() {
+    localStorage.setItem('searchType', this.searchType);
     if (this.searchType === 'phone_no') {
+      localStorage.setItem('phone_no', this.phone_no);
       this.manageDialog.fetchUserData(this.phone_no).subscribe(response => {
         if (response.results && response.results.length > 0) {
-          console.log(response);
           this.patientNameList = response.results;
           this.dataSource = new MatTableDataSource(this.patientNameList);
         }
       })
     } else {
+      localStorage.setItem('patient_name', this.patient_name);
       this.manageDialog.fetchUserByName(this.patient_name).subscribe(response => {
         if (response.results && response.results.length > 0) {
-          console.log(response);
           this.patientNameList = response.results;
           this.dataSource = new MatTableDataSource(this.patientNameList);
         }

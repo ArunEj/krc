@@ -18,7 +18,8 @@ export class PatientRegistrationComponent implements OnInit {
 
   patientRegObj: Patient = {
     patient_name: '', dob: '', address: '', sex: '', email_id: '', mobile_no: '', first_visit_date: '',
-    communicate_address: '', user_id: '', org_id: '', alt_mobile_no: '', aadhar_no: '', photo: '', alt_email_id: '', branch_id: '',
+    communicate_address: '', user_id: '', org_id: '', alt_mobile_no: '', aadhar_no: '', photo: '',
+     alt_email_id: '', branch_id: '',
     age: '', blood_group: '', husband_name: '', guardian_name: '', guardian_type: '', father_name: '', ration_cardno: '',
     profession: '', attender1_name: '', attender1_relation_type: '', attender1_contact: '', attender2_name: '', attender2_relation_type: '', attender2_contact: '',
     pincode: '', reapproval: 'N'
@@ -64,7 +65,12 @@ export class PatientRegistrationComponent implements OnInit {
     this.patientRegObj.dob = temp.getFullYear() + '-' + month + '-' + this.appendZero(temp.getDate());
   }
   goBack() {
-    this.router.navigate(['/landing'])
+    if (this.updatePatient) {
+      this.router.navigate(['/manage-patient'], { state: this.patientRegObj })
+    } else {
+      this.router.navigate(['/landing'])
+    }
+
   }
   appendZero(value: any) {
     if (value < 10) {

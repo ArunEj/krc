@@ -43,6 +43,7 @@ import { FilterPipe } from './supplier/supplier-master/filter';
 import { EodComponent } from './eod/eod.component';
 import { CancelInvoiceDialogComponent } from './utilities/cancel-invoice-dialog/cancel-invoice-dialog.component'
 import { ViewProductDialogComponent } from './utilities/view-product-dialog/view-product-dialog.component';
+import { CollectionPaymentwiseReportComponent } from './collection-payment-report/collection-payment-report.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -81,7 +82,8 @@ import { ViewProductDialogComponent } from './utilities/view-product-dialog/view
     FilterPipe,
     EodComponent,
     CancelInvoiceDialogComponent,
-    ViewProductDialogComponent
+    ViewProductDialogComponent,
+    CollectionPaymentwiseReportComponent
   ],
   imports: [
     BrowserModule,
