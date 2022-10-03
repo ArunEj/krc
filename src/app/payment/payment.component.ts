@@ -6,6 +6,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { Location } from '@angular/common';
 import { PromptDialogComponent } from '../utilities/prompt-dialog/prompt-dialog.component';
 import { ViewProductDialogComponent } from '../utilities/view-product-dialog/view-product-dialog.component';
+import { InvoicePrintService } from '../invoice-print/invoice-print.service';
 export interface DialogData {
   branch_id: string,
   patient_id: '',
@@ -48,7 +49,8 @@ export class PaymentComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private ps: PaymentService,
-    private _location: Location) {
+    private _location: Location,
+    private invoicePrintService: InvoicePrintService) {
 
   }
 
@@ -180,6 +182,13 @@ export class PaymentComponent implements OnInit {
     })
 
   }
+
+  //Print Inv
+  navigateToPrint() {
+    // let data = {patient_id: this.patientHeader.patient_id, invoice: this.invoice}
+    this.invoicePrintService.invData(this.patientHeader.patient_id, this.invoice);
+    this.router.navigate(['/print'])
+  }
 }
 interface payType {
   ref_type: string,
@@ -191,6 +200,7 @@ interface payType {
   templateUrl: 'dialog-overview-example-dialog.html',
 })
 export class DialogOverviewExampleDialog implements OnInit {
+  [x: string]: any;
   payTypes: payType[] = [];
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
@@ -240,8 +250,6 @@ export class DialogOverviewExampleDialog implements OnInit {
       return true;
     }
   }
-
-
 
 
 }

@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
   })
 
 export class InvoicePrintService {
+    printData: any;
 
     constructor(public http: HttpClient) {}
 
@@ -45,5 +46,15 @@ export class InvoicePrintService {
       headers.append('Content-Type', 'application/json');
       return this.http.get(environment.apiUrl + 'billings/' + branch_id + '?patient_id=' + patient_id + '&inv_status=' + inv_status,
         { headers: headers })
+    }
+
+    //set Inv Data
+    invData(patient_id: any, invoice_no: any) {
+      this.printData = {invoice_no, patient_id};
+    }
+
+    //get Inv Data
+    getInvData() {
+      return this.printData;
     }
 }
