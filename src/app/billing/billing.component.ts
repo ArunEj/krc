@@ -370,9 +370,9 @@ export class BillingComponent implements OnInit {
     this.totalOtherCharges = this.totalOtherCharges + this.billingItem.total_charges;
     this.totalGrossDiscount = this.totalGrossDiscount + this.billingItem.gross_discount;
     this.showBillingForm = false;
-    this.options = [];
+    //this.options = [];
     this.calculateFinal();
-    //this.resetFields();
+    this.resetFields();
     //this.clearValidation(this.myForm, this.myControl);   
 
   }
@@ -421,7 +421,7 @@ export class BillingComponent implements OnInit {
   resetFields() {
 
     this.billingItem = {
-      bu_id: '',
+      bu_id: this.billingItem.bu_id,
       patient_id: '',
       product_id: '',
       product_type: '',
@@ -448,7 +448,7 @@ export class BillingComponent implements OnInit {
       net_balance: Number(0),
       net_paid: Number(0),
     }
-    this.myForm.get('bu_id')?.setValue('');
+    //this.myForm.get('bu_id')?.setValue('');
   }
   resetFieldsCalculation() {
     this.billingItem = {

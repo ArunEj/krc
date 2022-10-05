@@ -85,6 +85,6 @@ export class BillingService {
     myForm.controls.discount_remark2.clearValidators();
     myForm.controls.discount3.clearValidators();
     myForm.controls.discount_remark3.clearValidators();
-    //myControl.product_name.clearValidators();
+    myControl.product_name.clearValidators();
   }
 }
