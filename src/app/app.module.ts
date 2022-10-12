@@ -46,6 +46,7 @@ import { PoComponent } from './po/po.component';
 import { InsuranceSummaryComponent } from './insurance-summary/insurance-summary.component';
 import { PoSubmissionComponent } from './po-submission/po-submission.component';
 import { GoodsReceiptComponent } from './goods-receipt/goods-receipt.component';
+import { SupplierPaymentComponent } from './supplier-payment/supplier-payment.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -87,7 +88,8 @@ import { GoodsReceiptComponent } from './goods-receipt/goods-receipt.component';
     CollectionPaymentwiseReportComponent,
     InsuranceSummaryComponent,
     PoSubmissionComponent,
-    GoodsReceiptComponent
+    GoodsReceiptComponent,
+    SupplierPaymentComponent
   ],
   imports: [
     BrowserModule,

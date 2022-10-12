@@ -25,6 +25,7 @@ import { CollectionPaymentwiseReportComponent } from './collection-payment-repor
 import { InsuranceSummaryComponent } from './insurance-summary/insurance-summary.component';
 import { PoSubmissionComponent } from './po-submission/po-submission.component';
 import { GoodsReceiptComponent } from './goods-receipt/goods-receipt.component';
+import { SupplierPaymentComponent } from './supplier-payment/supplier-payment.component';
 
 const routes: Routes = [
   {
@@ -127,6 +128,10 @@ const routes: Routes = [
   {
     path: 'goods-receipt',
     component: GoodsReceiptComponent
+  },
+  {
+    path: 'supplier-payment',
+    component: SupplierPaymentComponent
   }
 
 ];

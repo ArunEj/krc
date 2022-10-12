@@ -1,0 +1,61 @@
+<app-header></app-header>
+<div class="container">
+    <div class="row">
+        <h3>Supplier payment</h3>
+        <form [formGroup]="supplierPaymentForm">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class=" supplier-item">
+                        <label for="branch_id" class="form-label">Ordered Branch<span class="txt-danger">*</span></label>
+                        <input type="text" class="form-control" name="branch_id" formControlName="branch_id"
+                             id="branch_id" required>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class=" supplier-item">
+                        <label for="supplier_id" class="form-label">Supplier Name<span class="txt-danger">*</span></label>
+                        <input type="text" class="form-control" name="supplier_id" formControlName="supplier_id"
+                             id="supplier_id" (change)="getPoSuppPayment()" required>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <br>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">PO Number</th>
+                <th scope="col">PO Date</th>
+                <th scope="col">Inv #</th>
+                <th scope="col">Inv Date</th>
+                <th scope="col">Receipt Date</th>
+                <th scope="col">Payment Due Date</th>
+                <th scope="col">Inv Amount</th>
+                <th scope="col">Paid</th>
+                <th scope="col">Balance</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container>
+                <!-- <tr *ngFor="let suppPay of dataSource">
+                    <td>{{suppPay.po_number}}</td>
+
+                    <td>{{suppPay.po_date}}</td>
+        
+                    <td>{{suppPay.supplier_invoice_num}}</td>
+
+                    <td>{{suppPay.payment_date | date: 'dd-MM-yyyy'}}</td>
+
+                    <td>{{suppPay.payment_date | date: 'dd-MM-yyyy'}}</td>  
+                    
+                    <td>{{suppPay.supp_inv_amt}}</td>
+
+                    <td>{{suppPay.supp_inv_amt_paid}}</td>
+
+                    <td>{{suppPay.supp_inv_amt_bal}}</td>
+                </tr> -->
+            </ng-container>
+        </tbody>
+      </table>
+</div>
