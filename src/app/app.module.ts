@@ -45,6 +45,8 @@ import {CollectionPaymentwiseReportComponent } from './collection-payment-report
 import { PoComponent } from './po/po.component';
 import { InsuranceSummaryComponent } from './insurance-summary/insurance-summary.component';
 import { PatientScheduleComponent } from './patient-schedule/patient-schedule.component';
+import { PatientListingReportComponent } from './patient-listing-report/patient-listing-report.component';
+import {ListTable}from './patient-listing-report/list-table/list-table.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -85,7 +87,9 @@ import { PatientScheduleComponent } from './patient-schedule/patient-schedule.co
     PoComponent,
     CollectionPaymentwiseReportComponent,
     InsuranceSummaryComponent,
-    PatientScheduleComponent
+    PatientScheduleComponent,
+    PatientListingReportComponent,
+    ListTable
   ],
   imports: [
     BrowserModule,

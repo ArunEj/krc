@@ -24,6 +24,7 @@ import { PoComponent } from './po/po.component';
 import { CollectionPaymentwiseReportComponent } from './collection-payment-report/collection-payment-report.component';
 import { InsuranceSummaryComponent } from './insurance-summary/insurance-summary.component';
 import { PatientScheduleComponent } from './patient-schedule/patient-schedule.component';
+import { PatientListingReportComponent } from './patient-listing-report/patient-listing-report.component';
 
 const routes: Routes = [
   {
@@ -122,7 +123,12 @@ const routes: Routes = [
   {
     path: 'patient-schedule',
     component: PatientScheduleComponent
+  },
+  {
+    path: 'patient-listing',
+    component: PatientListingReportComponent
   }
+
 
 ];
 
