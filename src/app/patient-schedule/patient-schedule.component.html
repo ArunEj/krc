@@ -1,0 +1,104 @@
+<app-header></app-header>
+<div class="container">
+    <div class="row">
+        <h1>Patient Schedule</h1>
+    </div>
+    <app-patient-header (outputPatientHeader)="patientHeader($event)"></app-patient-header>
+    <form [formGroup]="insSummaryForm" *ngIf="showScheduleForm">
+        <div class="row">
+
+            <div class="row">
+                <div class="col-3">
+                    <div class="supplier-item">
+                        <label for="bu" class="form-label fs">Month</label>
+                        <select class="form-control" name="bu" formControlName="bu" (change)="changeMonth()">
+                            <option *ngFor="let bu of buList" [value]="bu.bu_id">{{bu.bu_name}}</option>
+
+                        </select>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="supplier-item">
+                        <label for="month" class="form-label fs">Month</label>
+                        <select class="form-control" name="month" formControlName="month" (change)="changeMonth()">
+                            <option value="undefined" selected disabled>--Select--</option>
+                            <option value="1">Jan</option>
+                            <option value="2">Feb</option>
+                            <option value="3">Mar</option>
+                            <option value="4">Apr</option>
+                            <option value="5">May</option>
+                            <option value="6">Jun</option>
+                            <option value="7">Jul</option>
+                            <option value="8">Aug</option>
+                            <option value="9">Sep</option>
+                            <option value="10">Oct</option>
+                            <option value="11">Nov</option>
+                            <option value="12">Dec</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="supplier-item">
+                        <label for="year" class="form-label fs">Year</label>
+                        <input matInput type="text" class="form-control" formControlName="year" name="year"
+                            (change)="changeMonth()">
+                    </div>
+                </div>
+                <div class="col-3">
+                    <button (click)="getInsuSummay()" class="btn btn-primary mt-4">Submit</button>
+                </div>
+            </div>
+        </div>
+        <br>
+    </form>
+    <div class="container mar20t pad0" *ngIf="showScheduleForm">
+        <button class="btn btn-primary" (click)="addRecord()">Add Record</button>
+
+        <div class="table-responsive-lg col-lg-12" style="margin-top:20px" *ngIf="tableData && tableData.length>0">
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Schedule Date</th>
+                        <th>Pupose</th>
+                        <th>Visit Flag</th>
+                        <th>Replan Date</th>
+                        <th>Actual Date</th>
+                        <th></th>
+                    </tr>
+
+                <tbody>
+                    <tr *ngFor="let item of tableData;let i=index">
+                        <td scope="row">{{i+1}}</td>
+
+                        <td><input type="date" class="form-control no-border" [(ngModel)]="item.schedule_date"></td>
+                        <td><input type="text" class="form-control no-border" [(ngModel)]="item.schedule_purpose"></td>
+
+                        <td><select class="form-select scrollable-menu" aria-label="Default select example"
+                                [(ngModel)]="item.visit_flag">
+                                <!-- <option selected>Open this select menu</option> -->
+                                <option *ngFor="let flag of schType" [value]="flag.ref_code">{{flag.ref_desc}}</option>
+                            </select></td>
+                        <td><input type="date" class="form-control no-border" [(ngModel)]="item.planned_date"></td>
+
+                        <td><input type="date" class="form-control no-border" [(ngModel)]="item.actual_date"></td>
+
+
+                        <td>
+                            <mat-icon title="delete" [ngClass]="{'disabled': item.schedule_num !== undefined}"
+                                class="delete-icon" aria-hidden="false" aria-label="Example home icon"
+                                (click)="delete_item(i)">delete</mat-icon>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+            <button type="button" class="btn btn-primary mar20tb" (click)="updateDetails()">
+                Save
+            </button>
+        </div>
+    </div>
+
+
+</div>

@@ -44,6 +44,7 @@ import { EodComponent } from './eod/eod.component';
 import {CollectionPaymentwiseReportComponent } from './collection-payment-report/collection-payment-report.component';
 import { PoComponent } from './po/po.component';
 import { InsuranceSummaryComponent } from './insurance-summary/insurance-summary.component';
+import { PatientScheduleComponent } from './patient-schedule/patient-schedule.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -83,7 +84,8 @@ import { InsuranceSummaryComponent } from './insurance-summary/insurance-summary
     EodComponent,
     PoComponent,
     CollectionPaymentwiseReportComponent,
-    InsuranceSummaryComponent
+    InsuranceSummaryComponent,
+    PatientScheduleComponent
   ],
   imports: [
     BrowserModule,
