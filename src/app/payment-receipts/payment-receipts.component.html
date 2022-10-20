@@ -1,0 +1,150 @@
+<app-header></app-header>
+<div class="container">
+    <div class="row">
+        <h1>Payment/Receipts</h1>
+    </div>
+</div>
+<div class="container mar30">
+    <form class="example-form" [formGroup]="myForm" novalidate>
+        <div class="col-lg-12">
+            <mat-form-field  appearance="fill" class="col-lg-4  pad10r">
+                <mat-label>Branch</mat-label>
+                <input matInput type="text" formControlName="branch_id" readonly name="branch_id"
+                    [(ngModel)]="payReceiptItem.branch_id">
+
+            </mat-form-field>
+
+            <mat-form-field  appearance="fill" class="col-lg-4 pad10r">
+                <mat-label>Transaction Date</mat-label>
+                <input matInput type="text" [ngModelOptions]="{standalone: true}" readonly name="displayDate"
+                    [(ngModel)]="displayDate">
+
+            </mat-form-field>
+
+            <mat-form-field  appearance="fill" class="col-lg-4 pad10r">
+                <mat-label>Transaction ID</mat-label>
+                <input matInput type="text" formControlName="trans_id" readonly name="trans_id"
+                    [(ngModel)]="payReceiptItem.trans_id">
+
+            </mat-form-field>
+        </div>
+
+
+        <mat-radio-group class=" mar20lr" aria-label="Select an option" [ngModelOptions]="{standalone: true}"
+            [(ngModel)]="payReceiptItem.trans_type">
+            <mat-label>Transaction Type</mat-label>
+            <mat-radio-button class="p-4" value="R">Receipts</mat-radio-button>
+            <mat-radio-button class="p-4" value="P">Payments</mat-radio-button>
+        </mat-radio-group>
+        <div class="col-lg-12"> 
+            <mat-form-field class="col-lg-6 mar20lr" appearance="fill">
+                <mat-label>Account Code</mat-label>
+                <mat-select [(ngModel)]="payReceiptItem.account_code" formControlName="account_code">
+                    <mat-option *ngFor="let mode of acMaster" [value]="mode.account_code">{{mode.account_desc}}
+                    </mat-option>
+
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="mar20lr" appearance="fill">
+                <mat-label>Payment Mode</mat-label>
+                <mat-select [(ngModel)]="payReceiptItem.payment_mode" formControlName="payment_mode"
+                   >
+                    <mat-option *ngFor="let mode of paymentModes" [value]="mode.ref_code">{{mode.ref_desc}}</mat-option>
+
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="mar20lr" appearance="fill">
+                <mat-label>Amount</mat-label>
+                <input matInput type="number" min='0' required formControlName="account_value"
+                    [(ngModel)]="payReceiptItem.account_value" name="account_value">
+            </mat-form-field>
+
+            <mat-form-field class="mar20lr" appearance="fill">
+                <mat-label>Payment Ref#</mat-label>
+                <input matInput type="text" formControlName="payment_ref" [(ngModel)]="payReceiptItem.payment_ref"
+                    name="payment_ref">
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field class="mar20lr" appearance="fill">
+                <mat-label>Subledger</mat-label>
+                <mat-select [(ngModel)]="payReceiptItem.rp_for" formControlName="rp_for"
+                    (selectionChange)="changeSubledger()">
+                    <mat-option *ngFor="let mode of subledger" [value]="mode.ref_code">{{mode.ref_desc}}</mat-option>
+
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field *ngIf="payReceiptItem.rp_for === 'D'" appearance="fill">
+                <mat-label>Doctor Name</mat-label>
+
+                <mat-select name="patient_type" [(ngModel)]="payReceiptItem.rp_name_id" formControlName="rp_name_id" >
+                    <mat-option *ngFor="let doctor of doctors" [value]="doctor.doctor_id" (click)="selectName(doctor)">{{doctor.doctor_name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field *ngIf="payReceiptItem.rp_for === 'S'" appearance="fill">
+                <mat-label>Supplier Name</mat-label>
+
+                <mat-select name="patient_type" [(ngModel)]="payReceiptItem.rp_name_id" formControlName="rp_name_id">
+                    <mat-option *ngFor="let sup of suppliers" [value]="sup.supplier_id" (click)="selectName(sup)">{{sup.supplier_name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field *ngIf="payReceiptItem.rp_for === 'E'" appearance="fill">
+                <mat-label>Employee Name</mat-label>
+
+                <mat-select name="patient_type" [(ngModel)]="payReceiptItem.rp_name_id" formControlName="rp_name_id">
+                    <mat-option *ngFor="let sup of users" [value]="sup.user_id" (click)="selectName(sup)">{{sup.user_name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field *ngIf="payReceiptItem.rp_for === 'O'" class="mar20lr" appearance="fill">
+                <mat-label>Others</mat-label>
+                <input matInput type="text" formControlName="rp_name_other" [(ngModel)]="payReceiptItem.rp_name_other"
+                    name="rp_name_other">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="mar20lr col-lg-12" appearance="fill">
+                <mat-label>Transaction Narration</mat-label>
+                <input matInput type="text" required formControlName="trans_narration"
+                    [(ngModel)]="payReceiptItem.trans_narration" name="trans_narration">
+            </mat-form-field>
+
+            
+            
+        </div>
+        <div>
+            <mat-form-field class="mar20lr col-lg-12" appearance="fill">
+                <mat-label>Additional Remarks</mat-label>
+                <input matInput type="text"  formControlName="addl_remarks"
+                    [(ngModel)]="payReceiptItem.addl_remarks" name="addl_remarks">
+            </mat-form-field>
+        </div>
+        <div class="col-lg-12">
+            <mat-form-field class="col-lg-5 mar20lr" appearance="fill">
+                <mat-label>Voucher Number</mat-label>
+                <input matInput type="text" required formControlName="voucher_num"
+                    [(ngModel)]="payReceiptItem.voucher_num" name="voucher_num">
+            </mat-form-field>
+            <mat-form-field class="col-lg-5 mar20lr" appearance="fill">
+                <mat-label>Voucher Date</mat-label>
+                <input matInput type="date" required formControlName="voucher_date"
+                    [(ngModel)]="payReceiptItem.voucher_date" name="voucher_date">
+            </mat-form-field>
+        </div>
+
+    </form>
+    <div>
+        <button type="button" class="btn btn-primary" (click)="save()">
+            Submit
+        </button>
+    </div>
+</div>
