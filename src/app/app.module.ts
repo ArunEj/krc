@@ -47,7 +47,9 @@ import { InsuranceSummaryComponent } from './insurance-summary/insurance-summary
 import { PatientScheduleComponent } from './patient-schedule/patient-schedule.component';
 import { PatientListingReportComponent } from './patient-listing-report/patient-listing-report.component';
 import {ListTable}from './patient-listing-report/list-table/list-table.component';
-import { PaymentReceiptsComponent } from './payment-receipts/payment-receipts.component'
+import { PaymentReceiptsComponent } from './payment-receipts/payment-receipts.component';
+import { UpdatePayreceiptsComponent } from './update-payreceipts/update-payreceipts.component';
+import { PrTableComponent } from './update-payreceipts/pr-table/pr-table.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -91,7 +93,9 @@ import { PaymentReceiptsComponent } from './payment-receipts/payment-receipts.co
     PatientScheduleComponent,
     PatientListingReportComponent,
     ListTable,
-    PaymentReceiptsComponent
+    PaymentReceiptsComponent,
+    UpdatePayreceiptsComponent,
+    PrTableComponent
   ],
   imports: [
     BrowserModule,

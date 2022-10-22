@@ -26,6 +26,7 @@ import { InsuranceSummaryComponent } from './insurance-summary/insurance-summary
 import { PatientScheduleComponent } from './patient-schedule/patient-schedule.component';
 import { PatientListingReportComponent } from './patient-listing-report/patient-listing-report.component';
 import { PaymentReceiptsComponent } from './payment-receipts/payment-receipts.component';
+import { UpdatePayreceiptsComponent } from './update-payreceipts/update-payreceipts.component';
 
 const routes: Routes = [
   {
@@ -132,6 +133,10 @@ const routes: Routes = [
   {
     path: 'payment-receipts',
     component: PaymentReceiptsComponent
+  },
+  {
+    path: 'update-payreceipts',
+    component: UpdatePayreceiptsComponent
   }
 
 

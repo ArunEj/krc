@@ -9,6 +9,13 @@ export class PaymentReceiptsService {
 
   constructor(private http: HttpClient) { }
 
+  getBranchList():Observable<any>{
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(environment.apiUrl + 'branches/KRC',
+    { headers: headers })
+  }
+
   public getEodDetailData(): Observable<any> {
     let org_id = localStorage.getItem('org_id');
     let branch_id = localStorage.getItem('branch_id');
@@ -78,4 +85,7 @@ export class PaymentReceiptsService {
     let returnUrl = baseUrl + "suppliers/KRC/" + branch_id;
     return returnUrl;
   }
+
+  
+  
 }

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Router, ActivatedRoute } from '@angular/router';
 import { InfoDialogComponent } from '../utilities/info-dialog/info-dialog.component';
 import { PaymentReceiptsService } from './payment-receipts.service'
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-payment-receipts',
@@ -17,8 +19,10 @@ export class PaymentReceiptsComponent implements OnInit {
   suppliers: any = [];
   acMaster: any = [];
   users: any = [];
+  branchList:any=[];
+  branch = localStorage.getItem('branch_id')
   myForm: FormGroup = this.fb.group({
-    branch_id: [null, {}],
+    branch_id: [null, { Validators: [Validators.required] }],
     trans_date: [null, { Validators: [Validators.required] }],
     payment_mode: [null, {}],
     account_value: [null, {}],
@@ -33,31 +37,13 @@ export class PaymentReceiptsComponent implements OnInit {
     addl_remarks: [null, {}],
     trans_narration: [null, {}]
   })
-  /*{
-    "org_id": "KRC",
-    "branch_id": "KRC0001",
-    "user_id": "KRC000001",
-      "trans_id": "KRC0001ROCT202200002",
-    "trans_type":"R", 
-    "account_code":"A", 
-    "trans_date":"2022-10-18", 
-    "account_value":200, 
-    "trans_narration":"test1", 
-    "addl_remarks":"test2", 
-    "voucher_num":"test2", 
-    "voucher_date":"2022-10-18", 
-    "rp_for":"S", 
-    "rp_name_id":"S", 
-    "rp_name_other":"O", 
-    "payment_mode":"C", 
-    "payment_ref":"Credit"
-}*/
+
   payReceiptItem = {
     "org_id": localStorage.getItem('org_id'),
     "user_id": localStorage.getItem('user_id'),
-    branch_id: localStorage.getItem('branch_id'),
+    branch_id: '',
     trans_date: '',
-    trans_type: '',
+    account_type: 'R',
     payment_mode: '',
     account_value: 0,
     rp_for: '',
@@ -71,9 +57,19 @@ export class PaymentReceiptsComponent implements OnInit {
     "voucher_num": "",
     "voucher_date": ""
   }
-  constructor(private fb: FormBuilder, private dialog: MatDialog, private prs: PaymentReceiptsService) { }
+  constructor(private fb: FormBuilder, private location: Location,
+    private router: Router, private dialog: MatDialog, private prs: PaymentReceiptsService
+    , private route: ActivatedRoute) {
 
+  }
+readonlyReceipts = false;
   ngOnInit(): void {
+    if (history.state?.account_value) {
+      this.payReceiptItem = history.state;
+      this.fetchDcotors();
+      this.readonlyReceipts = true;
+    }
+    this.getBranch();
     this.getAcMaster()
     this.getEOD();
     this.getPayModes();
@@ -84,6 +80,12 @@ export class PaymentReceiptsComponent implements OnInit {
     })
   }
   displayDate = ''
+  getBranch(){
+    this.prs.getBranchList().subscribe(data => {      
+      this.branchList = data.results;
+    })
+  }
+
   getEOD() {
     this.prs.getEodDetailData().subscribe(data => {
       this.payReceiptItem.trans_date = data.results[0].eod_date
@@ -132,38 +134,47 @@ export class PaymentReceiptsComponent implements OnInit {
     })
   }
 
-  selectName(event:any){
-    switch(this.payReceiptItem.rp_for){
-      case 'D':{
+  selectName(event: any) {
+    switch (this.payReceiptItem.rp_for) {
+      case 'D': {
         this.payReceiptItem.rp_name_other = event.doctor_name;
         return;
       }
-      case 'E':{
+      case 'E': {
         this.payReceiptItem.rp_name_other = event.user_name;
         return;
       }
-      case 'S':{
+      case 'S': {
         this.payReceiptItem.rp_name_other = event.supplier_name;
         return;
       }
-      default:{
+      default: {
         return;
       }
     }
-    
+
 
   }
   save() {
     console.log(this.payReceiptItem)
     this.prs.submitPayment(this.payReceiptItem).subscribe(data => {
       this.payReceiptItem.trans_id = data.trans_id;
-      this.dialog.open(InfoDialogComponent, {
+      const dialog = this.dialog.open(InfoDialogComponent, {
         width: '400px',
         data: 'Payment/Receipts Saved Successfully!!!'
       });
+      dialog.afterClosed().subscribe(data => {
+        if (history.state.account_value) {
+          this.router.navigate(['/update-payreceipts'])
+        } else {
+          this.router.navigate(['/landing'])
+        }
+
+      })
 
     })
 
   }
+  
 
 }

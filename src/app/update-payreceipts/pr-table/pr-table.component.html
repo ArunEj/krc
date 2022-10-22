@@ -1,0 +1,55 @@
+<div class="example-container mat-elevation-z8">
+    <div class="example-header">
+      <mat-form-field class="mar20lr">
+        <input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Filter">
+      </mat-form-field>
+    </div>
+  
+    <mat-table #table [dataSource]="dataSource">
+  
+      <!-- Position Column -->
+      <ng-container matColumnDef="trans_id">
+        <mat-header-cell *matHeaderCellDef>Transaction #</mat-header-cell>
+        <mat-cell *matCellDef="let element;let i = index;"> {{element.trans_id}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="account_value">
+        <mat-header-cell *matHeaderCellDef>Amount</mat-header-cell>
+        <mat-cell *matCellDef="let element;let i = index;"> {{element.account_value}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="payment_mode_name">
+        <mat-header-cell *matHeaderCellDef>Amount</mat-header-cell>
+        <mat-cell *matCellDef="let element;let i = index;"> {{element.payment_mode_name}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="rp_name_other">
+        <mat-header-cell *matHeaderCellDef>RP For</mat-header-cell>
+        <mat-cell *matCellDef="let element;let i = index;"> {{element.rp_name_other}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="trans_narration">
+        <mat-header-cell *matHeaderCellDef>Narration</mat-header-cell>
+        <mat-cell *matCellDef="let element;let i = index;"> {{element.trans_narration}} </mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="voucher_num">
+        <mat-header-cell *matHeaderCellDef>Voucher #</mat-header-cell>
+        <mat-cell *matCellDef="let element;let i = index;"> {{element.voucher_num}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let element;let i = index;">
+            <button (click)="update(element)" [disabled]="element.trans_date != eoDate">Edit
+            </button>
+        </mat-cell>
+    </ng-container>
+  
+      
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+  
+  
+  <!-- Copyright 2018 Google Inc. All Rights Reserved.
+      Use of this source code is governed by an MIT-style license that
+      can be found in the LICENSE file at http://angular.io/license -->
