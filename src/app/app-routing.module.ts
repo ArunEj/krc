@@ -27,6 +27,7 @@ import { PatientScheduleComponent } from './patient-schedule/patient-schedule.co
 import { PatientListingReportComponent } from './patient-listing-report/patient-listing-report.component';
 import { PaymentReceiptsComponent } from './payment-receipts/payment-receipts.component';
 import { UpdatePayreceiptsComponent } from './update-payreceipts/update-payreceipts.component';
+import { ProductMasterComponent } from './product-master/product-master.component';
 
 const routes: Routes = [
   {
@@ -137,6 +138,10 @@ const routes: Routes = [
   {
     path: 'update-payreceipts',
     component: UpdatePayreceiptsComponent
+  },
+  {
+    path: 'product-master',
+    component: ProductMasterComponent
   }
 
 

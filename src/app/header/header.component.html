@@ -114,6 +114,17 @@
             
           </ul>
         </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Product
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" [routerLink]="'/product-master'" href="#">Product Master</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/'" href="#">Product Selling Price Master</a></li>
+            
+          </ul>
+        </li>
         <li class="nav-item">
           <a class="nav-link" (click)="logout()">Logout</a>
         </li>

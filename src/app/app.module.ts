@@ -49,7 +49,8 @@ import { PatientListingReportComponent } from './patient-listing-report/patient-
 import {ListTable}from './patient-listing-report/list-table/list-table.component';
 import { PaymentReceiptsComponent } from './payment-receipts/payment-receipts.component';
 import { UpdatePayreceiptsComponent } from './update-payreceipts/update-payreceipts.component';
-import { PrTableComponent } from './update-payreceipts/pr-table/pr-table.component'
+import { PrTableComponent } from './update-payreceipts/pr-table/pr-table.component';
+import { ProductMasterComponent } from './product-master/product-master.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -95,7 +96,8 @@ import { PrTableComponent } from './update-payreceipts/pr-table/pr-table.compone
     ListTable,
     PaymentReceiptsComponent,
     UpdatePayreceiptsComponent,
-    PrTableComponent
+    PrTableComponent,
+    ProductMasterComponent
   ],
   imports: [
     BrowserModule,
