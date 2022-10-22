@@ -39,7 +39,7 @@
 
 
         <mat-radio-group class=" mar20lr" aria-label="Select an option" [ngModelOptions]="{standalone: true}"
-            [(ngModel)]="payReceiptItem.account_type" [disabled]="readonlyReceipts" required>
+            [(ngModel)]="payReceiptItem.account_type" [disabled]="readonlyReceipts" required (change)="changeAccount()">
             <mat-label>Transaction Type</mat-label>
             <mat-radio-button class="p-4" value="R">Receipts</mat-radio-button>
             <mat-radio-button class="p-4" value="P">Payments</mat-radio-button>

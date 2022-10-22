@@ -19,7 +19,7 @@ export class PaymentReceiptsComponent implements OnInit {
   suppliers: any = [];
   acMaster: any = [];
   users: any = [];
-  branchList:any=[];
+  branchList: any = [];
   branch = localStorage.getItem('branch_id')
   myForm: FormGroup = this.fb.group({
     branch_id: [null, { Validators: [Validators.required] }],
@@ -62,7 +62,7 @@ export class PaymentReceiptsComponent implements OnInit {
     , private route: ActivatedRoute) {
 
   }
-readonlyReceipts = false;
+  readonlyReceipts = false;
   ngOnInit(): void {
     if (history.state?.account_value) {
       this.payReceiptItem = history.state;
@@ -70,18 +70,18 @@ readonlyReceipts = false;
       this.readonlyReceipts = true;
     }
     this.getBranch();
-    this.getAcMaster()
+    this.changeAccount()
     this.getEOD();
     this.getPayModes();
   }
-  getAcMaster() {
-    this.prs.fetchAcMaster().subscribe(data => {
-      this.acMaster = data.results;
-    })
-  }
+  // getAcMaster() {
+  //   this.prs.fetchAcMaster().subscribe(data => {
+  //     this.acMaster = data.results;
+  //   })
+  // }
   displayDate = ''
-  getBranch(){
-    this.prs.getBranchList().subscribe(data => {      
+  getBranch() {
+    this.prs.getBranchList().subscribe(data => {
       this.branchList = data.results;
     })
   }
@@ -103,7 +103,11 @@ readonlyReceipts = false;
       this.subledger = data.results;
     });
   }
-
+  changeAccount() {
+    this.prs.fetchAcMasterByType(this.payReceiptItem.account_type).subscribe(data => {
+      this.acMaster = data.results
+    })
+  }
 
   changeSubledger() {
     this.fetchDcotors();
@@ -175,6 +179,6 @@ readonlyReceipts = false;
     })
 
   }
-  
+
 
 }

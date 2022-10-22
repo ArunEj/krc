@@ -62,6 +62,17 @@ export class PaymentReceiptsService {
       { headers: headers })
   }
 
+ // accounts/KRC?account_type=P
+
+  fetchAcMasterByType(type:string): Observable<any> {
+    let org = localStorage.getItem('org_id');
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(environment.apiUrl + 'accounts/'+org+'?account_type='+type,
+      { headers: headers })
+  }
+
+
   submitPayment(item: any): Observable<any> {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
