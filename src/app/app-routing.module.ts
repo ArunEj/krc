@@ -28,6 +28,8 @@ import { PatientListingReportComponent } from './patient-listing-report/patient-
 import { PoSubmissionComponent } from './po-submission/po-submission.component';
 import { GoodsReceiptComponent } from './goods-receipt/goods-receipt.component';
 import { SupplierPaymentComponent } from './supplier-payment/supplier-payment.component';
+import { PaymentReceiptsComponent } from './payment-receipts/payment-receipts.component';
+import { UpdatePayreceiptsComponent } from './update-payreceipts/update-payreceipts.component';
 
 const routes: Routes = [
   {
@@ -142,6 +144,13 @@ const routes: Routes = [
   {
     path: 'supplier-payment',
     component: SupplierPaymentComponent
+  }, {
+    path: 'payment-receipts',
+    component: PaymentReceiptsComponent
+  },
+  {
+    path: 'update-payreceipts',
+    component: UpdatePayreceiptsComponent
   }
 
 

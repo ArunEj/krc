@@ -50,6 +50,9 @@ import {ListTable}from './patient-listing-report/list-table/list-table.component
 import { PoSubmissionComponent } from './po-submission/po-submission.component';
 import { GoodsReceiptComponent } from './goods-receipt/goods-receipt.component';
 import { SupplierPaymentComponent } from './supplier-payment/supplier-payment.component';
+import { PaymentReceiptsComponent } from './payment-receipts/payment-receipts.component';
+import { UpdatePayreceiptsComponent } from './update-payreceipts/update-payreceipts.component';
+import { PrTableComponent } from './update-payreceipts/pr-table/pr-table.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -95,7 +98,10 @@ import { SupplierPaymentComponent } from './supplier-payment/supplier-payment.co
     ListTable,
     PoSubmissionComponent,
     GoodsReceiptComponent,
-    SupplierPaymentComponent
+    SupplierPaymentComponent,
+    PaymentReceiptsComponent,
+    UpdatePayreceiptsComponent,
+    PrTableComponent
   ],
   imports: [
     BrowserModule,

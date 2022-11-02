@@ -1,0 +1,65 @@
+<app-header></app-header>
+<div class="container">
+    <app-base-detail></app-base-detail>
+    <h4>Payment/receipts Listing</h4>
+    <div class="row">
+
+        <mat-radio-group class=" mar20lr" aria-label="Select an option" [ngModelOptions]="{standalone: true}"
+            [(ngModel)]="trans_type">
+            <mat-label>Transaction Type</mat-label>
+            <mat-radio-button class="p-4" value="R">Receipts</mat-radio-button>
+            <mat-radio-button class="p-4" value="P">Payments</mat-radio-button>
+        </mat-radio-group>
+
+
+        <mat-form-field appearance="fill" class="col-lg-3">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+                <input matStartDate placeholder="Start date" [(ngModel)]="from_date">
+                <input matEndDate placeholder="End date" [max]="today" [(ngModel)]="to_date">
+            </mat-date-range-input>
+            <mat-hint>DD/MM/YYYY – DD/MM/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+    </div>
+    <div class="row mt-4">
+        <button class="btn btn-primary col-lg-2" (click)="getReports()">Retrieve</button>
+
+    </div>
+
+    <!-- <div *ngIf="reportData && reportData.length > 0">
+       
+        Receipts:
+        <table class="table mar20">
+            <thead>
+                <tr>
+                    <th scope="col">Transaction#</th>
+                    
+                    <th scope="col">Amount</th>
+                    <th scope="col">Payment Mode</th>
+                    <th scope="col">Paymnt For</th>
+                    <th scope="col">Trans Narration</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of reportData">
+                    <td>{{item.trans_id}}
+                    </td>
+                    <td>{{item.trans_id}}</td>
+                    
+                    <td>{{item.account_value}}</td>
+                    <td>{{item.payment_mode}}</td>
+                    <td>{{item.rp_name_other}}</td>
+                    <td>{{item.trans_narration}}</td>
+                    <td><button [disabled]="item.trans_date != eod" (click)="update(item)">Update</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div> -->
+    
+    <div *ngIf="reportData && reportData.length > 0" class="mar20t">
+        <app-pr-table [tableData]="reportData" [eoDate]="eod" (updateEmit)="update($event)"></app-pr-table>
+    </div>
+    
