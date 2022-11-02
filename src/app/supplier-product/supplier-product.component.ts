@@ -138,7 +138,11 @@ export class SupplierProductComponent implements OnInit {
       //   }
       // });
       console.log("productList", this.productList);
-    })
+    },
+    (err) => {
+      this.productList = null;
+      // console.log(err)
+    });
   }
 
   getSupplierId() {
