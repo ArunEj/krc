@@ -28,6 +28,7 @@ import { PatientListingReportComponent } from './patient-listing-report/patient-
 import { PaymentReceiptsComponent } from './payment-receipts/payment-receipts.component';
 import { UpdatePayreceiptsComponent } from './update-payreceipts/update-payreceipts.component';
 import { ProductMasterComponent } from './product-master/product-master.component';
+import { ProductMasterListingComponent } from './product-master-listing/product-master-listing.component';
 
 const routes: Routes = [
   {
@@ -142,6 +143,10 @@ const routes: Routes = [
   {
     path: 'product-master',
     component: ProductMasterComponent
+  },
+  {
+    path:'product-master-listing',
+    component:ProductMasterListingComponent
   }
 
 

@@ -34,6 +34,14 @@ export class ReferenceService {
       { headers: headers })
   } 
 
+  fetchBuList(): Observable<any> {
+    let org_id = localStorage.getItem('org_id');
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(environment.apiUrl + 'business/'+org_id,
+      { headers: headers })
+  }
+
 
   // fetch doctot list from branch id
   fetchDoctors(): Observable<any> {
@@ -60,6 +68,15 @@ export class ReferenceService {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.get(environment.apiUrl + 'users/'+org_id+'/'+branch_id,
+      { headers: headers })
+  }
+
+  fetchProducts(bu:any): Observable<any> {
+    let org_id = localStorage.getItem('org_id');
+    let branch_id = localStorage.getItem('branch_id');
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(environment.apiUrl + 'productmaster/'+org_id+'?bu_id='+bu,
       { headers: headers })
   }
 }
