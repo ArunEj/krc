@@ -4,20 +4,11 @@
         <h3>Supplier Master</h3>
         <form [formGroup]="supplierInputForm">
             <div class="row">
-                <!-- <button class="btn btn-primary" (click)="fetchSupplier()">Fetch</button> -->
                 <div class="col-md-4">
-                    <!-- <div class=" supplier-item">
-                        <label for="supplier_name" class="form-label">Supplier Name</label>
-                        <input type="search" [(ngModel)]="search" class="form-control" name="supplier_name" formControlName="supplier_name"
-                          id="supplier_name">
-                        <select class="form-control" *ngFor="let f of (folderObjs | filter:search)as folder">
-                            <option>{{f.supplier_name}}</option>
-                        </select>
-                    </div> -->
                     <mat-form-field class="width25-perc mar20lr"  appearance="fill">
                         <mat-label>supplier Name</mat-label>
                         <input type="text" matInput name="supplier_name" required [(ngModel)]="search"
-                          placeholder="Pick one" aria-label="supplier_name" formControlName="supplier_name" [matAutocomplete]="auto">
+                          placeholder="Pick one" aria-label="supplier_name" formControlName="supplier_name" [matAutocomplete]="auto" [maxLength]="500">
                         <mat-autocomplete #auto="matAutocomplete" (optionSelected)="setProductCost($event.option.value)">
                           <mat-option *ngFor="let f of (folderObjs | filter:search)as folder" [value]="f.supplier_name">
                             {{f?.supplier_name}}
@@ -32,56 +23,35 @@
                           name="supplier_id" readonly>
                   
                       </mat-form-field>
-                    <!-- <div class=" supplier-item">
-                        <label for="supplier_id" class="form-label">Supplier ID</label>
-                        <input type="text" class="form-control" formControlName="supplier_id" name="supplier_id" id="supplier_id">
-                    </div> -->
                 </div>
                 <div class="col-md-4">
-                    <!-- <mat-form-field appearance="fill">
-                        <mat-label>Choose a date</mat-label>
-                        <input matInput [matDatepicker]="picker" formControlName="supplier_opendate">
-                        <mat-hint>MM/DD/YYYY</mat-hint>
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
-                      </mat-form-field> -->
                     <mat-form-field class="mar20lr" appearance="fill">
                         <mat-label>Operational From</mat-label>
                         <input matInput type="date" formControlName="supplier_opendate"
                           name="supplier_opendate">
                       </mat-form-field>
-                    <!-- <div class="supplier-item">
-                        <label for="supplier_opendate" class="form-label">Operational From</label>
-                        <input type="text" class="form-control" formControlName="supplier_opendate"
-                            name="supplier_opendate"  id="supplier_opendate">
-                    </div> -->
                 </div>
 
                 <div class="col-md-4">
                     <mat-form-field class="mar20lr" appearance="fill">
                         <mat-label>Registered Address</mat-label>
                         <textarea matInput type="text" formControlName="supplier_address"
-                          name="supplier_address"></textarea>
+                          name="supplier_address" [maxLength]="5000"></textarea>
                   
                       </mat-form-field>
-                    <!-- <div class="supplier-item">
-                        <label for="supplier_address" class="form-label">Address</label>
-                        <textarea type="text" class="form-control" formControlName="supplier_address"
-                            name="supplier_address"  id="supplier_address"></textarea>
-                    </div> -->
                 </div>
                 <div class="col-md-4">
                     <mat-form-field class="mar20lr" appearance="fill">
                         <mat-label>Communication Address</mat-label>
                         <textarea matInput type="text" formControlName="comm_address"
-                          name="comm_address"></textarea>
+                          name="comm_address" [maxLength]="2000"></textarea>
                   
                       </mat-form-field>
                 </div>
                 <div class="col-md-4">
                     <mat-form-field class="mar20lr" appearance="fill">
                         <mat-label>Pincode</mat-label>
-                        <input matInput type="text" formControlName="pin_code"
+                        <input matInput type="number" [maxLength]="10" formControlName="pin_code"
                           name="pin_code">
                   
                       </mat-form-field>
@@ -89,82 +59,52 @@
                 <div class="col-md-4">
                     <mat-form-field class="mar20lr" appearance="fill">
                         <mat-label>Contact Number</mat-label>
-                        <input matInput type="text" formControlName="supplier_contact_num"
-                          name="supplier_contact_num">
+                        <input matInput type="number" formControlName="supplier_contact_num"
+                          name="supplier_contact_num" [maxLength]="15">
                   
                       </mat-form-field>
-                    <!-- <div class="supplier-item">
-                        <label for="supplier_contact_num" class="form-label">Contact Number</label>
-                        <input type="text" class="form-control" formControlName="supplier_contact_num"
-                            name="supplier_contact_num"  id="supplier_contact_num">
-                    </div> -->
                 </div>
                 <div class="col-md-4">
                     <mat-form-field class="mar20lr" appearance="fill">
                         <mat-label>Email ID</mat-label>
                         <input matInput type="text" formControlName="supplier_email_id"
-                          name="supplier_email_id">
+                          name="supplier_email_id" [maxLength]="100">
                   
                       </mat-form-field>
-                    <!-- <div class="supplier-item">
-                        <label for="supplier_email_id" class="form-label">Email ID</label>
-                        <input type="text" class="form-control" formControlName="supplier_email_id"
-                            name="supplier_email_id"  id="supplier_email_id">
-                    </div> -->
                 </div>
 
                 <div class="col-md-4">
                     <mat-form-field class="mar20lr" appearance="fill">
                         <mat-label>Website</mat-label>
                         <input matInput type="text" formControlName="supplier_website"
-                          name="supplier_website">
+                          name="supplier_website" [maxLength]="100">
                   
                     </mat-form-field>
-                    <!-- <div class="supplier-item">
-                        <label for="supplier_website" class="form-label">Website</label>
-                        <input type="text" class="form-control" formControlName="supplier_website"
-                            name="supplier_website"  id="supplier_website">
-                    </div> -->
                 </div>
 
                 <div class="col-md-4">
                     <mat-form-field class="mar20lr" appearance="fill">
                         <mat-label>Contact Person</mat-label>
                         <input matInput type="text" formControlName="supplier_cont_pers"
-                          name="supplier_cont_pers">
+                          name="supplier_cont_pers" [maxLength]="100">
                   
                       </mat-form-field>
-                    <!-- <div class="supplier-item">
-                        <label for="supplier_contact_pers" class="form-label">Contact Person</label>
-                        <input type="text" class="form-control" formControlName="supplier_contact_pers"
-                            name="supplier_contact_pers"  id="supplier_contact_pers">
-                    </div> -->
                 </div>
                 <div class="col-md-4">
                     <mat-form-field class="mar20lr" appearance="fill">
                         <mat-label>Contact Person Phone</mat-label>
                         <input matInput type="text" formControlName="supplier_cont_pers_phone"
-                          name="supplier_cont_pers_phone">
+                          name="supplier_cont_pers_phone" [maxLength]="15">
                   
                       </mat-form-field>
-                    <!-- <div class="supplier-item">
-                        <label for="supplier_contact_pers_phone" class="form-label">Contact Person Phone</label>
-                        <input type="text" class="form-control" formControlName="supplier_contact_pers_phone"
-                            name="supplier_contact_pers_phone"  id="supplier_contact_pers_phone">
-                    </div> -->
                 </div>
                 <div class="col-md-4">
                     <mat-form-field class="mar20lr" appearance="fill">
                         <mat-label>Contact Person Email</mat-label>
                         <input matInput type="text" formControlName="supplier_cont_pers_email"
-                          name="supplier_cont_pers_email">
+                          name="supplier_cont_pers_email" [maxLength]="100">
                   
                     </mat-form-field>
-                    <!-- <div class="supplier-item">
-                        <label for="supplier_contact_pers_email" class="form-label">Contact Person Email</label>
-                        <input type="text" class="form-control" formControlName="supplier_contact_pers_email"
-                            name="supplier_contact_pers_email"  id="supplier_contact_pers_email">
-                    </div> -->
                 </div>
 
 
@@ -172,142 +112,92 @@
                     <mat-form-field class="mar20lr" appearance="fill">
                         <mat-label>GST Number</mat-label>
                         <input matInput type="text" formControlName="supplier_gst_num"
-                          name="supplier_gst_num">
+                          name="supplier_gst_num" [maxLength]="100">
                   
                     </mat-form-field>
-                    <!-- <div class="supplier-item">
-                        <label for="supplier_gst_num" class="form-label">GST Number</label>
-                        <input type="text" class="form-control" formControlName="supplier_gst_num"
-                            name="supplier_gst_num"  id="supplier_gst_num">
-                    </div> -->
                 </div>
                 <div class="col-md-4">
                     <mat-form-field class="mar20lr" appearance="fill">
                         <mat-label>Local GST Number</mat-label>
                         <input matInput type="text" formControlName="supplier_localgst_num"
-                          name="supplier_localgst_num">
+                          name="supplier_localgst_num" [maxLength]="100">
                   
                     </mat-form-field>
-                    <!-- <div class="supplier-item">
-                        <label for="supplier_localgst_num" class="form-label">Local GST Number</label>
-                        <input type="text" class="form-control" formControlName="supplier_localgst_num"
-                            name="supplier_localgst_num"  id="supplier_localgst_num">
-                    </div> -->
                 </div>
 
                 <div class="col-md-4">
                     <mat-form-field class="mar20lr" appearance="fill">
                         <mat-label>CST Number</mat-label>
                         <input matInput type="text" formControlName="supplier_cst_num"
-                          name="supplier_cst_num">
+                          name="supplier_cst_num" [maxLength]="100">
                   
                     </mat-form-field>
-                    <!-- <div class="supplier-item">
-                        <label for="supplier_cst_num" class="form-label">CST Number</label>
-                        <input type="text" class="form-control" formControlName="supplier_cst_num"
-                            name="supplier_cst_num"  id="supplier_cst_num">
-                    </div> -->
                 </div>
 
                 <div class="col-md-4">
                     <mat-form-field class="mar20lr" appearance="fill">
                         <mat-label>PAN No</mat-label>
                         <input matInput type="text" formControlName="pan_no"
-                          name="pan_no">
+                          name="pan_no" [maxLength]="100">
                   
                     </mat-form-field>
-                    <!-- <div class="supplier-item">
-                        <label for="pan_no" class="form-label">PAN No</label>
-                        <input type="text" class="form-control" formControlName="pan_no"
-                            name="pan_no"  id="pan_no">
-                    </div> -->
                 </div>
 
                 <div class="col-md-4">
                     <mat-form-field class="mar20lr" appearance="fill">
                         <mat-label>DL #</mat-label>
                         <input matInput type="text" formControlName="dl_no"
-                          name="dl_no">
+                          name="dl_no" [maxLength]="100">
                     </mat-form-field>
-                    <!-- <div class="supplier-item">
-                        <label for="dl_no" class="form-label">DL #</label>
-                        <input type="text" class="form-control" formControlName="dl_no"
-                            name="dl_no"  id="dl_no">
-                    </div> -->
                 </div>
 
                 <div class="col-md-4">
                     <mat-form-field class="mar20lr" appearance="fill">
                         <mat-label>Credit Days</mat-label>
-                        <input matInput type="text" formControlName="credit_days"
+                        <input matInput type="number" formControlName="credit_days"
                           name="credit_days">
                   
                     </mat-form-field>
-                    <!-- <div class="supplier-item">
-                        <label for="credit_days" class="form-label">Credit Days</label>
-                        <input type="text" class="form-control" formControlName="credit_days"
-                            name="credit_days"  id="credit_days">
-                    </div> -->
                 </div>
 
                 <div class="col-md-4">
                     <mat-form-field class="mar20lr" appearance="fill">
                         <mat-label>Bank Name</mat-label>
                         <input matInput type="text" formControlName="bank_name"
-                          name="bank_name">
+                          name="bank_name" [maxLength]="100">
                     </mat-form-field>
-                    <!-- <div class="supplier-item">
-                        <label for="bank_name" class="form-label">Bank Name</label>
-                        <input type="text" class="form-control" formControlName="bank_name"
-                            name="bank_name"  id="bank_name">
-                    </div> -->
                 </div>
                 <div class="col-md-4">
                     <mat-form-field class="mar20lr" appearance="fill">
                         <mat-label>Bank Branch</mat-label>
                         <input matInput type="text" formControlName="bank_branch"
-                          name="bank_branch">
+                          name="bank_branch" [maxLength]="100">
                       </mat-form-field>
                 </div>
                 <div class="col-md-4">
                     <mat-form-field class="mar20lr" appearance="fill">
                         <mat-label>Accout Number</mat-label>
                         <input matInput type="text" formControlName="account_no"
-                          name="account_no">
+                          name="account_no" [maxLength]="50">
                   
                     </mat-form-field>
-                    <!-- <div class="supplier-item">
-                        <label for="account_no" class="form-label">Accout Number</label>
-                        <input type="text" class="form-control" formControlName="account_no"
-                            name="account_no"  id="account_no">
-                    </div> -->
                 </div>
 
                 <div class="col-md-4">
                     <mat-form-field class="mar20lr" appearance="fill">
                         <mat-label>IFSC Code</mat-label>
                         <input matInput type="text" formControlName="ifsc_no"
-                          name="ifsc_no">
+                          name="ifsc_no" [maxLength]="50">
                   
                     </mat-form-field>
-                    <!-- <div class="supplier-item">
-                        <label for="ifsc_code" class="form-label">IFSC Code</label>
-                        <input type="text" class="form-control" formControlName="ifsc_code"
-                            name="ifsc_code"  id="ifsc_code">
-                    </div> -->
                 </div>
                 <div class="col-md-4">
                     <mat-form-field class="mar20lr" appearance="fill">
                         <mat-label>Cheque Favour of</mat-label>
                         <input matInput type="text" formControlName="chq_name"
-                          name="chq_name">
+                          name="chq_name" [maxLength]="100">
                   
                     </mat-form-field>
-                    <!-- <div class="supplier-item">
-                        <label for="chq_name" class="form-label">Cheque Favour of</label>
-                        <input type="text" class="form-control" formControlName="chq_name"
-                            name="chq_name"  id="chq_name">
-                    </div> -->
                 </div>
             </div>
         </form>

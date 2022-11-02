@@ -25,6 +25,9 @@ import { CollectionPaymentwiseReportComponent } from './collection-payment-repor
 import { InsuranceSummaryComponent } from './insurance-summary/insurance-summary.component';
 import { PatientScheduleComponent } from './patient-schedule/patient-schedule.component';
 import { PatientListingReportComponent } from './patient-listing-report/patient-listing-report.component';
+import { PoSubmissionComponent } from './po-submission/po-submission.component';
+import { GoodsReceiptComponent } from './goods-receipt/goods-receipt.component';
+import { SupplierPaymentComponent } from './supplier-payment/supplier-payment.component';
 
 const routes: Routes = [
   {
@@ -127,6 +130,18 @@ const routes: Routes = [
   {
     path: 'patient-listing',
     component: PatientListingReportComponent
+  },
+  {
+    path: 'po-submission',
+    component: PoSubmissionComponent
+  },
+  {
+    path: 'goods-receipt',
+    component: GoodsReceiptComponent
+  },
+  {
+    path: 'supplier-payment',
+    component: SupplierPaymentComponent
   }
 
 

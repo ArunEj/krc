@@ -1,0 +1,145 @@
+<app-header></app-header>
+<div class="container">
+    <div class="row">
+        <h3>Supplier payment</h3>
+        <form [formGroup]="supplierPaymentForm">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class=" supplier-item">
+                        <label for="branch_id" class="form-label">Ordered Branch<span
+                                class="txt-danger">*</span></label>
+                        <select class="form-control" name="branch_id"  formControlName="branch_id" (change)="getSupplierList()">
+                            <option *ngFor="let branch of branchList;" [value]="branch.branch_id">{{branch.branch_name}}</option>
+    
+                        </select>
+                        <!-- <input type="text" class="form-control" name="branch_id" formControlName="branch_id"
+                            id="branch_id" (change)="getSupplierList()" required> -->
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="supplier-item">
+                        <label for="supplier_id" class="form-label">Supplier Name<span
+                                class="txt-danger">*</span></label>
+                        <select class="form-control" name="supplier_id" formControlName="supplier_id"
+                            (change)="getPoSuppPayment()">
+                            <option *ngFor="let suppData of supplierIdData" [value]="suppData.supplier_id">
+                                {{suppData.supplier_name}}</option>
+
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">PO Number</th>
+                        <th scope="col">PO Date</th>
+                        <th scope="col">Inv #</th>
+                        <!-- <th scope="col">Inv Date</th>
+                        <th scope="col">Receipt Date</th> -->
+                        <th scope="col">Payment Due Date</th>
+                        <th scope="col">Inv Amount</th>
+                        <th scope="col">Paid</th>
+                        <th scope="col">Balance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container>
+                        <tr *ngFor="let suppPay of suppPayData; let i = index"  (click)="ClickedRow(i)" [class.active]="i == HighlightRow">
+                            <td>{{suppPay.po_number}}</td>
+
+                            <td>{{suppPay.po_date | date: 'dd-MM-yyyy'}}</td>
+
+                            <td (click)="showPayEntry(suppPay)" class="pointer">{{suppPay.supplier_invoice_num}}</td>
+
+                            <td>{{suppPay.payment_date | date: 'dd-MM-yyyy'}}</td>
+<!-- 
+                            <td>{{suppPay.payment_date | date: 'dd-MM-yyyy'}}</td>
+
+                            <td>{{suppPay.payment_date | date: 'dd-MM-yyyy'}}</td> -->
+
+                            <td>{{suppPay.supp_inv_amt}}</td>
+
+                            <td>{{suppPay.supp_inv_amt_paid}}</td>
+
+                            <td>{{suppPay.supp_inv_amt_bal}}</td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+            <br>
+            <div *ngIf="isShowPayEntry">
+                <div class="row">
+                    <div class="col-3">
+                        <div class="supplier-item">
+                            <label for="payment_date" class="form-label">Payment Date</label>
+                            <input type="date" class="form-control" formControlName="payment_date"
+                                name="payment_date"  id="payment_date" (change)="validateDate()">
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="supplier-item">
+                            <label for="payment_mode" class="form-label">Payment Mode</label>
+                            <select formControlName="payment_mode" class="form-control">
+                                <option [value]="null">-Select-</option>
+                                <option *ngFor="let ref of paymentModes" [value]="ref.ref_code">{{ref.ref_code}}-{{ref.ref_desc}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="supplier-item">
+                            <label for="payment_amount" class="form-label">Payment Amount</label>
+                            <input type="number" class="form-control" formControlName="payment_amount"
+                                name="payment_amount"  id="payment_amount" (change)="validatePayment()">
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="supplier-item">
+                            <label for="remarks" class="form-label">Remarks</label>
+                            <textarea type="text" class="form-control" formControlName="remarks"
+                                name="remarks"  id="remarks" [maxLength]="500"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-6 d-flex">
+                            <!-- <div class="col-3" *ngIf="isShowPayEntry">
+                                <button class="btn btn-primary" (click)="addToList()">Fetch Data</button>
+                            </div> -->
+                            <div class="col-2">
+                                <button class="btn btn-primary" (click)="submit()">Save</button>
+                            </div>
+                    </div>
+                </div><br>
+                <h5>PAYMENT ENTRY</h5>
+                <table class="table table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Payment Date</th>
+                            <th scope="col">Payment Mode</th>
+                            <th scope="col">Payment amount</th>
+                            <th scope="col">Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container>
+                            <tr *ngFor="let payData of paymentTableData">
+                                <td>{{payData.payment_date | date: 'dd-MM-yyyy'}}</td>
+
+                                <td>{{payData.payment_mode_name}}</td>
+
+                                <td>{{payData.payment_value}}</td>
+
+                                <td>{{payData.payment_desc}}</td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>

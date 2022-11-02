@@ -46,7 +46,10 @@ import { PoComponent } from './po/po.component';
 import { InsuranceSummaryComponent } from './insurance-summary/insurance-summary.component';
 import { PatientScheduleComponent } from './patient-schedule/patient-schedule.component';
 import { PatientListingReportComponent } from './patient-listing-report/patient-listing-report.component';
-import {ListTable}from './patient-listing-report/list-table/list-table.component'
+import {ListTable}from './patient-listing-report/list-table/list-table.component';
+import { PoSubmissionComponent } from './po-submission/po-submission.component';
+import { GoodsReceiptComponent } from './goods-receipt/goods-receipt.component';
+import { SupplierPaymentComponent } from './supplier-payment/supplier-payment.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -89,7 +92,10 @@ import {ListTable}from './patient-listing-report/list-table/list-table.component
     InsuranceSummaryComponent,
     PatientScheduleComponent,
     PatientListingReportComponent,
-    ListTable
+    ListTable,
+    PoSubmissionComponent,
+    GoodsReceiptComponent,
+    SupplierPaymentComponent
   ],
   imports: [
     BrowserModule,

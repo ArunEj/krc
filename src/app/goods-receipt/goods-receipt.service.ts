@@ -6,18 +6,18 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class PoService {
+export class GoodsReceiptService {
 
   constructor(private http: HttpClient) { }
 
-  getProducts(supId: any):Observable<any> {
+  getProducts(supId: string):Observable<any> {
     return this.http.get(environment.apiUrl + 'supplierproducts/' + localStorage.getItem('branch_id') + '/' + supId);
   }
 
-  createPO(param:any):Observable<any>{
+  createGoods(param:any):Observable<any>{
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post(environment.apiUrl + 'po',param,
+    return this.http.post(environment.apiUrl + 'pogoodsreceipt',param,
       { headers: headers })
   }
 
@@ -62,6 +62,16 @@ export class PoService {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.get(environment.apiUrl + 'products/'+ branchId,
+      { headers: headers })
+  }
+
+  //View
+  public viewGoods(suppId: any, poNumber: any, code: any): Observable<any> {
+    const orgId = localStorage.getItem('org_id');
+    const branch_id = localStorage.getItem('branch_id');
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(environment.apiUrl + 'goodreceipt/'+ orgId + '/' + branch_id + '/' + suppId + '?po_number=' + poNumber + '&item_code=' + code,
       { headers: headers })
   }
 }
