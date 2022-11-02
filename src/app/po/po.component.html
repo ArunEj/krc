@@ -37,8 +37,6 @@
                         <option *ngFor="let po of poDraftData" [value]="po.po_number">{{po.po_number}}</option>
 
                     </select>
-                    <!-- <input type="text" class="form-control" formControlName="po"
-                        name="po"  id="po" readonly> -->
                 </div>
             </div>
             <div class="col-1">
@@ -54,31 +52,10 @@
             <div class="col-3">
                 <div class="supplier-item">
                     <label for="po_value" class="form-label">PO Value</label>
-                    <input type="text" class="form-control" formControlName="po_value"
+                    <input type="number" class="form-control" formControlName="po_value"
                         name="po_value"  id="po_value" readonly>
                 </div>
             </div>
-            <!-- <div class="col-3">
-                <div class="supplier-item">
-                    <label for="supInvVal" class="form-label">Supplier Inv Value</label>
-                    <input type="text" class="form-control" formControlName="supInvVal"
-                        name="supInvVal"  id="supInvVal" readonly>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="supplier-item">
-                    <label for="paidSup" class="form-label">Paid to Supplier</label>
-                    <input type="text" class="form-control" formControlName="paidSup"
-                        name="paidSup"  id="paidSup" readonly>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="supplier-item">
-                    <label for="balSup" class="form-label">Balance to Supplier</label>
-                    <input type="text" class="form-control" formControlName="balSup"
-                        name="balSup"  id="balSup" readonly>
-                </div>
-            </div> -->
             <div class="col-3">
                 <div class="supplier-item">
                     <label for="po_status" class="form-label">PO status</label>
@@ -107,13 +84,13 @@
                 </div>
             </div>
 
-            <div class="col-2">
+            <!-- <div class="col-2">
                 <div class="supplier-item">
                     <label for="item_cost" class="form-label">Item Cost</label>
                     <input type="number" class="form-control" formControlName="item_cost"
                         name="item_cost"  id="item_cost" (change)="calculateTotalCost()">
                 </div>
-            </div>
+            </div> -->
             <div class="col-1">
                 <div class="supplier-item">
                     <label for="qty_ordered" class="form-label">Qty Order</label>
@@ -121,13 +98,13 @@
                         name="qty_ordered"  id="qty_ordered" (change)="calculateTotalCost()">
                 </div>
             </div>
-            <div class="col-2">
+            <!-- <div class="col-2">
                 <div class="supplier-item">
                     <label for="net_value" class="form-label">Total cost</label>
                     <input type="number" class="form-control" formControlName="net_value"
                         name="net_value"  id="net_value">
                 </div>
-            </div>
+            </div> -->
             <div class="col-2">
                 <div class="supplier-item">
                     <label for="exp_del_date" class="form-label">To be Delivered on</label>
@@ -148,7 +125,7 @@
                 <div class="supplier-item">
                     <label for="remarks" class="form-label">Remarks</label>
                     <textarea type="text" class="form-control" formControlName="remarks"
-                        name="remarks"  id="remarks"></textarea>
+                        name="remarks"  id="remarks" [maxLength]="1000"></textarea>
                 </div>
             </div>
         </div>
@@ -174,9 +151,9 @@
           <tr>
             <!-- <th>Item Code</th> -->
             <th>Item Desc</th>
-            <th>Item Cost</th>
+            <!-- <th>Item Cost</th> -->
             <th>Qty Order</th>
-            <th>Total cost</th>
+            <!-- <th>Total cost</th> -->
             <th>Deliver By</th>
             <th>Delivery Branch</th>
             <th>Remarks</th>
@@ -188,11 +165,11 @@
                 <tr *ngFor="let poData of poList">
                     <td >{{poData.item_desc}}</td>
 
-                    <td>{{poData.item_cost}}</td>
+                    <!-- <td>{{poData.item_cost}}</td> -->
         
                     <td>{{poData.qty_ordered}}</td>
 
-                    <td>{{poData.net_value}}</td>
+                    <!-- <td>{{poData.net_value}}</td> -->
 
                     <td>{{poData.exp_del_date | date: 'dd-MM-yyyy'}}</td>  
                     
@@ -209,11 +186,11 @@
 
                     <td>{{item.product_name}}</td>
 
-                    <td>{{item.item_cost}}</td>
+                    <!-- <td>{{item.item_cost}}</td> -->
         
                     <td>{{item.qty_ordered}}</td>
 
-                    <td>{{item.net_value}}</td>
+                    <!-- <td>{{item.net_value}}</td> -->
 
                     <td>{{item.exp_del_date | date: 'dd-MM-yyyy'}}</td>
                     

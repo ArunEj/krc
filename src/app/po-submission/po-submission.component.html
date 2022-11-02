@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div class="container">
     <div class="row">
-        <h3>PO</h3>
+        <h3>PO SUBMISSION</h3>
     </div>
     <form [formGroup]="poSubForm">
         <div class="row">
@@ -42,7 +42,7 @@
           <tr>
             <th>PO#</th>
             <th>PO Date</th>
-            <th>PO Value</th>
+            <!-- <th>PO Value</th> -->
             <th>Action</th>
           </tr> 
         </thead>
@@ -54,7 +54,7 @@
         
                     <td>{{item.po_date | date: 'dd-MM-yyyy'}}</td>
 
-                    <td>{{item.po_value}}</td>
+                    <!-- <td>{{item.po_value}}</td> -->
                     
                     <td><mat-checkbox class="example-margin" color="primary" (click)="checked(item)"></mat-checkbox></td>
                 </tr>
@@ -68,9 +68,9 @@
           <tr>
             <!-- <th>Item Code</th> -->
             <th>Item Desc</th>
-            <th>Item Cost</th>
+            <!-- <th>Item Cost</th> -->
             <th>Qty Order</th>
-            <th>Total cost</th>
+            <!-- <th>Total cost</th> -->
             <th>Deliver By</th>
             <th>Delivery Branch</th>
             <th>Remarks</th>
@@ -81,11 +81,11 @@
                 <tr *ngFor="let poData of poList">
                     <td>{{poData.product_name}}</td>
 
-                    <td>{{poData.item_cost}}</td>
+                    <!-- <td>{{poData.item_cost}}</td> -->
         
                     <td>{{poData.qty_ordered}}</td>
 
-                    <td>{{poData.net_value}}</td>
+                    <!-- <td>{{poData.net_value}}</td> -->
 
                     <td>{{poData.exp_del_date | date: 'dd-MM-yyyy'}}</td>  
                     

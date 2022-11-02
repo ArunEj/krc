@@ -7,8 +7,12 @@
                 <div class="col-md-4">
                     <div class=" supplier-item">
                         <label for="branch_id" class="form-label">Branch ID<span class="txt-danger">*</span></label>
-                        <input type="text" class="form-control" name="branch_id" formControlName="branch_id"
-                             id="branch_id" required>
+                        <select class="form-control" name="branch_id"  formControlName="branch_id">
+                            <option *ngFor="let branch of branchList;" [value]="branch.branch_id">{{branch.branch_name}}</option>
+    
+                        </select>
+                        <!-- <input type="text" class="form-control" name="branch_id" formControlName="branch_id"
+                             id="branch_id" required> -->
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -58,7 +62,7 @@
                 <div class="col">
                     <div class=" supplier-item">
                         <label for="purchase_price" class="form-label">Supplier Price</label>
-                        <input type="text" class="form-control" formControlName="purchase_price"
+                        <input type="number" class="form-control" formControlName="purchase_price"
                             name="purchase_price"  id="purchase_price" [(ngModel)]="prodItem.purchase_price">
                     </div>
                 </div> 
@@ -72,7 +76,7 @@
                 <div class="col">
                     <div class="supplier-item">
                         <label for="credit_days" class="form-label">Credit Days</label>
-                        <input type="text" class="form-control" formControlName="credit_days"
+                        <input type="number" class="form-control" formControlName="credit_days"
                             name="credit_days"  id="credit_days" [(ngModel)]="prodItem.credit_days">
                     </div>
                 </div>
