@@ -16,7 +16,7 @@ export class PrTableComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.tableData);
   }
 
-  displayedColumns = ['trans_id', 'account_value','payment_mode_name', 'rp_name_other', 'trans_narration','voucher_num', 'action'];
+  displayedColumns = ['trans_id', 'account_value','payment_mode_name', 'rp_name_other', 'trans_narration','voucher_num','trans_date','account_code', 'action'];
 
 
   applyFilter(filterValue: string) {

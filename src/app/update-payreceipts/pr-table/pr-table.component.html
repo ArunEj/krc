@@ -9,7 +9,7 @@
   
       <!-- Position Column -->
       <ng-container matColumnDef="trans_id">
-        <mat-header-cell *matHeaderCellDef>Transaction #</mat-header-cell>
+        <mat-header-cell class="w-75" *matHeaderCellDef>Transaction #</mat-header-cell>
         <mat-cell *matCellDef="let element;let i = index;"> {{element.trans_id}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="account_value">
@@ -17,7 +17,7 @@
         <mat-cell *matCellDef="let element;let i = index;"> {{element.account_value}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="payment_mode_name">
-        <mat-header-cell *matHeaderCellDef>Amount</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef>Payment Type</mat-header-cell>
         <mat-cell *matCellDef="let element;let i = index;"> {{element.payment_mode_name}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="rp_name_other">
@@ -34,6 +34,14 @@
         <mat-header-cell *matHeaderCellDef>Voucher #</mat-header-cell>
         <mat-cell *matCellDef="let element;let i = index;"> {{element.voucher_num}} </mat-cell>
     </ng-container>
+    <ng-container matColumnDef="trans_date">
+      <mat-header-cell *matHeaderCellDef>Transaction Date</mat-header-cell>
+      <mat-cell *matCellDef="let element;let i = index;"> {{element.trans_date}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="account_code">
+    <mat-header-cell *matHeaderCellDef>Account Code</mat-header-cell>
+    <mat-cell *matCellDef="let element;let i = index;"> {{element.account_code}} </mat-cell>
+</ng-container>
     <ng-container matColumnDef="action">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let element;let i = index;">

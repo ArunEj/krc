@@ -19,7 +19,7 @@ export class PatientRegistrationComponent implements OnInit {
   patientRegObj: Patient = {
     patient_name: '', dob: '', address: '', sex: '', email_id: '', mobile_no: '', first_visit_date: '',
     communicate_address: '', user_id: '', org_id: '', alt_mobile_no: '', aadhar_no: '', photo: '',
-     alt_email_id: '', branch_id: '',
+    alt_email_id: '', branch_id: '',
     age: '', blood_group: '', husband_name: '', guardian_name: '', guardian_type: '', father_name: '', ration_cardno: '',
     profession: '', attender1_name: '', attender1_relation_type: '', attender1_contact: '', attender2_name: '', attender2_relation_type: '', attender2_contact: '',
     pincode: '', reapproval: 'N'
@@ -57,12 +57,9 @@ export class PatientRegistrationComponent implements OnInit {
       temp = new Date(this.patientRegObj.dob);
       fvDate = new Date(this.patientRegObj.first_visit_date || '');
       let month = this.appendZero(fvDate.getMonth() + 1);
-      this.patientRegObj.first_visit_date = fvDate.getFullYear() + '-' + month + '-' + this.appendZero(fvDate.getDate());
-    } else {
-      temp = new Date();
+      this.patientRegObj.first_visit_date = fvDate.getFullYear() + '-' + month + '-' + this.appendZero(fvDate.getDate());      
     }
-    let month = this.appendZero(temp.getMonth() + 1);
-    this.patientRegObj.dob = temp.getFullYear() + '-' + month + '-' + this.appendZero(temp.getDate());
+
   }
   goBack() {
     if (this.updatePatient) {
