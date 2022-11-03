@@ -9,6 +9,7 @@ import { FormGroup, FormBuilder } from "@angular/forms";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PatientListDialogComponent } from '../utilities/patient-list-dialog/patient-list-dialog.component';
 import { InvoiceComponent } from '../invoice/invoice.component';
+import { ReferenceService } from '../utilities/services/reference.service';
 @Component({
   selector: 'app-billing',
   templateUrl: './billing.component.html',
@@ -96,20 +97,31 @@ export class BillingComponent implements OnInit {
 
   }
   totalAmount = 0;
+  eodData:any;
   totalOtherCharges = 0;
   totalGrossDiscount = 0;
   filteredOptions: Observable<any[]> | undefined;
   headerDetailData: any;
   constructor(private bs: BillingService,
-    private dialog: MatDialog, private router: Router, private fb: FormBuilder) { }
+    private dialog: MatDialog, private router: Router, private fb: FormBuilder,
+    private ref:ReferenceService) { }
 
   ngOnInit(): void {
 
     this.fetchBu();
+    this.getEodDetails();
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value)),
     );
+  }
+
+  getEodDetails() {
+    this.ref.getEodDetailData().subscribe(data => {
+      console.log("EOD data", data.results);
+      this.eodData = data.results[0].eod_date;
+      
+    })
   }
 
   fetchBu() {
@@ -167,7 +179,7 @@ export class BillingComponent implements OnInit {
     this.resetFieldsCalculation();
     switch (data) {
       case 'DIALY': {
-        this.bs.fetchProducts(data, patientType).subscribe(data => {
+        this.bs.fetchProducts(data, patientType,this.eodData).subscribe(data => {
           this.options = data.results;
           this.filteredOptions = this.myControl.valueChanges.pipe(
             startWith(''),
@@ -177,7 +189,7 @@ export class BillingComponent implements OnInit {
         break;
       }
       case 'PHARM': {
-        this.bs.fetchProducts(data, patientType).subscribe(data => {
+        this.bs.fetchProducts(data, patientType,this.eodData).subscribe(data => {
           this.options = data.results;
           this.filteredOptions = this.myControl.valueChanges.pipe(
             startWith(''),
@@ -187,7 +199,7 @@ export class BillingComponent implements OnInit {
         break;
       }
       case 'LAB': {
-        this.bs.fetchProducts(data, patientType).subscribe(data => {
+        this.bs.fetchProducts(data, patientType,this.eodData).subscribe(data => {
           this.options = data.results;
           this.filteredOptions = this.myControl.valueChanges.pipe(
             startWith(''),
@@ -209,7 +221,7 @@ export class BillingComponent implements OnInit {
     this.billingItem.bu_id = data;
     let patientType = this.headerDetailData.patient_type;
     this.resetFieldsCalculation();
-    this.bs.fetchProducts(data, patientType).subscribe(data => {
+    this.bs.fetchProducts(data, patientType,this.eodData).subscribe(data => {
       this.options = data.results;
       this.filteredOptions = this.myControl.valueChanges.pipe(
         startWith(''),

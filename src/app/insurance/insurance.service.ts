@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
   })
 
 export class InsuranceService {
+    setInsData: any;
 
     constructor(public http: HttpClient) {}
 
@@ -92,5 +93,15 @@ export class InsuranceService {
       headers.append('Content-Type', 'application/json');
       return this.http.post(environment.apiUrl + 'patientinsurancereport',params,
         { headers: headers })
+    }
+
+    //set insurance data
+    setInsurancedata(data: any) {
+      console.log(data);
+      this.setInsData = data;
+    }
+
+    getInsurancedata(){
+      return this.setInsData;
     }
 }

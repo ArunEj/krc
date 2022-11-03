@@ -44,6 +44,17 @@ import { EodComponent } from './eod/eod.component';
 import { CancelInvoiceDialogComponent } from './utilities/cancel-invoice-dialog/cancel-invoice-dialog.component'
 import { ViewProductDialogComponent } from './utilities/view-product-dialog/view-product-dialog.component';
 import { CollectionPaymentwiseReportComponent } from './collection-payment-report/collection-payment-report.component';
+import { PoComponent } from './po/po.component';
+import { InsuranceSummaryComponent } from './insurance-summary/insurance-summary.component';
+import { PatientScheduleComponent } from './patient-schedule/patient-schedule.component';
+import { PatientListingReportComponent } from './patient-listing-report/patient-listing-report.component';
+import {ListTable}from './patient-listing-report/list-table/list-table.component';
+import { PoSubmissionComponent } from './po-submission/po-submission.component';
+import { GoodsReceiptComponent } from './goods-receipt/goods-receipt.component';
+import { SupplierPaymentComponent } from './supplier-payment/supplier-payment.component';
+import { PaymentReceiptsComponent } from './payment-receipts/payment-receipts.component';
+import { UpdatePayreceiptsComponent } from './update-payreceipts/update-payreceipts.component';
+import { PrTableComponent } from './update-payreceipts/pr-table/pr-table.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -82,8 +93,19 @@ import { CollectionPaymentwiseReportComponent } from './collection-payment-repor
     FilterPipe,
     EodComponent,
     CancelInvoiceDialogComponent,
-    ViewProductDialogComponent,
-    CollectionPaymentwiseReportComponent
+    ViewProductDialogComponent,    
+    PoComponent,
+    CollectionPaymentwiseReportComponent,
+    InsuranceSummaryComponent,
+    PatientScheduleComponent,
+    PatientListingReportComponent,
+    ListTable,
+    PoSubmissionComponent,
+    GoodsReceiptComponent,
+    SupplierPaymentComponent,
+    PaymentReceiptsComponent,
+    UpdatePayreceiptsComponent,
+    PrTableComponent
   ],
   imports: [
     BrowserModule,

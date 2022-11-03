@@ -39,11 +39,11 @@ export class BillingService {
   }
 
 
-  fetchProducts(bu:string, patientType: string): Observable<any> {
+  fetchProducts(bu:string, patientType: string, eod:string): Observable<any> {
     let branch_id = localStorage.getItem('branch_id');
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.get(environment.apiUrl + 'products/'+branch_id+'?bu_id='+bu + '&patient_type='+patientType,
+    return this.http.get(environment.apiUrl + 'products/'+branch_id+'?bu_id='+bu + '&patient_type='+patientType+'&eod_date='+eod+'&screen_id=Invoice',
       { headers: headers })
   }
 

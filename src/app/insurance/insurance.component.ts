@@ -50,6 +50,8 @@ export class InsuranceComponent implements OnInit {
   printData: any[] =[];
   HeaderIns: any;
   // date = new FormControl(moment());
+  ins_flag: boolean = true;
+  getValue: any;
 
   constructor(private is: InvoiceService, private dialog: MatDialog, private router: Router,
     private formBuilder: FormBuilder, private aptService: AptBookingService, private insuranceService: InsuranceService,
@@ -67,8 +69,13 @@ export class InsuranceComponent implements OnInit {
     })
     this.dateForm.controls.year.setValue('2022');
     this.submitData();
+    this.loadInsurance();
   }
 
+  loadInsurance() {
+    this.patientHeaderData(this.insuranceService.getInsurancedata());
+  }
+  
   headerForm() {
     this.insuranceform = this.formBuilder.group(
       {
@@ -125,31 +132,48 @@ export class InsuranceComponent implements OnInit {
   }
 
   showPatientList(result: any) {
-    const dialogRef = this.dialog.open(PatientListDialogComponent, {
-      width: '500px',
-      data: result,
-    });
-
-    dialogRef.afterClosed().subscribe(data => {
-      this.patientList = data.results;
-      this.is.fetchHeader(data.patient_id).subscribe(data => {
-        if (data) {
-          this.fetchInsHeader(data);
-          if(data.patient_type == 'N'){
-            this.dialog.open(InfoDialogComponent, {
-              width: '500px',
-              data: 'Insurance Entry Not applicable for Normal Patient!!!'
-            })
-            return;
-          }
-          this.patientHeader = data;
-          this.isShowPatientHeader = true;
-          this.isShowPatientInputForm = true;
-          this.patientInvoiceDetail = true;
-          this.fetchInsData();
+    this.is.fetchHeader(result.patient_id).subscribe(data => {
+      if (data) {
+        this.fetchInsHeader(data);
+        if(data.patient_type == 'N'){
+          this.dialog.open(InfoDialogComponent, {
+            width: '500px',
+            data: 'Insurance Entry Not applicable for Normal Patient!!!'
+          })
+          return;
         }
-      })
-    });
+        this.patientHeader = data;
+        this.isShowPatientHeader = true;
+        this.isShowPatientInputForm = true;
+        this.patientInvoiceDetail = true;
+        this.fetchInsData();
+      }
+    })
+    // const dialogRef = this.dialog.open(PatientListDialogComponent, {
+    //   width: '500px',
+    //   data: result,
+    // });
+
+    // dialogRef.afterClosed().subscribe(data => {
+    //   this.patientList = data.results;
+    //   this.is.fetchHeader(data.patient_id).subscribe(data => {
+    //     if (data) {
+    //       this.fetchInsHeader(data);
+    //       if(data.patient_type == 'N'){
+    //         this.dialog.open(InfoDialogComponent, {
+    //           width: '500px',
+    //           data: 'Insurance Entry Not applicable for Normal Patient!!!'
+    //         })
+    //         return;
+    //       }
+    //       this.patientHeader = data;
+    //       this.isShowPatientHeader = true;
+    //       this.isShowPatientInputForm = true;
+    //       this.patientInvoiceDetail = true;
+    //       this.fetchInsData();
+    //     }
+    //   })
+    // });
   }
 
   //get Doctor list
@@ -397,5 +421,13 @@ export class InsuranceComponent implements OnInit {
   //back
   back(){
     this.isShowPrint = false;
+  }
+
+  //patientHeaderData
+  patientHeaderData(data: any) {
+    console.log("data---->>>",data.data);
+    this.dateForm.controls.month.setValue(data.month);
+    this.dateForm.controls.year.setValue(data.year);
+    this.showPatientList(data.data);
   }
 }

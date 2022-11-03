@@ -37,10 +37,10 @@ export class SupplierProductService {
     }
 
     //get product list data
-    public getSupplierProdList(bu_id: any, branchId: any): Observable<any> {
+    public getSupplierProdList(bu_id: any, branchId: any, eodDate: any): Observable<any> {
       let headers = new HttpHeaders();
       headers.append('Content-Type', 'application/json');
-      return this.http.get(environment.apiUrl + 'products/'+ branchId + '?bu_id=' + bu_id,
+      return this.http.get(environment.apiUrl + 'products/'+ branchId + '?bu_id=' + bu_id +'&eod_date=' + eodDate +'&screen_id=PO',
         { headers: headers })
     }
 }

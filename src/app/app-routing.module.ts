@@ -20,7 +20,16 @@ import { OutstantingPtwiseComponent } from './outstanting-ptwise/outstanting-ptw
 import { SupplierMasterComponent } from './supplier/supplier-master/supplier-master.component';
 import { SupplierProductComponent } from './supplier-product/supplier-product.component';
 import { EodComponent } from './eod/eod.component';
+import { PoComponent } from './po/po.component';
 import { CollectionPaymentwiseReportComponent } from './collection-payment-report/collection-payment-report.component';
+import { InsuranceSummaryComponent } from './insurance-summary/insurance-summary.component';
+import { PatientScheduleComponent } from './patient-schedule/patient-schedule.component';
+import { PatientListingReportComponent } from './patient-listing-report/patient-listing-report.component';
+import { PoSubmissionComponent } from './po-submission/po-submission.component';
+import { GoodsReceiptComponent } from './goods-receipt/goods-receipt.component';
+import { SupplierPaymentComponent } from './supplier-payment/supplier-payment.component';
+import { PaymentReceiptsComponent } from './payment-receipts/payment-receipts.component';
+import { UpdatePayreceiptsComponent } from './update-payreceipts/update-payreceipts.component';
 
 const routes: Routes = [
   {
@@ -107,7 +116,47 @@ const routes: Routes = [
   {
     path: 'eod',
     component: EodComponent
+  },
+  {
+    path: 'po',
+    component: PoComponent
+  },
+  {
+    path: 'collection-paymentwise-report',
+    component: CollectionPaymentwiseReportComponent
+  },
+  {
+    path: 'insurance-summary',
+    component: InsuranceSummaryComponent
+  },
+  {
+    path: 'patient-schedule',
+    component: PatientScheduleComponent
+  },
+  {
+    path: 'patient-listing',
+    component: PatientListingReportComponent
+  },
+  {
+    path: 'po-submission',
+    component: PoSubmissionComponent
+  },
+  {
+    path: 'goods-receipt',
+    component: GoodsReceiptComponent
+  },
+  {
+    path: 'supplier-payment',
+    component: SupplierPaymentComponent
+  }, {
+    path: 'payment-receipts',
+    component: PaymentReceiptsComponent
+  },
+  {
+    path: 'update-payreceipts',
+    component: UpdatePayreceiptsComponent
   }
+
 
 ];
 
