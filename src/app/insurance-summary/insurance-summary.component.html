@@ -27,7 +27,7 @@
                 <div class="col-3">
                     <div class="supplier-item">
                         <label for="year" class="form-label fs">Year</label>
-                        <input matInput type="text" class="form-control" formControlName="year" name="year" >
+                        <input type="text" class="form-control" formControlName="year" name="year">
                     </div>
                 </div>
                 <div class="col-3">
@@ -55,7 +55,7 @@
                 </tr>
                 <tr *ngFor="let data of data.details; let i=index">
                     <td>{{i+1}}</td>
-                    <td (click)="goToInsScreen(data)">{{data.patient_id}}</td>
+                    <td (click)="goToInsScreen(data)" class="nav-link pointer">{{data.patient_id}}</td>
                     <td>{{data.patient_name}}</td>
                     <td>{{data.total_dialy}}</td>
                     <td>{{data.completed}}</td>

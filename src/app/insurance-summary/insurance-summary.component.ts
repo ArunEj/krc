@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { InsuranceService } from '../insurance/insurance.service';
-import { InsSummaryService } from './insurace-summary.service';
+import { InsSummaryService } from './insurance-summary.service';
 
 @Component({
   selector: 'app-insurance-summary',
