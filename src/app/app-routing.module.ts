@@ -30,6 +30,7 @@ import { GoodsReceiptComponent } from './goods-receipt/goods-receipt.component';
 import { SupplierPaymentComponent } from './supplier-payment/supplier-payment.component';
 import { PaymentReceiptsComponent } from './payment-receipts/payment-receipts.component';
 import { UpdatePayreceiptsComponent } from './update-payreceipts/update-payreceipts.component';
+import { PoReportsComponent } from './po-reports/po-reports.component';
 
 const routes: Routes = [
   {
@@ -151,6 +152,10 @@ const routes: Routes = [
   {
     path: 'update-payreceipts',
     component: UpdatePayreceiptsComponent
+  },
+  {
+    path: 'po-reports',
+    component: PoReportsComponent
   }
 
 

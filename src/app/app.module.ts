@@ -52,7 +52,9 @@ import { GoodsReceiptComponent } from './goods-receipt/goods-receipt.component';
 import { SupplierPaymentComponent } from './supplier-payment/supplier-payment.component';
 import { PaymentReceiptsComponent } from './payment-receipts/payment-receipts.component';
 import { UpdatePayreceiptsComponent } from './update-payreceipts/update-payreceipts.component';
-import { PrTableComponent } from './update-payreceipts/pr-table/pr-table.component'
+import { PrTableComponent } from './update-payreceipts/pr-table/pr-table.component';
+import { PoReportsComponent } from './po-reports/po-reports.component'
+import { DatePipe } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -101,7 +103,8 @@ import { PrTableComponent } from './update-payreceipts/pr-table/pr-table.compone
     SupplierPaymentComponent,
     PaymentReceiptsComponent,
     UpdatePayreceiptsComponent,
-    PrTableComponent
+    PrTableComponent,
+    PoReportsComponent
   ],
   imports: [
     BrowserModule,
@@ -112,7 +115,7 @@ import { PrTableComponent } from './update-payreceipts/pr-table/pr-table.compone
     BrowserAnimationsModule,
     MaterialModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
