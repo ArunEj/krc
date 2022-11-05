@@ -55,6 +55,8 @@ import { UpdatePayreceiptsComponent } from './update-payreceipts/update-payrecei
 import { PrTableComponent } from './update-payreceipts/pr-table/pr-table.component';
 import { PoReportsComponent } from './po-reports/po-reports.component'
 import { DatePipe } from '@angular/common';
+import { GoodsReportsComponent } from './goods-reports/goods-reports.component';
+import { SupplierReportsComponent } from './supplier-reports/supplier-reports.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -104,7 +106,9 @@ import { DatePipe } from '@angular/common';
     PaymentReceiptsComponent,
     UpdatePayreceiptsComponent,
     PrTableComponent,
-    PoReportsComponent
+    PoReportsComponent,
+    GoodsReportsComponent,
+    SupplierReportsComponent
   ],
   imports: [
     BrowserModule,

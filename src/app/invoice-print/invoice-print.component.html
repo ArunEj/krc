@@ -2,15 +2,6 @@
 <div class="container" *ngIf="!isShowPrint">
     <div class="row" *ngIf="!patientInvoiceDetail">
         <app-patient-header (outputPatientHeader)="patientHeader($event)"></app-patient-header>
-        <!-- <h3>Patient Details</h3>
-        <div class="patient-details">
-            <label for="contact" class="form-label">Contact</label>
-            <input type="text" class="form-control contact-input" required name="contact" [(ngModel)]="mobile_no"
-                id="contact">
-            <br>
-            <button (click)="fetchUserInvoices()" [disabled]="!mobile_no" class="btn btn-primary mar20t">fetch
-                Invoices</button>
-        </div> -->
     </div>
     <div *ngIf="patientHeaderData" class="row header-border margin-20t">
         <div class="">
@@ -59,9 +50,7 @@
             <tbody>
                 <tr *ngFor="let item of invoiceStatusDetails; let index">
 
-                    <td *ngIf="!billing">{{item.invoice_no}}</td>
-                    <!-- [routerLink]="['/invoice', item.invoice_no, {invoice_no:item.invoice_no}]" -->
-                    
+                    <td *ngIf="!billing">{{item.invoice_no}}</td>                    
                     <td>{{item.net_inv_amount}}</td>
                     <td>{{item.net_inv_paid}}</td>
                     <td>{{item.net_inv_balance}}</td>
@@ -70,7 +59,6 @@
                    <td>
                     <mat-icon class="print-icon" (click)="print(item)">print</mat-icon>
                     </td>
-                    <!-- <mat-icon title="delete" class="cancel-icon" aria-hidden="false" aria-label="Example home icon" (click)="cancelInvoice(item)">delete</mat-icon> -->
                 </tr>
             </tbody>
         </table>
@@ -110,11 +98,6 @@
                   <th class="align-item">Total Charges</th>
                   <th class="align-item">Discount</th>
                   <th class="align-item">Net amount</th>
-                  <!-- <th class="align-item">Received</th>
-                  <th class="align-item">mode</th>
-                  <th class="align-item">Payment Date</th>
-                  <th class="align-item">Payment Amount</th>
-                  <th class="align-item">Balance</th> -->
                 </tr>
                 <tr *ngFor="let data of invoiceData.invoice_lists; let i=index">
                   <td class="align-item">{{i + 1}}</td>
@@ -125,11 +108,6 @@
                   <td class="align-item">{{data.tot_other_charge}}</td>
                   <td class="align-item">{{data.gross_discount}}</td>
                   <td class="align-item">{{data.net_amount}}</td>
-                  <!-- <td class="align-item"> {{data.net_paid}}</td>
-                  <td class="align-item">{{data.payment_mode}}</td>
-                  <td class="align-item">{{data.payment_date | date: 'dd-MMM-y'}}</td>
-                  <td class="align-item">{{data.payment_amount}}</td>
-                  <td class="align-item">{{data.net_balance}}</td> -->
                 </tr>
                 <tr>
                     <td class="align-item font-weight" colspan="4">Total</td>
@@ -139,25 +117,25 @@
                     <td class="align-item font-weight">{{invoiceData.invoice_summary.sum_net_amt}}</td>
                 </tr>
                 <tr>
-                    <td class="" colspan="12">Payment Details</td>
+                    <td class="font-weight" colspan="12">Payment Details</td>
                 </tr>
                 <tr>
-                    <td class="" colspan="1"></td>
-                    <td>Total Amount</td>
-                    <td>Received</td>
-                    <td>Receipt Date</td>
-                    <td>Mode</td>
-                    <td>Total Paid</td>
-                    <td colspan="2">Total Balance</td>
+                    <td></td>
+                    <td class="font-weight">Total Amount</td>
+                    <td class="font-weight">Received</td>
+                    <td class="font-weight">Receipt Date</td>
+                    <td class="font-weight">Mode</td>
+                    <td class="font-weight">Total Paid</td>
+                    <td class="font-weight" colspan="2">Total Balance</td>
                 </tr>
-                <tr *ngFor="let data of invoiceData.invoice_payment; let i=index">
-                    <td class="" colspan="1"></td>
-                    <td>{{data.product_name}}</td>
+                <tr *ngFor="let data of invoiceData.invoice_payments; let i=index">
+                    <td>{{data.bu_id}}</td>
+                    <td>{{data.net_amount}}</td>
                     <td>{{data.net_paid}}</td>
                     <td>{{data.payment_mode}}</td>
                     <td>{{data.payment_date | date: 'dd-MMM-y'}}</td>
                     <td>{{data.payment_amount}}</td>
-                    <td>{{data.net_balance}}</td>
+                    <td colspan="2">{{data.net_balance}}</td>
                 </tr>
               </table>
         </div>
@@ -167,7 +145,7 @@
                 <div class="">Time: {{today | date: 'shortTime'}}</div>
             </div>
             <div class="col-6 align-left">
-                <div class="">For {{invoiceData.branch_name}}</div>
+                <div class="">For {{invoiceData?.branch_name}}</div>
                 <div class="space"></div>
                  <div class="">Authorised Signature</div>
             </div>
@@ -205,11 +183,6 @@
                         <th class="align-item">Total Charges</th>
                         <th class="align-item">Discount</th>
                         <th class="align-item">Net amount</th>
-                        <!-- <th class="align-item">Received</th>
-                        <th class="align-item">mode</th>
-                        <th class="align-item">Payment Date</th>
-                        <th class="align-item">Payment Amount</th>
-                        <th class="align-item">Balance</th> -->
                     </tr>
                     <tr *ngFor="let data of invoiceData.estimate_lists; let i=index">
                       <td class="align-item">{{i + 1}}</td>
@@ -220,23 +193,13 @@
                       <td class="align-item">{{data.tot_other_charge}}</td>
                       <td class="align-item">{{data.gross_discount}}</td>
                       <td class="align-item">{{data.net_amount}}</td>
-                      <!-- <td class="align-item"> NA</td>
-                      <td class="align-item">NA</td>
-                      <td class="align-item">NA</td>
-                      <td class="align-item">NA</td>
-                      <td class="align-item">NA</td> -->
-                      <!-- <td class="align-item"> {{data.net_paid}}</td>
-                      <td class="align-item">{{data.payment_mode}}</td>
-                      <td class="align-item">{{data.payment_date | date: 'd-MMM-y'}}</td>
-                      <td class="align-item">{{data.payment_amount}}</td>
-                      <td class="align-item">{{data.net_balance}}</td> -->
                     </tr>
                     <tr>
                         <td class="align-item font-weight" colspan="4">Total</td>
-                        <td class="align-item font-weight">{{invoiceData.invoice_summary.sum_gross_inv_amt}}</td>
-                        <td class="align-item font-weight">{{invoiceData.invoice_summary.sum_tot_other_charge}}</td>
-                        <td class="align-item font-weight">{{invoiceData.invoice_summary.sum_gross_disc}}</td>
-                        <td class="align-item font-weight">{{invoiceData.invoice_summary.sum_net_amt}}</td>
+                        <td class="align-item font-weight">{{invoiceData.estimate_summary.sum_gross_inv_amt}}</td>
+                        <td class="align-item font-weight">{{invoiceData.estimate_summary.sum_tot_other_charge}}</td>
+                        <td class="align-item font-weight">{{invoiceData.estimate_summary.sum_gross_disc}}</td>
+                        <td class="align-item font-weight">{{invoiceData.estimate_summary.sum_net_amt}}</td>
                     </tr>
                   </table>
             </div>
@@ -255,5 +218,6 @@
     </div>
     <div class="d-flex">
         <button type="button" class="btn btn-primary mar20t" [useExistingCss]="true" id="print-to-pdf" printSectionId="print-section"  ngxPrint >Print to Pdf</button>
+        <button type="button" class="btn btn-primary mar20t ml-10" (click)="back()" >Back</button>
     </div>
 </ng-container>

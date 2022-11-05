@@ -31,6 +31,8 @@ import { SupplierPaymentComponent } from './supplier-payment/supplier-payment.co
 import { PaymentReceiptsComponent } from './payment-receipts/payment-receipts.component';
 import { UpdatePayreceiptsComponent } from './update-payreceipts/update-payreceipts.component';
 import { PoReportsComponent } from './po-reports/po-reports.component';
+import { GoodsReportsComponent } from './goods-reports/goods-reports.component';
+import { SupplierReportsComponent } from './supplier-reports/supplier-reports.component';
 
 const routes: Routes = [
   {
@@ -156,6 +158,14 @@ const routes: Routes = [
   {
     path: 'po-reports',
     component: PoReportsComponent
+  },
+  {
+    path: 'goods-reports',
+    component: GoodsReportsComponent
+  },
+  {
+    path: 'supplier-reports',
+    component: SupplierReportsComponent
   }
 
 

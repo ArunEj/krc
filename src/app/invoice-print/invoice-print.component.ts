@@ -90,7 +90,7 @@ export class InvoicePrintComponent implements OnInit {
         if(this.invoiceData.estimate_lists.length !== 0) {
           this.isShowEstimateData = true;
         }
-        // console.log("data",this.invoiceData)
+        console.log("data",this.invoiceData)
       },
       (err) => {
         console.log(err, "response error");
@@ -203,6 +203,10 @@ export class InvoicePrintComponent implements OnInit {
     // this.headerDetail = data;
     this.patientHeaderData = data;
     this.patientInvoiceDetail = true;
+  }
+
+  back() {
+    this.isShowPrint = false;
   }
 }
 
