@@ -10,13 +10,15 @@ export class PMTableComponent implements OnInit {
   @Input() tableData: any;
   @Input() eoDate: any;
   @Output() updateEmit = new EventEmitter();
+  @Output() emitNP = new EventEmitter();
   constructor() { }
   dataSource: any;
+  showNP = false;
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource(this.tableData);
   }
 
-  displayedColumns = ['product_id', 'product_name', 'uom','action'];
+  displayedColumns = ['product_name', 'uom', 'stock_in_hand','max_stock','min_stock','reorder_level','account_code','prod_name_invoice','product_price','action', 'normalpricing','insurancepricing'];
 
 
   applyFilter(filterValue: string) {
@@ -27,6 +29,16 @@ export class PMTableComponent implements OnInit {
 
   update(element: any) {
     this.updateEmit.emit(element);
+  }
+
+  redirectNormalPricing(element: any) {
+    element.np = true;
+    this.emitNP.emit(element);
+  }
+
+  redirectIP(element:any){
+    element.np = false;
+    this.emitNP.emit(element);
   }
 
 }

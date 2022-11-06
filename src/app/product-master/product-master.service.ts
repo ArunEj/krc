@@ -16,4 +16,11 @@ export class ProductMasterService {
     return this.http.post(environment.apiUrl + 'createproduct', param,
       { headers: headers })
   }
+
+  public createProdP(param: any): Observable<any> {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(environment.apiUrl + 'createproductpricing', param,
+      { headers: headers })
+  }
 }

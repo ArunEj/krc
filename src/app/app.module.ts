@@ -52,7 +52,9 @@ import { UpdatePayreceiptsComponent } from './update-payreceipts/update-payrecei
 import { PrTableComponent } from './update-payreceipts/pr-table/pr-table.component';
 import { ProductMasterComponent } from './product-master/product-master.component';
 import { ProductMasterListingComponent } from './product-master-listing/product-master-listing.component'
-import {PMTableComponent} from './product-master-listing/pr-table/pr-table.component'
+import {PMTableComponent} from './product-master-listing/pr-table/pr-table.component';
+import { NormalPricingComponent } from './product-master-listing/normal-pricing/normal-pricing.component';
+import { InsurancePricingComponent } from './product-master-listing/insurance-pricing/insurance-pricing.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -101,7 +103,9 @@ import {PMTableComponent} from './product-master-listing/pr-table/pr-table.compo
     PrTableComponent,
     ProductMasterComponent,
     ProductMasterListingComponent,
-    PMTableComponent
+    PMTableComponent,
+    NormalPricingComponent,
+    InsurancePricingComponent
   ],
   imports: [
     BrowserModule,
