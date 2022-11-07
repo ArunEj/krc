@@ -33,37 +33,37 @@
             <th>PO Date</th>
             <th>Supplier Inv No</th>
             <th>Supplier Inv Date</th>
-            <th>Supplier Inv Amt</th>
-            <th>Supplier Inv Paid</th>
-            <th>Supplier Inv Bal</th>
+            <th>Item Description</th>
+            <th>PO Qty Ordered</th>
+            <th>Supplier Qty</th>
+            <th>Balance Qty</th>
             <th>GR Status</th>
-            <th>Payment Status</th>
           </tr> 
         </thead>
         <tbody>
-            <ng-container *ngFor="let data of reportData">
-                <tr *ngFor="let details of data.details; let i = index">
+            <ng-container>
+                <tr *ngFor="let details of reportData; let i = index">
                     <td>{{i+1}}</td>
                     
-                    <td>{{data.supplier_name}}</td>
+                    <td>{{details.supplier_name}}</td>
         
                     <td>{{details.po_number}}</td>
 
                     <td>{{details.po_date | date: 'dd-MM-yyyy'}}</td>
 
-                    <td>{{details.supplier_invoice_num}}</td>  
+                    <td>{{details.supp_inv_number}}</td>  
                     
-                    <td>{{details.payment_date | date: 'dd-MM-yyyy'}}</td>
+                    <td>{{details.supp_inv_date | date: 'dd-MM-yyyy'}}</td>
 
-                    <td>{{details.supp_inv_amt}}</td>
+                    <td>{{details.product_name}}</td>
 
-                    <td>{{details.supp_inv_amt_paid}}</td>
+                    <td>{{details.qty_ordered}}</td>
 
-                    <td>{{details.supp_inv_amt_bal}}</td>  
+                    <td>{{details.gr_qty_received}}</td>  
                     
-                    <td>{{details.po_status}}</td>
+                    <td>{{details.qty_balance}}</td>
 
-                    <td>{{details.payment_status}}</td>
+                    <td>{{details.goods_rcpt_status}}</td>
                 
                 </tr>
             </ng-container>

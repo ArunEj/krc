@@ -32,19 +32,6 @@ export class PoReportsComponent implements OnInit {
     this.poRepService.retrieveData(branchId, from_date, to_date).subscribe(data => {
       console.log(data);
       this.reportData = data.results;
-      this.calculateTotal();
     })
-  }
-
-  calculateTotal() {
-    let suppName: any;
-    this.reportData?.forEach((element: any) => {
-      element.details.forEach((elementDel: any) => {
-        this.suppInvTotal += elementDel.supp_inv_amt;
-        suppName = elementDel.supplier_name;
-      });
-      console.log(this.suppInvTotal);
-    });
-    
   }
 }

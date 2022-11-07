@@ -13,7 +13,7 @@ export class goodsReportsService {
     retrieveData(branchId: any, fromDate: any, toDate: any):Observable<any>{
         let headers = new HttpHeaders();
         headers.append('Content-Type', 'application/json');
-        return this.http.get(environment.apiUrl + 'poinvoicesummaryreport/KRC/'+branchId+'?from_date='+fromDate+'&to_date'+toDate,
+        return this.http.get(environment.apiUrl + 'goodreceiptreport/KRC/'+branchId+'?from_date='+fromDate+'&to_date'+toDate,
         { headers: headers })
       }
 }
