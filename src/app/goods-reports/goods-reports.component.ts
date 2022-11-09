@@ -1,7 +1,9 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DateAdapter } from '@angular/material/core';
 import { goodsReportsService } from './goods-reports.service';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { ListTable } from '../patient-listing-report/list-table/list-table.component';
 
 @Component({
   selector: 'app-goods-reports',
@@ -16,7 +18,13 @@ export class GoodsReportsComponent implements OnInit {
   to_date: any;
   suppDetails: any;
   suppInvTotal: number = 0;
-  
+  displayedColumns: string[] = ['supplier_name', 'po_no', 'po_date', 'supp_inv_number', 'supp_inv_date', 'product_name', 'qty_ordered', 'gr_qty_received', 'qty_balance', 'goods_rcpt_status'];
+  // dataSource: any;
+  resultsLength = 0;
+
+  dataSource = new MatTableDataSource(this.reportData);
+  @ViewChild(MatTable, { static: true }) table: MatTable<any> | undefined;
+
   constructor(private grService: goodsReportsService, private dp: DatePipe,
     private dateAdapter:DateAdapter<Date>) { 
     this.dateAdapter.setLocale('en-GB'); //dd/MM/yyyy
@@ -31,6 +39,15 @@ export class GoodsReportsComponent implements OnInit {
     this.grService.retrieveData(branchId, from_date, to_date).subscribe(data => {
       console.log(data);
       this.reportData = data.results;
+      this.dataSource = this.reportData;
+      this.resultsLength = this.reportData.length;
     })
+  }
+
+  applyFilter(filterValue: any) {
+    let data = filterValue.target.value;
+    this.dataSource.filter = data.trim().toLowerCase();
+    console.log(this.dataSource.filter);
+    
   }
 }

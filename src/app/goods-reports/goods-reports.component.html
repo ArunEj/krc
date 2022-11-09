@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div class="container">
     <div class="row">
-        <h3>PO INVOICE SUMMARY</h3>
+        <h3>GOODS RECEIPTS REPORT</h3>
     </div>
     <div class="row">
         <mat-form-field appearance="fill" class="col-lg-3">
@@ -23,8 +23,8 @@
     
     </div>
     <br>
-    <div class="tableFixHead">
-      <table class="table table-bordered">
+    <section class="example-container mat-elevation-z8" tabindex="0">
+      <!-- <table class="table table-bordered">
         <thead class="thead-dark">
           <tr>
             <th>SI NO</th>
@@ -41,7 +41,7 @@
           </tr> 
         </thead>
         <tbody>
-            <ng-container>
+            <ng-container *ngIf="reportData.length > 0">
                 <tr *ngFor="let details of reportData; let i = index">
                     <td>{{i+1}}</td>
                     
@@ -68,6 +68,66 @@
                 </tr>
             </ng-container>
         </tbody>
+      </table> -->
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
+      </mat-form-field>
+      
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="Supplier Name">
+          <th mat-header-cell *matHeaderCellDef> Supplier Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.supplier_name}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="PO No">
+          <th mat-header-cell *matHeaderCellDef> PO No </th>
+          <td mat-cell *matCellDef="let element"> {{element.po_number}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="PO Date">
+          <th mat-header-cell *matHeaderCellDef> PO Date </th>
+          <td mat-cell *matCellDef="let element"> {{element.po_date | date: 'dd-MM-yyyy'}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="Supplier Inv No">
+          <th mat-header-cell *matHeaderCellDef> Supplier Inv No </th>
+          <td mat-cell *matCellDef="let element"> {{element.supp_inv_number}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Supplier Inv Date">
+          <th mat-header-cell *matHeaderCellDef> Supplier Inv Date </th>
+          <td mat-cell *matCellDef="let element"> {{element.supp_inv_date | date: 'dd-MM-yyyy'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Item Description">
+          <th mat-header-cell *matHeaderCellDef> Item Description </th>
+          <td mat-cell *matCellDef="let element"> {{element.product_name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="PO Qty Ordered">
+          <th mat-header-cell *matHeaderCellDef> PO Qty Ordered </th>
+          <td mat-cell *matCellDef="let element"> {{element.qty_ordered}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Supplier Qty">
+          <th mat-header-cell *matHeaderCellDef> Supplier Qty </th>
+          <td mat-cell *matCellDef="let element"> {{element.gr_qty_received}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Balance Qty">
+          <th mat-header-cell *matHeaderCellDef> Balance Qty </th>
+          <td mat-cell *matCellDef="let element"> {{element.qty_balance}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="GR Status">
+          <th mat-header-cell *matHeaderCellDef> GR Status </th>
+          <td mat-cell *matCellDef="let element"> {{element.goods_rcpt_status}} </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
-    </div>
+    </section>
+    <!-- <mat-paginator [length]="resultsLength" [pageSize]="10" aria-label="Select page of GitHub search results"></mat-paginator> -->
 </div>

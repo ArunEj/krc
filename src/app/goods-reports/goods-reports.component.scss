@@ -1,28 +1,38 @@
-.tableFixHead {
-    overflow-y: auto;
-    height: 393px;
+.example-container {
+    height: 400px;
+    overflow: auto;
+    width: 110%;
   }
-  .tableFixHead thead th {
-    position: sticky;
-    top: 0;
-  }
+  
   table {
-    border-collapse: collapse;
     width: 100%;
   }
-  th,
-  td {
-    padding: 8px 16px;
-    border: 1px solid #ccc;
+  
+  tr.mat-footer-row {
+    font-weight: bold;
   }
-  th {
-    background: #eee;
-  }
-
-  .hightlight{
-    font-weight: 600 !important;
+  
+  .mat-table-sticky {
+    border-top: 1px solid #e0e0e0;
   }
 
-  .bg-yellow{
-    background-color: yellow !important;
+  .mat-table {
+    overflow-x: scroll;
+    max-width: 99%;
+  }
+  
+  .mat-cell,
+  .mat-header-cell {
+    word-wrap: initial;
+    display: table-cell;
+    padding: 0px 10px;
+    line-break: unset;
+    white-space: nowrap;
+    overflow: hidden;
+    vertical-align: middle;
+  }
+  
+  .mat-row,
+  .mat-header-row {
+    display: table-row;
   }
