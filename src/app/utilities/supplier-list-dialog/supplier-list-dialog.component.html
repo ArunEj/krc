@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>Supplier Price</h1>
+<div mat-dialog-content>
+  <!-- <label id="patient-radio-group-label">Pick Patient from list</label> -->
+  <table class="table table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <td>Supplier</td>
+        <td>Price</td>
+
+      </tr>
+
+
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of supPriceList">
+        <td scope="row">{{item.supplier_name}}</td>
+        <td scope="row">{{item.purchase_price}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">OK</button>
+</div>

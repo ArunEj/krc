@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, ObservedValueOf, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
@@ -87,5 +87,21 @@ export class ReferenceService {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.get(environment.apiUrl+'references/PATTYP')
+  }
+
+
+  getBillingTypes():Observable<any>{
+    let org_id = localStorage.getItem('org_id');
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(environment.apiUrl+'references/PRDTYP')
+  }
+
+
+  getSupplierDetails(prod_id:string):Observable<any>{
+    let org_id = localStorage.getItem('org_id');
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(environment.apiUrl+'supplierproductdetail/'+prod_id)
   }
 }

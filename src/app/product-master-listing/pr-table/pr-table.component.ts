@@ -18,7 +18,7 @@ export class PMTableComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.tableData);
   }
 
-  displayedColumns = ['product_name', 'uom', 'stock_in_hand','max_stock','min_stock','reorder_level','account_code','prod_name_invoice','product_price','action', 'normalpricing','insurancepricing'];
+  displayedColumns = ['product_name', 'uom', 'stock_in_hand','max_stock','min_stock','reorder_level','prod_name_invoice','product_price','action', 'insurancepricing'];
 
 
   applyFilter(filterValue: string) {

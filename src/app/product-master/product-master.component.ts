@@ -18,6 +18,7 @@ export class ProductMasterComponent implements OnInit {
   constructor(private fb: FormBuilder, private ref: ReferenceService,
     private dialog: MatDialog, private pms: ProductMasterService, private router: Router) { }
   bu: any[] = [];
+  prdTypes:any = [];
 
   myForm: FormGroup = this.fb.group({
     product_name: [null, { Validators: [Validators.required] }],
@@ -50,7 +51,8 @@ export class ProductMasterComponent implements OnInit {
     if (history.state.product_id) {
       this.setValues();
     }
-    this.fetchBu()
+    this.fetchBu();
+    this.fetchPRD();
   }
 
   setValues() {
@@ -71,6 +73,12 @@ export class ProductMasterComponent implements OnInit {
     this.myForm.get('gst_value')?.setValue(history.state.gst_value);
 
 
+  }
+
+  fetchPRD(){
+    this.ref.getBillingTypes().subscribe(data=>{
+      this.prdTypes = data.results;
+    })
   }
 
   fetchBu() {

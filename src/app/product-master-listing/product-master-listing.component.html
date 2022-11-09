@@ -21,21 +21,21 @@
     </div>
 
     <div *ngIf="prodList && prodList.length > 0" class="mar20t">
-        <app-pm-table [tableData]="prodList" (emitNP)="emitPricing($event)"></app-pm-table>
+        <app-pm-table [tableData]="prodList" (updateEmit)="update($event)" (emitNP)="emitPricing($event)"></app-pm-table>
 
 
     </div>
 
 </div>
-<div class="container" *ngIf="showNpForm">
+<!-- <div class="container" *ngIf="showNpForm">
     <app-base-detail></app-base-detail>
     <h4>Normal Pricing</h4>
     <app-normal-pricing [prod_obj]="product" (emitBack)="reload()"></app-normal-pricing>
-</div>
+</div> -->
 
 <div class="container" *ngIf="showipForm">
     <app-base-detail></app-base-detail>
-    <h4>Insurance Pricing</h4>
+    <h4>Pricing</h4>
     <app-insurance-pricing [prod_obj]="product" (emitBack)="reload()"></app-insurance-pricing>
 </div>
 

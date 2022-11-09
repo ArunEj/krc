@@ -21,6 +21,7 @@ import { InvoiceComponent } from './invoice/invoice.component';
 import { ManageDialogComponent } from './manage-dialog/manage-dialog.component';
 import { InfoDialogComponent } from './utilities/info-dialog/info-dialog.component';
 import { PatientListDialogComponent } from './utilities/patient-list-dialog/patient-list-dialog.component';
+import { SupplierListDialogComponent } from './utilities/supplier-list-dialog/supplier-list-dialog.component';
 import { BillingEditComponent } from './billing-edit/billing-edit.component';
 import { PromptDialogComponent } from './utilities/prompt-dialog/prompt-dialog.component';
 import { PatientHeaderComponent } from './patient-header/patient-header.component';
@@ -105,7 +106,8 @@ import { InsurancePricingComponent } from './product-master-listing/insurance-pr
     ProductMasterListingComponent,
     PMTableComponent,
     NormalPricingComponent,
-    InsurancePricingComponent
+    InsurancePricingComponent,
+    SupplierListDialogComponent
   ],
   imports: [
     BrowserModule,

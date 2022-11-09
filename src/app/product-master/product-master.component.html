@@ -57,9 +57,7 @@
                 <mat-form-field class="col-lg-2 pad10r" appearance="fill">
                     <mat-label>Part Of Billing</mat-label>
                     <mat-select formControlName="billing_flag">
-                        <mat-option value="Y">Yes
-                        </mat-option>
-                        <mat-option value="N">No
+                        <mat-option *ngFor="let type of prdTypes" [value]="type.ref_code">{{type.ref_desc}}
                         </mat-option>
 
                     </mat-select>
