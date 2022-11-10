@@ -119,10 +119,10 @@
         <div class="row">
             <div class="col-6 d-flex">
                     <div class="col-3" *ngIf="isShowEdit">
-                        <button class="btn btn-primary" (click)="addToList()">Add Record</button>
+                        <button class="btn btn-primary pointer" (click)="addToList()">Add Record</button>
                     </div>
                     <div class="col-3" *ngIf="!isShowEdit">
-                        <button class="btn btn-primary" (click)="editList()">Update Record</button>
+                        <button class="btn btn-primary pointer" (click)="editList()">Update Record</button>
                     </div>
             </div>
         </div>
@@ -159,7 +159,7 @@
 
                     <td>{{poData.remarks}}</td>
                     
-                    <td><mat-icon class="print-icon cancel-icon" (click)="edit(poData)"> border_color</mat-icon>
+                    <td><mat-icon class="print-icon cancel-icon pointer" (click)="edit(poData)"> border_color</mat-icon>
                         <mat-icon title="delete" class="delete-icon delete-icon-disabled" aria-hidden="false" aria-label="Example home icon" disabled>delete</mat-icon> </td>
                 </tr>
             </ng-container>
@@ -181,8 +181,8 @@
                     <td>{{item.remarks}}</td>
                     
                     <td>
-                        <mat-icon class="print-icon cancel-icon" (click)="edit(item)"> border_color</mat-icon>
-                        <mat-icon title="delete" class="delete-icon pointer" aria-hidden="false" aria-label="Example home icon">delete</mat-icon> </td>
+                        <mat-icon class="print-icon cancel-icon pointer" (click)="edit(item)"> border_color</mat-icon>
+                        <mat-icon title="delete" class="delete-icon pointer" aria-hidden="false" aria-label="Example home icon" (click)="delete(item)">delete</mat-icon> </td>
                 </tr>
             </ng-container>
         </tbody>
