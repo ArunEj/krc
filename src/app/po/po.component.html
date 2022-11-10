@@ -95,7 +95,7 @@
                 <div class="supplier-item">
                     <label for="qty_ordered" class="form-label">Qty Order</label>
                     <input type="number" class="form-control" formControlName="qty_ordered"
-                        name="qty_ordered"  id="qty_ordered" (change)="calculateTotalCost()">
+                        name="qty_ordered" min="0"  id="qty_ordered" (change)="calculateTotalCost()">
                 </div>
             </div>
             <!-- <div class="col-2">
@@ -139,9 +139,9 @@
                     <div class="col-3" *ngIf="!isShowEdit">
                         <button class="btn btn-primary" (click)="editList()">Update Record</button>
                     </div>
-                    <div class="col-2">
+                    <!-- <div class="col-2">
                         <button class="btn btn-primary" (click)="submit()">Save</button>
-                    </div>
+                    </div> -->
             </div>
         </div>
     </form>
@@ -200,9 +200,17 @@
                     
                     <td>
                         <mat-icon class="print-icon cancel-icon" (click)="edit(item)"> border_color</mat-icon>
-                        <mat-icon title="delete" class="delete-icon pointer" aria-hidden="false" aria-label="Example home icon">delete</mat-icon> </td>
+                        <mat-icon title="delete" class="delete-icon pointer" aria-hidden="false" aria-label="Example home icon" (click)="delete(item)">delete</mat-icon> </td>
                 </tr>
             </ng-container>
         </tbody>
       </table>
+
+      <div class="row">
+        <div class="col-6 d-flex">
+                <div class="col-2">
+                    <button class="btn btn-primary" (click)="submit()">Save</button>
+                </div>
+        </div>
+    </div>
 </div>

@@ -59,7 +59,8 @@ export class PoComponent implements OnInit {
         net_value: [''],
         exp_del_date: [''],
         del_branch_id: [''],
-        remarks: ['']
+        remarks: [''],
+        id: ['']
       }
     );
   }
@@ -141,7 +142,7 @@ export class PoComponent implements OnInit {
 
   addToList() {
     const temp = {item_code:'', item_cost:'', qty_ordered:1, net_value:0, item_status:'P', 
-                  remarks:'', del_branch_id:'',del_branch_name: '', exp_del_date:'', item_desc: '', product_name: ''}
+                  remarks:'', del_branch_id:'',del_branch_name: '', exp_del_date:'', item_desc: '', product_name: '', id: 0}
     temp.item_code = '';
     temp.item_cost = '';
     temp.qty_ordered = 1;
@@ -151,7 +152,8 @@ export class PoComponent implements OnInit {
     temp.del_branch_name = '';
     temp.item_desc = '';
     temp.product_name = '';
-    temp.remarks = ''
+    temp.remarks = '';
+    temp.id = 0;
     
     //set values
     temp.item_code = this.poForm.controls.item_code.value; 
@@ -162,6 +164,7 @@ export class PoComponent implements OnInit {
     temp.exp_del_date = this.poForm.controls.exp_del_date.value;
     temp.del_branch_id = this.poForm.controls.del_branch_id.value;
     temp.remarks = this.poForm.controls.remarks.value;
+    temp.id = this.poTableData.length;
     let getItem = this.prodList.find((element: any)=> element.product_id == temp.item_code);
     temp.product_name = getItem.product_name;
     let getBranch = this.branchList.find((element: any)=> element.branch_id == temp.del_branch_id);
@@ -237,7 +240,7 @@ export class PoComponent implements OnInit {
     this.poForm.controls.qty_ordered.setValue(item.qty_ordered);
     this.poForm.controls.net_value.setValue(item.net_value);
     this.poForm.controls.del_branch_id.setValue(item.del_branch_id);
-    this.poForm.controls.exp_del_date.setValue(item.po_date);
+    this.poForm.controls.exp_del_date.setValue(item.exp_del_date);
     this.poForm.controls.remarks.setValue(item.remarks);
   }
 
@@ -256,13 +259,27 @@ export class PoComponent implements OnInit {
           let getItem = this.prodList.find((prod: any)=> prod.product_id == element.item_code);
           element.product_name = getItem.product_name;
           let getBranch = this.branchList.find((prod: any)=> prod.branch_id == element.del_branch_id);
-          element.del_branch_name = getBranch.del_branch_name;
+          element.del_branch_name = getBranch.branch_name;
           this.grandTotal = this.grandTotal + element.net_value;
           this.poForm.controls.po_value.setValue(this.grandTotal);
         }
         
       });
       this.clearFields();
+      this.isShowEdit = true;
+  }
+
+  delete(item: any) {
+    let dataArray = this.poTableData;
+    
+    this.poTableData.forEach(element => {
+      if(element.id == item.id) {
+        dataArray.splice(element.id, 1);
+      }
+    });
+
+    this.poTableData = dataArray;
+
   }
 
 }
@@ -281,4 +298,5 @@ export interface poItem {
   total_cost: number;
   product_name: string;
   remarks:string;
+  id: number
 }
