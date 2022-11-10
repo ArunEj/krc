@@ -49,14 +49,7 @@ export class InvoicePrintComponent implements OnInit {
     this.orgId = localStorage.getItem('org_id');
     this.branchId = localStorage.getItem('branch_id');
     this.getReferenceList();
-    this.loadInvData();
     // this.fetchInvoiceStatus('A');
-  }
-
-  loadInvData(){
-    if(this.invoicePrintService.getInvData()){
-      this.print(this.invoicePrintService.getInvData());
-    }
   }
 
   getReferenceList() {
@@ -82,9 +75,12 @@ export class InvoicePrintComponent implements OnInit {
   }
 
   getInvoiceData(item: any) {
-    if(!item){
-      return
-    }
+    // let params = new HttpParams();
+    // params = params.append("org_id", this.orgId);
+    // params = params.append("branch_id", this.branchId);
+    // params = params.append("invoice_no", item.invoice_no,);
+    // params = params.append("patient_number", item.patient_id);
+
     this.invoicePrintService.getInvoiceList(item.invoice_no,item.patient_id).subscribe(
       (data) => {
         this.invoiceData = data;
@@ -94,9 +90,10 @@ export class InvoicePrintComponent implements OnInit {
         if(this.invoiceData.estimate_lists.length !== 0) {
           this.isShowEstimateData = true;
         }
+        console.log("data",this.invoiceData)
       },
       (err) => {
-        console.log(err)
+        console.log(err, "response error");
       });
   }
 
@@ -206,6 +203,10 @@ export class InvoicePrintComponent implements OnInit {
     // this.headerDetail = data;
     this.patientHeaderData = data;
     this.patientInvoiceDetail = true;
+  }
+
+  back() {
+    this.isShowPrint = false;
   }
 }
 
