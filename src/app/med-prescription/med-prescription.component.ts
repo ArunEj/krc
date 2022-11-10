@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MedPreparationService } from './med-prescription.service';
 import { UtilityService } from '../utilities/services/utility.service';
+import { ReferenceService } from '../utilities/services/reference.service';
 import { InfoDialogComponent } from '../utilities/info-dialog/info-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { FormGroup, FormBuilder, Form } from '@angular/forms';
@@ -41,26 +42,29 @@ export class MedPrescriptionComponent implements OnInit {
 
   previousData: LabItem[] = [];
   labPayload = {};
-
+  eod: any;
   constructor(private mpService: MedPreparationService,
     private utility: UtilityService, private dialog: MatDialog,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder, private ref: ReferenceService) { }
 
   ngOnInit(): void {
+    this.ref.getEodDetailData().subscribe(data => {
+      this.eod = data.results[0].eod_date;
+      this.mpService.fetchProducts('PHARM', this.eod).subscribe(data => {
+        this.pharmaList = data.results;
+      });
+    })
 
-    this.mpService.fetchProducts('PHARM').subscribe(data => {
-      this.pharmaList = data.results;
-    });
 
     this.mpService.fetchLastPharmaDetails(this.headerDetail.patient_id).subscribe(data => {
       this.previousData = data.results;
       this.tableData = this.previousData
 
     }, error => {
-      this.dialog.open(InfoDialogComponent, {
-        width: '500px',
-        data: 'No data found'
-      })
+      // this.dialog.open(InfoDialogComponent, {
+      //   width: '500px',
+      //   data: 'No data found'
+      // })
     })
   }
 

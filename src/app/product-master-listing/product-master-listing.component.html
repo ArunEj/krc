@@ -1,0 +1,41 @@
+<app-header></app-header>
+<div class="container" *ngIf="!showNpForm && !showipForm">
+    <app-base-detail></app-base-detail>
+    <h4>Product Master Listing</h4>
+
+    <div class="row">
+        <form class="example-form" [formGroup]="myForm" novalidate>
+            <mat-form-field class="col-lg-3 pad10r" appearance="fill">
+                <mat-label>Bu</mat-label>
+                <mat-select formControlName="bu_id" required>
+                    <mat-option *ngFor="let mode of bu" [value]="mode.bu_id">{{mode.bu_name}}
+                    </mat-option>
+
+                </mat-select>
+            </mat-form-field>
+        </form>
+    </div>
+    <div class="row mt-4">
+        <button class="btn btn-primary col-lg-2" (click)="getProducts()">Retrieve</button>
+
+    </div>
+
+    <div *ngIf="prodList && prodList.length > 0" class="mar20t">
+        <app-pm-table [tableData]="prodList" (updateEmit)="update($event)" (emitNP)="emitPricing($event)"></app-pm-table>
+
+
+    </div>
+
+</div>
+<!-- <div class="container" *ngIf="showNpForm">
+    <app-base-detail></app-base-detail>
+    <h4>Normal Pricing</h4>
+    <app-normal-pricing [prod_obj]="product" (emitBack)="reload()"></app-normal-pricing>
+</div> -->
+
+<div class="container" *ngIf="showipForm">
+    <app-base-detail></app-base-detail>
+    <h4>Pricing</h4>
+    <app-insurance-pricing [prod_obj]="product" (emitBack)="reload()"></app-insurance-pricing>
+</div>
+

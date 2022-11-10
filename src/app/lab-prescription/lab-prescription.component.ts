@@ -5,6 +5,7 @@ import { UtilityService } from '../utilities/services/utility.service';
 import { InfoDialogComponent } from '../utilities/info-dialog/info-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
+import { ReferenceService } from '../utilities/services/reference.service';
 @Component({
   selector: 'app-lab-prescription',
   templateUrl: './lab-prescription.component.html',
@@ -18,19 +19,23 @@ export class LabPrescriptionComponent implements OnInit {
   labTest: LabItem[] = [];
   displayedColumns = ['id', 'test_id', 'test_date', 'test_notes', 'action'];
   labPayload = {};
-  previousLabDetails : LabTestItem[] = [];
+  previousLabDetails: LabTestItem[] = [];
+  eod: any;
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   @ViewChild(MatTable, { static: true }) table: MatTable<any> | undefined;
 
   constructor(private lpService: LabPreparationService,
-    private utility: UtilityService, private dialog: MatDialog) { }
+    private utility: UtilityService, private dialog: MatDialog,
+    private ref: ReferenceService) { }
 
   ngOnInit(): void {
-   // this.visit_no = '2';
-    this.lpService.fetchProducts('LAB').subscribe(data => {
-      this.labTest = data.results;
-    });
-
+    // this.visit_no = '2';
+    this.ref.getEodDetailData().subscribe(data => {
+      this.eod = data.results[0].eod_date;
+      this.lpService.fetchProducts(this.eod).subscribe(data => {
+        this.labTest = data.results;
+      });
+    })
     this.lpService.fetchLastLabDetails(this.headerDetail.patient_id).subscribe(data => {
       this.previousLabDetails = data.results;
       this.dataSource.data = this.previousLabDetails
@@ -39,15 +44,15 @@ export class LabPrescriptionComponent implements OnInit {
         item.test_date = this.convertDate(item.test_date)
       })
     }, error => {
-      this.dialog.open(InfoDialogComponent, {
-        width: '500px',
-        data: 'No data found'
-      })
+      // this.dialog.open(InfoDialogComponent, {
+      //   width: '500px',
+      //   data: 'No data found'
+      // })
     })
   }
   convertDate(test_date: any) {
-   return  this.utility.convertTodayTostr(test_date);
-    
+    return this.utility.convertTodayTostr(test_date);
+
   }
   addRecord() {
     let length = this.dataSource.data.length;

@@ -1,0 +1,81 @@
+<div class="example-container mat-elevation-z8">
+  <div class="example-header">
+    <mat-form-field class="mar20lr">
+      <input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Filter">
+    </mat-form-field>
+  </div>
+
+  <mat-table #table [dataSource]="dataSource">
+
+    <!-- Position Column -->
+
+    <ng-container matColumnDef="product_name">
+      <mat-header-cell *matHeaderCellDef>Product Name</mat-header-cell>
+      <mat-cell *matCellDef="let element;let i = index;"> {{element.product_name}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="uom">
+      <mat-header-cell *matHeaderCellDef>UOM</mat-header-cell>
+      <mat-cell *matCellDef="let element;let i = index;"> {{element.uom}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="stock_in_hand">
+      <mat-header-cell *matHeaderCellDef>Stock In Hand</mat-header-cell>
+      <mat-cell *matCellDef="let element;let i = index;"> {{element.stock_in_hand}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="max_stock">
+      <mat-header-cell *matHeaderCellDef>Max Stock</mat-header-cell>
+      <mat-cell *matCellDef="let element;let i = index;"> {{element.max_stock}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="min_stock">
+      <mat-header-cell *matHeaderCellDef>Min Stock</mat-header-cell>
+      <mat-cell *matCellDef="let element;let i = index;"> {{element.min_stock}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="reorder_level">
+      <mat-header-cell *matHeaderCellDef>Reorder Level</mat-header-cell>
+      <mat-cell *matCellDef="let element;let i = index;"> {{element.reorder_level}} </mat-cell>
+    </ng-container>
+    <!-- <ng-container matColumnDef="account_code">
+      <mat-header-cell *matHeaderCellDef>Acc Code</mat-header-cell>
+      <mat-cell *matCellDef="let element;let i = index;"> {{element.account_code}} </mat-cell>
+    </ng-container> -->
+
+    <ng-container matColumnDef="prod_name_invoice">
+      <mat-header-cell *matHeaderCellDef>Name for Invoice</mat-header-cell>
+      <mat-cell *matCellDef="let element;let i = index;"> {{element.prod_name_invoice}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="product_price">
+      <mat-header-cell *matHeaderCellDef>Base Price</mat-header-cell>
+      <mat-cell *matCellDef="let element;let i = index;"> {{element.product_price}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <mat-header-cell class="w-75" *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element;let i = index;">
+        <button (click)="update(element)">Edit
+        </button>
+      </mat-cell>
+    </ng-container>
+    
+    <!-- <ng-container matColumnDef="normalpricing">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element;let i = index;">
+        <button (click)="redirectNormalPricing(element)">Selling Price
+        </button>
+      </mat-cell>
+    </ng-container> -->
+
+    <ng-container matColumnDef="insurancepricing">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element;let i = index;">
+        <button (click)="redirectIP(element)">Price
+        </button>
+      </mat-cell>
+    </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>

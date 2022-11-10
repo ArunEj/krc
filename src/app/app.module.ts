@@ -21,6 +21,8 @@ import { InvoiceComponent } from './invoice/invoice.component';
 import { ManageDialogComponent } from './manage-dialog/manage-dialog.component';
 import { InfoDialogComponent } from './utilities/info-dialog/info-dialog.component';
 import { PatientListDialogComponent } from './utilities/patient-list-dialog/patient-list-dialog.component';
+import { SupplierListDialogComponent } from './utilities/supplier-list-dialog/supplier-list-dialog.component';
+import { PreviousPriceListDialogComponent } from './utilities/previousprice-list-dialog/previousprice-list-dialog.component';
 import { BillingEditComponent } from './billing-edit/billing-edit.component';
 import { PromptDialogComponent } from './utilities/prompt-dialog/prompt-dialog.component';
 import { PatientHeaderComponent } from './patient-header/patient-header.component';
@@ -54,7 +56,12 @@ import { GoodsReceiptComponent } from './goods-receipt/goods-receipt.component';
 import { SupplierPaymentComponent } from './supplier-payment/supplier-payment.component';
 import { PaymentReceiptsComponent } from './payment-receipts/payment-receipts.component';
 import { UpdatePayreceiptsComponent } from './update-payreceipts/update-payreceipts.component';
-import { PrTableComponent } from './update-payreceipts/pr-table/pr-table.component'
+import { PrTableComponent } from './update-payreceipts/pr-table/pr-table.component';
+import { ProductMasterComponent } from './product-master/product-master.component';
+import { ProductMasterListingComponent } from './product-master-listing/product-master-listing.component'
+import {PMTableComponent} from './product-master-listing/pr-table/pr-table.component';
+import { NormalPricingComponent } from './product-master-listing/normal-pricing/normal-pricing.component';
+import { InsurancePricingComponent } from './product-master-listing/insurance-pricing/insurance-pricing.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -105,7 +112,15 @@ import { PrTableComponent } from './update-payreceipts/pr-table/pr-table.compone
     SupplierPaymentComponent,
     PaymentReceiptsComponent,
     UpdatePayreceiptsComponent,
-    PrTableComponent
+    PrTableComponent,
+    ProductMasterComponent,
+    ProductMasterListingComponent,
+    PMTableComponent,
+    NormalPricingComponent,
+    InsurancePricingComponent,
+    SupplierListDialogComponent,
+    PreviousPriceListDialogComponent
+    
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,63 @@
+<div class="container mar30">
+    <form class="np-form" [formGroup]="myForm" novalidate>
+        <div class="col-lg-12">
+
+
+
+            <mat-form-field appearance="fill" class="col-lg-3 pad10r">
+                <mat-label>Selling Price</mat-label>
+                <input matInput type="number" name="product_price" formControlName="product_price" required>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="col-lg-3 pad10r">
+                <mat-label>MRP</mat-label>
+                <input matInput type="number" name="mrp_price" formControlName="mrp_price" >
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="col-lg-2 pad10r">
+                <mat-label>Discount Amt</mat-label>
+                <input matInput type="number" name="discount_value" formControlName="discount_value">
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="col-lg-2 pad10r">
+                <mat-label>Discount %</mat-label>
+                <input matInput type="number" name="discount_perc" formControlName="discount_perc">
+            </mat-form-field>
+        </div>
+        <div class="col-lg-12">
+            <mat-form-field class="col-lg-4 " appearance="fill">
+                <mat-label>Effective From Date</mat-label>
+                <input matInput type="date" required formControlName="eff_from" name="eff_from">
+            </mat-form-field>
+
+            <mat-form-field class="col-lg-4 mar20lr" appearance="fill">
+                <mat-label>Effective To Date</mat-label>
+                <input matInput type="date" formControlName="eff_to" name="eff_to">
+            </mat-form-field>
+        </div>
+
+        <!-- <mat-form-field appearance="fill" class="col-lg-3 pad10r">
+            <mat-label>Selling Price</mat-label>
+            <input matInput type="number" name="product_price" formControlName="product_price" required>  
+          </mat-form-field> -->
+
+        <!-- <mat-form-field appearance="fill" class="col-lg-2 pad10r">
+          <mat-label>UOM</mat-label>
+          <input matInput type="text" name="uom" formControlName="uom">
+  
+        </mat-form-field>
+  
+        <mat-form-field class="col-lg-3 pad10r" appearance="fill">
+          <mat-label>Bu</mat-label>
+          <mat-select formControlName="bu_id" required>
+            <mat-option *ngFor="let mode of bu" [value]="mode.bu_id">{{mode.bu_name}}
+            </mat-option>
+  
+          </mat-select>
+        </mat-form-field> -->
+
+        <div>
+            <div class="col-3">
+                <button class="btn btn-primary" [disabled]="myForm.invalid" (click)="save()">Save</button>
+            </div>
+        </div>
+    </form>
+
+</div>

@@ -10,11 +10,14 @@ export class LabPreparationService {
 
   constructor(private http:HttpClient) { }
 
-  fetchProducts(bu:string): Observable<any> {
+  fetchProducts(eod:string): Observable<any> {
+    let patient_type = JSON.parse(localStorage.getItem('header')!).patient_type;
+    //let eod = localStorage.getItem('eod');
     let branch_id = localStorage.getItem('branch_id');
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.get(environment.apiUrl + 'products/'+branch_id+'?bu_id='+bu,
+   // return this.http.get(environment.apiUrl + 'products/'+branch_id+'?bu_id='+bu,
+   return this.http.get(environment.apiUrl + 'products/'+branch_id+'?bu_id=LAB&patient_type='+patient_type+'&eod_date='+eod+'&screen_id=Invoice',
       { headers: headers })
   }
 

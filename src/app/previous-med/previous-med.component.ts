@@ -64,10 +64,10 @@ export class PreviousMedComponent implements OnInit {
       this.setCurrentPatientData();
 
     }, error => {
-      this.dialog.open(InfoDialogComponent, {
-        width: '500px',
-        data: 'No data found'
-      })
+      // this.dialog.open(InfoDialogComponent, {
+      //   width: '500px',
+      //   data: 'No data found'
+      // })
     })
   }
 
