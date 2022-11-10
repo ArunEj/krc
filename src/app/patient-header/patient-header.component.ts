@@ -60,6 +60,7 @@ export class PatientHeaderComponent implements OnInit {
     this.patientHeaderService.fetchHeader(rowData.patient_id).subscribe(data => {
       this.headerDetail = true;
       this.patientHeader = data;
+      localStorage.setItem('header', JSON.stringify(data));
       this.outputPatientHeader.emit(this.patientHeader);
     });
   }
