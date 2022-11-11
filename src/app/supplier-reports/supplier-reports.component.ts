@@ -16,7 +16,7 @@ export class SupplierReportsComponent implements OnInit {
   to_date: any;
   suppDetails: any;
   suppInvTotal: number = 0;
-  displayedColumns: string[] = ['Supplier Name', 'PO No', 'PO Date', 'Supplier Inv No', 'Supplier Inv Date', 'Supplier Inv Amt', 'Supplier Inv Paid', 'Supplier Inv Bal', 'Payment', 'Payment Dt', 'Payment Mode', 'Remarks'];
+  displayedColumns: string[] = ['supplier_name', 'po_no', 'pO _date', 'supplier_inv_no', 'supplier_inv_date', 'supplier_inv_amt', 'supplier_inv_paid', 'supplier_inv_bal', 'payment', 'payment_dt', 'payment_mode', 'remarks'];
   dataSource: any;
   resultsLength = 0;
   

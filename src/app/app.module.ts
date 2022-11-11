@@ -57,6 +57,8 @@ import { PoReportsComponent } from './po-reports/po-reports.component'
 import { DatePipe } from '@angular/common';
 import { GoodsReportsComponent } from './goods-reports/goods-reports.component';
 import { SupplierReportsComponent } from './supplier-reports/supplier-reports.component';
+import { SrTableComponent } from './supplier-reports/sr-table/sr-table.component';
+import { GrTableComponent } from './goods-reports/gr-table/gr-table.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -108,7 +110,9 @@ import { SupplierReportsComponent } from './supplier-reports/supplier-reports.co
     PrTableComponent,
     PoReportsComponent,
     GoodsReportsComponent,
-    SupplierReportsComponent
+    SupplierReportsComponent,
+    SrTableComponent,
+    GrTableComponent
   ],
   imports: [
     BrowserModule,

@@ -18,7 +18,7 @@ export class GoodsReportsComponent implements OnInit {
   to_date: any;
   suppDetails: any;
   suppInvTotal: number = 0;
-  displayedColumns: string[] = ['supplier_name', 'po_no', 'po_date', 'supp_inv_number', 'supp_inv_date', 'product_name', 'qty_ordered', 'gr_qty_received', 'qty_balance', 'goods_rcpt_status'];
+  displayedColumns: string[] = ['supplier_name', 'po_no', 'po_date', 'supplier_inv_no', 'supplier_inv_date', 'item_description', 'po_qty_ordered', 'supplier_qty', 'balance_qty', 'gr_status'];
   // dataSource: any;
   resultsLength = 0;
 
@@ -42,12 +42,5 @@ export class GoodsReportsComponent implements OnInit {
       this.dataSource = this.reportData;
       this.resultsLength = this.reportData.length;
     })
-  }
-
-  applyFilter(filterValue: any) {
-    let data = filterValue.target.value;
-    this.dataSource.filter = data.trim().toLowerCase();
-    console.log(this.dataSource.filter);
-    
   }
 }
