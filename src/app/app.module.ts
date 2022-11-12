@@ -59,6 +59,10 @@ import { GoodsReportsComponent } from './goods-reports/goods-reports.component';
 import { SupplierReportsComponent } from './supplier-reports/supplier-reports.component';
 import { SrTableComponent } from './supplier-reports/sr-table/sr-table.component';
 import { GrTableComponent } from './goods-reports/gr-table/gr-table.component';
+import { ReceiptPaymentReportComponent } from './receipt-payment-report/receipt-payment-report.component';
+import { RpTableComponent } from './receipt-payment-report/rp-table/rp-table.component';
+import { StockRegisterReportComponent } from './stock-register-report/stock-register-report.component';
+import { SRegTableComponent } from './stock-register-report/s-reg-table/s-reg-table.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -112,7 +116,11 @@ import { GrTableComponent } from './goods-reports/gr-table/gr-table.component';
     GoodsReportsComponent,
     SupplierReportsComponent,
     SrTableComponent,
-    GrTableComponent
+    GrTableComponent,
+    ReceiptPaymentReportComponent,
+    RpTableComponent,
+    StockRegisterReportComponent,
+    SRegTableComponent
   ],
   imports: [
     BrowserModule,

@@ -1,14 +1,14 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { DateAdapter } from '@angular/material/core';
-import { supplierReportsService } from './supplier-reports.service';
+import { stockRegisterReportsService } from './stock-register-report.service';
 
 @Component({
-  selector: 'app-supplier-reports',
-  templateUrl: './supplier-reports.component.html',
-  styleUrls: ['./supplier-reports.component.scss']
+  selector: 'app-stock-register-report',
+  templateUrl: './stock-register-report.component.html',
+  styleUrls: ['./stock-register-report.component.scss']
 })
-export class SupplierReportsComponent implements OnInit {
+export class StockRegisterReportComponent implements OnInit {
 
   today = new Date();
   reportData: any = [];
@@ -16,26 +16,26 @@ export class SupplierReportsComponent implements OnInit {
   to_date: any;
   suppDetails: any;
   suppInvTotal: number = 0;
-  displayedColumns: string[] = ['supplier_name', 'po_no', 'po_date', 'supplier_inv_no', 'supplier_inv_date', 'supplier_inv_amt', 'supplier_inv_paid', 'supplier_inv_bal', 'payment', 'payment_dt', 'payment_mode', 'remarks'];
+  displayedColumns: string[] = ['transaction_date', 'product_name', 'opening_stock', 'goods_received', 'goods_sold', 'closing_stock'];
   dataSource: any;
   resultsLength = 0;
   
-  constructor(private srService: supplierReportsService, private dp: DatePipe,
+  constructor(private sregService: stockRegisterReportsService, private dp: DatePipe,
     private dateAdapter:DateAdapter<Date>) { 
     this.dateAdapter.setLocale('en-GB'); //dd/MM/yyyy
   }
 
   ngOnInit(): void {
   }
+
   getReports() {
     const branchId = localStorage.getItem('branch_id');
     let from_date = this.dp.transform(this.from_date, 'yyyy-MM-dd');
     let to_date = this.dp.transform(this.to_date, 'yyyy-MM-dd');
-    this.srService.retrieveData(branchId, from_date, to_date).subscribe(data => {
+    this.sregService.retrieveData(branchId, from_date, to_date).subscribe(data => {
       console.log(data);
       this.reportData = data.results;
       this.dataSource = this.reportData;
     })
   }
-
 }
