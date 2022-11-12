@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { PoReportsService } from './po-reports.service';
 import { DateAdapter } from '@angular/material/core';
+import { UtilityService } from '../utilities/services/utility.service';
 
 @Component({
   selector: 'app-po-reports',
@@ -18,7 +19,7 @@ export class PoReportsComponent implements OnInit {
   suppInvTotal: number = 0;
 
   constructor(private poRepService: PoReportsService, private dp: DatePipe,
-    private dateAdapter:DateAdapter<Date>) { 
+    private dateAdapter:DateAdapter<Date>, private us: UtilityService) { 
     this.dateAdapter.setLocale('en-GB'); //dd/MM/yyyy
   }
 
@@ -33,5 +34,9 @@ export class PoReportsComponent implements OnInit {
       console.log(data);
       this.reportData = data.results;
     })
+  }
+
+  export2Excel() {
+    this.us.export2Excel('po-table', 'po.xlsx')
   }
 }

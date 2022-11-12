@@ -18,13 +18,13 @@
     <div class="row mt-4">
         <button class="btn btn-primary col-lg-2" (click)="getReports()">Retrieve</button>
     
-        <!-- <button class="btn btn-primary col-lg-2 ms-2" [disabled]="reportData.length === 0"
-          (click)="export2Excel()">Export</button> -->
+        <button class="btn btn-primary col-lg-2 ms-2" [disabled]="reportData.length === 0"
+          (click)="export2Excel()">Export</button>
     
     </div>
     <br>
     <div class="card tableFixHead" *ngIf="reportData && reportData.length > 0">
-      <table class="table table-bordered">
+      <table class="table table-bordered" id="po-table">
         <thead class="thead-dark">
           <tr>
             <th>SI NO</th>
