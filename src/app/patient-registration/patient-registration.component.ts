@@ -56,8 +56,9 @@ export class PatientRegistrationComponent implements OnInit {
     if (this.updatePatient) {
       temp = new Date(this.patientRegObj.dob);
       fvDate = new Date(this.patientRegObj.first_visit_date || '');
-      let month = this.appendZero(fvDate.getMonth() + 1);
-      this.patientRegObj.first_visit_date = fvDate.getFullYear() + '-' + month + '-' + this.appendZero(fvDate.getDate());      
+      let fvDate_month = this.appendZero(fvDate.getMonth() + 1);
+      this.patientRegObj.first_visit_date = fvDate.getFullYear() + '-' + fvDate_month + '-' + this.appendZero(fvDate.getDate());
+      this.patientRegObj.dob = temp.getFullYear() + '-' + this.appendZero(temp.getMonth() + 1) + '-' + this.appendZero(temp.getDate());      
     }
 
   }

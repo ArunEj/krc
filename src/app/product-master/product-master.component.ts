@@ -56,6 +56,7 @@ export class ProductMasterComponent implements OnInit {
   }
 
   setValues() {
+    
     this.myForm.get('product_name')?.setValue(history.state.product_name);
     this.myForm.get('uom')?.setValue(history.state.uom);
     this.myForm.get('bu_id')?.setValue(history.state.bu_id);
