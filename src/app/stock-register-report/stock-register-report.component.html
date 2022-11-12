@@ -17,7 +17,8 @@
     </div>
     <div class="row mt-4">
         <button class="btn btn-primary col-lg-2" (click)="getReports()">Retrieve</button>
-    
+        <button class="btn btn-primary col-lg-2 ms-2" [disabled]="reportData.length === 0"
+          (click)="export2Excel()">Export</button>
     </div>
     <br>
 

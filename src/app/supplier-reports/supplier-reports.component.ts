@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { DateAdapter } from '@angular/material/core';
+import { UtilityService } from '../utilities/services/utility.service';
 import { supplierReportsService } from './supplier-reports.service';
 
 @Component({
@@ -20,7 +21,7 @@ export class SupplierReportsComponent implements OnInit {
   dataSource: any;
   resultsLength = 0;
   
-  constructor(private srService: supplierReportsService, private dp: DatePipe,
+  constructor(private srService: supplierReportsService, private dp: DatePipe, private us: UtilityService,
     private dateAdapter:DateAdapter<Date>) { 
     this.dateAdapter.setLocale('en-GB'); //dd/MM/yyyy
   }
@@ -36,6 +37,10 @@ export class SupplierReportsComponent implements OnInit {
       this.reportData = data.results;
       this.dataSource = this.reportData;
     })
+  }
+
+  export2Excel() {
+    this.us.export2Excel('supplier-table', 'supplier.xlsx')
   }
 
 }

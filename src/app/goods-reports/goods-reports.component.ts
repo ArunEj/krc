@@ -4,6 +4,7 @@ import { DateAdapter } from '@angular/material/core';
 import { goodsReportsService } from './goods-reports.service';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { ListTable } from '../patient-listing-report/list-table/list-table.component';
+import { UtilityService } from '../utilities/services/utility.service';
 
 @Component({
   selector: 'app-goods-reports',
@@ -25,7 +26,7 @@ export class GoodsReportsComponent implements OnInit {
   dataSource = new MatTableDataSource(this.reportData);
   @ViewChild(MatTable, { static: true }) table: MatTable<any> | undefined;
 
-  constructor(private grService: goodsReportsService, private dp: DatePipe,
+  constructor(private grService: goodsReportsService, private dp: DatePipe, private us: UtilityService,
     private dateAdapter:DateAdapter<Date>) { 
     this.dateAdapter.setLocale('en-GB'); //dd/MM/yyyy
   }
@@ -42,5 +43,9 @@ export class GoodsReportsComponent implements OnInit {
       this.dataSource = this.reportData;
       this.resultsLength = this.reportData.length;
     })
+  }
+
+  export2Excel() {
+    this.us.export2Excel('goods-table', 'goods.xlsx')
   }
 }
