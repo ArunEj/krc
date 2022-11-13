@@ -32,6 +32,11 @@ import { PaymentReceiptsComponent } from './payment-receipts/payment-receipts.co
 import { UpdatePayreceiptsComponent } from './update-payreceipts/update-payreceipts.component';
 import { ProductMasterComponent } from './product-master/product-master.component';
 import { ProductMasterListingComponent } from './product-master-listing/product-master-listing.component';
+import { PoReportsComponent } from './po-reports/po-reports.component';
+import { GoodsReportsComponent } from './goods-reports/goods-reports.component';
+import { SupplierReportsComponent } from './supplier-reports/supplier-reports.component';
+import { ReceiptPaymentReportComponent } from './receipt-payment-report/receipt-payment-report.component';
+import { StockRegisterReportComponent } from './stock-register-report/stock-register-report.component';
 
 const routes: Routes = [
   {
@@ -165,6 +170,25 @@ const routes: Routes = [
   {
     path:'product-master-listing',
     component:ProductMasterListingComponent
+  },{
+    path: 'po-reports',
+    component: PoReportsComponent
+  },
+  {
+    path: 'goods-reports',
+    component: GoodsReportsComponent
+  },
+  {
+    path: 'supplier-reports',
+    component: SupplierReportsComponent
+  },
+  {
+    path: 'payment-reports',
+    component: ReceiptPaymentReportComponent
+  },
+  {
+    path: 'stock-reports',
+    component: StockRegisterReportComponent
   }
 
 

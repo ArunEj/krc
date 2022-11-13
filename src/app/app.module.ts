@@ -62,6 +62,16 @@ import { ProductMasterListingComponent } from './product-master-listing/product-
 import {PMTableComponent} from './product-master-listing/pr-table/pr-table.component';
 import { NormalPricingComponent } from './product-master-listing/normal-pricing/normal-pricing.component';
 import { InsurancePricingComponent } from './product-master-listing/insurance-pricing/insurance-pricing.component'
+import { PoReportsComponent } from './po-reports/po-reports.component'
+import { DatePipe } from '@angular/common';
+import { GoodsReportsComponent } from './goods-reports/goods-reports.component';
+import { SupplierReportsComponent } from './supplier-reports/supplier-reports.component';
+import { SrTableComponent } from './supplier-reports/sr-table/sr-table.component';
+import { GrTableComponent } from './goods-reports/gr-table/gr-table.component';
+import { ReceiptPaymentReportComponent } from './receipt-payment-report/receipt-payment-report.component';
+import { RpTableComponent } from './receipt-payment-report/rp-table/rp-table.component';
+import { StockRegisterReportComponent } from './stock-register-report/stock-register-report.component';
+import { SRegTableComponent } from './stock-register-report/s-reg-table/s-reg-table.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -119,8 +129,17 @@ import { InsurancePricingComponent } from './product-master-listing/insurance-pr
     NormalPricingComponent,
     InsurancePricingComponent,
     SupplierListDialogComponent,
-    PreviousPriceListDialogComponent
+    PreviousPriceListDialogComponent,
     
+    PoReportsComponent,
+    GoodsReportsComponent,
+    SupplierReportsComponent,
+    SrTableComponent,
+    GrTableComponent,
+    ReceiptPaymentReportComponent,
+    RpTableComponent,
+    StockRegisterReportComponent,
+    SRegTableComponent
   ],
   imports: [
     BrowserModule,
@@ -131,7 +150,7 @@ import { InsurancePricingComponent } from './product-master-listing/insurance-pr
     BrowserAnimationsModule,
     MaterialModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

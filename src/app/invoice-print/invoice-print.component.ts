@@ -207,5 +207,9 @@ export class InvoicePrintComponent implements OnInit {
     this.patientHeaderData = data;
     this.patientInvoiceDetail = true;
   }
+
+  back() {
+    this.isShowPrint = false;
+  }
 }
 

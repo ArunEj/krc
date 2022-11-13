@@ -378,6 +378,7 @@ export class InsuranceComponent implements OnInit {
   }
 
   isrequiredSaveBtn() {
+    this.validateFlag();
     this.patientDialysisHistory.forEach((element: any)=> {
       if(element.active_flag == 'Y') {
         this.save();

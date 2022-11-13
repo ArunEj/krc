@@ -1,0 +1,26 @@
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatTable, MatTableDataSource } from '@angular/material/table'
+
+@Component({
+  selector: 'app-sr-table',
+  templateUrl: './sr-table.component.html',
+  styleUrls: ['./sr-table.component.scss']
+})
+export class SrTableComponent implements OnInit {
+  @Input() tableData: any;
+  @Output() updateEmit = new EventEmitter();
+  constructor() { }
+  dataSource: any;
+  ngOnInit(): void {
+    this.dataSource = new MatTableDataSource(this.tableData);
+  }
+
+  displayedColumns: string[] = ['supplier_name', 'po_no', 'po_date', 'supplier_inv_no', 'supplier_inv_date', 'supplier_inv_amt', 'supplier_inv_paid', 'supplier_inv_bal', 'payment', 'payment_dt', 'payment_mode', 'remarks'];
+
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+  }
+}

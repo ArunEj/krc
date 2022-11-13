@@ -1,0 +1,78 @@
+<section class="example-container mat-elevation-z8" tabindex="0">
+    <div class="example-header">
+      <mat-form-field class="mar20lr">
+        <input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Filter">
+      </mat-form-field>
+    </div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" id="receipt-payment-table">
+
+  <ng-container matColumnDef="transaction_date">
+    <th mat-header-cell *matHeaderCellDef> Transaction Date </th>
+    <td mat-cell *matCellDef="let element"> {{element.trans_date | date: 'dd-MM-yyyy'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="acc_type">
+    <th mat-header-cell *matHeaderCellDef> Acc Type </th>
+    <td mat-cell *matCellDef="let element"> {{element.account_type}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="acc_desc">
+    <th mat-header-cell *matHeaderCellDef> Acc Desc </th>
+    <td mat-cell *matCellDef="let element"> {{element.account_desc}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="trans_id">
+    <th mat-header-cell *matHeaderCellDef> Trans ID </th>
+    <td mat-cell *matCellDef="let element"> {{element.trans_Id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="amount">
+    <th mat-header-cell *matHeaderCellDef> Amount </th>
+    <td mat-cell *matCellDef="let element"> {{element.account_value}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="payment_mode">
+    <th mat-header-cell *matHeaderCellDef> Payment Mode </th>
+    <td mat-cell *matCellDef="let element"> {{element.payment_mode}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="payment_reference">
+    <th mat-header-cell *matHeaderCellDef> Payment Reference </th>
+    <td mat-cell *matCellDef="let element"> {{element.payment_ref}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="subledger_type">
+    <th mat-header-cell *matHeaderCellDef> Subledger Type </th>
+    <td mat-cell *matCellDef="let element"> {{element.subledger_type}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="subledger_name">
+    <th mat-header-cell *matHeaderCellDef> Subledger Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.rp_name_other}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="voucher_number">
+    <th mat-header-cell *matHeaderCellDef> Voucher number </th>
+    <td mat-cell *matCellDef="let element"> {{element.voucher_num}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="voucher_date">
+    <th mat-header-cell *matHeaderCellDef> Voucher Date </th>
+    <td mat-cell *matCellDef="let element"> {{element.voucher_date | date: 'dd-MM-yyyy'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="narration">
+    <th mat-header-cell *matHeaderCellDef> Narration </th>
+    <td mat-cell *matCellDef="let element"> {{element.trans_narration}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="remarks">
+    <th mat-header-cell *matHeaderCellDef> Remarks </th>
+    <td mat-cell *matCellDef="let element"> {{element.addl_remarks}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+</section>
