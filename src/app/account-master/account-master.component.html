@@ -1,0 +1,68 @@
+<app-header></app-header>
+<div class="container">
+    <div class="row">
+        <h3>DOCTOR MASTER</h3>
+    </div>
+    <form [formGroup]="accForm">
+        <div class="row">
+            <div class="col-4">
+                    <!-- <label for="doc_name" class="form-label">Doctor Name<span class="txt-danger">*</span></label>
+                    <select class="form-control" name="doc_name"  formControlName="doc_name">
+                        <option *ngFor="let branch of branchList;" [value]="branch.doc_name">{{branch.doc_name}}</option>
+
+                    </select> -->
+                    <mat-form-field class="d-flex" appearance="fill">
+                        <mat-select placeholder="Account Type" formControlName="acc_type" >
+                          <!-- <mat-option *ngFor="let bu of buList" [value]="bu.bu_id">
+                            {{bu.doc_name}}
+                          </mat-option> -->
+                        </mat-select>
+                    </mat-form-field>
+            </div>
+            <div class="col-4">
+                <div>
+                    <mat-form-field class="d-flex" appearance="fill">
+                        <mat-label>Receipts</mat-label>
+                        <input matInput type="text" formControlName="receipt" name="receipt">
+                    
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>Payments</mat-label>
+                    <input matInput type="number" min="0" formControlName="payment" name="payment">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-12">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>Account Code</mat-label>
+                    <input matInput type="text" formControlName="acc_code" name="acc_code">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-12">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>Account Description</mat-label>
+                    <input matInput type="text" formControlName="acc_desc" name="acc_desc">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-12">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>Status</mat-label>
+                    <input matInput type="text" formControlName="status" name="status">
+                
+                </mat-form-field>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-12 d-flex text-center">
+                        <button mat-raised-button color="bg-clr" class="bg-clr">Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <br>
+</div>

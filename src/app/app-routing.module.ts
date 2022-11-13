@@ -35,6 +35,9 @@ import { GoodsReportsComponent } from './goods-reports/goods-reports.component';
 import { SupplierReportsComponent } from './supplier-reports/supplier-reports.component';
 import { ReceiptPaymentReportComponent } from './receipt-payment-report/receipt-payment-report.component';
 import { StockRegisterReportComponent } from './stock-register-report/stock-register-report.component';
+import { DoctorMasterComponent } from './doctor-master/doctor-master.component';
+import { AccountMasterComponent } from './account-master/account-master.component';
+import { InventoryConfigComponent } from './inventory-config/inventory-config.component';
 
 const routes: Routes = [
   {
@@ -176,6 +179,18 @@ const routes: Routes = [
   {
     path: 'stock-reports',
     component: StockRegisterReportComponent
+  },
+  {
+    path: 'doctor-master',
+    component: DoctorMasterComponent
+  },
+  {
+    path: 'account-master',
+    component: AccountMasterComponent
+  },
+  {
+    path: 'inventory',
+    component: InventoryConfigComponent
   }
 
 
