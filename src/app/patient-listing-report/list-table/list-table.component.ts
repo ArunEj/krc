@@ -1,6 +1,8 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatSort, Sort } from '@angular/material/sort';
+import { HighlightSpanKind } from 'typescript';
+import { UtilityService } from 'src/app/utilities/services/utility.service';
 
 /**
  * @title Table with filtering
@@ -15,10 +17,13 @@ export class ListTable implements OnInit {
     dataSource: any;
     @ViewChild(MatSort)
     sort: MatSort =new MatSort()
-    displayedColumns = ['patient_name', 'father_name', 'mobile_no', 'age'];
+    displayedColumns = ['patient_id','patient_name', 'father_name','patient_type_name', 'mobile_no', 'age','dob','sex','pincode'];
     ngOnInit() {
         this.dataSource = new MatTableDataSource(this.patientList);
         
+    }
+    constructor(private util:UtilityService){
+
     }
     ngAfterViewInit(){
         this.dataSource.sort = this.sort;
@@ -33,6 +38,9 @@ export class ListTable implements OnInit {
         filterValue = filterValue.trim(); // Remove whitespace
         filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
         this.dataSource.filter = filterValue;
+    }
+    export(){
+        this.util.exportArrayToExcel(this.dataSource.data, "patientListing");
     }
 }
 

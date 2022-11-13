@@ -1,9 +1,9 @@
 <app-header></app-header>
 <div class="container">
   <div class="row">
-    <h1>Patient Schedule</h1>
+    <h1>Patient Listing</h1>
   </div>
-  <div class="row" *ngIf="!headerDetail">
+  <!-- <div class="row" *ngIf="!headerDetail">
     <h3>Patient Details</h3>
     <div class="patient-details">
 
@@ -35,8 +35,8 @@
       </div>
 
     </div>
-  </div>
-  <div class="container" *ngIf="headerDetail">
+  </div> -->
+  <!-- <div class="container" *ngIf="headerDetail">
     <div class="row header-border margin-20t">
       <div class="">
         <label class="mar15">Patient Id: {{patientHeader?.patient_id}}</label>
@@ -53,8 +53,8 @@
         <label class="mar15">Advance Balance: {{patientHeader?.advance_amount_balance}}</label>
       </div>
     </div>
-  </div>
-  <div *ngIf="!headerDetail && patientNameList && patientNameList.length>0">
+  </div> -->
+  <div *ngIf="patientNameList && patientNameList.length>0">
     <list-table [patientList]="patientNameList"></list-table>
   </div>
 

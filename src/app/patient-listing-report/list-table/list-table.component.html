@@ -1,14 +1,24 @@
 <div class="example-container mat-elevation-z8">
+  <div >
+    <button  style="background-color:aliceblue" mat-button (click)="export()">Export</button>
+  </div>
     <div class="example-header">
       <mat-form-field>
         <input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Filter">
       </mat-form-field>
+      
     </div>
   
     <mat-table #table [dataSource]="dataSource" matSort>
-  
+
       <!-- Position Column -->
       <ng-container matColumnDef="patient_name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Patient ID </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.patient_id}} </mat-cell>
+      </ng-container>
+  
+      <!-- Position Column -->
+      <ng-container matColumnDef="patient_id">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Patient Name </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.patient_name}} </mat-cell>
       </ng-container>
@@ -18,7 +28,11 @@
         <mat-header-cell *matHeaderCellDef>Father's Name </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.father_name}} </mat-cell>
       </ng-container>
-  
+      <ng-container matColumnDef="patient_type_name">
+        <mat-header-cell *matHeaderCellDef>Father's Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.patient_type_name}} </mat-cell>
+      </ng-container>
+      
       <!-- Weight Column -->
       <ng-container matColumnDef="mobile_no">
         <mat-header-cell *matHeaderCellDef> Phone Number </mat-header-cell>
@@ -29,6 +43,21 @@
       <ng-container matColumnDef="age">
         <mat-header-cell *matHeaderCellDef> Age </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.age}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="dob">
+        <mat-header-cell *matHeaderCellDef> DOB </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.dob | date:'dd-MM-yyyy'}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="sex">
+        <mat-header-cell *matHeaderCellDef> SEX </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.sex === "M"?'Male':'Female'}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="pincode">
+        <mat-header-cell *matHeaderCellDef> PINCODE </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.pincode}} </mat-cell>
       </ng-container>
   
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

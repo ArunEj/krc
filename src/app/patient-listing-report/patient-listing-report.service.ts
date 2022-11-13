@@ -18,11 +18,19 @@ export class PatientListingReportService {
     
   }
 
-  fetchUserData(mobile_no: string): Observable<any> {
+  fetchUserDataByNo(mobile_no: string): Observable<any> {
     let branch_id = localStorage.getItem('branch_id');
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.get(environment.apiUrl + 'patients/' + localStorage.getItem('branch_id') + '?mobile_no=' + mobile_no,
+      { headers: headers })
+  }
+
+  fetchUserData(): Observable<any> {
+    let branch_id = localStorage.getItem('branch_id');
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(environment.apiUrl + 'patients/' + localStorage.getItem('branch_id'),
       { headers: headers })
   }
 

@@ -17,7 +17,7 @@ export class PatientListingReportComponent implements OnInit {
   searchType: string = '';
   patient_name: string = '';
   headerDetail: any;
-  patientDetail: boolean = false;
+  patientDetail: boolean = true;
   patientHeader: any;
   patientList = [];
   patientNameList: Patient[] = []!;
@@ -25,25 +25,25 @@ export class PatientListingReportComponent implements OnInit {
   dataSource = new MatTableDataSource(this.patientNameList);
   @ViewChild(MatTable, { static: true }) table: MatTable<any> | undefined;
   displayedColumns: string[] = ['patient_name', 'father_name', 'mobile_no', 'age', 'dob', 'sex', 'patient_type'];
-  selectedPerson: any;  
+  selectedPerson: any;
   constructor(private patientHeaderService: PatientListingReportService,
     private dialog: MatDialog) { }
 
   ngOnInit(): void {
-
+    this.fetchUser();
   }
 
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
     console.log(this.dataSource.filter);
-    
+
   }
 
   fetchUser() {
-    this.patientHeaderService.fetchUserData(this.mobile_no).subscribe(data => {
-      this.patientDetail = true;     
-      this.patientList = data.results;     
+    this.patientHeaderService.fetchUserData().subscribe(data => {
+      this.patientDetail = true;
+      this.patientNameList = data.results;
 
     })
   }
@@ -55,6 +55,6 @@ export class PatientListingReportComponent implements OnInit {
     })
 
   }
-  
- 
+
+
 }

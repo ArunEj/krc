@@ -47,6 +47,17 @@ export class UtilityService {
     XLSX.writeFile(wb, fileName);
 
   }
+   
+
+
+  exportArrayToExcel(arr: any[], name?: string) {
+   // let { sheetName, fileName } = this.getFileName(name);
+  
+    var wb = XLSX.utils.book_new();
+    var ws = XLSX.utils.json_to_sheet(arr);
+    XLSX.utils.book_append_sheet(wb, ws, name);
+    XLSX.writeFile(wb, `${name}.xlsx`);
+  }
 
 
 }
