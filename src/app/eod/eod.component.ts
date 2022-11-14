@@ -97,12 +97,14 @@ export class EodComponent implements OnInit {
     let newDate = this.eodForm.controls.new_eod_date.value;
     let splitDate = newDate.split('-');
     newDate = splitDate[2] + '-' + splitDate[0] + '-' + splitDate[1];
+    const new_eod_date = newDate;
     let nextDate = splitDate[1] + '-' + splitDate[0] + '-' + splitDate[2];
+    console.log(nextDate);
     const eodDate = this.eodForm.controls.eod_date.value;
     $("#MyPopup1").modal("hide");
     let param = {
       org_id: localStorage.getItem('org_id'), branch_id: localStorage.getItem('branch_id'), user_id: localStorage.getItem('user_id'),
-      new_eod_date: newDate, eod_date: eodDate
+      new_eod_date: new_eod_date, eod_date: eodDate
     }
     this.eodService.createEod(param).subscribe(data => {
       console.log(data);
