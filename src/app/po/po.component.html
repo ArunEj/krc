@@ -83,28 +83,13 @@
                     </select>
                 </div>
             </div>
-
-            <!-- <div class="col-2">
-                <div class="supplier-item">
-                    <label for="item_cost" class="form-label">Item Cost</label>
-                    <input type="number" class="form-control" formControlName="item_cost"
-                        name="item_cost"  id="item_cost" (change)="calculateTotalCost()">
-                </div>
-            </div> -->
             <div class="col-1">
                 <div class="supplier-item">
                     <label for="qty_ordered" class="form-label">Qty Order</label>
-                    <input type="number" class="form-control" formControlName="qty_ordered"
-                        name="qty_ordered" min="0"  id="qty_ordered" (change)="calculateTotalCost()">
+                    <input type="number" min="0" class="form-control" formControlName="qty_ordered"
+                        name="qty_ordered"  id="qty_ordered" (change)="calculateTotalCost()">
                 </div>
             </div>
-            <!-- <div class="col-2">
-                <div class="supplier-item">
-                    <label for="net_value" class="form-label">Total cost</label>
-                    <input type="number" class="form-control" formControlName="net_value"
-                        name="net_value"  id="net_value">
-                </div>
-            </div> -->
             <div class="col-2">
                 <div class="supplier-item">
                     <label for="exp_del_date" class="form-label">To be Delivered on</label>
@@ -134,14 +119,11 @@
         <div class="row">
             <div class="col-6 d-flex">
                     <div class="col-3" *ngIf="isShowEdit">
-                        <button class="btn btn-primary" (click)="addToList()">Add Record</button>
+                        <button class="btn btn-primary pointer" (click)="addToList()">Add Record</button>
                     </div>
                     <div class="col-3" *ngIf="!isShowEdit">
-                        <button class="btn btn-primary" (click)="editList()">Update Record</button>
+                        <button class="btn btn-primary pointer" (click)="editList()">Update Record</button>
                     </div>
-                    <!-- <div class="col-2">
-                        <button class="btn btn-primary" (click)="submit()">Save</button>
-                    </div> -->
             </div>
         </div>
     </form>
@@ -177,7 +159,7 @@
 
                     <td>{{poData.remarks}}</td>
                     
-                    <td><mat-icon class="print-icon cancel-icon" (click)="edit(poData)"> border_color</mat-icon>
+                    <td><mat-icon class="print-icon cancel-icon pointer" (click)="edit(poData)"> border_color</mat-icon>
                         <mat-icon title="delete" class="delete-icon delete-icon-disabled" aria-hidden="false" aria-label="Example home icon" disabled>delete</mat-icon> </td>
                 </tr>
             </ng-container>
@@ -199,7 +181,11 @@
                     <td>{{item.remarks}}</td>
                     
                     <td>
+<<<<<<< HEAD
                         <mat-icon class="print-icon cancel-icon" (click)="edit(item)"> border_color</mat-icon>
+=======
+                        <mat-icon class="print-icon cancel-icon pointer" (click)="edit(item)"> border_color</mat-icon>
+>>>>>>> nov10cloneMergeBranch
                         <mat-icon title="delete" class="delete-icon pointer" aria-hidden="false" aria-label="Example home icon" (click)="delete(item)">delete</mat-icon> </td>
                 </tr>
             </ng-container>

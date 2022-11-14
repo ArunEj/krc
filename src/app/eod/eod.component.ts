@@ -41,7 +41,7 @@ export class EodComponent implements OnInit {
 
   getEodDetails() {
     this.eodService.getEodDetailData(this.orgId, this.branchId).subscribe(data => {
-      console.log("EOD data", data.results);
+      // console.log("EOD data", data.results);
       this.eodData = data.results[0];
       let date = data.results[0].eod_date;
       this.eodForm.controls.eod_date.setValue(date);
@@ -55,6 +55,7 @@ export class EodComponent implements OnInit {
     let todayDate = (new Date()).getTime();
     let systemNewDate = (new Date(this.setDate)).getTime();
     console.log(systemNewDate);
+    // console.log(systemNewDate);
     if(todayDate == systemNewDate || todayDate < systemNewDate){
       this.dialog.open(InfoDialogComponent, {
         width: '400px',

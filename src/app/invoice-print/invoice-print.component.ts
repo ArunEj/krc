@@ -82,9 +82,7 @@ export class InvoicePrintComponent implements OnInit {
   }
 
   getInvoiceData(item: any) {
-    if(!item){
-      return
-    }
+
     this.invoicePrintService.getInvoiceList(item.invoice_no,item.patient_id).subscribe(
       (data) => {
         this.invoiceData = data;
@@ -94,9 +92,10 @@ export class InvoicePrintComponent implements OnInit {
         if(this.invoiceData.estimate_lists.length !== 0) {
           this.isShowEstimateData = true;
         }
+        console.log("data",this.invoiceData)
       },
       (err) => {
-        console.log(err)
+        console.log(err, "response error");
       });
   }
 
@@ -130,18 +129,6 @@ export class InvoicePrintComponent implements OnInit {
           this.patientInvoiceDetail = true;
         }
       })
-      // this.invoicePrintService.fetchInvoiceSection(data.patient_id).subscribe(data => {
-      //   this.patientInvoiceDetail = true;
-      //   this.invoiceDetails = data.results;
-      //   // console.log("invoice",this.invoiceDetails)
-      // }, error => {
-      //   if (error.error.status === 404) {
-      //     this.dialog.open(InfoDialogComponent, {
-      //       width: '300px',
-      //       data: 'Invoice details not found!!!'
-      //     });
-      //   }
-      // })
     });
   }
 

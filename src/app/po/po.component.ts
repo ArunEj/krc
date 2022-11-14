@@ -298,5 +298,5 @@ export interface poItem {
   total_cost: number;
   product_name: string;
   remarks:string;
-  id: number
+  id: number;
 }
