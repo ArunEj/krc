@@ -56,6 +56,7 @@ export class InvoicePrintComponent implements OnInit {
   loadInvData(){
     if(this.invoicePrintService.getInvData()){
       this.print(this.invoicePrintService.getInvData());
+      this.invoicePrintService.printData = null;
     }
   }
 
