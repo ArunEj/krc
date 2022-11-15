@@ -72,6 +72,9 @@ import { ReceiptPaymentReportComponent } from './receipt-payment-report/receipt-
 import { RpTableComponent } from './receipt-payment-report/rp-table/rp-table.component';
 import { StockRegisterReportComponent } from './stock-register-report/stock-register-report.component';
 import { SRegTableComponent } from './stock-register-report/s-reg-table/s-reg-table.component';
+import { AccountMasterComponent } from './account-master/account-master.component';
+import { DoctorMasterComponent } from './doctor-master/doctor-master.component';
+import { InventoryConfigComponent } from './inventory-config/inventory-config.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -139,7 +142,10 @@ import { SRegTableComponent } from './stock-register-report/s-reg-table/s-reg-ta
     ReceiptPaymentReportComponent,
     RpTableComponent,
     StockRegisterReportComponent,
-    SRegTableComponent
+    SRegTableComponent,
+    AccountMasterComponent,
+    DoctorMasterComponent,
+    InventoryConfigComponent
   ],
   imports: [
     BrowserModule,

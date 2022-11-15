@@ -1,0 +1,86 @@
+<p>doctor-master works!</p>
+<app-header></app-header>
+<div class="container">
+    <div class="row">
+        <h3>DOCTOR MASTER</h3>
+    </div>
+    <form [formGroup]="docForm">
+        <div class="row">
+            <div class="col-6">
+                    <!-- <label for="doc_name" class="form-label">Doctor Name<span class="txt-danger">*</span></label>
+                    <select class="form-control" name="doc_name"  formControlName="doc_name">
+                        <option *ngFor="let branch of branchList;" [value]="branch.doc_name">{{branch.doc_name}}</option>
+
+                    </select> -->
+                    <mat-form-field class="d-flex" appearance="fill">
+                        <mat-select placeholder="Doctor Name" formControlName="doc_name" >
+                          <!-- <mat-option *ngFor="let bu of buList" [value]="bu.bu_id">
+                            {{bu.doc_name}}
+                          </mat-option> -->
+                        </mat-select>
+                    </mat-form-field>
+            </div>
+            <div class="col-6">
+                <div>
+                    <mat-form-field class="d-flex" appearance="fill">
+                        <mat-select placeholder="Doctor ID" formControlName="doc_id" >
+                          <!-- <mat-option *ngFor="let bu of buList" [value]="bu.doc_id">
+                            {{bu.doc_id}}
+                          </mat-option> -->
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-6">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>Doctor Contact</mat-label>
+                    <input matInput type="number" formControlName="doc_contact" name="doc_contact">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>Doctor Email ID</mat-label>
+                    <input matInput type="text" formControlName="doc_email" name="doc_email">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>Doctor Assistence Name</mat-label>
+                    <input matInput type="text" formControlName="doc_assistence" name="doc_assistence">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>Doctor Assistence Contact #</mat-label>
+                    <input matInput type="number" formControlName="doc_assist_contact" name="doc_assist_contact">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>Doctor Assistence Email ID</mat-label>
+                    <input matInput type="text" formControlName="doc_assist_email" name="doc_assist_email">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>Doctor Attached to</mat-label>
+                    <input matInput type="text" formControlName="doc_attach" name="doc_attach">
+                
+                </mat-form-field>
+                <br>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-12 d-flex text-center">
+                        <button mat-raised-button color="bg-clr" class="bg-clr">Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <br>
+</div>
