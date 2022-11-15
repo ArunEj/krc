@@ -12,6 +12,11 @@ export class UtilityService {
     let month = this.appendZero(temp.getMonth() + 1);
     return temp.getFullYear() + '-' + month + '-' + this.appendZero(temp.getDate());
   }
+  convertTodayTostrDDMMYYYY(date?:any) {
+    let temp = (date)?new Date(date):new Date();
+    let month = this.appendZero(temp.getMonth() + 1);
+    return this.appendZero(temp.getDate()) + '-' + month + '-' + temp.getFullYear();
+  }
   appendZero(value: any) {
     if (value < 10) {
       return "0" + value;

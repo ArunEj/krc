@@ -4,12 +4,15 @@ import { EodService } from './eod.service';
 import { MatDialog } from '@angular/material/dialog';
 import { InfoDialogComponent } from '../utilities/info-dialog/info-dialog.component';
 import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
+import { UtilityService } from '../utilities/services/utility.service';
 declare var $:any
 
 @Component({
   selector: 'app-eod',
   templateUrl: './eod.component.html',
-  styleUrls: ['./eod.component.scss']
+  styleUrls: ['./eod.component.scss'],
+  providers: [DatePipe]
 })
 export class EodComponent implements OnInit {
   orgId: any;
@@ -17,9 +20,12 @@ export class EodComponent implements OnInit {
   eodForm!: FormGroup;
   eodData: any;
   setDate: any;
-  newEod: Date | undefined;
+  newEod: any;
+  currDate: any;
+  newEodStr: any;
 
-  constructor(private eodService: EodService, private formBuilder: FormBuilder,private dialog: MatDialog, private router: Router) { }
+  constructor(private eodService: EodService, private formBuilder: FormBuilder,private dialog: MatDialog, private router: Router, 
+    private dp: DatePipe, private us: UtilityService) { }
 
   ngOnInit(): void {
     this.orgId = localStorage.getItem('org_id');
@@ -43,18 +49,17 @@ export class EodComponent implements OnInit {
     this.eodService.getEodDetailData(this.orgId, this.branchId).subscribe(data => {
       // console.log("EOD data", data.results);
       this.eodData = data.results[0];
-      let date = data.results[0].eod_date;
-      this.eodForm.controls.eod_date.setValue(date);
+      this.currDate = data.results[0].eod_date;
+      this.eodForm.controls.eod_date.setValue(this.currDate);
       console.log(this.eodForm.controls.eod_date);
       this.eod();
       this.setNewEodDate();
     })
   }
   openModal() {
-    this.setDate =this.eodForm.controls.new_eod_date.value;
+    this.setDate = this.newEodStr;
     let todayDate = (new Date()).getTime();
     let systemNewDate = (new Date(this.setDate)).getTime();
-    console.log(systemNewDate);
     // console.log(systemNewDate);
     if(todayDate == systemNewDate || todayDate < systemNewDate){
       this.dialog.open(InfoDialogComponent, {
@@ -81,39 +86,26 @@ export class EodComponent implements OnInit {
   }
 
   setNewEodDate() {
-    this.setDate =this.eodForm.controls.eod_date.value;
-    let date = this.setDate.split("-");
-    date = new Date(date);
-    let final = date.setDate(date.getDate() + 1);
-    final = (new Date(final)).toLocaleDateString();
-    let final1 = final.split("/");
-    final = final1[0]+ '-' + final1[1] + '-' + final1[2];
-    console.log(final);
-    this.eodForm.controls.new_eod_date.setValue(final);
-    console.log(this.eodForm.value);
+    let date = new Date(this.currDate);
+    this.newEod = date.setDate(date.getDate() + 1);
+    this.newEodStr = this.us.convertTodayTostr(date)
+    console.log(this.us.convertTodayTostr(date))
+    console.log("final---");
   }
 
   closeModal() {
-    let newDate = this.eodForm.controls.new_eod_date.value;
-    let splitDate = newDate.split('-');
-    newDate = splitDate[2] + '-' + splitDate[0] + '-' + splitDate[1];
-    const new_eod_date = newDate;
-    let nextDate = splitDate[1] + '-' + splitDate[0] + '-' + splitDate[2];
-    console.log(nextDate);
-    const eodDate = this.eodForm.controls.eod_date.value;
     $("#MyPopup1").modal("hide");
     let param = {
       org_id: localStorage.getItem('org_id'), branch_id: localStorage.getItem('branch_id'), user_id: localStorage.getItem('user_id'),
-      new_eod_date: new_eod_date, eod_date: eodDate
+      new_eod_date: this.newEodStr, eod_date: this.currDate
     }
     this.eodService.createEod(param).subscribe(data => {
       console.log(data);
       this.dialog.open(InfoDialogComponent, {
         width: '400px',
-        data: 'EOD Completed Successfully.  Your Next Business Date : '+ nextDate
+        data: 'EOD Completed Successfully.  Your Next Business Date : '+ this.us.convertTodayTostrDDMMYYYY(this.newEod)
       })
       this.router.navigate(['/landing'])
-      // this.getEodDetails();
     })
   }
 }

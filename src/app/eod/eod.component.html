@@ -40,7 +40,7 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-body txt-center">
-               <div> Are You Sure to Close EOD for current Business date <br>{{setDate | date: 'dd-MM-yyyy'}}</div><br>
+               <div> Are You Sure to Close EOD for current Business date <br>{{currDate | date: 'dd-MM-yyyy'}}</div><br>
                 <div class="row">
                     <div class="col-md-6 btn-right">
                         <button class="btn btn-primary" type="button" value="yes" (click)="openModal1()">Yes</button>
@@ -64,7 +64,7 @@
                 <h4 class="modal-title"></h4>
             </div> -->
             <div class="modal-body txt-center">
-               <div> Are You Re-confirming to Close EOD for current Business date <br> {{setDate | date: 'dd-MM-yyyy'}}</div><br>
+               <div> Are You Re-confirming to Close EOD for current Business date <br> {{currDate | date: 'dd-MM-yyyy'}}</div><br>
                 <div class="row">
                     <div class="col-md-6 btn-right">
                         <button class="btn btn-primary" type="button" value="yes" (click)="closeModal()">Yes</button>
