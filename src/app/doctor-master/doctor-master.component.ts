@@ -32,10 +32,11 @@ export class DoctorMasterComponent implements OnInit {
   }
 
   createDoc() {
+    let dmForm = this.docForm.controls;
     let params={
       org_id: localStorage.getItem('org_id'),
       branch_id: localStorage.getItem('branch_id'),
-      user_id:"KRC000001",
+      user_id: localStorage.getItem('user_id'),
       doctor_name: this.docForm.controls.doc_name.value,   
       doctor_contact_no: this.docForm.controls.doc_contact.value,
       doctor_email_id:this.docForm.controls.doc_email.value,

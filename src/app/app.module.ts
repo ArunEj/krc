@@ -75,6 +75,7 @@ import { SRegTableComponent } from './stock-register-report/s-reg-table/s-reg-ta
 import { AccountMasterComponent } from './account-master/account-master.component';
 import { DoctorMasterComponent } from './doctor-master/doctor-master.component';
 import { InventoryConfigComponent } from './inventory-config/inventory-config.component';
+import { SuppProdMapComponent } from './supp-prod-map/supp-prod-map.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -145,7 +146,8 @@ import { InventoryConfigComponent } from './inventory-config/inventory-config.co
     SRegTableComponent,
     AccountMasterComponent,
     DoctorMasterComponent,
-    InventoryConfigComponent
+    InventoryConfigComponent,
+    SuppProdMapComponent
   ],
   imports: [
     BrowserModule,

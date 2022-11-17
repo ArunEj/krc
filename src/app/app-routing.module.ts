@@ -40,6 +40,7 @@ import { StockRegisterReportComponent } from './stock-register-report/stock-regi
 import { AccountMasterComponent } from './account-master/account-master.component';
 import { DoctorMasterComponent } from './doctor-master/doctor-master.component';
 import { InventoryConfigComponent } from './inventory-config/inventory-config.component';
+import { SuppProdMapComponent } from './supp-prod-map/supp-prod-map.component';
 
 const routes: Routes = [
   {
@@ -204,6 +205,10 @@ const routes: Routes = [
   {
     path: 'inventory',
     component: InventoryConfigComponent
+  },
+  {
+    path: 'main-supp',
+    component: SuppProdMapComponent
   }
 
 
