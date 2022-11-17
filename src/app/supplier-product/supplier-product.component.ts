@@ -28,7 +28,7 @@ export class SupplierProductComponent implements OnInit {
   
   supplierProductForm!: FormGroup;
   fetchSupplierProductdata: any;
-  tableData: LabItem[] = [];
+  tableData: any[] = [];
   supplierIdData: any;
   SupplierProdData: any;
   getSuppProds: any;
@@ -46,6 +46,8 @@ export class SupplierProductComponent implements OnInit {
   branchList: any;
   eodDate: any;
   // buForm!: FormGroup;
+  isShowEdit: boolean = true;
+  updateData: any;
 
   constructor(private supplierProdSer: SupplierProductService,
     private formBuilder: FormBuilder, private dialog: MatDialog,
@@ -83,21 +85,28 @@ export class SupplierProductComponent implements OnInit {
   }
 
   addRecord() {
-    if(this.supplierProductForm.valid){
-      this.tableData.push(this.prodItem);
-      this.resetData();
+    if(!this.supplierProductForm.valid){
+      return
     }
-    // this.buForm.controls.bu_id.setValue(this.buForm.value.bu_id);
-    // this.tableData.push({
-    //   id: this.tableData.length,
-    //   product_id: '',
-    //   product_name: '',
-    //   purchase_price: 0,
-    //   eff_from: '',
-    //   credit_days: 0,
-    //   check: 0,
-    //   bu_id: this.supplierProductForm.value.bu_id
-    // })
+    const temp = {bu_id:'', product_id:'', product_name: '', purchase_price: 0, eff_from:'', credit_days: '', id: 0}
+    temp.bu_id = '';
+    temp.product_id = '';
+    temp.product_name = '';
+    temp.purchase_price = 0;
+    temp.eff_from = '';
+    temp.credit_days = '';
+    temp.id = 0;
+    
+    //set values
+    temp.bu_id = this.supplierProductForm.controls.bu_id.value; 
+    temp.product_id = this.supplierProductForm.controls.product_id.value; 
+    temp.product_name = this.supplierProductForm.controls.product_name.value;
+    temp.purchase_price = this.supplierProductForm.controls.purchase_price.value;
+    temp.eff_from = this.supplierProductForm.controls.eff_from.value;
+    temp.credit_days = this.supplierProductForm.controls.credit_days.value;
+    temp.id = this.tableData.length;
+    this.tableData.push(temp);
+    this.resetData();
   }
 
   resetData() {
@@ -186,16 +195,15 @@ export class SupplierProductComponent implements OnInit {
   }
 
   submit() {
-    this.addRecord();
+    let form = this.supplierProductForm.controls;
+    if(this.isShowEdit) {
+      this.addRecord();
+    }
+    
     this.tableData.forEach(element => {
       element.active_flag = 'Y';
-      // if(element.check == 0){
-      //   let date = (element.eff_from).split("-");
-      //   element.eff_from = date[2] + '-' + date[1] + '-' + date[0];
-      //   element.check++;
-      // }
     });
-    console.log("tableDate submit", this.tableData);
+    // console.log("tableDate submit", this.tableData);
     let params = {
       org_id: localStorage.getItem('org_id'), branch_id: localStorage.getItem('branch_id'), user_id: localStorage.getItem('user_id'),
       supplier_id: this.supplierProductForm.controls.supplier_id.value, supp_prods: this.tableData
@@ -228,4 +236,47 @@ export class SupplierProductComponent implements OnInit {
       this.branchList = data.results;
     })
   }
+
+  //edit
+  edit(item: any) {
+    console.log(item)
+    this.updateData = item;
+    this.isShowEdit = false;
+    this.supplierProductForm.controls.bu_id.setValue(item.bu_id);
+    this.supplierProductForm.controls.product_name.setValue(item.product_name);
+    this.supplierProductForm.controls.product_id.setValue(item.product_id);
+    this.supplierProductForm.controls.purchase_price.setValue(item.purchase_price);
+    this.supplierProductForm.controls.eff_from.setValue(item.eff_from);
+    this.supplierProductForm.controls.credit_days.setValue(item.credit_days);
+    this.fetchProductsDynamic();
+  }
+
+  editList() {
+    let value = this.tableData.find((element:any)=> element.id == this.updateData.id);
+    this.tableData.forEach((element:any) => {
+      if(element.id == value?.id){
+          //set values
+          element.bu_id = this.supplierProductForm.controls.bu_id.value;
+          element.product_name = this.supplierProductForm.controls.product_name.value;
+          element.product_id = this.supplierProductForm.controls.product_id.value;
+          element.purchase_price = this.supplierProductForm.controls.purchase_price.value;
+          element.eff_from = this.supplierProductForm.controls.eff_from.value;
+          element.credit_days = this.supplierProductForm.controls.credit_days.value;
+        }
+        
+      });
+      this.resetData();
+      // this.clearFields();
+      this.isShowEdit = true;
+  }
+
+  // clearFields() {  
+  //   this.supplierProductForm.controls.bu_id.setValue(null);
+  //   this.supplierProductForm.controls.product_name.setValue(null);
+  //   this.supplierProductForm.controls.product_id.setValue(null); 
+  //   this.supplierProductForm.controls.purchase_price.setValue(null); 
+  //   this.supplierProductForm.controls.eff_from.setValue(null);
+  //   this.supplierProductForm.controls.credit_days.setValue(null);
+  // }
+
 }

@@ -84,12 +84,15 @@
             <br>
             <div class="row">
                 <div class="col-6 d-flex">
-                        <div class="col-3">
+                        <div class="col-3" *ngIf="isShowEdit">
                             <button class="btn btn-primary" (click)="addRecord()">Add Record</button>
                         </div>
-                        <div class="col-2">
-                            <button class="btn btn-primary" (click)="submit()">Save</button>
+                        <div class="col-3" *ngIf="!isShowEdit">
+                            <button class="btn btn-primary pointer" (click)="editList()">Update Record</button>
                         </div>
+                        <!-- <div class="col-2">
+                            <button class="btn btn-primary" (click)="submit()">Save</button>
+                        </div> -->
                 </div>
             </div>
             <br>
@@ -126,7 +129,9 @@
                                 <div class="circle-red"></div>
                             </td>
                             
-                            <td><mat-icon title="delete" class="delete-icon delete-icon-disabled" aria-hidden="false" aria-label="Example home icon" disabled>delete</mat-icon> </td>
+                            <td>
+                                <mat-icon class="print-icon cancel-icon pointer delete-icon-disabled" disabled> border_color</mat-icon>
+                                <mat-icon title="delete" class="delete-icon delete-icon-disabled" aria-hidden="false" aria-label="Example home icon" disabled>delete</mat-icon> </td>
                         </tr>
                     </ng-container>
                     <ng-container *ngIf="tableData.length > 0">
@@ -159,12 +164,19 @@
                                 <div class="circle-red"></div>
                             </td>
                             
-                            <td><mat-icon title="delete" class="delete-icon pointer" aria-hidden="false" aria-label="Example home icon" (click)="delete_item(item)">delete</mat-icon> </td>
+                            <td>
+                                <mat-icon class="print-icon cancel-icon pointer" (click)="edit(item)"> border_color</mat-icon>
+                                <mat-icon title="delete" class="delete-icon pointer" aria-hidden="false" aria-label="Example home icon" (click)="delete_item(item)">delete</mat-icon> </td>
                         </tr>
                     </ng-container>
                 </tbody>
               </table>
               <br>
+                <div class="col-6 d-flex">
+                    <div class="col-2">
+                        <button class="btn btn-primary" [disabled]="!isShowEdit" (click)="submit()">Save</button>
+                    </div>
+                </div>
         <!-- </form> -->
     </div>
 </div>
