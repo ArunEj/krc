@@ -15,7 +15,7 @@
                 <div>
                     <mat-form-field class="d-flex" appearance="fill">
                         <mat-label>Source BU ID</mat-label>
-                        <input matInput type="text" formControlName="SourceBu_id" name="SourceBu_id">
+                        <input matInput type="text" formControlName="source_product_id" name="source_product_id">
                     </mat-form-field>
                 </div>
             </div>
@@ -26,9 +26,54 @@
                 
                 </mat-form-field>
             </div>
-            
-            <br>
         </div>
+        <hr>
+        <div class="row">
+            <div class="col-3">
+                    <mat-form-field class="d-flex" appearance="fill">
+                        <mat-select placeholder="Target BU" formControlName="source_product_id" >
+                            <mat-option value="Arun">Arun</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+            </div>
+            <div class="col-3">
+                <div>
+                    <mat-form-field class="d-flex" appearance="fill">
+                        <mat-label>Target Product</mat-label>
+                        <input matInput type="text" formControlName="target_product_id" name="target_product_id">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-3">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>Quantity Impact</mat-label>
+                    <input matInput type="text" formControlName="qty_impact" name="qty_impact">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-3">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-select placeholder="Active" formControlName="active_flag" >
+                        <mat-option value="Y">Yes</mat-option>
+                        <mat-option value="N">No</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <div class="col-6 d-flex">
+                        <div class="col-3" *ngIf="isShowEdit">
+                            <button mat-raised-button class="bg-clr"  color="bg-clr" (click)="addToList()">Add Record</button>
+                        </div>
+                        <!-- <div class="col-3" *ngIf="!isShowEdit">
+                            <button class="btn btn-primary pointer" (click)="editList()">Update Record</button>
+                        </div> -->
+                </div>
+                
+            </div>
+            
+        </div>
+        <br>
+        
 
         <table class="table table-bordered">
             <thead class="thead-dark">
@@ -39,8 +84,8 @@
                 <th>Active</th>
               </tr> 
             </thead>
-            <!-- <tbody>
-                <ng-container *ngIf="prodData && prodData.length > 0">
+            <tbody>
+                <!-- <ng-container *ngIf="prodData && prodData.length > 0">
                     <tr *ngFor="let prod of prodData">
                         <td >{{prod.source_product_id}}</td>
     
@@ -50,21 +95,21 @@
     
                         <td>{{prod.active_flag}}</td>
                     </tr>
-                </ng-container>
-                <ng-container *ngIf="prodData.length > 0">
-                    <tr *ngFor="let item of prodData">
+                </ng-container> -->
+                <ng-container *ngIf="suppTableData.length > 0">
+                    <tr *ngFor="let item of suppTableData">
     
-                        <td >{{prod.source_product_id}}</td>
+                        <td >{{item.source_product_id}}</td>
     
-                        <td>{{prod.target_product_id}}</td>
+                        <td>{{item.target_product_id}}</td>
             
-                        <td>{{prod.qty_impact}}</td>
+                        <td>{{item.qty_impact}}</td>
     
-                        <td>{{prod.active_flag}}</td> 
+                        <td>{{item.active_flag}}</td> 
                         
                     </tr>
                 </ng-container>
-            </tbody> -->
+            </tbody>
         </table>
         <br>
         <div class="row">

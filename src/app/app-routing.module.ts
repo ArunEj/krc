@@ -41,6 +41,7 @@ import { AccountMasterComponent } from './account-master/account-master.componen
 import { DoctorMasterComponent } from './doctor-master/doctor-master.component';
 import { InventoryConfigComponent } from './inventory-config/inventory-config.component';
 import { SuppProdMapComponent } from './supp-prod-map/supp-prod-map.component';
+import { UserMasterComponent } from './user-master/user-master.component';
 
 const routes: Routes = [
   {
@@ -209,6 +210,10 @@ const routes: Routes = [
   {
     path: 'main-supp',
     component: SuppProdMapComponent
+  },
+  {
+    path: 'user-master',
+    component: UserMasterComponent
   }
 
 

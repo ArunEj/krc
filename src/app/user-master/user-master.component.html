@@ -1,0 +1,182 @@
+<app-header></app-header>
+<div class="container">
+    <div class="row">
+        <h3>SUPP PROD  MAP</h3>
+    </div>
+    <form [formGroup]="userMasterForm">
+        <div class="row">
+            <div class="col-4">
+                    <mat-form-field class="d-flex" appearance="fill">
+                        <mat-select placeholder="User Name" formControlName="user_name" >
+                        </mat-select>
+                    </mat-form-field>
+            </div>
+            <div class="col-4">
+                <div>
+                    <mat-form-field class="d-flex" appearance="fill">
+                        <mat-label>User Branch</mat-label>
+                        <input matInput type="text" formControlName="branch_id" name="branch_id">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>DOB</mat-label>
+                    <input matInput type="date" formControlName="dob" name="dob">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <div>
+                    <mat-form-field class="d-flex" appearance="fill">
+                        <mat-label>DOJ</mat-label>
+                        <input matInput type="date" formControlName="doj" name="doj">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>Mobile Number</mat-label>
+                    <input matInput type="text" formControlName="mobile_no" name="mobile_no">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <div>
+                    <mat-form-field class="d-flex" appearance="fill">
+                        <mat-label>Home Contact #</mat-label>
+                        <input matInput type="text" formControlName="home_contact_no" name="home_contact_no">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>Residence Address</mat-label>
+                    <input matInput type="text" formControlName="residence_address" name="residence_address">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>Email ID</mat-label>
+                    <input matInput type="text" formControlName="email_id" name="email_id">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <div>
+                    <mat-form-field class="d-flex" appearance="fill">
+                        <mat-label>Aadhar Number</mat-label>
+                        <input matInput type="text" formControlName="aadhar_no" name="aadhar_no">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>Pan Number</mat-label>
+                    <input matInput type="text" formControlName="pan_no" name="pan_no">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>Passport Number</mat-label>
+                    <input matInput type="text" formControlName="passport" name="passport">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <div>
+                    <mat-form-field class="d-flex" appearance="fill">
+                        <mat-label>Bank Account Number</mat-label>
+                        <input matInput type="text" formControlName="bank_account_no" name="bank_account_no">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>IFSC Code</mat-label>
+                    <input matInput type="text" formControlName="ifsc_code" name="ifsc_code">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>Bank Name</mat-label>
+                    <input matInput type="text" formControlName="bank_name" name="bank_name">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>Bank Address</mat-label>
+                    <input matInput type="text" formControlName="bank_address" name="bank_address">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>Bank Branch</mat-label>
+                    <input matInput type="text" formControlName="attached_branch" name="attached_branch">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>Signature</mat-label>
+                    <input matInput type="text" formControlName="signature" name="signature">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>PF Available</mat-label>
+                    <input matInput type="text" formControlName="pf_employee" name="pf_employee">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>PF Number</mat-label>
+                    <input matInput type="text" formControlName="pf_number" name="pf_number">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>PF Start Date</mat-label>
+                    <input matInput type="date" formControlName="pf_start_date" name="pf_start_date">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>User Type</mat-label>
+                    <input matInput type="text" formControlName="user_type" name="user_type">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>PWD</mat-label>
+                    <input matInput type="text" formControlName="pwd" name="pwd">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>User Status</mat-label>
+                    <input matInput type="text" formControlName="user_status" name="user_status">
+                
+                </mat-form-field>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-12 d-flex text-center">
+                    <button mat-raised-button color="bg-clr" class="bg-clr">Save</button>
+            </div>
+        </div>
+    </form>
+    <br>
+</div>
