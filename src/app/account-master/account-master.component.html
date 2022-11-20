@@ -5,55 +5,34 @@
     </div>
     <form [formGroup]="accForm">
         <div class="row">
+            
+            <mat-radio-group class=" mar20lr" aria-label="Select an option" formControlName="acc_type" 
+                name="acc_type" (change)="changeAccount()" required [disabled]="isShowEdit">
+            <mat-label>Account Type</mat-label>
+            <mat-radio-button class="p-4" value="R">Receipts</mat-radio-button>
+            <mat-radio-button class="p-4" value="P">Payments</mat-radio-button>
+            </mat-radio-group>
+            
             <div class="col-4">
-                    <!-- <label for="doc_name" class="form-label">Doctor Name<span class="txt-danger">*</span></label>
-                    <select class="form-control" name="doc_name"  formControlName="doc_name">
-                        <option *ngFor="let branch of branchList;" [value]="branch.doc_name">{{branch.doc_name}}</option>
-
-                    </select> -->
-                    <mat-form-field class="d-flex" appearance="fill">
-                        <mat-select placeholder="Account Type" formControlName="acc_type" >
-                          <!-- <mat-option *ngFor="let bu of buList" [value]="bu.bu_id">
-                            {{bu.doc_name}}
-                          </mat-option> -->
-                        </mat-select>
-                    </mat-form-field>
-            </div>
-            <div class="col-4">
-                <div>
-                    <mat-form-field class="d-flex" appearance="fill">
-                        <mat-label>Receipts</mat-label>
-                        <input matInput type="text" formControlName="receipt" name="receipt">
-                    
-                    </mat-form-field>
-                </div>
-            </div>
-            <div class="col-4">
-                <mat-form-field class="d-flex" appearance="fill">
-                    <mat-label>Payments</mat-label>
-                    <input matInput type="number" min="0" formControlName="payment" name="payment">
-                
-                </mat-form-field>
-            </div>
-            <div class="col-12">
                 <mat-form-field class="d-flex" appearance="fill">
                     <mat-label>Account Code</mat-label>
-                    <input matInput type="text" formControlName="acc_code" name="acc_code">
+                    <input matInput type="text" formControlName="acc_code" name="acc_code" readonly>
                 
                 </mat-form-field>
             </div>
-            <div class="col-12">
+            <div class="col-4">
                 <mat-form-field class="d-flex" appearance="fill">
                     <mat-label>Account Description</mat-label>
                     <input matInput type="text" formControlName="acc_desc" name="acc_desc">
                 
                 </mat-form-field>
             </div>
-            <div class="col-12">
+            <div class="col-4">
                 <mat-form-field class="d-flex" appearance="fill">
-                    <mat-label>Status</mat-label>
-                    <input matInput type="text" formControlName="status" name="status">
-                
+                    <mat-select placeholder="Status" formControlName="status">
+                        <mat-option value="Y">Yes</mat-option>
+                        <mat-option value="N">No</mat-option>
+                    </mat-select>
                 </mat-form-field>
             </div>
             <br>
@@ -65,4 +44,43 @@
         </div>
     </form>
     <br>
+    <div *ngIf="fetchData?.length > 0">
+        <section class="example-container mat-elevation-z8" tabindex="0">
+            
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" id="goods-table">
+        
+              <ng-container matColumnDef="account_code">
+                <th mat-header-cell *matHeaderCellDef> Account Code </th>
+                <td mat-cell *matCellDef="let element"> {{element.account_code}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="account_desc">
+                <th mat-header-cell *matHeaderCellDef> Account Desc </th>
+                <td mat-cell *matCellDef="let element"> {{element.account_desc}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="account_type">
+                <th mat-header-cell *matHeaderCellDef> Account Type </th>
+                <td mat-cell *matCellDef="let element"> {{element.account_type}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="active_flag">
+                <th mat-header-cell *matHeaderCellDef> Active </th>
+                <td mat-cell *matCellDef="let element"> {{element.active_flag}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="edit">
+                <th mat-header-cell *matHeaderCellDef> Edit </th>
+                <td mat-cell *matCellDef="let element"> <button mat-icon-button matTooltip="Click to Edit" class="iconbutton"
+                    color="primary" (click)="edit(element)">
+                    <mat-icon>edit</mat-icon>
+                  </button> </td>
+              </ng-container>
+              
+            
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </section>
+    </div>
 </div>
