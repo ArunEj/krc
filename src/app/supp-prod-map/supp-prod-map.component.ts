@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { BillingService } from '../billing/billing.service';
+import { PoService } from '../po/po.service';
 import { suppProdService } from './supp-prod-map.service';
 
 @Component({
@@ -11,19 +13,25 @@ export class SuppProdMapComponent implements OnInit {
   mainSuppForm!: FormGroup;
   suppTableData: any[] = [];
   isShowEdit: boolean = true;
+  buList: any;
+  branchList: any;
+  prodList: any;
 
-  constructor(private formBuilder: FormBuilder, private spService: suppProdService) { }
+  constructor(private formBuilder: FormBuilder, private spService: suppProdService, private bs: BillingService, private pos: PoService,) { }
 
   ngOnInit(): void {
     this.mainSupp();
+    this.fetchBu();
+    this.getBranch();
   }
 
   mainSupp() {
     this.mainSuppForm = this.formBuilder.group(
       {
         inventory_branch: ['', []],
+        source_bu_id: [''],
         source_product_id: ['', ],
-        Source_prod: ['', []],
+        target_bu_id: ['', []],
         target_product_id: ['', []],
         qty_impact: [''],
         active_flag: ['']
@@ -51,8 +59,7 @@ export class SuppProdMapComponent implements OnInit {
   }
 
   clearFields() {
-    this.mainSuppForm.controls.target_product_id.setValue(null); 
-    this.mainSuppForm.controls.source_product_id.setValue(null); 
+    this.mainSuppForm.controls.target_product_id.setValue(null);
     this.mainSuppForm.controls.qty_impact.setValue(null);
     this.mainSuppForm.controls.active_flag.setValue(null);
   }
@@ -62,14 +69,29 @@ export class SuppProdMapComponent implements OnInit {
       org_id: localStorage.getItem('org_id'),
       branch_id: localStorage.getItem('branch_id'),
       user_id: localStorage.getItem('user_id'),
-      part_of_inventory: "Y",
-      source_product_id: this.mainSuppForm.controls.source_product_id.value,
-      target_product_id: this.mainSuppForm.controls.source_product_id.value,
-      qty_impact : this.mainSuppForm.controls.qty_impact.value,
-      "active_flag": "Y"
+      // part_of_inventory: "Y",
+      suppTableData: this.suppTableData,
     }
     this.spService.createSP(params).subscribe(data => {
       console.log(data);
+    })
+  }
+
+  fetchBu() {
+    this.bs.fetchBuList().subscribe(data => {
+      this.buList = data.results;
+    })
+  }
+
+  getBranch(){
+    this.pos.getBranchList().subscribe(data => {
+      this.branchList = data.results;
+    })
+  }
+
+  getProduct(event: any) {
+    this.spService.fetchProducts(event).subscribe(data => {
+      this.prodList = data.results;
     })
   }
 }

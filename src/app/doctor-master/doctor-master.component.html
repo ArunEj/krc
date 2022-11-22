@@ -71,16 +71,17 @@
             </div>
             <div class="col-4">
                 <mat-form-field class="d-flex" appearance="fill">
-                    <mat-label>Doctor Attached to</mat-label>
-                    <input matInput type="text" formControlName="doc_attach" name="doc_attach">
-                
+                    <mat-label>Doctor Branch</mat-label>
+                    <mat-select placeholder="Doctor Branch" formControlName="doc_branch" >
+                        <mat-option *ngFor="let branch of branchList;" [value]="branch.branch_id">{{branch.branch_name}}</mat-option>
+                    </mat-select>
                 </mat-form-field>
                 <br>
             </div>
             <br>
             <div class="row">
                 <div class="col-12 d-flex text-center">
-                        <button mat-raised-button color="bg-clr" class="bg-clr">Save</button>
+                        <button mat-raised-button color="bg-clr" class="bg-clr" (click)="submit()">Save</button>
                 </div>
             </div>
         </div>

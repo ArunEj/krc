@@ -1,14 +1,20 @@
 <app-header></app-header>
 <div class="container">
     <div class="row">
-        <h3>SUPP PROD  MAP</h3>
+        <h3>USER MASTER</h3>
     </div>
     <form [formGroup]="userMasterForm">
         <div class="row">
             <div class="col-4">
                     <mat-form-field class="d-flex" appearance="fill">
-                        <mat-select placeholder="User Name" formControlName="user_name" >
-                        </mat-select>
+                        <mat-label>User Name</mat-label>
+                        <input type="text" matInput name="user_name" required [(ngModel)]="search"
+                          placeholder="Pick one" aria-label="user_name" formControlName="user_name" [matAutocomplete]="auto" [maxLength]="500">
+                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="fetchUserDetails($event.option.value)">
+                            <mat-option *ngFor="let f of (userList | filter:search)as folder" [value]="f.user_id">
+                                {{f?.user_name}}
+                            </mat-option>
+                          </mat-autocomplete>
                     </mat-form-field>
             </div>
             <div class="col-4">
@@ -20,19 +26,23 @@
                 </div>
             </div>
             <div class="col-4">
-                <mat-form-field class="d-flex" appearance="fill">
-                    <mat-label>DOB</mat-label>
-                    <input matInput type="date" formControlName="dob" name="dob">
-                
-                </mat-form-field>
-            </div>
-            <div class="col-4">
-                <div>
-                    <mat-form-field class="d-flex" appearance="fill">
-                        <mat-label>DOJ</mat-label>
-                        <input matInput type="date" formControlName="doj" name="doj">
-                    </mat-form-field>
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field class="d-flex" appearance="fill">
+                            <mat-label>DOB</mat-label>
+                            <input matInput type="date" formControlName="dob" name="dob">
+                        
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field class="d-flex" appearance="fill">
+                            <mat-label>DOJ</mat-label>
+                            <input matInput type="date" formControlName="doj" name="doj">
+                        </mat-form-field>
+                    </div>
+                    
                 </div>
+                
             </div>
             <div class="col-4">
                 <mat-form-field class="d-flex" appearance="fill">
@@ -156,13 +166,13 @@
                 
                 </mat-form-field>
             </div>
-            <div class="col-4">
+            <!-- <div class="col-4">
                 <mat-form-field class="d-flex" appearance="fill">
                     <mat-label>PWD</mat-label>
                     <input matInput type="text" formControlName="pwd" name="pwd">
                 
                 </mat-form-field>
-            </div>
+            </div> -->
             <div class="col-4">
                 <mat-form-field class="d-flex" appearance="fill">
                     <mat-label>User Status</mat-label>
@@ -174,7 +184,7 @@
         <br>
         <div class="row">
             <div class="col-12 d-flex text-center">
-                    <button mat-raised-button color="bg-clr" class="bg-clr">Save</button>
+                    <button mat-raised-button color="bg-clr" class="bg-clr" (click)="submit()">Save</button>
             </div>
         </div>
     </form>

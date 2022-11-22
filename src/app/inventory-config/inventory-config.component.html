@@ -5,21 +5,19 @@
     </div>
     <form [formGroup]="inventoryForm">
         <div class="row">
-            <div class="col-12">
+            <div class="col-6">
                     <mat-form-field class="d-flex" appearance="fill">
                         <mat-select placeholder="Inventory Branch" formControlName="inventory_branch" >
-                          <!-- <mat-option *ngFor="let bu of buList" [value]="bu.bu_id">
-                            {{bu.doc_name}}
-                          </mat-option> -->
+                            <mat-option *ngFor="let branch of branchList;" [value]="branch.branch_id">{{branch.branch_name}}</mat-option>
                         </mat-select>
                     </mat-form-field>
             </div>
             <div class="col-6">
                 <div>
                     <mat-form-field class="d-flex" appearance="fill">
-                        <mat-select placeholder="BU ID" formControlName="bu_id" (change)="setProductId()">
+                        <mat-select placeholder="BU ID" formControlName="bu_id" (valueChange)="getProduct($event)">
                             <mat-option *ngFor="let bu of buList" [value]="bu.bu_id">
-                              {{bu.bu_id}}
+                              {{bu.bu_name}}
                             </mat-option>
                           </mat-select>
                     </mat-form-field>
@@ -27,12 +25,14 @@
             </div>
             <div class="col-6">
                 <mat-form-field class="d-flex" appearance="fill">
-                    <mat-label>Product</mat-label>
-                    <input matInput type="text" formControlName="product" name="product">
-                
+                    <mat-select placeholder="Product" formControlName="product">
+                        <mat-option *ngFor="let prod of prodList" [value]="prod.product_id">
+                            {{prod.product_name}}
+                          </mat-option>
+                    </mat-select>
                 </mat-form-field>
             </div>
-            <div class="col-12">
+            <div class="col-6">
                 <mat-form-field class="d-flex" appearance="fill">
                     <!-- <mat-label>Part Of Inventory</mat-label>
                     <input matInput type="text" formControlName="inventory_part" name="inventory_part"> -->

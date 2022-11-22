@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { BillingService } from '../billing/billing.service';
+import { PoService } from '../po/po.service';
+import { suppProdService } from '../supp-prod-map/supp-prod-map.service';
 import { InfoDialogComponent } from '../utilities/info-dialog/info-dialog.component';
 import { inventoryConfigService } from './inventory-config.service';
 
@@ -13,12 +15,16 @@ import { inventoryConfigService } from './inventory-config.service';
 export class InventoryConfigComponent implements OnInit {
   inventoryForm!: FormGroup;
   buList: any;
+  branchList: any;
+  prodList: any;
 
-  constructor(private formBuilder: FormBuilder, private icService: inventoryConfigService, private dialog: MatDialog, private bs: BillingService) { }
+  constructor(private formBuilder: FormBuilder, private icService: inventoryConfigService, 
+    private dialog: MatDialog, private bs: BillingService, private pos: PoService, private spService: suppProdService,) { }
 
   ngOnInit(): void {
     this.inventory();
     this.fetchBu();
+    this.getBranch();
   }
 
   inventory() {
@@ -30,6 +36,18 @@ export class InventoryConfigComponent implements OnInit {
         inventory_part: ['', []]
       }
     );
+  }
+
+  getBranch(){
+    this.pos.getBranchList().subscribe(data => {
+      this.branchList = data.results;
+    })
+  }
+
+  getProduct(event: any) {
+    this.spService.fetchProducts(event).subscribe(data => {
+      this.prodList = data.results;
+    })
   }
 
   fetchBu() {

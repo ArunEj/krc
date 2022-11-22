@@ -17,4 +17,18 @@ export class userMasterService {
         return this.http.post(environment.apiUrl + 'createuser', params,
         { headers: headers })
     }
+
+    getUserList(branch_id: any, orgId: any):Observable<any> {
+        let headers= new HttpHeaders();
+        headers.append('content-Type', 'application/json');
+        return this.http.get(environment.apiUrl + 'users/'+ orgId + '/' + branch_id,
+        { headers: headers })
+    }
+
+    getUserDetails(branch_id: any, orgId: any, userId: any):Observable<any> {
+        let headers= new HttpHeaders();
+        headers.append('content-Type', 'application/json');
+        return this.http.get(environment.apiUrl + 'users/'+ orgId + '/' + branch_id + '?user_id='+ userId,
+        { headers: headers })
+    }
 }

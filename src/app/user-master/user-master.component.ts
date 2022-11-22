@@ -12,11 +12,15 @@ import { userMasterService } from './user-master.service';
 export class UserMasterComponent implements OnInit {
 
   userMasterForm!: FormGroup;
+  userList: any;
+  search: any;
+  userDetails: any;
 
   constructor(private formBuilder: FormBuilder, private umService: userMasterService, private dialog: MatDialog,) { }
 
   ngOnInit(): void {
     this.userMaster();
+    this.getUserList();
   }
 
   userMaster() {
@@ -47,6 +51,14 @@ export class UserMasterComponent implements OnInit {
         pwd: ['']
       }
     );
+  }
+
+  getUserList(){
+    let org_id = localStorage.getItem('org_id');
+    let branchId = localStorage.getItem('branch_id');
+    this.umService.getUserList(branchId, org_id).subscribe(data => {
+      this.userList = data.results;
+    })
   }
 
   submit() {
@@ -86,7 +98,17 @@ export class UserMasterComponent implements OnInit {
         data: 'User Master Saved Successfully!!!'
       })
     })
-    // this.userMasterForm.reset();
+    this.userMasterForm.reset();
+  }
+
+  fetchUserDetails(data: any) {
+    let org_id = localStorage.getItem('org_id');
+    let branchId = localStorage.getItem('branch_id');
+    this.umService.getUserDetails(branchId, org_id, data).subscribe(data => {
+      console.log(data)
+      this.userDetails = data.results;
+      this.userMasterForm.patchValue(this.userDetails)
+    })
   }
 
 }
