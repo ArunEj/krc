@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
 import { BillingService } from '../billing/billing.service';
 import { PoService } from '../po/po.service';
+import { InfoDialogComponent } from '../utilities/info-dialog/info-dialog.component';
 import { suppProdService } from './supp-prod-map.service';
 
 @Component({
@@ -12,12 +15,17 @@ import { suppProdService } from './supp-prod-map.service';
 export class SuppProdMapComponent implements OnInit {
   mainSuppForm!: FormGroup;
   suppTableData: any[] = [];
+  isShowTable: boolean = false;
   isShowEdit: boolean = true;
   buList: any;
   branchList: any;
   prodList: any;
+  dataSource: any;
+  displayedColumns: string[] = ['source_product_id', 'target_product_id', 'qty_impact', 'active_flag', 'edit'];
+  updateData: any;
 
-  constructor(private formBuilder: FormBuilder, private spService: suppProdService, private bs: BillingService, private pos: PoService,) { }
+  constructor(private formBuilder: FormBuilder, private spService: suppProdService, 
+      private bs: BillingService, private pos: PoService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.mainSupp();
@@ -55,6 +63,8 @@ export class SuppProdMapComponent implements OnInit {
     temp.active_flag = this.mainSuppForm.controls.active_flag.value;
     temp.id = this.suppTableData.length;
     this.suppTableData.push(temp);
+    this.dataSource = new MatTableDataSource(this.suppTableData);;
+    this.suppTableData.length > 0 ? this.isShowTable = true : this.isShowTable = false;
     this.clearFields();
   }
 
@@ -69,11 +79,16 @@ export class SuppProdMapComponent implements OnInit {
       org_id: localStorage.getItem('org_id'),
       branch_id: localStorage.getItem('branch_id'),
       user_id: localStorage.getItem('user_id'),
-      // part_of_inventory: "Y",
-      suppTableData: this.suppTableData,
+      inventory_products: this.suppTableData,
     }
     this.spService.createSP(params).subscribe(data => {
       console.log(data);
+      this.dialog.open(InfoDialogComponent, {
+        width: '400px',
+        data: 'Product Map Created Successfully!!!'
+      })
+      this.suppTableData.length = 0;
+      this.isShowTable = false;
     })
   }
 
@@ -94,12 +109,29 @@ export class SuppProdMapComponent implements OnInit {
       this.prodList = data.results;
     })
   }
-}
 
-// export interface poItem {
-//   item_code: string;
-//   item_desc: string;
-//   item_cost: string;
-//   item_name: string;
-//   id: number;
-// }
+  edit(element: any) {
+    this.isShowEdit = false;
+    console.log(element)
+    this.updateData = element;
+    this.mainSuppForm.controls.target_product_id.setValue(element.target_product_id);
+    this.mainSuppForm.controls.qty_impact.setValue(element.qty_impact);
+    this.mainSuppForm.controls.active_flag.setValue(element.active_flag);
+  }
+
+  editList() {
+    let getValue = this.suppTableData.find((element:any)=> element.id == this.updateData.id);
+    this.suppTableData.forEach((element:any) => {
+      if(element.id == getValue.id){
+          //set values
+          element.target_product_id = this.mainSuppForm.controls.target_product_id.value; 
+          element.source_product_id = this.mainSuppForm.controls.source_product_id.value; 
+          element.qty_impact = this.mainSuppForm.controls.qty_impact.value;
+          element.active_flag = this.mainSuppForm.controls.active_flag.value;
+        }
+        
+      });
+      this.clearFields();
+      this.isShowEdit = true;
+  }
+}

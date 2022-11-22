@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { PaymentReceiptsService } from '../payment-receipts/payment-receipts.service';
+import { InfoDialogComponent } from '../utilities/info-dialog/info-dialog.component';
 import { AccountMasterService } from './account-master.service';
 
 @Component({
@@ -16,7 +18,8 @@ export class AccountMasterComponent implements OnInit {
   displayedColumns: string[] = ['account_code', 'account_desc', 'account_type', 'active_flag', 'edit'];
   isShowEdit: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private amService: AccountMasterService, private prs: PaymentReceiptsService) { }
+  constructor(private formBuilder: FormBuilder, private amService: AccountMasterService,
+      private prs: PaymentReceiptsService, private dialog: MatDialog,) { }
 
   ngOnInit(): void {
     this.acc();
@@ -38,15 +41,47 @@ export class AccountMasterComponent implements OnInit {
   }
 
   submit() {
+    this.accForm.controls.acc_code.value ? this.update() : this.create();
+  }
+
+  create() {
     let params = {
       org_id: localStorage.getItem('org_id'),
       user_id: localStorage.getItem('user_id'),
       account_type: this.accForm.controls.acc_type.value,
       account_desc: this.accForm.controls.acc_desc.value  
     }
-    console.log(params)
+    // console.log(params)
     this.amService.createAM(params).subscribe(data => {
-      console.log(data);
+      // console.log(data);
+      this.dialog.open(InfoDialogComponent, {
+        width: '400px',
+        data: 'Account Master Created Successfully!!!'
+      })
+      this.accForm.reset();
+      this.fetchData.length = 0;
+      this.isShowEdit = false;
+    })
+  }
+
+  update() {
+    let params = {
+      org_id: localStorage.getItem('org_id'),
+      user_id: localStorage.getItem('user_id'),
+      account_type: this.accForm.controls.acc_type.value,
+      account_desc: this.accForm.controls.acc_desc.value ,
+      account_code: this.accForm.controls.acc_code.value
+    }
+    // console.log(params)
+    this.amService.createAM(params).subscribe(data => {
+      // console.log(data);
+      this.dialog.open(InfoDialogComponent, {
+        width: '400px',
+        data: 'Account Master Updated Successfully!!!'
+      })
+      this.accForm.reset();
+      this.fetchData.length = 0;
+      this.isShowEdit = false;
     })
   }
 

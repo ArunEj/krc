@@ -77,9 +77,9 @@
                         <div class="col-3" *ngIf="isShowEdit">
                             <button mat-raised-button class="bg-clr"  color="bg-clr" (click)="addToList()">Add Record</button>
                         </div>
-                        <!-- <div class="col-3" *ngIf="!isShowEdit">
-                            <button class="btn btn-primary pointer" (click)="editList()">Update Record</button>
-                        </div> -->
+                        <div class="col-3" *ngIf="!isShowEdit">
+                            <button mat-raised-button class="bg-clr"  color="bg-clr" (click)="editList()">Update Record</button>
+                        </div>
                 </div>
                 
             </div>
@@ -87,48 +87,50 @@
         </div>
         <br>
         
-
-        <table class="table table-bordered">
-            <thead class="thead-dark">
-              <tr>
-                <th>Target BU</th>
-                <th>Target Product</th>
-                <th>Quantity Impact</th>
-                <th>Active</th>
-              </tr> 
-            </thead>
-            <tbody>
-                <!-- <ng-container *ngIf="prodData && prodData.length > 0">
-                    <tr *ngFor="let prod of prodData">
-                        <td >{{prod.source_product_id}}</td>
-    
-                        <td>{{prod.target_product_id}}</td>
+        <div *ngIf="isShowTable">
+            <section class="example-container mat-elevation-z8" tabindex="0">
+                
+                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" id="goods-table">
             
-                        <td>{{prod.qty_impact}}</td>
+                  <ng-container matColumnDef="source_product_id">
+                    <th mat-header-cell *matHeaderCellDef> Target BU </th>
+                    <td mat-cell *matCellDef="let element"> {{element.source_product_id}} </td>
+                  </ng-container>
+                
+                  <ng-container matColumnDef="target_product_id">
+                    <th mat-header-cell *matHeaderCellDef> Target Product </th>
+                    <td mat-cell *matCellDef="let element"> {{element.target_product_id}} </td>
+                  </ng-container>
+                
+                  <ng-container matColumnDef="qty_impact">
+                    <th mat-header-cell *matHeaderCellDef> Quantity Impact </th>
+                    <td mat-cell *matCellDef="let element"> {{element.qty_impact}} </td>
+                  </ng-container>
+                
+                  <ng-container matColumnDef="active_flag">
+                    <th mat-header-cell *matHeaderCellDef> Active </th>
+                    <td mat-cell *matCellDef="let element"> {{element.active_flag}} </td>
+                  </ng-container>
     
-                        <td>{{prod.active_flag}}</td>
-                    </tr>
-                </ng-container> -->
-                <ng-container *ngIf="suppTableData.length > 0">
-                    <tr *ngFor="let item of suppTableData">
-    
-                        <td >{{item.source_product_id}}</td>
-    
-                        <td>{{item.target_product_id}}</td>
-            
-                        <td>{{item.qty_impact}}</td>
-    
-                        <td>{{item.active_flag}}</td> 
-                        
-                    </tr>
-                </ng-container>
-            </tbody>
-        </table>
-        <br>
-        <div class="row">
-            <div class="col-12 d-flex text-center">
-                    <button mat-raised-button color="bg-clr" class="bg-clr" (click)="submit()">Save</button>
-            </div>
+                  <ng-container matColumnDef="edit">
+                    <th mat-header-cell *matHeaderCellDef> Edit </th>
+                    <td mat-cell *matCellDef="let element"> <button mat-icon-button matTooltip="Click to Edit" class="iconbutton"
+                        color="primary" (click)="edit(element)">
+                        <mat-icon>edit</mat-icon>
+                      </button> </td>
+                  </ng-container>
+                  
+                
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+              </section>
+              <br>
+              <div class="row">
+                  <div class="col-12 d-flex text-center">
+                          <button mat-raised-button color="bg-clr" class="bg-clr" (click)="submit()">Save</button>
+                  </div>
+              </div>
         </div>
     </form>
     <br>
