@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { PoService } from '../po/po.service';
 import { InfoDialogComponent } from '../utilities/info-dialog/info-dialog.component';
 import { userMasterService } from './user-master.service';
 
@@ -15,12 +16,17 @@ export class UserMasterComponent implements OnInit {
   userList: any;
   search: any;
   userDetails: any;
+  usertype: any;
+  branchList: any;
 
-  constructor(private formBuilder: FormBuilder, private umService: userMasterService, private dialog: MatDialog,) { }
+  constructor(private formBuilder: FormBuilder, private umService: userMasterService, 
+      private dialog: MatDialog, private pos: PoService,) { }
 
   ngOnInit(): void {
     this.userMaster();
     this.getUserList();
+    this.getUserType();
+    this.getBranch();
   }
 
   userMaster() {
@@ -51,6 +57,18 @@ export class UserMasterComponent implements OnInit {
         pwd: ['']
       }
     );
+  }
+
+  getBranch(){
+    this.pos.getBranchList().subscribe(data => {
+      this.branchList = data.results;
+    })
+  }
+
+  getUserType() {
+    this.umService.getUserTypes().subscribe(data => {
+      this.usertype = data.results;
+    })
   }
 
   getUserList(){

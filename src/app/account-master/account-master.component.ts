@@ -99,4 +99,10 @@ export class AccountMasterComponent implements OnInit {
     this.accForm.controls.acc_desc.setValue(element.account_desc);
     this.accForm.controls.status.setValue(element.active_flag);
   }
+  
+  clear() {
+    this.accForm.reset();
+    this.fetchData.length = 0;
+    this.isShowEdit = false;
+  }
 }

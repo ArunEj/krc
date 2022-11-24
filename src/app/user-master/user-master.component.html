@@ -20,8 +20,9 @@
             <div class="col-4">
                 <div>
                     <mat-form-field class="d-flex" appearance="fill">
-                        <mat-label>User Branch</mat-label>
-                        <input matInput type="text" formControlName="branch_id" name="branch_id">
+                        <mat-select placeholder="User Branch" formControlName="branch_id" >
+                            <mat-option *ngFor="let branch of branchList;" [value]="branch.branch_id">{{branch.branch_name}}</mat-option>
+                        </mat-select>
                     </mat-form-field>
                 </div>
             </div>
@@ -140,9 +141,10 @@
             </div>
             <div class="col-4">
                 <mat-form-field class="d-flex" appearance="fill">
-                    <mat-label>PF Available</mat-label>
-                    <input matInput type="text" formControlName="pf_employee" name="pf_employee">
-                
+                    <mat-select placeholder="PF Available" formControlName="pf_employee">
+                        <mat-option value="Y">Yes</mat-option>
+                        <mat-option value="N">No</mat-option>
+                    </mat-select>
                 </mat-form-field>
             </div>
             <div class="col-4">
@@ -161,9 +163,9 @@
             </div>
             <div class="col-4">
                 <mat-form-field class="d-flex" appearance="fill">
-                    <mat-label>User Type</mat-label>
-                    <input matInput type="text" formControlName="user_type" name="user_type">
-                
+                    <mat-select placeholder="User Type" formControlName="user_type">
+                        <mat-option *ngFor="let user of usertype" value="{{user.ref_code}}">{{user.ref_desc}}</mat-option>
+                    </mat-select>
                 </mat-form-field>
             </div>
             <!-- <div class="col-4">
@@ -175,9 +177,10 @@
             </div> -->
             <div class="col-4">
                 <mat-form-field class="d-flex" appearance="fill">
-                    <mat-label>User Status</mat-label>
-                    <input matInput type="text" formControlName="user_status" name="user_status">
-                
+                    <mat-select placeholder="User Status" formControlName="user_status">
+                        <mat-option value="Y">Active</mat-option>
+                        <mat-option value="N">In Active</mat-option>
+                    </mat-select>
                 </mat-form-field>
             </div>
         </div>
