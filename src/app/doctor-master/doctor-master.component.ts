@@ -102,6 +102,7 @@ export class DoctorMasterComponent implements OnInit {
         data: 'Doctor Master Updated Successfully!!!'
       })
       this.docForm.reset();
+      this.fetchDoctorsByBranchId();
     })
   }
 
@@ -119,5 +120,9 @@ export class DoctorMasterComponent implements OnInit {
         this.docForm.controls.doc_branch.setValue(element.branch_id);
       }
     });
+  }
+
+  clear() {
+    this.docForm.reset();
   }
 }

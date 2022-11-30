@@ -24,7 +24,7 @@ export class AccountMasterComponent implements OnInit {
   ngOnInit(): void {
     this.acc();
     this.accForm.controls.status.setValue('Y');
-    this.changeAccount();
+    // this.changeAccount();
   }
 
   acc() {
@@ -90,6 +90,7 @@ export class AccountMasterComponent implements OnInit {
       this.fetchData = data.results;
       this.dataSource = new MatTableDataSource(this.fetchData);
     })
+    this.clearInp();
   }
 
   edit(element: any) {
@@ -104,5 +105,11 @@ export class AccountMasterComponent implements OnInit {
     this.accForm.reset();
     this.fetchData.length = 0;
     this.isShowEdit = false;
+  }
+
+  clearInp() {
+    this.accForm.controls.acc_code.setValue(null);
+    this.accForm.controls.acc_desc.setValue(null);
+    this.accForm.controls.status.setValue(null);
   }
 }

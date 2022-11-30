@@ -3,6 +3,12 @@
     <div class="row">
         <h3>DOCTOR MASTER</h3>
     </div>
+    <div class="row">
+        <div class="col-12 d-flex txt-right">
+                <button mat-raised-button color="bg-clr" class="bg-clr" (click)="clear()">Clear</button>
+        </div>
+    </div>
+    <br>
     <form [formGroup]="docForm">
         <div class="row">
             <div class="col-4">
@@ -15,16 +21,7 @@
                         {{f?.doctor_name}}
                       </mat-option>
                     </mat-autocomplete>
-                  </mat-form-field>
-
-                    <!-- <mat-form-field class="d-flex" appearance="fill">
-                        <mat-select placeholder="Doctor Name" formControlName="doc_name" >
-                          <mat-option *ngFor="let doctor of doctorList" [value]="doctor.doctor_id">
-                            {{doctor.doctor_name}}
-                          </mat-option>
-
-                        </mat-select>
-                    </mat-form-field> -->
+                </mat-form-field>
             </div>
             <div class="col-4">
                 <div>
