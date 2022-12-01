@@ -41,26 +41,26 @@ export class PoComponent implements OnInit {
   po() {
     this.poForm = this.formBuilder.group(
       {
-        branch_id: ['', []],
-        supplier_id: ['', ],
-        supplier_name: ['', []],
-        po_number: ['', []],
-        po_date: ['', []],
-        po_value: ['', []],
-        supInvVal: ['', []],
-        paidSup: ['', []],
-        balSup: ['', []],
-        po_status: ['', []],
-        goods_rcpt_status: [''],
-        item_code: [''],
-        item_desc: [''],
-        item_cost: [''],
-        qty_ordered: [''],
-        net_value: [''],
-        exp_del_date: [''],
-        del_branch_id: [''],
-        remarks: [''],
-        id: ['']
+        branch_id: [null, []],
+        supplier_id: [null, ],
+        supplier_name: [null, []],
+        po_number: [null, []],
+        po_date: [null, []],
+        po_value: [null, []],
+        supInvVal: [null, []],
+        paidSup: [null, []],
+        balSup: [null, []],
+        po_status: [null, []],
+        goods_rcpt_status: [null],
+        item_code: [null],
+        item_desc: [null],
+        item_cost: [null],
+        qty_ordered: [null],
+        net_value: [null],
+        exp_del_date: [null],
+        del_branch_id: [null],
+        remarks: [null],
+        id: [null]
       }
     );
   }
@@ -74,6 +74,7 @@ export class PoComponent implements OnInit {
 
   getSupplierList(){
     const branchId = this.poForm.controls.branch_id.value;
+    const orgId = localStorage.getItem('org_id')
     this.pos.getSupplierList(branchId).subscribe(data => {
       console.log(data);
       this.supplierIdData = data.results;
@@ -160,7 +161,8 @@ export class PoComponent implements OnInit {
     // temp.item_desc = this.poForm.controls.item_desc.value; 
     temp.item_cost = this.poForm.controls.item_cost.value;
     temp.qty_ordered = this.poForm.controls.qty_ordered.value;
-    temp.net_value = this.poForm.controls.net_value.value;
+    // temp.net_value = this.poForm.controls.net_value.value;
+    temp.net_value = 0;
     temp.exp_del_date = this.poForm.controls.exp_del_date.value;
     temp.del_branch_id = this.poForm.controls.del_branch_id.value;
     temp.remarks = this.poForm.controls.remarks.value;
