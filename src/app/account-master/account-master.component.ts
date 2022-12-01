@@ -49,7 +49,8 @@ export class AccountMasterComponent implements OnInit {
       org_id: localStorage.getItem('org_id'),
       user_id: localStorage.getItem('user_id'),
       account_type: this.accForm.controls.acc_type.value,
-      account_desc: this.accForm.controls.acc_desc.value  
+      account_desc: this.accForm.controls.acc_desc.value,
+      active_flag: this.accForm.controls.status.value
     }
     // console.log(params)
     this.amService.createAM(params).subscribe(data => {
@@ -70,7 +71,8 @@ export class AccountMasterComponent implements OnInit {
       user_id: localStorage.getItem('user_id'),
       account_type: this.accForm.controls.acc_type.value,
       account_desc: this.accForm.controls.acc_desc.value ,
-      account_code: this.accForm.controls.acc_code.value
+      account_code: this.accForm.controls.acc_code.value,
+      active_flag: this.accForm.controls.status.value
     }
     // console.log(params)
     this.amService.createAM(params).subscribe(data => {

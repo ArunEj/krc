@@ -97,6 +97,7 @@ export class UserMasterComponent implements OnInit {
   }
 
   create() {
+    this.userMasterForm.controls.user_status.setValue('Y');
     let params = {
       org_id: localStorage.getItem('org_id'), branch_id: localStorage.getItem('branch_id'),
       user_name: this.userMasterForm.controls.user_name.value,
@@ -124,7 +125,7 @@ export class UserMasterComponent implements OnInit {
       user_type: this.userMasterForm.controls.user_type.value,
 
       user_status: this.userMasterForm.controls.user_status.value,
-      pwd: this.userMasterForm.controls.pwd.value
+      // pwd: this.userMasterForm.controls.pwd.value
     }
     this.umService.createUser(params).subscribe(data => {
       this.dialog.open(InfoDialogComponent, {
@@ -163,7 +164,7 @@ export class UserMasterComponent implements OnInit {
       user_type: this.userMasterForm.controls.user_type.value,
 
       user_status: this.userMasterForm.controls.user_status.value,
-      pwd: this.userMasterForm.controls.pwd.value
+      // pwd: this.userMasterForm.controls.pwd.value
     }
     this.umService.createUser(params).subscribe(data => {
       this.dialog.open(InfoDialogComponent, {
