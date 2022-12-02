@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { InfoDialogComponent } from '../utilities/info-dialog/info-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -26,7 +26,7 @@ export class GoodsReceiptComponent implements OnInit {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource: any;
   prodName: any;
-
+  @ViewChild('focus', {static: false}) input: ElementRef | any;
 
   constructor(private goodsService: GoodsReceiptService, private dialog: MatDialog, private router: Router, private formBuilder: FormBuilder) { }
 
@@ -67,6 +67,9 @@ export class GoodsReceiptComponent implements OnInit {
     this.poData = this.poDraftData.find((element: any) => element.po_number == num);
     console.log("poData", this.poData)
     this.poList = this.poData.po_details;
+    setTimeout(()=>{ // this will make the execution after the above boolean has changed
+      this.input.nativeElement.focus();
+    },0);
     // this.getPoList()
     this.getPo(num);
   }
