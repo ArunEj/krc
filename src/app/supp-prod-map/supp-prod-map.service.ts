@@ -24,4 +24,11 @@ export class suppProdService {
     return this.http.get(environment.apiUrl + 'products/'+branch_id+'?bu_id='+bu,
       { headers: headers })
   }
+
+  getSP(branchId: any, prod_id: any):Observable<any>{
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(environment.apiUrl + 'inventoryproduct/' + branchId + '/' +prod_id,
+      { headers: headers })
+  }
 }

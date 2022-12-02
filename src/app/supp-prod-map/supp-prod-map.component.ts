@@ -63,7 +63,7 @@ export class SuppProdMapComponent implements OnInit {
     temp.active_flag = this.mainSuppForm.controls.active_flag.value;
     temp.id = this.suppTableData.length;
     this.suppTableData.push(temp);
-    this.dataSource = new MatTableDataSource(this.suppTableData);;
+    this.dataSource = new MatTableDataSource(this.suppTableData);
     this.suppTableData.length > 0 ? this.isShowTable = true : this.isShowTable = false;
     this.clearFields();
   }
@@ -133,5 +133,15 @@ export class SuppProdMapComponent implements OnInit {
       });
       this.clearFields();
       this.isShowEdit = true;
+  }
+
+  getProdList() {
+    let prodId = this.mainSuppForm.controls.source_product_id.value;
+    let branchId = this.mainSuppForm.controls.inventory_branch.value;
+    this.spService.getSP(branchId, prodId).subscribe(data => {
+      console.log(data);
+      this.isShowTable = true;
+      this.dataSource = new MatTableDataSource(data.results);
+    })
   }
 }
