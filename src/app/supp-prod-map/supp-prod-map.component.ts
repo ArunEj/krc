@@ -114,6 +114,7 @@ export class SuppProdMapComponent implements OnInit {
     this.isShowEdit = false;
     console.log(element)
     this.updateData = element;
+    this.mainSuppForm.controls.target_bu_id.setValue(element.target_bu_id);
     this.mainSuppForm.controls.target_product_id.setValue(element.target_product_id);
     this.mainSuppForm.controls.qty_impact.setValue(element.qty_impact);
     this.mainSuppForm.controls.active_flag.setValue(element.active_flag);
