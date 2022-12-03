@@ -142,7 +142,8 @@ export class SuppProdMapComponent implements OnInit {
     this.spService.getSP(branchId, prodId).subscribe(data => {
       console.log(data);
       this.isShowTable = true;
-      this.dataSource = new MatTableDataSource(data.results);
+      this.suppTableData = data.results;
+      this.dataSource = new MatTableDataSource(this.suppTableData);
     })
   }
 }
