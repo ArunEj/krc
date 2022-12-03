@@ -198,7 +198,7 @@ export class GoodsReceiptComponent implements OnInit {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Please Enter Inv#/ Inv Date/ Received date/ Inv Qty/ Inv Amount atleast one row'
+        text: 'Please Enter Inv#/ Inv Date/ Received date/ Inv Qty/ Inv Amount for atleast one row'
       })
       return
     }
