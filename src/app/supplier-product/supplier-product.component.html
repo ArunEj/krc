@@ -34,7 +34,10 @@
                 </div>
             </div>
             <br>
-            <div class="row">
+            <div class="row card">
+                <div class="col-12 text-right">
+                    <button class="btn btn-primary pointer" (click)="clear()">Clear</button>
+                </div>
                 <div class="col">
                     <div class=" supplier-item">
                         <label for="bu_id" class="form-label">Bu ID</label>
@@ -48,6 +51,7 @@
                     <div class=" supplier-item">
                         <label for="product_name" class="form-label">Product Name</label>
                         <select class="form-control" name="product_name"  formControlName="product_name" (ngModelChange)="setProductId($event)" [(ngModel)]="prodItem.product_name">
+                            <option [hidden]="supplierProductForm.controls.product_name.value" value="null" disabled>Select</option>
                             <option *ngFor="let prodData of productList" [value]="prodData.product_name">{{prodData.product_name}}</option>
                         </select>
                     </div>

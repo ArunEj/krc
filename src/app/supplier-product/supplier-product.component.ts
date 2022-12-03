@@ -270,13 +270,13 @@ export class SupplierProductComponent implements OnInit {
       this.isShowEdit = true;
   }
 
-  // clearFields() {  
-  //   this.supplierProductForm.controls.bu_id.setValue(null);
-  //   this.supplierProductForm.controls.product_name.setValue(null);
-  //   this.supplierProductForm.controls.product_id.setValue(null); 
-  //   this.supplierProductForm.controls.purchase_price.setValue(null); 
-  //   this.supplierProductForm.controls.eff_from.setValue(null);
-  //   this.supplierProductForm.controls.credit_days.setValue(null);
-  // }
+  clear() {  
+    this.supplierProductForm.controls.bu_id.setValue(null);
+    this.supplierProductForm.controls.product_name.setValue(null);
+    this.supplierProductForm.controls.product_id.setValue(null); 
+    this.supplierProductForm.controls.purchase_price.setValue(0); 
+    this.supplierProductForm.controls.eff_from.setValue(null);
+    this.supplierProductForm.controls.credit_days.setValue(0);
+  }
 
 }

@@ -194,6 +194,15 @@ export class GoodsReceiptComponent implements OnInit {
         }
     });
 
+    if(poData.length == 0){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please Enter Inv#/ Inv Date/ Received date/ Inv Qty/ Inv Amount atleast one row'
+      })
+      return
+    }
+
     let params = {
       org_id: localStorage.getItem('org_id'), branch_id: localStorage.getItem('branch_id'), user_id: localStorage.getItem('user_id'),
       supplier_id: this.goodsForm.controls.supplier_id.value, po_number: this.poData.po_number, po_date: this.poData.po_date, po_goods: poData

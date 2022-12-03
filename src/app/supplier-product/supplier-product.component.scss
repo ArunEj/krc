@@ -40,3 +40,14 @@
 .delete-icon-disabled{
     opacity: 0.5;
 }
+
+.card {
+    min-height: 100px;
+    border-radius: 5px;
+    cursor: pointer;
+    flex-direction: row !important;
+  }
+.text-right{
+    text-align: right;
+    padding: 0;
+}
