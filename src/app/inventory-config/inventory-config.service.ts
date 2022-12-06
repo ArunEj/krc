@@ -17,4 +17,11 @@ export class inventoryConfigService {
       return this.http.post(environment.apiUrl + 'createinventoryconfig',param,
         { headers: headers})
     }
+
+    public getInvList(inv_branch: any): Observable<any> {
+      let headers = new HttpHeaders();
+      headers.append('Content-Type', 'application/json');
+      return this.http.get(environment.apiUrl + 'inventoryconfig/'+ inv_branch,
+        { headers: headers})
+    }
 }

@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { BillingService } from '../billing/billing.service';
 import { PoService } from '../po/po.service';
 import { InfoDialogComponent } from '../utilities/info-dialog/info-dialog.component';
+import { ReferenceService } from '../utilities/services/reference.service';
 import { suppProdService } from './supp-prod-map.service';
 
 @Component({
@@ -21,11 +22,12 @@ export class SuppProdMapComponent implements OnInit {
   branchList: any;
   prodList: any;
   dataSource: any;
-  displayedColumns: string[] = ['source_product_id', 'target_product_id', 'qty_impact', 'active_flag', 'edit'];
+  displayedColumns: string[] = ['target_bu_id', 'target_product_name', 'qty_impact', 'active_flag', 'edit'];
   updateData: any;
+  isDisable: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private spService: suppProdService, 
-      private bs: BillingService, private pos: PoService, private dialog: MatDialog) { }
+      private bs: BillingService, private pos: PoService, private dialog: MatDialog, private refService: ReferenceService) { }
 
   ngOnInit(): void {
     this.mainSupp();
@@ -41,6 +43,7 @@ export class SuppProdMapComponent implements OnInit {
         source_product_id: ['', ],
         target_bu_id: ['', []],
         target_product_id: ['', []],
+        target_product_name: [''],
         qty_impact: [''],
         active_flag: ['']
 
@@ -49,15 +52,19 @@ export class SuppProdMapComponent implements OnInit {
   }
 
   addToList() {
-    const temp = {target_product_id:'', qty_impact:'', active_flag:'', source_product_id:'', id: 0}
+    const temp = {target_product_id:'', qty_impact:'', active_flag:'', source_product_id:'', id: 0, target_bu_id: '', target_product_name: ''}
     temp.target_product_id = '';
+    temp.target_bu_id = '';
     temp.source_product_id = '';
+    temp.target_product_name = '';
     temp.qty_impact = '';
     temp.active_flag = '';
     temp.id = 0;
     
     //set values
-    temp.target_product_id = this.mainSuppForm.controls.target_product_id.value; 
+    temp.target_product_id = this.mainSuppForm.controls.target_product_id.value;
+    temp.target_bu_id = this.mainSuppForm.controls.target_bu_id.value;
+    temp.target_product_name = this.mainSuppForm.controls.target_product_name.value;
     temp.source_product_id = this.mainSuppForm.controls.source_product_id.value; 
     temp.qty_impact = this.mainSuppForm.controls.qty_impact.value;
     temp.active_flag = this.mainSuppForm.controls.active_flag.value;
@@ -89,6 +96,9 @@ export class SuppProdMapComponent implements OnInit {
       })
       this.suppTableData.length = 0;
       this.isShowTable = false;
+      this.isShowEdit = true;
+      this.clearFields();
+
     })
   }
 
@@ -105,13 +115,19 @@ export class SuppProdMapComponent implements OnInit {
   }
 
   getProduct(event: any) {
-    this.spService.fetchProducts(event).subscribe(data => {
+    this.prodList = null;
+    this.refService.fetchProducts(event).subscribe(data => {
       this.prodList = data.results;
     })
   }
 
   edit(element: any) {
     this.isShowEdit = false;
+    if(element.id){
+      this.isDisable = false;
+    }else {
+      this.isDisable = true;
+    }
     console.log(element)
     this.updateData = element;
     this.mainSuppForm.controls.target_bu_id.setValue(element.target_bu_id);
@@ -123,7 +139,18 @@ export class SuppProdMapComponent implements OnInit {
   editList() {
     let getValue = this.suppTableData.find((element:any)=> element.id == this.updateData.id);
     this.suppTableData.forEach((element:any) => {
-      if(element.id == getValue.id){
+      if(element.id && (element.id == getValue.id)){
+          //set values
+          element.target_product_id = this.mainSuppForm.controls.target_product_id.value; 
+          element.target_bu_id = this.mainSuppForm.controls.target_bu_id.value;
+          element.target_product_name = this.mainSuppForm.controls.target_product_name.value;
+          element.source_product_id = this.mainSuppForm.controls.source_product_id.value; 
+          element.qty_impact = this.mainSuppForm.controls.qty_impact.value;
+          element.active_flag = this.mainSuppForm.controls.active_flag.value;
+          return;
+        }
+
+        if(element.target_product_id == getValue.target_product_id){
           //set values
           element.target_product_id = this.mainSuppForm.controls.target_product_id.value; 
           element.source_product_id = this.mainSuppForm.controls.source_product_id.value; 
@@ -134,6 +161,7 @@ export class SuppProdMapComponent implements OnInit {
       });
       this.clearFields();
       this.isShowEdit = true;
+      this.isDisable = false;
   }
 
   getProdList() {
@@ -145,5 +173,13 @@ export class SuppProdMapComponent implements OnInit {
       this.suppTableData = data.results;
       this.dataSource = new MatTableDataSource(this.suppTableData);
     })
+  }
+
+  getProductName(event: any) {
+    this.prodList.forEach((element: any) => {
+      if(element.product_id == event){
+        this.mainSuppForm.controls.target_product_name.setValue(element.product_name);
+      }
+    });
   }
 }

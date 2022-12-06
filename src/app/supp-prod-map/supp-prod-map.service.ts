@@ -17,13 +17,13 @@ export class suppProdService {
       { headers: headers })
   }
 
-  fetchProducts(bu:string,): Observable<any> {
-    let branch_id = localStorage.getItem('branch_id');
-    let headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.get(environment.apiUrl + 'products/'+branch_id+'?bu_id='+bu,
-      { headers: headers })
-  }
+  // fetchProducts(bu:string,): Observable<any> {
+  //   let branch_id = localStorage.getItem('branch_id');
+  //   let headers = new HttpHeaders();
+  //   headers.append('Content-Type', 'application/json');
+  //   return this.http.get(environment.apiUrl + 'products/'+branch_id+'?bu_id='+bu,
+  //     { headers: headers })
+  // }
 
   getSP(branchId: any, prod_id: any):Observable<any>{
     let headers = new HttpHeaders();
