@@ -130,7 +130,7 @@ export class UserMasterComponent implements OnInit {
     this.umService.createUser(params).subscribe(data => {
       this.dialog.open(InfoDialogComponent, {
         width: '400px',
-        data: 'User Master Saved Successfully!!!'
+        data: 'User Master Created Successfully!!!'
       })
     })
     this.userMasterForm.reset();
@@ -169,7 +169,7 @@ export class UserMasterComponent implements OnInit {
     this.umService.createUser(params).subscribe(data => {
       this.dialog.open(InfoDialogComponent, {
         width: '400px',
-        data: 'User Master Saved Successfully!!!'
+        data: 'User Master Updated Successfully!!!'
       })
     })
     this.userMasterForm.reset();
