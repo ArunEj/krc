@@ -213,6 +213,7 @@ export class DialogOverviewExampleDialog implements OnInit {
       this.payTypes = types.results;
     })
     this.maxAmount = this.data.net_balance;
+    this.data.amt_payment = this.data.net_balance
   }
 
   onNoClick(): void {

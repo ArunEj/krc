@@ -18,11 +18,12 @@ export class LoginComponent implements OnInit {
   }
   login() {
     this.loginService.login(this.loginObj).subscribe(response => {
-      if (response.status === 401) {
+      if (response.status === 401 || response.user === null) {
         this.validUser = false;
         this.loginService.isUserLoggedIn = false;
         return;
       }
+      
       this.validUser = true;
       this.loginService.isUserLoggedIn = true;
       this.loginService.userData = response.user;

@@ -33,6 +33,7 @@ export class PatientHeaderComponent implements OnInit {
     private dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.searchType = 'phone_no'
   }
 
 
