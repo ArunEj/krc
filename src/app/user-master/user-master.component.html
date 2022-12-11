@@ -11,7 +11,7 @@
                         <input type="text" matInput name="user_name" required [(ngModel)]="search"
                           placeholder="Pick one" aria-label="user_name" formControlName="user_name" [matAutocomplete]="auto" [maxLength]="500">
                         <mat-autocomplete #auto="matAutocomplete" (optionSelected)="fetchUserDetails($event.option.value)">
-                            <mat-option *ngFor="let f of (userList | filter:search)as folder" [value]="f.user_id">
+                            <mat-option *ngFor="let f of (userList | userFilter:search)as folder" [value]="f.user_id">
                                 {{f?.user_name}}
                             </mat-option>
                           </mat-autocomplete>

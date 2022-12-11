@@ -77,6 +77,7 @@ import { DoctorMasterComponent } from './doctor-master/doctor-master.component';
 import { InventoryConfigComponent } from './inventory-config/inventory-config.component';
 import { SuppProdMapComponent } from './supp-prod-map/supp-prod-map.component';
 import { UserMasterComponent } from './user-master/user-master.component';
+import { userFilterPipe } from './user-master/user-filter';
 @NgModule({
   declarations: [
     AppComponent,
@@ -149,7 +150,8 @@ import { UserMasterComponent } from './user-master/user-master.component';
     DoctorMasterComponent,
     InventoryConfigComponent,
     SuppProdMapComponent,
-    UserMasterComponent
+    UserMasterComponent,
+    userFilterPipe
   ],
   imports: [
     BrowserModule,
