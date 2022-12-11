@@ -134,6 +134,7 @@ export class UserMasterComponent implements OnInit {
       })
     })
     this.userMasterForm.reset();
+    this.getUserList();
   }
 
   update() {
