@@ -132,9 +132,9 @@ export class UserMasterComponent implements OnInit {
         width: '400px',
         data: 'User Master Created Successfully!!!'
       })
+      this.getUserList();
     })
     this.userMasterForm.reset();
-    this.getUserList();
   }
 
   update() {
