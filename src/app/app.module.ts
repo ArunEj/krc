@@ -78,6 +78,7 @@ import { InventoryConfigComponent } from './inventory-config/inventory-config.co
 import { SuppProdMapComponent } from './supp-prod-map/supp-prod-map.component';
 import { UserMasterComponent } from './user-master/user-master.component';
 import { userFilterPipe } from './user-master/user-filter';
+import { LoginUserComponent } from './login-user/login-user.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -151,7 +152,8 @@ import { userFilterPipe } from './user-master/user-filter';
     InventoryConfigComponent,
     SuppProdMapComponent,
     UserMasterComponent,
-    userFilterPipe
+    userFilterPipe,
+    LoginUserComponent
   ],
   imports: [
     BrowserModule,

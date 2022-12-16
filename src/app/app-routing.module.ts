@@ -42,6 +42,7 @@ import { DoctorMasterComponent } from './doctor-master/doctor-master.component';
 import { InventoryConfigComponent } from './inventory-config/inventory-config.component';
 import { SuppProdMapComponent } from './supp-prod-map/supp-prod-map.component';
 import { UserMasterComponent } from './user-master/user-master.component';
+import { LoginUserComponent } from './login-user/login-user.component';
 
 const routes: Routes = [
   {
@@ -214,6 +215,10 @@ const routes: Routes = [
   {
     path: 'user-master',
     component: UserMasterComponent
+  },
+  {
+    path: 'pwd',
+    component: LoginUserComponent
   }
 
 
