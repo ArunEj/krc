@@ -2,6 +2,12 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { environment } from '../environments/environment';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -72,6 +78,7 @@ import { ReceiptPaymentReportComponent } from './receipt-payment-report/receipt-
 import { RpTableComponent } from './receipt-payment-report/rp-table/rp-table.component';
 import { StockRegisterReportComponent } from './stock-register-report/stock-register-report.component';
 import { SRegTableComponent } from './stock-register-report/s-reg-table/s-reg-table.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -139,7 +146,8 @@ import { SRegTableComponent } from './stock-register-report/s-reg-table/s-reg-ta
     ReceiptPaymentReportComponent,
     RpTableComponent,
     StockRegisterReportComponent,
-    SRegTableComponent
+    SRegTableComponent,
+    FileUploadComponent
   ],
   imports: [
     BrowserModule,
@@ -148,7 +156,10 @@ import { SRegTableComponent } from './stock-register-report/s-reg-table/s-reg-ta
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireStorageModule
   ],
   providers: [AuthService, DatePipe],
   bootstrap: [AppComponent]

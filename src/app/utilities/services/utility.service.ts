@@ -7,6 +7,13 @@ export class UtilityService {
 
   constructor() { }
 
+  getTodayDDMMYYYYHHMM(){
+    let today = new Date();
+    let month = this.appendZero(today.getMonth() + 1);
+    
+    return today.getDate()+''+month+''+today.getFullYear()+''+ today.getHours()+''+today.getMinutes();
+  }
+
   convertTodayTostr(date?:any) {
     let temp = (date)?new Date(date):new Date();
     let month = this.appendZero(temp.getMonth() + 1);

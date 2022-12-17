@@ -1,0 +1,105 @@
+<app-header></app-header>
+<div class="container">
+    <div class="row">
+        <h1>Upload</h1>
+    </div>
+
+    <app-patient-header (outputPatientHeader)="patientHeaderData($event)"></app-patient-header>
+</div>
+
+
+<div class="container mar20t" *ngIf="headerDetail">
+
+    <mat-tab-group>
+        <mat-tab label="Upload File">
+            <div class="mar20t">
+                <div class="mar20t col-lg-4">
+                    <label class="form-label">Doc Type</label>
+                    <select class="form-control" name="doc_type" [(ngModel)]="doc_type">
+
+                        <option *ngFor="let doctor of docList" [value]="doctor.ref_code">{{doctor.ref_desc}}
+                        </option>
+
+                    </select>
+                </div>
+                <div class="mar20t">
+                    <label class="form-label">Add File</label> <br/>                   
+                    <input type="file" class="text-nowrap text-truncate" #fileUploader (change)="selectFile($event)" />
+                </div>
+
+                <div class="mar20t">
+                    <label class="form-label">File Tag</label> <br/>                   
+                    <input type="text" class="text-nowrap text-truncate" [(ngModel)]="doc_tag" />
+                </div>
+                <div class="mar20t">
+                    <button class="btn btn-success btn-sm" [disabled]="!selectedFiles || doc_tag === ''" (click)="upload()">
+                        Upload
+                    </button>
+                    <button class="btn btn-success btn-sm margin-20l" (click)="reset()">
+                        Reset
+                    </button>
+                </div>
+                <div *ngIf="currentFileUpload" class="progress mt-2">
+                    <div class="progress-bar progress-bar-info" role="progressbar" attr.aria-valuenow="{{ percentage }}"
+                        aria-valuemin="0" aria-valuemax="100" [ngStyle]="{ width: percentage + '%' }">
+                        {{ percentage }}%
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="View Files">
+            <div class="mar20t">
+                <button class="btn btn-success btn-sm" (click)="getFIles()">
+                    Get files
+                </button>
+                <div class="container mar20t " *ngIf="uploads?.length>0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="col-lg-4">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">File Name</th>
+                                            <th scope="col">File Description</th>
+                                            <th scope="col"></th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of uploads;let i=index">
+
+                                            <td>{{item.name}}</td>
+                                            <td>{{item.description}}</td>
+                                            <td>
+                                                <mat-icon title="preview" class="edit-icon" aria-hidden="false"
+                                                    aria-label="edit icon" (click)="view(item)">preview
+                                                </mat-icon>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="col-lg-4" *ngIf="fileSrc">
+                                <div *ngIf="imageType">
+                                    <img [src]="fileSrc" style="width:400px;height:300px" />
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+            </div>
+        </mat-tab>
+
+    </mat-tab-group>
+
+
+
+
+
+</div>
